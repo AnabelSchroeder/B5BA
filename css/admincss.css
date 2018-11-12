@@ -2,4 +2,19 @@
     background-color: var(--hintergrund-grau);
 }
 
+#admin-box{
+    width: var(--groesse-haupt-container);
+    margin: auto;
+    display: flex;
+}
 
+#admin-nav{
+    background-color: #FFFFFF;
+    padding: 20px;
+    margin: 20px;
+}
+
+.admin-nav-ueberschrift{
+    font-weight: 700;
+    width: 100%;
+}

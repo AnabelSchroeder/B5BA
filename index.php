@@ -30,10 +30,9 @@ if(isset($_GET['Seiten_ID'])) {
 
 
 //Adminbereich einbinden
-if ($seitenid == "Adminbereich"){
     include "Adminbereich/adminbereich.php";
     
-}
+
 
 echo"</body>";
 
