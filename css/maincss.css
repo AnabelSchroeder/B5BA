@@ -1,0 +1,10 @@
+/*Css Variablen*/
+/*Verwändungsbeispiel*/
+/*
+.divcontainer {
+    width: var(--groesse-haupt-container);
+}
+*/
+:root{
+    --groesse-haupt-container: 800px;
+}
