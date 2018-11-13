@@ -15,18 +15,18 @@ $admin = true;
         //Seitennavigations-Box
         echo"<div class=\"admin-nav\">";
             //Mein Konto bereich
-            echo"<a class=\"admin-nav-ueberschrift\">Mein Konto</a><br><br>";
+            echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" class=\"admin-nav-ueberschrift\">Mein Konto</a><br><br>";
 
             if ($admin == true){
                 //User bereich
-                echo"<a class=\"admin-nav-ueberschrift\">User</a><br>"; 
-                echo"<a class=\"admin-nav-listenpunkt\">Kunde</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Admin</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Neu anlegen</a><br><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" class=\"admin-nav-ueberschrift\">User</a><br>"; 
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" class=\"admin-nav-listenpunkt\">Kunde</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-adminliste\" class=\"admin-nav-listenpunkt\">Admin</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-neuanlegen\" class=\"admin-nav-listenpunkt\">Neu anlegen</a><br><br>";
                 
                 //Artikelbereich
-                echo"<a class=\"admin-nav-ueberschrift\">Artikel</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Neu anlegen</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" class=\"admin-nav-ueberschrift\">Artikel</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-neuanlegen\" class=\"admin-nav-listenpunkt\">Neu anlegen</a><br>";
             }
 
         echo"</div>";
