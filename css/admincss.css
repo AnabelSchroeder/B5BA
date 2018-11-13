@@ -1,20 +1,36 @@
-#admin-main{
+.admin-main{
     background-color: var(--hintergrund-grau);
 }
 
-#admin-box{
+.admin-box{
     width: var(--groesse-haupt-container);
     margin: auto;
     display: flex;
 }
 
-#admin-nav{
+.admin-nav{
     background-color: #FFFFFF;
     padding: 20px;
     margin: 20px;
+    flex: 1;
 }
 
 .admin-nav-ueberschrift{
     font-weight: 700;
     width: 100%;
 }
+
+
+.admin-rechtebox{
+    flex: 5;
+    margin: 20px;
+    background-color: #FFFFFF;
+}
+
+.admin-rechtebox-oben{
+    background-color: #183050;
+    color: #FFFFFF;
+    padding: 10px;
+    font-weight: 700;
+}
+
