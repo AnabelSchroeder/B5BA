@@ -73,7 +73,133 @@ $admin = true;
                 case "Adminbereich":
                     $adminBoxRechtsOben = "Mein Konto";
                     function boxRechtsUntenBefuellen(){
-                        echo " aus der unterfunktion befüllt";
+                        //erster block Name, Adresse
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Vorname";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Anne";
+                                echo"</div>";
+                            echo"</div>";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Nachname";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"schmidt";
+                                echo"</div>";
+                            echo"</div>";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Straße";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Musterstraße 12";
+                                echo"</div>";
+                            echo"</div>";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"PLZ, Ort";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"12345 Musterhausen";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+
+                       //zweiter Block Bestellungen 
+                       echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Bestellungen";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"3 Bestellungen + Bestelungsansehenbutton";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+                        //dritter Block Nutzerart, email, Nutzername
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Nutzerart";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Kunde";
+                                echo"</div>";
+                            echo"</div>";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Login Name";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Supershoper84";
+                                echo"</div>";
+                            echo"</div>";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Email";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Rote.Rose@gmx.de";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+                        //Vierter Block Sperre
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Sperre";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"Hier wird angezeigt ob man gesperrt ist.";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+                        //Button Block
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+
+                                echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-bearbeiten\">";
+                                echo "<input type=\"submit\" id=\"a-userbearbeiten\" class=\"a-button\" value=\"Bearbeiten\">";
+                                echo "</form>";
+
+                                echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php\">";
+                                echo "<input type=\"submit\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">";
+                                echo "</form>";
+
+                                echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php\">";
+                                echo "<input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\">";
+                                echo "</form>";
+
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
                     }
                     break;
 
@@ -84,7 +210,27 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Kunden Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "Liste der Kunden.";
+                            for ($i=1; $i <=10;$i++){
+                            echo"<div  class=\"admin-box-linie\">"; 
+                            echo"<div  class=\"admin-box-liste\">"; 
+                                echo"<div  class=\"admin-box-liste-kdnr\">"; 
+                                echo "Kd-Nr. 1234";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-liste-name\">"; 
+                                echo "Schmidt,Anne";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-liste-bestellung\">"; 
+                                echo "3 Bestellungen";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-liste-gesperrt\">"; 
+                                echo "gesperrt";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-liste-ansehen\">"; 
+                                echo "ansehen";
+                                echo"</div>";
+                            echo"</div>";
+                        echo"</div>";
+                        }
                         }
                     }
                     else {
@@ -114,7 +260,123 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User neu anlegen";
                         function boxRechtsUntenBefuellen(){
-                            echo "neu anlegen";
+                        
+                        echo "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen\" method=\"POST\"  >";
+                        //erster block Name, Adresse
+                        echo"<div  class=\"admin-box-linie\">";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Vorname";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-vorname\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Nachname";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-nachname\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Straße";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-strasse\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"PLZ, Ort";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-plzort\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"</div>";
+
+                        //zweiter block Rechte, Lagin name, Passwort, Email
+                        echo"<div  class=\"admin-box-linie\">";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Rechte";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-rechte\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Login Name";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-loginname\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Passwort";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-passwort\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"E-mail";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-email\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"</div>";
+
+                        //Vierter Block Sperre
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"Sperre";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"<input type=\"radio\" name=\"sperrung\" value=\"nichtgeperrt\" checked> Nicht gesperrt";
+                                echo"<input type=\"radio\" name=\"sperrung\" value=\"geperrt\"> gesperrt";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+                        //Button Block
+                        echo"<div  class=\"admin-box-linie\">";
+
+                            echo"<div  class=\"admin-box-textfelder\">";
+                                echo"<div  class=\"admin-box-texfeld-links\">";
+                                echo"";
+                                echo"</div>";
+                                echo"<div  class=\"admin-box-texfeld-rechts\">";
+                                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" id=\"abbrechenUserNeuAnlegen\" class=\"button\">Abbrechen</a>";
+                                
+                                echo"<input type=\"submit\"  id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\">";
+                                echo"</div>";
+                            echo"</div>";
+
+                        echo"</div>";
+
+                
+                echo "</form>";
                         }
                     }
                 else {
