@@ -5,7 +5,9 @@ $adminBoxRechtsUnten;
 //Programmierungshilfe muss rausgelöscht werden im verlauf
 $admin = true;
 
-        //Stellt die Navbox in den Adminbereich-unterseiten dar
+/************************************************************************************ */
+//Stellt die Navbox in den Adminbereich-unterseiten dar
+/************************************************************************************* */
         function AdminNavbox(){
         //Programmierungshilfe muss rausgelöscht werden im verlauf
         global $admin;    
@@ -30,14 +32,13 @@ $admin = true;
         echo"</div>";
         }
 
-       
+/*********************************************************************************************/
+//Darstellung der Rechten Box im Adminbereich, hier wird automatisch Befüllt aus der boxrechtsBefüllen funktion. 
+/********************************************************************************************/
 
-
-        //Contentbereichs-Seiten
-        
-        //Startseite Des Adminbereichs Mein Konto
-        if ($seitenid == "Adminbereich"||$seitenid == "user-kundenliste"){
-        global $adminBoxRechtsOben, $adminBoxRechtsUnten;    
+        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung"){
+        global $adminBoxRechtsOben, $adminBoxRechtsUnten; 
+        //aufruf der Funktion damit der Code ausgeführt werden kann   
         boxRechtsBefuellen();    
         echo"<div class=\"admin-main\">";
             echo"<div class=\"admin-box\">";    
@@ -59,52 +60,207 @@ $admin = true;
         echo"</div>";  
         }
 
-        //Befüllen der Rechten Box im Admin bereich diese werden dan in die Seitenstrucktur gelegt.
+
+/******************************************************************************************* */        
+//Befüllen der Rechten Box im Admin bereich diese werden dann in die Seitenstrucktur gelegt.
+/********************************************************************************************** */
+
         function boxRechtsBefuellen(){
-            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid;     
+            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid, $admin;     
             switch ($seitenid){
+                //Seite Mein Konto
+                /*************************************************************** */
                 case "Adminbereich":
-                    $adminBoxRechtsOben = "oben aus funktion";
+                    $adminBoxRechtsOben = "Mein Konto";
                     function boxRechtsUntenBefuellen(){
                         echo " aus der unterfunktion befüllt";
                     }
                     break;
+
+
+                //Seite User Kundenliste   
+                /****************************************************************** */ 
+                case "admin-user-kundenliste":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Kunden Liste";
+                        function boxRechtsUntenBefuellen(){
+                            echo "Liste der Kunden.";
+                        }
+                    }
+                    else {
+                        umleitungAufStartseite();
+                    }
+                    break;
+
+
+                //Seite User-Adminliste
+                /****************************************************************** */ 
+                case "admin-user-adminliste":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Admin Liste";
+                        function boxRechtsUntenBefuellen(){
+                            echo "Liste der Admins.";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;  
+
+                
+                //Seite User-Neuanlegen
+                /****************************************************************** */ 
+                case "admin-user-neuanlegen":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "User neu anlegen";
+                        function boxRechtsUntenBefuellen(){
+                            echo "neu anlegen";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+                //Seite User-Anzeigen
+                /****************************************************************** */ 
+                case "admin-user-anzeigen":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "User Name Variable";
+                        function boxRechtsUntenBefuellen(){
+                            echo "User";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite User-Bearbeiten
+                /****************************************************************** */ 
+                case "admin-user-bearbeiten":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "User bearbeiten";
+                        function boxRechtsUntenBefuellen(){
+                            echo "bearbeiten";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite Artikel-Liste
+                /****************************************************************** */ 
+                case "admin-artikel-liste":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Artikel Liste";
+                        function boxRechtsUntenBefuellen(){
+                            echo "artikel liste";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite Artikel-neuanlegen
+                /****************************************************************** */ 
+                case "admin-artikel-neuanlegen":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Artikel neu anlegen";
+                        function boxRechtsUntenBefuellen(){
+                            echo "artikel neu";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite Artikel-Bearbeiten
+                /****************************************************************** */ 
+                case "admin-artikel-bearbeiten":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Artikel X(Variable) bearbeiten";
+                        function boxRechtsUntenBefuellen(){
+                            echo "artikel bearbeiten felder";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite Artikel-Anzeigen
+                /****************************************************************** */ 
+                case "admin-artikel-anzeigen":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Artikel X(Variable) anzeigen";
+                        function boxRechtsUntenBefuellen(){
+                            echo "artikel felder";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
+                //Seite Bestellungs-liste-user
+                /****************************************************************** */ 
+                case "admin-bestellungsliste":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "bestellungen von user x";
+                        function boxRechtsUntenBefuellen(){
+                            echo "bestellungsliste";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+                //Seite Bestellung-user
+                /****************************************************************** */ 
+                case "admin-bestellung":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "bestellungen x von user x";
+                        function boxRechtsUntenBefuellen(){
+                            echo "bestellungs details";
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+
             }
         }
 
-    /*    if ($admin == true){
-        //Seite User-Kundenliste
-        if ($seitenid == "user-kundenliste"){
-            echo"<div class=\"admin-main\">";
-                echo"<div class=\"admin-box\">";    
-                    AdminNavbox();
-                    echo"<div  class=\"admin-rechtebox\">";
-            
-                    echo "Kundenliste";
-                    echo"</div>";
-                echo"</div>";
-            echo"</div>";  
-            }
+/************************************************************************************** */
+//Sonstige Functionen
+/*************************************************************************************** */
+
+        //Umleiten auf die Startseite
+        function umleitungAufStartseite (){
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL=http://localhost/b5ba/index.php\">";
+        }
+
 
 
 
 
             
-        //Seite User-Adminliste
+        
 
-        //Seite User-Neuanlegen
+ 
 
-        //Seite User-Bearbeiten
 
-        //Seite Artikel-Liste
-
-        //Seite Artikel-neuanlegen
-
-        //Seite Artikel-Bearbeiten
-
-    }
-    else{
-        //auf index.php verweisen, funktiniert warscheinlich so nicht in verbindung zu den anderen seiten und muss überarbeitet werden
-        echo"du darfst hier nicht rein"; 
-    }*/
 ?>
