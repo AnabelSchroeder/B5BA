@@ -137,7 +137,7 @@ $admin = true;
                                 echo"Nutzerart";
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
-                                echo"Kunde";
+                                echo"was auch immer gewählt wurde";
                                 echo"</div>";
                             echo"</div>";
 
@@ -184,6 +184,7 @@ $admin = true;
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
 
+                                echo "<div class=\"button-box\">";
                                 echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-bearbeiten\">";
                                 echo "<input type=\"submit\" id=\"a-userbearbeiten\" class=\"a-button\" value=\"Bearbeiten\">";
                                 echo "</form>";
@@ -195,6 +196,7 @@ $admin = true;
                                 echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php\">";
                                 echo "<input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\">";
                                 echo "</form>";
+                                echo"</div>";
 
                                 echo"</div>";
                             echo"</div>";
@@ -311,7 +313,10 @@ $admin = true;
                             echo"Rechte";
                             echo"</div>";
                             echo"<div  class=\"admin-box-texfeld-rechts\">";
-                            echo"<input type=\"text\" name=\"a-rechte\">";
+                            echo"<select>";
+                                    echo"<option value=\"true\">Admin</option>";
+                                    echo"<option value=\"false\" selected>Kunde</option>";
+                                echo"</select>";
                             echo"</div>";
                         echo"</div>";
 
@@ -352,8 +357,8 @@ $admin = true;
                                 echo"Sperre";
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
-                                echo"<input type=\"radio\" name=\"sperrung\" value=\"nichtgeperrt\" checked> Nicht gesperrt";
-                                echo"<input type=\"radio\" name=\"sperrung\" value=\"geperrt\"> gesperrt";
+                                echo"<input type=\"radio\" name=\"sperrung\" value=\"false\" checked> Nicht gesperrt";
+                                echo"<input type=\"radio\" name=\"sperrung\" value=\"true\"> gesperrt";
                                 echo"</div>";
                             echo"</div>";
 
@@ -367,16 +372,23 @@ $admin = true;
                                 echo"";
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
-                                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" id=\"abbrechenUserNeuAnlegen\" class=\"button\">Abbrechen</a>";
-                                
+
+                                echo "<div class=\"button-box\">";
+
+                                /*echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" id=\"abbrechenUserNeuAnlegen\" class=\"button\">Abbrechen</a>";*/
+                              
                                 echo"<input type=\"submit\"  id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\">";
+                                echo "</form>";
+
+                                echo "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\">";
+                                echo "<input type=\"submit\"  id=\"a-userNeuAnlegenabbrechen\" value=\"Abbrechen\" class=\"a-button\">";
+                                echo "</form>";
+                                echo"</div>";
                                 echo"</div>";
                             echo"</div>";
-
                         echo"</div>";
 
-                
-                echo "</form>";
+
                         }
                     }
                 else {
