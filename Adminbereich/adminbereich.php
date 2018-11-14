@@ -1,4 +1,7 @@
 <?php
+
+include ("admindbanbindung.php");
+
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
 
@@ -296,10 +299,19 @@ $admin = true;
 
                         echo"<div  class=\"admin-box-textfelder\">";
                             echo"<div  class=\"admin-box-texfeld-links\">";
-                            echo"PLZ, Ort";
+                            echo"PLZ";
                             echo"</div>";
                             echo"<div  class=\"admin-box-texfeld-rechts\">";
-                            echo"<input type=\"text\" name=\"a-plzort\">";
+                            echo"<input type=\"text\" name=\"a-plz\">";
+                            echo"</div>";
+                        echo"</div>";
+
+                        echo"<div  class=\"admin-box-textfelder\">";
+                            echo"<div  class=\"admin-box-texfeld-links\">";
+                            echo"Ort";
+                            echo"</div>";
+                            echo"<div  class=\"admin-box-texfeld-rechts\">";
+                            echo"<input type=\"text\" name=\"a-ort\">";
                             echo"</div>";
                         echo"</div>";
 
@@ -314,8 +326,8 @@ $admin = true;
                             echo"</div>";
                             echo"<div  class=\"admin-box-texfeld-rechts\">";
                             echo"<select>";
-                                    echo"<option value=\"true\">Admin</option>";
-                                    echo"<option value=\"false\" selected>Kunde</option>";
+                                    echo"<option name=\"a-rechte\" value=\"true\">Admin</option>";
+                                    echo"<option name=\"a-rechte\" value=\"false\" selected>Kunde</option>";
                                 echo"</select>";
                             echo"</div>";
                         echo"</div>";
@@ -357,8 +369,8 @@ $admin = true;
                                 echo"Sperre";
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
-                                echo"<input type=\"radio\" name=\"sperrung\" value=\"false\" checked> Nicht gesperrt";
-                                echo"<input type=\"radio\" name=\"sperrung\" value=\"true\"> gesperrt";
+                                echo"<input type=\"radio\" name=\"a-sperrung\" value=\"false\" checked> Nicht gesperrt";
+                                echo"<input type=\"radio\" name=\"a-sperrung\" value=\"true\"> gesperrt";
                                 echo"</div>";
                             echo"</div>";
 
@@ -402,7 +414,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User Name Variable";
                         function boxRechtsUntenBefuellen(){
-                            echo "User";
+                            echo $_POST['a-vorname'];
                         }
                     }
                 else {
