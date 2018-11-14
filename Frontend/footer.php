@@ -7,7 +7,7 @@
 echo "<footer>";
 
     // Logo anzeigen
-    echo "<img src=\"../img/PH.jpg\">";
+    echo "<img src=\"../assets/img/PH.jpg\">";
 
     //Container für interne Links
     echo "<div>";
@@ -39,19 +39,19 @@ echo "<footer>";
 
         // Facebook - Logo & Link
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img src=\"../assets/img/PH.jpg\">";
             echo "Facebook";
         echo "<button>";
 
         // Twitter - Logo & Link
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img src=\"../assets/img/PH.jpg\">";
             echo "Twitter";
         echo "<button>";
 
         // Instagram
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img src=\"../assets/img/PH.jpg\">";
             echo "Instagram";
         echo "<button>";
 

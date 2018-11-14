@@ -6,7 +6,7 @@
 
 echo "<header>";
     // Logo anzeigen
-    echo "<img src=\"../img/PH.jpg\">";
+    echo "<img src=\"../assets/img/PH.jpg\">";
 
     // Verlinkung zur Home-Seite anzeigen
     echo "<button>";
@@ -20,17 +20,17 @@ echo "<header>";
 
     // Icon für Suchfeld
     echo "<button>";
-        echo "<img src=\"../img/PH.jpg\">";
+        echo "<img src=\"../assets/img/PH.jpg\">";
     echo "</button>";
 
     // Icon für Account/Login
     echo "<button>";
-        echo "<img src=\"../img/PH.jpg\">";
+        echo "<img src=\"../assets/img/PH.jpg\">";
     echo "</button>";
 
     // Icon für Warenkorb mit Artikelanzahlanzeige
     echo "<button>";
-        echo "<img src=\"../img/PH.jpg\">";
+        echo "<img src=\"../assets/img/PH.jpg\">";
         echo "<div id=\"warenkorb_art_anz\">";
             echo "";
         echo "</div>";
