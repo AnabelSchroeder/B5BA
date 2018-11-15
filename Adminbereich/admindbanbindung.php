@@ -5,6 +5,8 @@ $password = "";
 $dbname = "ba_webshop";
 
 
+if (isset($_POST['userNeuAnlegen'])){
+
 $a_rechte = $_POST["a-rechte"];
 $a_nname =  $_POST["a-nachname"];
 $a_vname = $_POST["a-vorname"];
@@ -33,6 +35,8 @@ catch(PDOException $e)
     }
 
 $conn = null;
+$_POST['userNeuAnlegen'] =  null;
 
+}
 
 ?>

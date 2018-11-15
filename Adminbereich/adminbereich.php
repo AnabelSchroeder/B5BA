@@ -325,10 +325,10 @@ $admin = true;
                             echo"Rechte";
                             echo"</div>";
                             echo"<div  class=\"admin-box-texfeld-rechts\">";
-                            echo"<select>";
-                                    echo"<option name=\"a-rechte\" value=\"true\">Admin</option>";
-                                    echo"<option name=\"a-rechte\" value=\"false\" selected>Kunde</option>";
-                                echo"</select>";
+                            
+                            echo"<input type=\"radio\" name=\"a-rechte\" value=0 checked> Kunde";
+                                echo"<input type=\"radio\" name=\"a-rechte\" value=1> Admin"; 
+                                echo"</div>";
                             echo"</div>";
                         echo"</div>";
 
@@ -369,8 +369,8 @@ $admin = true;
                                 echo"Sperre";
                                 echo"</div>";
                                 echo"<div  class=\"admin-box-texfeld-rechts\">";
-                                echo"<input type=\"radio\" name=\"a-sperrung\" value=\"false\" checked> Nicht gesperrt";
-                                echo"<input type=\"radio\" name=\"a-sperrung\" value=\"true\"> gesperrt";
+                                echo"<input type=\"radio\" name=\"a-sperrung\" value=0 checked> Nicht gesperrt";
+                                echo"<input type=\"radio\" name=\"a-sperrung\" value=1> gesperrt"; 
                                 echo"</div>";
                             echo"</div>";
 
@@ -389,7 +389,7 @@ $admin = true;
 
                                 /*echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" id=\"abbrechenUserNeuAnlegen\" class=\"button\">Abbrechen</a>";*/
                               
-                                echo"<input type=\"submit\"  id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\">";
+                                echo"<input type=\"submit\" name=\"userNeuAnlegen\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >";
                                 echo "</form>";
 
                                 echo "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\">";
