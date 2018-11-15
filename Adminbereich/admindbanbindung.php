@@ -5,6 +5,7 @@ $password = "";
 $dbname = "ba_webshop";
 
 
+// Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
 if (isset($_POST['userNeuAnlegen'])){
 
 $a_rechte = $_POST["a-rechte"];
@@ -38,5 +39,16 @@ $conn = null;
 $_POST['userNeuAnlegen'] =  null;
 
 }
+
+
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    
+    $sqlkundenliste = "SELECT * FROM nutzer WHERE n_sperre = 0";
+   
+    if (isset($_GET['adminnutzerwahl'])){
+    $adminnutzerwahl = "SELECT * FROM nutzer WHERE n_id= ". $_GET['adminnutzerwahl'];
+    }
+
+
 
 ?>
