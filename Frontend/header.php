@@ -5,6 +5,7 @@
 ///////////////////////////////////////
 
 echo "<header>";
+
     // Logo anzeigen und Link zur LandingPage/Home
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
@@ -51,7 +52,7 @@ echo "<header>";
                 echo "value=\"Warenkorb\">";
             echo "<img src=\"../assets/PH.jpg\">";
             echo "<div id=\"warenkorb_art_anz\">";
-                echo "";
+                echo $w_art_anz;
             echo "</div>";
         echo "</button>";
     echo "</form>";
