@@ -36,6 +36,21 @@ echo "<header>";
         echo "</div>";
     echo "</button>";
 
+
+// der Button muss später in den Header
+echo"<form action=\"index.php\" method=\"get\">";
+echo"<button name=\"Seiten_ID\" type=\"submit\" value=\"Adminbereich\">Admin</button>";
+echo"</form>";
+
+
+if(isset($_GET['Seiten_ID'])) {
+    $seitenid = $_GET['Seiten_ID'];
+} else {
+    $seitenid = "index";
+}
+
+
+
 echo "</header>";
 
 ?>
