@@ -15,6 +15,7 @@ echo"</head>";
 
 echo"<body>";
 
+// Lisa: header einfügen
 include "header.php";
 
 /* der Button muss später in den Header
