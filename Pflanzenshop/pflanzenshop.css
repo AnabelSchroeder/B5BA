@@ -1,0 +1,424 @@
+//Farbvariablen
+
+--bg_hell: #f2f2f2;
+--grün: #177744;
+--akzent_farbe: #19314f;
+
+
+/*allgemein-------------------------------------------------------------------------------------------------*/
+
+.clear
+{
+    clear:both;
+}
+
+.button2
+{
+    color:#177744;
+    background-color: #ffffff;
+    border: #177744;
+    border-style: solid;
+    font-size: 8px;
+    padding:2px;
+}
+
+.button1
+{
+    background-color: #177744;
+    color: #ffffff;
+    font-size: 10px;
+    border: none;
+    width: 150px;
+    margin-top: 15px;
+    padding: 2px;
+    
+}
+
+/*Landing_Page_______________________________________________________________________________________________*/
+
+/*schrift*/
+
+
+
+.landing_slogan_schrift
+{
+    font-size: 35px;
+    color: #177744;
+}
+
+.landing_mosaik_weiß
+{
+    font-size: 35px;
+    color: #ffffff;
+    z-index: 200; 
+}
+.landing_unterschrift
+{
+    font-size:10px;
+}
+
+/*mosaik*/
+
+.landing_container
+{
+    max-width: 620px;
+    margin:auto;
+    
+}
+
+.landing_mosaik_1
+{
+    width:300px;
+    height:100px;
+    margin-left: 90px;
+    text-align: center;
+    background-image:url(img/bonsai.jpg);
+    background-size: cover;
+    background-position: 0px -70px;
+    margin:5px;
+    padding-top:200px;
+    float: left;
+  
+}
+
+.landing_mosaik_2
+{
+    width:300px;
+    height:100px;
+    margin-left: 90px;
+    text-align: center;
+    margin:5px;
+    padding-top: 35px;
+    float: left;
+    background-image:url(img/spring.jpg);
+    background-size: cover;
+    background-position: 0px -70px;
+}
+
+.landing_mosaik_3
+{
+    width:300px;
+    height:100px;
+    margin-left: 90px;
+    text-align: center;
+    background-color: aqua;
+    margin:5px;
+    padding-top: 55px;
+    float: left;
+    background-image:url(img/kaktus.jpg);
+    background-size: cover;
+    background-position: 0px -10px;
+    margin:5px;
+  
+}
+
+
+.landing_mosaik_4
+{
+    width:300px;
+    height:100px;
+    margin-left: 90px;
+    text-align: center;
+    margin:5px;
+    padding-top: 35px;
+    float: left;
+    background-image:url(img/deko.jpg);
+    background-size: cover;
+    background-position: 0px -20px;
+}
+
+
+
+.landing_mosaik_5
+{
+    width:300px;
+    height:100px;
+    margin-left: 90px;
+    text-align: center;
+    margin:5px;
+    padding-top: 35px;
+    float: left;
+    background-image:url(img/marriage.jpg);
+    background-size: cover;
+    background-position: 0px -70px;
+}
+
+.landing_mosaik_bilder
+{
+
+    z-index: 100;
+    width: 300px;
+    height:300px;
+ overflow:hidden;
+}
+
+.landing_slogan_container
+{
+    left:0;
+    margin-top: 30px;
+    
+    margin-bottom: 30px;
+    width:100%;
+    height: 135px;
+    background-image:url(img/flowers.jpg);
+    background-size: cover;
+    background-position: 0px -275px;
+    
+    text-align:center;
+  
+    clear:both;
+    padding-top:80px;
+   
+}
+
+.landing_neuheiten_container
+{
+    color: #177744;
+    max-width: 620px;
+    text-align: center;
+    margin:auto;
+    clear:both;
+}
+
+.landing_neuheiten_artikel
+{
+    background-color: #ffffff;
+    float: left;
+    font-size: 14px;
+    color: #177744;
+    width: 140px;
+    height: 300px;
+    margin:7.5px;
+    
+    text-align: center;
+    
+    
+}
+
+.landing_artikel_bild
+{
+    width:120px;
+    height: 200px;
+    margin: 10px;
+}
+
+/*User_Loginseite---------------------------------------------------------------------------------------------*/
+
+
+.user_login_bg
+{
+    width:100%;
+    background-color: #f2f2f2;
+    padding-top: 30px;
+    height: 500px;
+    
+}
+
+.user_login_container
+{
+    max-width: 800px;
+    margin:auto;
+}
+
+.user_login_div
+{
+    height:150px;
+    width:300px;
+    float:left;
+    margin: 30px;
+    margin-bottom: 40px;
+}
+
+.user_login_div_headleiste_l
+{
+    background-color: #19314f;
+    color: #ffffff;
+    width:345px;
+    height: 30px;
+    padding-left:15px;
+    vertical-align: middle;
+    padding-top: 10px;
+    margin-right:10px;
+   
+}
+
+.user_login_div_headleiste_r
+{
+    background-color: #19314f;
+    color: #ffffff;
+    width:345px;
+    height: 30px;
+    padding-left:15px;
+    vertical-align: middle;
+    padding-top: 10px;
+    margin-left:10px;
+   
+}
+
+.user_login_div_links
+{
+    background-color: #ffffff;
+    
+    padding: 30px;
+    height: 120px;
+    width: 300px;
+    margin-right:10px;
+}
+
+
+.user_login_div_rechts
+{
+    background-color: #ffffff;
+    text-align: center;
+    padding: 30px;
+    height: 120px;
+    width: 300px;
+    margin-left:10px;
+}
+
+.user_login_form
+{
+    margin:5px;
+}
+
+/*User-Registartion------------------------------------------------------------------------------------------------*/
+
+
+.user_registration_div
+{
+    
+    max-width: 700px;
+ 
+    margin-top:30px;
+    margin-bottom: 30px;
+    margin:auto;
+}
+.user_registration_headleiste
+{
+    height:30px;
+    background-color: #19314f;
+    max-width: 700px;
+    padding-top:10px;
+    
+}
+
+.user_registration_form
+{
+    background-color: #ffffff;
+    padding:15px;
+    padding-left: 60px;
+    max-width:625px;
+}
+
+
+
+
+/* Kasse-----------------------------------------------------------------------------------------------*/
+.kasse_headleiste
+{
+    width: 100%;
+    height: 65px;
+    font-size: 20px;
+    color: #177744;
+    padding-left: 90px;
+    
+}
+
+a.kasse_nav
+{
+   
+    font-weight: bold;
+    margin-right: 50px;
+    font-size: 14px;
+    color: #000000;
+   
+    padding-bottom:5px;
+    
+}
+a.kasse_nav:active
+{
+    border-bottom: solid  #177744;
+
+}
+.kasse_div
+{
+    width:100%;
+    background-color: #f2f2f2;
+    padding-top: 30px;
+    height: 400px;
+    
+}
+
+.kasse_links
+{
+    background-color: #ffffff;
+    color: #000000;
+    padding:30px;
+    float:left;
+    width: 500px;
+    float:left;
+    height: 300px;
+    margin-left:90px;
+}
+
+.kasse_rechts
+{
+    background-color: #ffffff;
+    color: #000000;
+    padding:30px;
+    float:left;
+    width: 140px;
+    float: left;
+    margin-left:10px;
+    height:300px;
+    
+}
+
+.kasse_button_weiter
+{
+    margin-left:315px;
+      background-color: #177744;
+    color: #ffffff;
+    font-size: 10px;
+    border: none;
+    width: 100px;
+    border: solid 1.5px #177744;
+    margin-top: 15px;
+    padding: 2px;
+
+}
+
+.kasse_button_zurück
+{
+    color:#177744;
+    background-color: #ffffff;
+    border: #177744;
+    border-style: solid;
+    border-width: 1.5px;
+    font-size: 10px;
+    padding:2px;
+    width:80px;
+    margin-top:15px;
+ 
+}
+
+
+/*kasse:schrift*/
+    
+.kasse_ueberschrift_klein
+{
+  color: #177744;
+    font-size:10px;
+}
+
+.kasse_rechts_klein
+{
+    color: #000000;
+    font-size: 10px;
+}
+
+.kasse_rechts_ueberschrift
+{
+    font-size: 14px;
+    font-weight:bold;
+}
