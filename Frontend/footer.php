@@ -6,21 +6,37 @@
 
 echo "<footer>";
 
-    // Logo anzeigen
-    echo "<img src=\"../img/PH.jpg\">";
+    // Logo anzeigen und Link zur LandingPage/Home
+    echo "<form action=\"index.php\" method=\"get\">";
+        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+                echo "value=\"Home\">";
+            echo "<img src=\"../assets/PH.jpg\">";
+        echo "</button>";
+    echo "</form>";
+
+
+
 
     //Container für interne Links
     echo "<div>";
 
-        // Verlinkung zur Home-Seite anzeigen
-        echo "<button>";
-            echo "Home";
-        echo "</button>";
+         // Verlinkung zur Home-Seite anzeigen
+        echo "<form action=\"index.php\" method=\"get\">";
+            echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+                    echo "value=\"Home\">";
+                echo "Home";
+            echo "</button>";
+        echo "</form>";
 
-        // Verlinkung zur Shop-Seite anzeigen
-        echo "<button>";
-            echo "Shop";
-        echo "</button>";
+
+       // Verlinkung zur Shop-Seite anzeigen
+       echo "<form action=\"index.php\" method=\"get\">";
+            echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+                    echo "value=\"Shop\">";
+                echo "Shop";
+            echo "</button>";
+        echo "</form>";    
+
 
         // Verlinkung zum Impressum
         echo "<button>";
