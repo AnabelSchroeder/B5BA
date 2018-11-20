@@ -4,6 +4,9 @@
 // Ersteller: Lisa Peters //
 ///////////////////////////////////////
 
+//Haupt CSS einbinden
+echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
+
 
 echo "<header>";
 
@@ -12,7 +15,7 @@ echo "<header>";
 echo "<div id=\"L_headerLinks\">";
 
 //-----------------------------------------------------------------------------------//
-    // Logo anzeigen und Link zur LandingPage/Home
+    // Logo anzeigen und Link zur LandingPage
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"index\">";
@@ -24,7 +27,7 @@ echo "<div id=\"L_headerLinks\">";
 
 
 //-----------------------------------------------------------------------------------//
-    // Verlinkung zur Home-Seite anzeigen
+    // Verlinkung zur LandingPage anzeigen
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"index\">";
@@ -97,7 +100,7 @@ echo "<div id=\"L_headerRechts\">";
                 echo "value=\"Warenkorb\">";
             echo "<img src=\"../assets/PH.jpg\">";
             echo "<div id=\"warenkorb_art_anz\">";
-                echo $w_art_anz;
+                echo /*$w_art_anz*/ "ZAHL";
             echo "</div>";
         echo "</button>";
     echo "</form>";
