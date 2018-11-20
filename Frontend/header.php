@@ -9,7 +9,7 @@ echo "<header>";
     // Logo anzeigen und Link zur LandingPage/Home
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
-                echo "value=\"Home\">";
+                echo "value=\"index\">";
             echo "<img src=\"../assets/PH.jpg\">";
         echo "</button>";
     echo "</form>";
@@ -17,7 +17,7 @@ echo "<header>";
     // Verlinkung zur Home-Seite anzeigen
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
-                echo "value=\"Home\">";
+                echo "value=\"index\">";
             echo "Home";
         echo "</button>";
     echo "</form>";
