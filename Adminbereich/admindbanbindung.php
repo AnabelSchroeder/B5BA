@@ -45,10 +45,23 @@ $_POST['userNeuAnlegen'] =  null;
     
     $sqlkundenliste = "SELECT * FROM nutzer WHERE n_sperre = 0";
    
+
+//Wenn der nutzer in der Kunden liste auf ansehen klickt wird die kunden id gespeichert zur weiteren verwendung der löschung und ansicht
     if (isset($_GET['adminnutzerwahl'])){
-    $adminnutzerwahl = "SELECT * FROM nutzer WHERE n_id= ". $_GET['adminnutzerwahl'];
-    }
 
+        $sqladminnutzerwahl = "SELECT * FROM nutzer WHERE n_id= ". $_GET['adminnutzerwahl'];
+        $_SESSION['adminnutzerwahl'] = $_GET['adminnutzerwahl'];
+        print $_SESSION['adminnutzerwahl'];
+   }
+   
 
+    //user Datensatz in Admin bereich löschen 
+    if (isset($_POST ['nutzerLoeschen'])){
+        
+        $statement = $conn->prepare("DELETE FROM nutzer WHERE n_id = :id");
+        $statement->execute(array('id'=>$_SESSION['adminnutzerwahl']));
+        
+        $_GET['nutzerLoeschen'] = null;
+        }
 
 ?>

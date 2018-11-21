@@ -272,7 +272,7 @@ $admin = true;
                         $adminBoxRechtsOben = "User neu anlegen";
                         function boxRechtsUntenBefuellen(){
                         
-                        echo "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen\" method=\"POST\"  >";
+                        echo "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\"  >";
                         //erster block Name, Adresse
                         echo"<div  class=\"admin-box-linie\">";
 
@@ -420,9 +420,9 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User Name Variable";
                         function boxRechtsUntenBefuellen(){
-                            global $conn, $adminnutzerwahl;
-                            foreach ($conn->query($adminnutzerwahl) as $row) {
-                            echo $row['n_vname'];
+                            global $conn, $sqladminnutzerwahl;
+                            foreach ($conn->query($sqladminnutzerwahl) as $row) {
+                            
 
                             echo"<div  class=\"admin-box-linie\">";
 
@@ -549,8 +549,8 @@ $admin = true;
                                 echo "<input type=\"submit\" id=\"a-userbearbeiten\" class=\"a-button\" value=\"Bearbeiten\">";
                                 echo "</form>";
 
-                                echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php\">";
-                                echo "<input type=\"submit\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">";
+                                echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\">";
+                                echo "<input type=\"submit\" name=\"nutzerLoeschen\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">";
                                 echo "</form>";
 
                                 echo "<form method=\"POST\" action=\"http://localhost/b5ba/index.php\">";
