@@ -19,20 +19,20 @@ $a_loginname = $_POST["a-loginname"];
 $a_passwort = $_POST["a-passwort"];
 $a_sperrung = $_POST["a-sperrung"];
 
-
+//Speichern der Daten von Neu anlegen eines Users im admin bereich
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO nutzer (n_admin, n_nname, n_vname, n_strasse, n_ort, n_plz, n_mail, n_login, n_passwort, n_sperre)
+    $asql = "INSERT INTO nutzer (n_admin, n_nname, n_vname, n_strasse, n_ort, n_plz, n_mail, n_login, n_passwort, n_sperre)
     VALUES ('$a_rechte', '$a_nname', '$a_vname', '$a_strasse', '$a_ort', '$a_plz', '$a_email', '$a_loginname', '$a_passwort', '$a_sperrung' )";
     // use exec() because no results are returned
-    $conn->exec($sql);
+    $conn->exec($asql);
     echo "New record created successfully";
     }
 catch(PDOException $e)
     {
-    echo $sql . "<br>" . $e->getMessage();
+    echo $asql . "<br>" . $e->getMessage();
     }
 
 $conn = null;
@@ -43,15 +43,17 @@ $_POST['userNeuAnlegen'] =  null;
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     
-    $sqlkundenliste = "SELECT * FROM nutzer WHERE n_sperre = 0";
+
+    // Laden der Daten für die ansicht der Kundenliste
+    $sqlkundenliste = "SELECT * FROM nutzer WHERE n_admin = 0";
    
 
-//Wenn der nutzer in der Kunden liste auf ansehen klickt wird die kunden id gespeichert zur weiteren verwendung der löschung und ansicht
+//Wenn der nutzer in der Kunden liste auf ansehen klickt wird die kunden id gespeichert zur weiteren verwendung für löschung und ansicht der Datensätze
     if (isset($_GET['adminnutzerwahl'])){
 
         $sqladminnutzerwahl = "SELECT * FROM nutzer WHERE n_id= ". $_GET['adminnutzerwahl'];
+        //Speichern der Kunden Id in die Session variable
         $_SESSION['adminnutzerwahl'] = $_GET['adminnutzerwahl'];
-        print $_SESSION['adminnutzerwahl'];
    }
    
 
