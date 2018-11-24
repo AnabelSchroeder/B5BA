@@ -38,4 +38,9 @@ header {
 #L_headerRechts {
   width: 100px;
 }
+
+.L_headerButton {
+  height: 12px;
+  width: 30px;
+}
 /*---------------------------------------------------------------*/
