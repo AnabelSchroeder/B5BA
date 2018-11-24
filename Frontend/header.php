@@ -17,7 +17,7 @@ echo "<div id=\"L_headerLinks\">";
 //-----------------------------------------------------------------------------------//
     // Logo anzeigen und Link zur LandingPage
     echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+        echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"index\">";
             echo "<img src=\"../assets/PH.jpg\">";
         echo "</button>";
@@ -29,7 +29,7 @@ echo "<div id=\"L_headerLinks\">";
 //-----------------------------------------------------------------------------------//
     // Verlinkung zur LandingPage anzeigen
     echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+        echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"index\">";
             echo "Home";
         echo "</button>";
@@ -41,7 +41,7 @@ echo "<div id=\"L_headerLinks\">";
 //-----------------------------------------------------------------------------------//
     // Verlinkung zur Shop-Seite anzeigen
     echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+        echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Shop\">";
             echo "Shop";
         echo "</button>";
@@ -52,7 +52,7 @@ echo "<div id=\"L_headerLinks\">";
 //-----------------------------------------------------------------------------------//
     // der Button muss später in den Header - Adminbutton
     echo"<form action=\"index.php\" method=\"get\">";
-        echo"<button name=\"Seiten_ID\" type=\"submit\" value=\"Adminbereich\">Admin</button>";
+        echo"<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" value=\"Adminbereich\">Admin</button>";
     echo"</form>";
 
 //-----------------------------------------------------------------------------------//
@@ -84,7 +84,7 @@ echo "<div id=\"L_headerRechts\">";
 //-----------------------------------------------------------------------------------//
     // Icon für Account/Login
     echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+        echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Login\">";
             echo "<img src=\"../assets/PH.jpg\">";
         echo "</button>";
@@ -96,7 +96,7 @@ echo "<div id=\"L_headerRechts\">";
 //-----------------------------------------------------------------------------------//
     // Icon für Warenkorb mit Artikelanzahlanzeige
     echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
+        echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Warenkorb\">";
             echo "<img src=\"../assets/PH.jpg\">";
             echo "<div id=\"warenkorb_art_anz\">";
