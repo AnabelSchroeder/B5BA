@@ -61,6 +61,11 @@ header {
 #L_headerContentContainer {
   width: 1450px;
 
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-left: 100px;
+  padding-right: 100px;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,6 +82,10 @@ header {
   align-items: center;
 }
 
+#L_headerLücke {
+  width: 540px;
+}
+
 #L_headerRechts {
   /*width: 50%;
   text-align: right;*/
@@ -86,6 +95,10 @@ header {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+}
+
+#headerSuchfeld {
+  font-size: var(--L_fontsize_hint);
 }
 
 #L_warenkorb_art_anz {
@@ -102,10 +115,20 @@ header {
   border: none;
   color: var(--L_farbe-weiß);
   font-size: var(--L_fontsize_button);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
 }
 
 .L_img {
   height: 25px;
+}
+
+#headerSuchfeld {
+  width: 200px;
+  height: 30px;
 }
 
 footer {
