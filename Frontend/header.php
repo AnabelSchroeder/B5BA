@@ -10,6 +10,7 @@ echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
 
 echo "<header>";
 
+echo "<div id=\"L_headerContentContainer\">";
 
 //===================================================================================//
 echo "<div id=\"L_headerLinks\">";
@@ -74,7 +75,7 @@ echo "<div id=\"L_headerRechts\">";
         echo "</button>";
     echo "</form>"; */
 
-    echo "<button on:click=\"showSearchField()\">";
+    echo "<button on:click=\"showSearchField()\" class=\"L_headerButton\" >";
         echo "<img src=\"../assets/PH.jpg\">";
     echo "</button>";
 
@@ -109,6 +110,8 @@ echo "<div id=\"L_headerRechts\">";
 
 echo "</div>";
 //===================================================================================//
+
+echo "</div>";
 
 echo "</header>";
 
