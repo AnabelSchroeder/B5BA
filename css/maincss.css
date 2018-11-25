@@ -11,8 +11,29 @@
 
   /*--------------------------------------------------LP-VARIABLEN--*/
   /* LP */
-  --farbe-gruen: rgb(27, 94, 27);
-  --farbe-weiß: rgb(255, 255, 255);
+  --L_farbe-gruen: rgb(14, 120, 57);
+  --L_farbe-weiß: rgb(255, 255, 255);
+  --L_farbe-hellgrau: rgb(242, 242, 242);
+  --L_farbe-black: rgb(0, 0, 0);
+
+  --L_fontsize_hint: 14px; /* Footer: Text // 
+                              Shopsuche: Seitenzahlanzeige // 
+                              Artikelansicht: "inkl. Mwst."// 
+                              Warenkorb: Stckpreis, "inklMwst", Weiter-shoppen-Button */
+  --L_fontsize_button: 16px; /* Header: Seitenlink // 
+                                Shopsuche: Filter-anwenden-Button // 
+                                Artikelansicht: In-Warenkorb-Button // 
+                                Warenkorb: Zur-Kasse- & Artikel-löschen-Button */
+  --L_fontsize_menu: 20px; /* Shopsuche: Suchtext, ExPreise, Filtermenu //
+                              Artikelansicht: Versandtext, Artikelanzahl //
+                              Warenkorb: Versandtext */
+  --L_fontsize_text: 24px; /* Header: Warenkorbzahl // 
+                              Shopsuche: Artikelname, Filteruntermenu // 
+                              Artikelansicht: Text // 
+                              Warenkorb: Artikelname, Summen */
+  --L_fontsize_preis: 34px; /* Preise außer beim Warenkorb */
+  --L_fontsize_titel: 48px; /* Seitentitel, Artikelname */
+
   /*---------------------------------------------------------------*/
 }
 
@@ -26,21 +47,88 @@
 
 header {
   width: 100%;
-  height: 100px;
-  background-color: var(--farbe-gruen);
-  color: var(--farbe-weiß);
+  height: 71px;
+  background-color: var(--L_farbe-gruen);
+  color: var(--L_farbe-weiß);
+
+  margin: 0px;
+  /*padding: 10px;*/
+
+  display: flex;
+  justify-content: center;
+}
+
+#L_headerContentContainer {
+  width: 1450px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #L_headerLinks {
-  width: 100px;
+  width: 300px;
+
+  /*position: absolute;*/
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 #L_headerRechts {
-  width: 100px;
+  /*width: 50%;
+  text-align: right;*/
+  /*position: absolute;*/
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#warenkorb_art_anz {
+  font-size: var(--L_fontsize_text);
 }
 
 .L_headerButton {
-  height: 12px;
-  width: 30px;
+  height: 30px;
+  width: 60px;
+
+  margin: 5px;
+
+  background-color: var(--L_farbe-gruen);
+  border: none;
+  color: var(--L_farbe-weiß);
+  font-size: var(--L_fontsize_button);
 }
+
+img {
+  height: 25px;
+}
+
+footer {
+  font-size: var(--L_fontsize_hint);
+  color: var(--L_farbe-weiß);
+}
+
+h1 {
+  font-size: var(--L_fontsize_titel);
+  font-style: bold;
+  color: var(--L_farbe-gruen);
+}
+
+h3 {
+  font-size: var(--L_fontsize_text);
+  font-style: bold;
+  color: var(--L_farbe-gruen);
+}
+
+p {
+  font-size: var(--L_fontsize_text);
+  color: var(--L_farbe-black);
+  text-align: left;
+}
+
 /*---------------------------------------------------------------*/
