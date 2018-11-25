@@ -16,7 +16,7 @@ echo"</head>";
 echo"<body>";
 
 // Lisa: header einfügen
-include "header.php";
+include "Frontend/header.php";
 
 /* der Button muss später in den Header
 echo"<form action=\"index.php\" method=\"get\">";
@@ -37,6 +37,8 @@ if(isset($_GET['Seiten_ID'])) {
     include "Adminbereich/adminbereich.php";
     
 */
+
+include "Frontend/footer.php";
 
 echo"</body>";
 
