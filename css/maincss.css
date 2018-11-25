@@ -88,7 +88,7 @@ header {
   align-items: center;
 }
 
-#warenkorb_art_anz {
+#L_warenkorb_art_anz {
   font-size: var(--L_fontsize_text);
 }
 
@@ -104,7 +104,7 @@ header {
   font-size: var(--L_fontsize_button);
 }
 
-img {
+.L_img {
   height: 25px;
 }
 
@@ -113,19 +113,19 @@ footer {
   color: var(--L_farbe-weiß);
 }
 
-h1 {
+.L_h1 {
   font-size: var(--L_fontsize_titel);
   font-style: bold;
   color: var(--L_farbe-gruen);
 }
 
-h3 {
+.L_h3 {
   font-size: var(--L_fontsize_text);
   font-style: bold;
   color: var(--L_farbe-gruen);
 }
 
-p {
+.L_p {
   font-size: var(--L_fontsize_text);
   color: var(--L_farbe-black);
   text-align: left;
