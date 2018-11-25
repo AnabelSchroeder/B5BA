@@ -7,7 +7,7 @@
 echo "<h1>Warenkorb</h1>";
 // Schleife zum anzeigen der Artikel
 echo "<div>";
-echo "<img src=\"../assets/PH.jpg\">";
+echo "<img class=\"L_img\" src=\"../assets/PH.jpg\">";
 echo "...</div>";
 //...
 

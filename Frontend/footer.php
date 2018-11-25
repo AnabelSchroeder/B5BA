@@ -10,7 +10,7 @@ echo "<footer>";
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Home\">";
-            echo "<img src=\"../assets/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"../assets/PH.jpg\">";
         echo "</button>";
     echo "</form>";
 
@@ -55,19 +55,19 @@ echo "<footer>";
 
         // Facebook - Logo & Link
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"../img/PH.jpg\">";
             echo "Facebook";
         echo "<button>";
 
         // Twitter - Logo & Link
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"../img/PH.jpg\">";
             echo "Twitter";
         echo "<button>";
 
         // Instagram
         echo "<button>";
-            echo "<img src=\"../img/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"../img/PH.jpg\">";
             echo "Instagram";
         echo "<button>";
 
