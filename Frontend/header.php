@@ -53,7 +53,10 @@ echo "<div id=\"L_headerLinks\">";
 //-----------------------------------------------------------------------------------//
     // der Button muss später in den Header - Adminbutton
     echo"<form action=\"index.php\" method=\"get\">";
-        echo"<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" value=\"Adminbereich\">Admin</button>";
+        echo"<button class=\"L_headerButton\" name=\"Seiten_ID\" 
+                     id=\"L_AdminButton\" style=\"visibility:hidden\"
+                    type=\"submit\" 
+                    value=\"Adminbereich\">Admin</button>";
     echo"</form>";
 
 //-----------------------------------------------------------------------------------//
@@ -73,12 +76,19 @@ echo "<div id=\"L_headerRechts\">";
                 echo "value=\"?\">";
             echo "<img src=\"../assets/PH.jpg\">";
         echo "</button>";
-    echo "</form>"; */
+    echo "</form>"; 
+    
+    */
 
-    echo "<button on:click=\"showSearchField()\" class=\"L_headerButton\" >";
-        echo "<img src=\"../assets/PH.jpg\">";
-    echo "</button>";
+    echo "<form action=\"index.php\" method=\"get\">";
+        echo "<input id=\"headerSuchfeld\" type=\"text\" style=\"visibility:hidden\" 
+                        name=\"header_search\" placeholder=\"Suche\" onkeyup=\"L_startSearch()\">";
+    echo "</form>"; 
+        echo "<button onclick=\"L_showSearchField()\" class=\"L_headerButton\" >";
+            echo "<img src=\"../assets/PH.jpg\">";
+        echo "</button>";
 
+        
 //-----------------------------------------------------------------------------------//
 
 
@@ -114,5 +124,7 @@ echo "</div>";
 echo "</div>";
 
 echo "</header>";
+
+echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>;";
 
 ?>
