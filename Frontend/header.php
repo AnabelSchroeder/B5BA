@@ -110,7 +110,7 @@ echo "<div id=\"L_headerRechts\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Warenkorb\">";
             echo "<img class=\"L_img\" src=\"../assets/PH.jpg\">";
-            echo "<div id=\"warenkorb_art_anz\">";
+            echo "<div id=\"L_warenkorb_art_anz\">";
                 echo /*$w_art_anz*/ "ZAHL";
             echo "</div>";
         echo "</button>";
