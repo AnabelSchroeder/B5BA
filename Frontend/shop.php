@@ -4,6 +4,10 @@
 // Ersteller: Lisa Peters //
 ///////////////////////////////////////
 
+
+//Haupt CSS einbinden
+echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
+
 echo "<div id=\"L_Content_SucheContainer\">";
     echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
@@ -75,13 +79,15 @@ echo "</div>";
 echo "<div id=\"L_shopPagContBack\">";
     echo "<div id=\"L_shopPagContSigns\">";
         
-            echo "<img src=\"../assets/PH.jpg>";
+            echo "<img src=\"../assets/PH.jpg\">";
         
             echo "<div id=\"L_shopPagAusgabe\">";
 
+                echo "1 2 3 4";
+
             echo "</div>";
 
-            echo "<img src=\"../assets/PH.jpg>";
+            echo "<img src=\"../assets/PH.jpg\">";
             
     echo "</div>";
 echo "</div>";
