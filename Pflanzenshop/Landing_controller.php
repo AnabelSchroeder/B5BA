@@ -1,25 +1,38 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$passwort = "";
-$dbname = "ba_webshop";
+    //Datenbank einbinden
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $dbase = "ba_webshop";
+    
+    $verbinde = mysqli_connect($host,$user,$pass);
+    $con = mysqli_select_db($verbinde,$dbase);
 
 
-$conn = new PDO("mysql:host= $servername;dbname= $dbname",$username, $passwort);
-//$verbinde = mysqli_connect($host,$user,$pass);
-//$con = mysqli_select_db($verbinde,$dbase);
+
 
 //landing_page
 //artikel neuheiten anzeigen
 
-$sql = "SELECT COUNT(*)FROM artikel;";
-mysqli_query($conn, $sql);
+$sql = "SELECT art_id, art_name, art_preis, art_bild FROM artikel WHERE art_id =1;";
+$sql= mysqli_query($verbinde, $sql);
 
-foreach($conn->query($sql) as $row)
+if (mysqli_num_rows ($sql) > 0)
 {
-    echo $row ['art_id'];
+    while ($zeile = mysqli_fetch_assoc($sql))
+    {
+        echo $zeile['art_name'];
+        echo "<br>";
+        echo $zeile['art_preis'];
+    }
 }
 
+else{
+    echo "nope";
+}
+
+
+/*
 $neueste_artikel = "SELECT art_id, art_name, art_preis FROM artikel LIMIT".$anzahl." -4, 4; ";
 for ($i=0; $i<=4; $i++)
 {
@@ -60,11 +73,11 @@ $landing_artikel_1_preis
 $landing_artikel_1_titel
 
 $landing_artikel_1_preis
-*/
+
 
 if (isset ($_POST['User_Registration_Speichern']))
 {
     
 }
-
+*/
 ?>
