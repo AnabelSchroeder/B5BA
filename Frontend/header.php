@@ -81,9 +81,9 @@ echo "<div id=\"L_headerRechts\">";
     
     */
 
-    echo "<form action=\"index.php\" method=\"get\">";
+    echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"headerSuchfeld\" type=\"text\" style=\"visibility:hidden\" 
-                        name=\"header_search\" placeholder=\"Suche\" onkeyup=\"L_startSearch()\">";
+                        name=\"L_searchfield\" placeholder=\"Suche\" onkeyup=\"L_startSearch()\">";
     echo "</form>"; 
         echo "<button onclick=\"L_showSearchField()\" class=\"L_headerButton\" >";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
