@@ -9,14 +9,17 @@ $dbase = "ba_webshop";
 $verbinde = mysqli_connect($host,$user,$pass);
 $con = mysqli_select_db($verbinde,$dbase);
 
- echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"pflanzenshop.css\">";
+ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/ pflanzenshop.css\">";
 
 echo "<html>";
     echo "<body>";
  
-$seite = "kasse_1";
 
-if ($seite== "landing") {
+
+/**********************************************************************************
+ * Darstellung Landing Page
+ *********************************************************************************/
+if ($seitenid== "index") {
 
 //landing page
 
@@ -24,14 +27,16 @@ if ($seite== "landing") {
     
     echo "header";
     echo "<br>";
-    
+
+//bilder mosaik
 echo "<div class=\"landing_container\">";
-    
+// form zum übergeben der seiten id    
+    echo "<form action=\"index.php?Seiten_ID=login\" method=\"GET\">";
     echo "<div class=\"landing_mosaik_1\">";
     
         echo "<span class=\"landing_mosaik_weiß\"> Bonsai </span> <br>";
 
-        echo "<button class=\"button1\"> Jetzt kaufen </button>";
+        echo "<button name=\"Seiten_ID\" class=\"button1\" type=\"submit\" value=\"login\"> Jetzt kaufen </button>";
     echo "</div>";
     
     
@@ -40,7 +45,7 @@ echo "<div class=\"landing_container\">";
     
             echo "<span class=\"landing_mosaik_weiß\"> Blume </span> <br>";
 
-            echo "<button class=\"button1\"> Jetzt kaufen </button>";
+            echo "<button name=\"Seiten_ID\" class=\"button1\"> Jetzt kaufen </button>";
       echo "</div>";
     
     
@@ -48,7 +53,7 @@ echo "<div class=\"landing_container\">";
   
         echo "<span class=\"landing_mosaik_weiß\"> Kaktus </span> <br>";
 
-        echo "<button class=\"button1\"> Jetzt kaufen </button>";
+        echo "<button name=\"Seiten_ID\" class=\"button1\"> Jetzt kaufen </button>";
      echo "</div>";
     
     
@@ -58,7 +63,7 @@ echo "<div class=\"landing_container\">";
 
         echo "<span class=\"landing_mosaik_weiß\"> Gr&uuml;npflanze </span> <br>";
 
-        echo "<button class=\"button1\"> Jetzt kaufen </button>";
+        echo "<button name=\"Seiten_ID\" class=\"button1\"> Jetzt kaufen </button>";
      echo "</div>";
     
     
@@ -68,14 +73,17 @@ echo "<div class=\"landing_container\">";
     
         echo "<span class=\"landing_mosaik_weiß\"> Schenken </span> <br>";
 
-        echo "<button class=\"button1\"> Jetzt kaufen </button>";
+        echo "<button name=\"Seiten_ID\" class=\"button1\"> Jetzt kaufen </button>";
     echo "</div>";
  
+echo "</form>";
 echo "</div> <br><br>";
 
+// slogan
 
 echo "<div class=\"landing_slogan_container\"> <span class=\"landing_slogan_schrift\"> SLOGAN </span> </div>";
 
+//neuheiten anzeigen
 echo "<div class=\"landing_neuheiten_container\">";
 echo "Unsere Neuheiten <br> <br>";
     
@@ -106,17 +114,22 @@ echo "</div>";
 echo "</div>";
 }
 
-else if ($seite == "login")
+/*******************************************************************************************************
+ * Loginseite
+ **********************************************************************************************/
+else if ($seitenid == "login")
 {
 
 
 // login
-$_Get = login;
+
    
 echo "header";
+
+//linker container (login)
 echo "<div class=\"user_login_bg\">";
     echo "<div class=\"user_login_container\">";
-    echo "<form action=\"pflanzenshop_AS.php\"  name=\"Login\" method=\"POST\">";
+    echo "<form action=\"index.php\"  name=\"Login\" onsubmit=\"return user_login_pruefe()\" method=\"POST\">";
     echo "<div class=\"user_login_div\">";
         echo "<div class=\"user_login_div_headleiste_l\"> Login </div>";
     
@@ -124,20 +137,20 @@ echo "<div class=\"user_login_bg\">";
         
         echo "Benutzer <input class=\"user_login_form\" type=\"text\" name=\"login_name\" placeholder=\"Nutzername\"> <br>";
         echo "Passwort <input class=\"user_login_form\" type=\"text\" name=\"login_pass\" placeholder=\"Passwort\"> <br>";
-        echo "<input class=\"button1\" name=\"user_login\" onclick=\"return user_login_pruefe()\" type=\"submit\" value=\"Login\" \">";
-       
+        echo "<input class=\"button1\" name=\"user_login\"  type=\"submit\" value=\"Login\" \">";
+    echo "</form>";
         echo "</div>";
     echo "</div>";
 
-
-    echo "<div class=\"user_login_div\">";
-        echo "<div class=\"user_login_div_headleiste_r\"> Konto erstellen </div>";
-    
+//rechter container (registrieren)
+ echo "<div class=\"user_login_div\">";
+echo "<div class=\"user_login_div_headleiste_r\"> Konto erstellen </div>";
+    echo"<form action=\"index.php?Seiten_ID=login\"  name=\"Login\" method=\"GET\">";
         echo "<div class=\"user_login_div_rechts\">";
         
         echo "Du hast noch kein Konto bei uns? <br> <br>";
         echo "Dann Melde dich einfach an!";
-        echo "<input class=\"button1\" name=\"registrieren\" type=\"submit\" value=\"Jetzt registrieren\"> <br>";
+        echo "<button name=\"Seiten_ID\" class=\"button1\"  type=\"submit\" value=\"user_registration\"> Jetzt registrieren </button> <br>";
            
         echo "</div>";
         echo "<div class=\"clear\"> </div>";
@@ -146,14 +159,16 @@ echo "</div>";
 echo "<div>";
     
 }
+/****************************************************************************************
+ * user registrierungsformular
+ *****************************************************************************************/
 
-
-else if ($seite == "User_registration")
+else if ($seitenid == "user_registration")
 {
 
 //registrieren
 include "registrierung.php";
-$_GET = User_registration;
+
 echo "header";
 echo "<div class=\"user_login_bg\">";
     echo "<div class=\"user_registration_div\">";
@@ -228,14 +243,15 @@ echo "</div>";
 
 
 
-//Kasse
-
+/****************************************************************************************** 
+*Kasse
+******************************************************************************************* */
 // Adresse
 
-else if ($seite== "kasse_1")
+else if ($seitenid== "kasse_1")
 {
 
-$_GET = Kasse_1;
+
 
 echo "header";
 echo "<div class=\"kasse_headleiste\">";
@@ -268,9 +284,9 @@ echo "</div>";
     
 // Zahlungsmethode
 
-else if ($seite=="kasse_2")
+else if ($seitenid=="kasse_2")
 {
-$_GET = Kasse_2;
+
 
 echo "header";
 echo "<div class=\"kasse_headleiste\">";
@@ -304,9 +320,9 @@ echo "</div>";
 
 //kauf abschließen
 
-else if ($seite == "kasse_3")
+else if ($seitenid== "kasse_3")
 {
-$_GET = Kasse_3;
+
 echo "header";
 echo "<div class=\"kasse_headleiste\">";
     echo "Kasse <br>";
@@ -333,7 +349,7 @@ echo "</div>";
 }
 
 // bestellbestätigung
-else if ($seite == "kasse_4")
+else if ($seitenid == "kasse_4")
 {
 
 $_GET = Kasse_4;
@@ -372,7 +388,7 @@ echo "</html>";
 
 
 
-echo "<script src=\"pflanzenshop.js\"></script>"
+echo "<script src=\"pflanzenshop.js\"></script>";
 
     
 ?>

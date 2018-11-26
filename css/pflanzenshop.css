@@ -72,7 +72,7 @@
     height:100px;
     margin-left: 90px;
     text-align: center;
-    background-image:url(img/bonsai.jpg);
+    background-image:url(../img/bonsai.jpg);
     background-size: cover;
     background-position: 0px -70px;
     margin:5px;
@@ -90,7 +90,7 @@
     margin:5px;
     padding-top: 35px;
     float: left;
-    background-image:url(img/spring.jpg);
+    background-image:url(../img/spring.jpg);
     background-size: cover;
     background-position: 0px -70px;
 }
@@ -105,7 +105,7 @@
     margin:5px;
     padding-top: 55px;
     float: left;
-    background-image:url(img/kaktus.jpg);
+    background-image:url(../img/kaktus.jpg);
     background-size: cover;
     background-position: 0px -10px;
     margin:5px;
@@ -122,7 +122,7 @@
     margin:5px;
     padding-top: 35px;
     float: left;
-    background-image:url(img/deko.jpg);
+    background-image:url(../img/deko.jpg);
     background-size: cover;
     background-position: 0px -20px;
 }
@@ -138,7 +138,7 @@
     margin:5px;
     padding-top: 35px;
     float: left;
-    background-image:url(img/marriage.jpg);
+    background-image:url(../img/marriage.jpg);
     background-size: cover;
     background-position: 0px -70px;
 }
@@ -160,7 +160,7 @@
     margin-bottom: 30px;
     width:100%;
     height: 135px;
-    background-image:url(img/flowers.jpg);
+    background-image:url(../img/flowers.jpg);
     background-size: cover;
     background-position: 0px -275px;
     
