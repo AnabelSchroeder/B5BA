@@ -8,16 +8,16 @@ $dbname = "ba_webshop";
 // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
 if (isset($_POST['userNeuAnlegen'])){
 
-$a_rechte = $_POST["a-rechte"];
-$a_nname =  $_POST["a-nachname"];
-$a_vname = $_POST["a-vorname"];
-$a_strasse = $_POST["a-strasse"];
-$a_ort = $_POST["a-ort"];
-$a_plz = $_POST["a-plz"];
-$a_email = $_POST["a-email"];
-$a_loginname = $_POST["a-loginname"];
-$a_passwort = $_POST["a-passwort"];
-$a_sperrung = $_POST["a-sperrung"];
+$a_rechte = $_POST["a_rechte"];
+$a_nname =  $_POST["a_nachname"];
+$a_vname = $_POST["a_vorname"];
+$a_strasse = $_POST["a_strasse"];
+$a_ort = $_POST["a_ort"];
+$a_plz = $_POST["a_plz"];
+$a_email = $_POST["a_email"];
+$a_loginname = $_POST["a_loginname"];
+$a_passwort = $_POST["a_passwort"];
+$a_sperrung = $_POST["a_sperrung"];
 
 //Speichern der Daten von Neu anlegen eines Users im admin bereich
 try {
@@ -46,8 +46,11 @@ $_POST['userNeuAnlegen'] =  null;
 
     // Laden der Daten für die ansicht der Kundenliste
     $sqlkundenliste = "SELECT * FROM nutzer WHERE n_admin = 0";
-   
 
+    // Laden der Daten für die ansicht der Adminliste
+    $sqladminliste = "SELECT * FROM nutzer WHERE n_admin = 1";
+
+ 
 //Wenn der nutzer in der Kunden liste auf ansehen klickt wird die kunden id gespeichert zur weiteren verwendung für löschung und ansicht der Datensätze
     if (isset($_GET['adminnutzerwahl'])){
 
@@ -65,5 +68,14 @@ $_POST['userNeuAnlegen'] =  null;
         
         $_GET['nutzerLoeschen'] = null;
         }
+
+
+    //Anzahl der Bestellungen für den einzelenen Nutzer, für die ausgabe auf der Nutzeransichtsseite
+ 
+    $statement1 = $conn->prepare("SELECT COUNT(*) AS anzahl FROM bestellung WHERE n_id = ?");
+    $statement1->execute(array($_SESSION['adminnutzerwahl']));  
+    $anzeigeBestellungsanzahl = $statement1->fetch();
+    //echo "Es wurden ".$anzeigeBestellungsanzahl['anzahl']." Bestellungen gefunden";
+            
 
 ?>

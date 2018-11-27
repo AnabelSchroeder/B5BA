@@ -77,7 +77,7 @@ $admin = true;
                 case "Adminbereich":
                     $adminBoxRechtsOben = "Mein Konto";
                     function boxRechtsUntenBefuellen(){
-                        view::af_Adminbereich();
+                        a_view::af_Adminbereich();
                         
                     }
                     break;
@@ -89,7 +89,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Kunden Liste";
                         function boxRechtsUntenBefuellen(){
-                        view::af_admin_user_kundenliste();
+                        a_view::af_admin_user_kundenliste();
                         }
                     }
                     else {
@@ -104,7 +104,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Admin Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "Liste der Admins.";
+                            a_view::af_admin_user_adminliste();
                         }
                     }
                 else {
@@ -119,7 +119,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User neu anlegen";
                         function boxRechtsUntenBefuellen(){
-                            view::af_admin_user_neuanlegen();
+                            a_view::af_admin_user_neuanlegen();
                         }
                     }
                 else {
@@ -133,7 +133,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User";
                         function boxRechtsUntenBefuellen(){
-                            view::af_admin_user_anzeigen();
+                            a_view::af_admin_user_anzeigen();
                         }
                     }
                 else {
@@ -258,14 +258,6 @@ $admin = true;
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=http://localhost/b5ba/index.php\">";
         }
 
-
-
-
-
-            
-        
-
- 
-
-
 ?>
+
+<script src="adminbereich/admin.js"></script>

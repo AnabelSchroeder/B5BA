@@ -1,5 +1,5 @@
 <?php
-    class view {
+    class a_view {
 
         /**************************************************************************************************************** */
         //admin-user-kundenliste
@@ -36,6 +36,42 @@
             </div>";
             }
         }
+
+        /**************************************************************************************************************** */
+        //admin-user-adminliste
+        /**************************************************************************************************************** */
+        //Seiteninhalt der rechten Box von der Kundenliste
+        public static function af_admin_user_adminliste() {
+            
+            global $conn, $sqladminliste ;
+            foreach ($conn->query($sqladminliste) as $row) {
+            print"<div  class=\"admin-box-linie\"> 
+            <div  class=\"admin-box-liste\"> 
+
+            
+                <div  class=\"admin-box-liste-kdnr\"> 
+                N-Nr ".$row['n_id']."
+                </div>
+                <div  class=\"admin-box-liste-name\"> 
+                ".$row['n_vname']." ".$row['n_nname']."
+                </div>
+                <div  class=\"admin-box-liste-gesperrt\">";
+
+                if ($row['n_sperre'] == 1){
+                   print "gesperrt";
+                } 
+               print" </div>
+                <div  class=\"admin-box-liste-ansehen\">
+                <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen&adminnutzerwahl=".$row['n_id']."\">
+                    <input type=\"submit\"  class=\"a-button\" value=\"ansehen\">
+                    </form>
+                </div>
+            
+
+            </div>
+        </div>";
+        }
+    }
 
         /**************************************************************************************************************** */
         //Adminbereich
@@ -184,8 +220,9 @@
         //admin-user-neuanlegen
         /**************************************************************************************************************** */
         //Seite user neu anlegen
+        //aNeuPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
         public static function af_admin_user_neuanlegen() {
-            print "<form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\"  >";
+            print "<form name=\"a_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe()\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
@@ -195,7 +232,7 @@
                     Vorname
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-vorname\">
+                    <input type=\"text\" name=\"a_vorname\">
                     </div>
                 </div>
 
@@ -204,7 +241,7 @@
                     Nachname
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-nachname\">
+                    <input type=\"text\" name=\"a_nachname\">
                     </div>
                 </div>
 
@@ -213,7 +250,7 @@
                     Straße
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-strasse\">
+                    <input type=\"text\" name=\"a_strasse\">
                     </div>
                 </div>
 
@@ -222,7 +259,7 @@
                     PLZ
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-plz\">
+                    <input type=\"text\" name=\"a_plz\">
                     </div>
                 </div>
 
@@ -231,7 +268,7 @@
                     Ort
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-ort\">
+                    <input type=\"text\" name=\"a_ort\">
                     </div>
                 </div>
 
@@ -247,8 +284,8 @@
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
                     
-                    <input type=\"radio\" name=\"a-rechte\" value=0 checked> Kunde
-                        <input type=\"radio\" name=\"a-rechte\" value=1> Admin 
+                    <input type=\"radio\" name=\"a_rechte\" value=0 checked> Kunde
+                        <input type=\"radio\" name=\"a_rechte\" value=1> Admin 
                         </div>
                     </div>
                 </div>
@@ -258,7 +295,7 @@
                     Login Name
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-loginname\">
+                    <input type=\"text\" name=\"a_loginname\">
                     </div>
                 </div>
 
@@ -267,7 +304,7 @@
                     Passwort
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-passwort\">
+                    <input type=\"text\" name=\"a_passwort\">
                     </div>
                 </div>
 
@@ -276,7 +313,7 @@
                     E-mail
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a-email\">
+                    <input type=\"text\" name=\"a_email\">
                     </div>
                 </div>
 
@@ -291,8 +328,8 @@
                         Sperre
                         </div>
                         <div  class=\"admin-box-texfeld-rechts\">
-                        <input type=\"radio\" name=\"a-sperrung\" value=0 checked> Nicht gesperrt
-                        <input type=\"radio\" name=\"a-sperrung\" value=1> gesperrt 
+                        <input type=\"radio\" name=\"a_sperrung\" value=0 checked> Nicht gesperrt
+                        <input type=\"radio\" name=\"a_sperrung\" value=1> gesperrt 
                         </div>
                     </div>
 
@@ -326,7 +363,7 @@
         /**************************************************************************************************************** */
         //anzeigen der User in ihrem einzelseite
         public static function af_admin_user_anzeigen() {
-            global $conn, $sqladminnutzerwahl;
+            global $conn, $sqladminnutzerwahl, $anzeigeBestellungsanzahl;
                             foreach ($conn->query($sqladminnutzerwahl) as $row) {
                             
 
@@ -379,8 +416,9 @@
                                 <div  class=\"admin-box-texfeld-links\">
                                 Bestellungen
                                 </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                3 Bestellungen + Bestelungsansehenbutton
+                                <div  class=\"admin-box-texfeld-rechts\">".
+                                $anzeigeBestellungsanzahl['anzahl']." Bestellungen 
+                                <a class=\"linkTexthervorgehobenFließtext\" href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-bestellungsliste\" class=\"admin-nav-ueberschrift\"> ansehen</a>
                                 </div>
                             </div>
 
@@ -463,9 +501,6 @@
                                 <input type=\"submit\" name=\"nutzerLoeschen\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">
                                 </form>
 
-                                <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
-                                <input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\">
-                                </form>
                                 </div>
 
                                 </div>
