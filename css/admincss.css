@@ -44,13 +44,14 @@
 
 .admin-box-linie{
     border-bottom: 1px solid gray; 
-    padding: 10px;  
+    /*padding: 10px;  */
 }
 
 .admin-box-liste{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .admin-box-textfelder{
