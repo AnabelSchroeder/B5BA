@@ -54,6 +54,17 @@
     padding-left: 10px;
 }
 
+/*gleichmäßige verteilung in der Artikellisten ansicht*/
+.admin-box-liste-artnummer, .admin-box-liste-artname, .admin-box-liste-artstueck, .admin-box-liste-artpreis, .admin-box-liste-salepreis{
+    flex: 1;
+}
+
+/*gleichmäßige verteilung in der Nutzerlisten ansicht*/
+.admin-box-liste-kdnr, .admin-box-liste-name, .admin-box-liste-gesperrt{
+    flex: 1;
+}
+
+
 .admin-box-textfelder{
     display: flex;
     padding: 10px 10px 10px 50px;
