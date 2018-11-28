@@ -148,7 +148,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User bearbeiten";
                         function boxRechtsUntenBefuellen(){
-                            echo "bearbeiten";
+                            a_view::af_admin_user_bearbeiten();
                         }
                     }
                 else {

@@ -222,7 +222,7 @@
         //Seite user neu anlegen
         //aNeuPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
         public static function af_admin_user_neuanlegen() {
-            print "<form name=\"a_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe()\" >";
+            print "<form name=\"a_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_neu_anlegen)\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
@@ -355,6 +355,170 @@
                         </div>
                     </div>
                 </div>";
+        }
+
+
+        /**************************************************************************************************************** */
+        //admin-user-bearbeiten
+        /**************************************************************************************************************** */
+        //Seite user neu anlegen
+        //aNeuPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
+        public static function af_admin_user_bearbeiten() {
+            global $conn, $sqladminnutzervaluebefuellen;
+            
+            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_user_bearbeiten)\" >";
+                //erster block Name, Adresse
+                /*************************************************************** */
+                foreach ($conn->query($sqladminnutzervaluebefuellen) as $row) {
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Vorname
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_vorname\" value=\"".$row['n_vname']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Nachname
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_nachname\" value=\"".$row['n_nname']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Straße
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_strasse\" value=\"".$row['n_strasse']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    PLZ
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_plz\" value=\"".$row['n_plz']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Ort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_ort\" value=\"".$row['n_ort']."\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //zweiter block Rechte, Login name, Passwort, Email
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Rechte
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+
+                    if ($row['n_admin'] == 0){
+                        print "<input type=\"radio\" name=\"a_rechte\" value=0 checked> Kunde
+                        <input type=\"radio\" name=\"a_rechte\" value=1> Admin"; 
+                    }
+                    
+                    if ($row['n_admin'] == 1){
+                        print "<input type=\"radio\" name=\"a_rechte\" value=0 > Kunde
+                        <input type=\"radio\" name=\"a_rechte\" value=1 checked> Admin"; 
+                    }
+
+                    print "</div>
+                    <!--div zuviel? -->
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Login Name
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_loginname\" value=\"".$row['n_login']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Passwort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_passwort\" value=\"".$row['n_passwort']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    E-mail
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_email\" value=\"".$row['n_mail']."\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //Vierter Block Sperre
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        Sperre
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">";
+
+                        if ($row['n_sperre'] == 0){
+                        print"<input type=\"radio\" name=\"a_sperrung\" value=0 checked> Nicht gesperrt
+                        <input type=\"radio\" name=\"a_sperrung\" value=1> gesperrt ";
+                        }
+                        if ($row['n_sperre'] == 1){
+                            print"<input type=\"radio\" name=\"a_sperrung\" value=0 > Nicht gesperrt
+                            <input type=\"radio\" name=\"a_sperrung\" value=1 checked> gesperrt ";
+                            }
+
+
+                        print"</div>
+                    </div>
+
+                </div>";
+
+                //Button Block
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+
+                        <div class=\"button-box\">
+                        <input type=\"submit\" name=\"userBearbeiten\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >
+                        </form>
+
+                        <form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen\" method=\"POST\">
+                        <input type=\"submit\"   value=\"Abbrechen\" class=\"a-button\">
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+                }    
         }
 
 
@@ -512,6 +676,9 @@
         }
 
 
+
+
+    //Klammer für die klasse 
     }
 
 ?>

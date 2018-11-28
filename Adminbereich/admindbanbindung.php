@@ -28,7 +28,7 @@ try {
     VALUES ('$a_rechte', '$a_nname', '$a_vname', '$a_strasse', '$a_ort', '$a_plz', '$a_email', '$a_loginname', '$a_passwort', '$a_sperrung' )";
     // use exec() because no results are returned
     $conn->exec($asql);
-    echo "New record created successfully";
+    //echo "New record created successfully";
     }
 catch(PDOException $e)
     {
@@ -39,6 +39,42 @@ $conn = null;
 $_POST['userNeuAnlegen'] =  null;
 
 }
+
+// Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
+if (isset($_POST['userBearbeiten'])){
+
+    $a_rechte = $_POST["a_rechte"];
+    $a_nname =  $_POST["a_nachname"];
+    $a_vname = $_POST["a_vorname"];
+    $a_strasse = $_POST["a_strasse"];
+    $a_ort = $_POST["a_ort"];
+    $a_plz = $_POST["a_plz"];
+    $a_email = $_POST["a_email"];
+    $a_loginname = $_POST["a_loginname"];
+    $a_passwort = $_POST["a_passwort"];
+    $a_sperrung = $_POST["a_sperrung"];
+    
+    //Speichern der Daten von Neu anlegen eines Users im admin bereich
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_sperre=? WHERE n_id=?";
+        $stmt = $conn->prepare($absql);
+        $stmt->execute([$a_rechte, $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_sperrung, $_SESSION['adminnutzerwahl']]);
+        
+        //echo "Datensatz neu hinterlegt";
+        }
+    catch(PDOException $e)
+        {
+        echo $absql . "<br>" . $e->getMessage();
+        }
+    
+    $conn = null;
+    $_POST['userBearbeiten'] =  null;
+    
+    }
+
 
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -58,7 +94,13 @@ $_POST['userNeuAnlegen'] =  null;
         //Speichern der Kunden Id in die Session variable
         $_SESSION['adminnutzerwahl'] = $_GET['adminnutzerwahl'];
    }
+ 
    
+//Nutzer bearbeiten Füllen der Value in den Fomularfeldern beim bearbeiten
+   if (isset($_SESSION['adminnutzerwahl'])){
+    $sqladminnutzervaluebefuellen = "SELECT * FROM nutzer WHERE n_id= ". $_SESSION['adminnutzerwahl'];
+   }
+
 
     //user Datensatz in Admin bereich löschen 
     if (isset($_POST ['nutzerLoeschen'])){
@@ -71,7 +113,7 @@ $_POST['userNeuAnlegen'] =  null;
 
 
     //Anzahl der Bestellungen für den einzelenen Nutzer, für die ausgabe auf der Nutzeransichtsseite
-    if (isset($_GET['adminnutzerwahl'])){
+    if (isset($_GET['adminnutzerwahl'])||isset($_SESSION['adminnutzerwahl'])){
     $statement1 = $conn->prepare("SELECT COUNT(*) AS anzahl FROM bestellung WHERE n_id = ?");
     $statement1->execute(array($_SESSION['adminnutzerwahl']));  
     $anzeigeBestellungsanzahl = $statement1->fetch();
