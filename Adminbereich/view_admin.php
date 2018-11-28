@@ -676,6 +676,223 @@
         }
 
 
+        /**************************************************************************************************************** */
+        //admin-Artikel-neuanlegen
+        /**************************************************************************************************************** */
+        //Seite Artikel neu anlegen
+        //aNeuArtikelPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
+        public static function af_admin_artikel_neuanlegen() {
+            print "<form name=\"a_artikel_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" method=\"POST\" onsubmit=\"return aArtikelNeuPruefe()\" >";
+                //erster block Name, Kathegorie, Preis
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Artikel-Name</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_name\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Kathegorie</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <select name=\"a_kat_bez\">
+                        <option value=\"nichts\">Bitte Wählen</option>
+                        <option value=\"baeumchen\">Bäumchen</option>
+                        <option value=\"gruenpflanze\">Grünpflanze</option>
+                        <option value=\"bluehend\">Blühend</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Preis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_preis\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //zweiter block Sale, Salepreis
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Sale</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    
+                    <input type=\"radio\" name=\"a_sale_status\" value=0 checked> nein
+                        <input type=\"radio\" name=\"a_sale_status\" value=1> ja 
+                        </div>
+                    </div>
+                
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Salepreis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_sale_preis\">
+                    </div>
+                </div>
+
+
+                </div>";
+
+                //Vierter Block Größe, Ort, Farbe, Pflege, Beschreibung, Bild
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Größe</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <input type=\"text\" name=\"a_art_groesse\"> 
+                        </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Ort</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <select name=\"a_art_ort\">
+                        <option value=\"nichts\">Bitte Wählen</option>
+                        <option value=\"licht\">Licht</option>
+                        <option value=\"sonnig\">Sonnig</option>
+                        <option value=\"halbschatten\">Halbschatten</option>
+                        <option value=\"schatten\">Schatten</option>
+                    </select>
+                        </div>
+                    </div>
+
+
+                    <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Farbe</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <select name=\"a_art_farbe\">
+                        <option value=\"nichts\">Bitte Wählen</option>
+                        <option value=\"weiss\">Weiß</option>
+                        <option value=\"rosa\">Rosa</option>
+                        <option value=\"gelb\">gelb</option>
+                        <option value=\"rot\">Rot</option>
+                        <option value=\"gruen\">Grün</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Pflege</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <textarea name=\"a_art_pflege\" cols=\"50\" rows=\"10\">
+                        </textarea>
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Beschreibung</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <textarea name=\"a_art_text\" cols=\"50\" rows=\"10\" >
+                        </textarea>
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Bildname (z.B. bild.img)</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <input type=\"text\" name=\"a_art_bild\"> 
+                        </div>
+                    </div>
+
+
+                </div>";
+
+                //Button Block
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+
+                        <div class=\"button-box\">
+                        <input type=\"submit\" name=\"a_button_ArtikelNeuAnlegen\"  value=\"Speichern\" class=\"a-button\" >
+                        </form>
+
+                        <form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" method=\"POST\">
+                        <input type=\"submit\"   value=\"Abbrechen\" class=\"a-button\">
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+        }
+
+        /**************************************************************************************************************** */
+        //admin-user-Artikelliste
+        /**************************************************************************************************************** */
+        //Seiteninhalt der rechten Box von der Kundenliste
+        public static function af_admin_user_artikelliste() {
+            
+            global $conn, $aSqlArtikelListe ;
+            foreach ($conn->query($aSqlArtikelListe) as $row) {
+            print"<div  class=\"admin-box-linie\"> 
+            <div  class=\"admin-box-liste\"> 
+
+            
+                <div class=\"admin-box-liste-artnummer\"> 
+                Art-Nr ".$row['art_id']."
+                </div>
+                <div  class=\"admin-box-liste-artname\"> 
+                ".$row['art_name']."
+                </div>
+                <div  class=\"admin-box-liste-artstueck\"> 
+                stückzahl verfügbar machen
+                </div>
+                <div  class=\"admin-box-liste-artpreis\"> 
+                ".$row['art_preis']." €
+                </div>
+                <div  class=\"admin-box-liste-salepreis\">";
+                if($row['sale_status'] == "1"){
+                    print $row['sale_preis']." €";
+                }
+                print" </div>
+
+                <div  class=\"admin-box-liste-ansehen\">
+                <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-anzeigen&a_gewaehlterArtikel=".$row['art_id']."\">
+                    <input type=\"submit\"  class=\"a-button\" value=\"ansehen\">
+                    </form>
+                </div>
+            
+
+            </div>
+        </div>";
+        }
+    }
+
+
+
+
 
 
     //Klammer für die klasse 

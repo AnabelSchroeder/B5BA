@@ -118,6 +118,51 @@ if (isset($_POST['userBearbeiten'])){
     $statement1->execute(array($_SESSION['adminnutzerwahl']));  
     $anzeigeBestellungsanzahl = $statement1->fetch();
     //echo "Es wurden ".$anzeigeBestellungsanzahl['anzahl']." Bestellungen gefunden";
-    }       
+    }   
+    
+    
+
+    /******************************************************************************************************************************************************* */
+    //Artikel
+    // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
+    if (isset($_POST['a_button_ArtikelNeuAnlegen'])){
+
+    $a_art_name = $_POST["a_art_name"];
+    $a_kat_bez =  $_POST["a_kat_bez"];
+    $a_art_preis = $_POST["a_art_preis"];
+    $a_sale_status = $_POST["a_sale_status"];
+    $a_sale_preis = $_POST["a_sale_preis"];
+    $a_art_groesse = $_POST["a_art_groesse"];
+    $a_art_ort = $_POST["a_art_ort"];
+    $a_art_farbe = $_POST["a_art_farbe"];
+    $a_art_pflege = $_POST["a_art_pflege"];
+    $a_art_text = $_POST["a_art_text"];
+    $a_art_bild = $_POST["a_art_bild"];
+
+    
+    //Speichern der Daten von Neu anlegen eines Users im admin bereich
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $asql = "INSERT INTO artikel (art_name, kat_bez, art_preis, sale_status, sale_preis, art_ort, art_farbe, art_pflege, art_text, art_bild, art_groesse)
+        VALUES ('$a_art_name', '$a_kat_bez', '$a_art_preis', '$a_sale_status', '$a_sale_preis', '$a_art_ort', '$a_art_farbe', '$a_art_pflege', '$a_art_text', '$a_art_bild' , '$a_art_groesse')";
+        // use exec() because no results are returned
+        $conn->exec($asql);
+        //echo "New record created successfully";
+        }
+    catch(PDOException $e)
+        {
+        echo $asql . "<br>" . $e->getMessage();
+        }
+    
+    $conn = null;
+    $_POST['a_button_ArtikelNeuAnlegen'] =  null;
+    
+    }
+
+    // Laden der Daten für die ansicht der Artikelliste
+    $aSqlArtikelListe = "SELECT * FROM artikel";
+
 
 ?>

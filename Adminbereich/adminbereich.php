@@ -163,7 +163,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Artikel Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel liste";
+                            a_view::af_admin_user_artikelliste();
                         }
                     }
                 else {
@@ -178,7 +178,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Artikel neu anlegen";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel neu";
+                            a_view::af_admin_artikel_neuanlegen();
                         }
                     }
                 else {
