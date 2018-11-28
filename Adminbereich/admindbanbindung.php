@@ -71,11 +71,11 @@ $_POST['userNeuAnlegen'] =  null;
 
 
     //Anzahl der Bestellungen für den einzelenen Nutzer, für die ausgabe auf der Nutzeransichtsseite
- 
+    if (isset($_GET['adminnutzerwahl'])){
     $statement1 = $conn->prepare("SELECT COUNT(*) AS anzahl FROM bestellung WHERE n_id = ?");
     $statement1->execute(array($_SESSION['adminnutzerwahl']));  
     $anzeigeBestellungsanzahl = $statement1->fetch();
     //echo "Es wurden ".$anzeigeBestellungsanzahl['anzahl']." Bestellungen gefunden";
-            
+    }       
 
 ?>
