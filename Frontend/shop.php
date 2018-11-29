@@ -8,6 +8,7 @@
 //Haupt CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
 
+// Bildbereich mit Suchfeld
 echo "<div id=\"L_Content_SucheContainer\">";
     echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
@@ -20,6 +21,7 @@ echo "<div id=\"L_Content_SucheContainer\">";
 echo "</div>";
 
 
+// Filterleiste
 echo "<div id=\"L_FilterBarCon\">";
 
 echo "<div id=\"L_FilterBar\">";
@@ -70,7 +72,7 @@ echo "</div>";
 echo "</div>";
 
 
-
+// Artikelanzeige (der Suche)
 echo "<div id=\"L_shopArtAusgabe\">";
 
     echo "<div class=\"L_shopArtContainer\">";
@@ -85,6 +87,8 @@ echo "<div id=\"L_shopArtAusgabe\">";
 
 echo "</div>";
 
+
+// Seitenzahl der Artikel
 echo "<div id=\"L_shopPagContBack\">";
     echo "<div id=\"L_shopPagContSigns\">";
         
