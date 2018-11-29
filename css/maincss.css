@@ -402,6 +402,33 @@ footer {
 
 /*---------------------------------------------------------------PAGINATION---*/
 
+#L_shopPagContBack {
+  width: 100%;
+  height: 75px;
+
+  background-color: var(--L_farbe-hellgrau);
+}
+
+#L_shopPagContSigns {
+  background-color: var(--L_farbe-hellgrau);
+
+  text-align: center;
+
+  padding: 15px;
+}
+
+#L_shopPagAusgabe {
+  color: var(--L_farbe-grau);
+
+  font-size: var(--L_fontsize_hint);
+}
+
+.L_pagPfeil {
+  height: 16px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
 /*-----------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------ARTIKELSEITE---*/

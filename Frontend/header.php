@@ -126,6 +126,6 @@ echo "</div>";
 
 echo "</header>";
 
-echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>;";
+echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>";
 
 ?>
