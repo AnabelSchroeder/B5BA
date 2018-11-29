@@ -19,7 +19,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
 
             //Container für Bild
         echo "<div id=\"L_artBild\">";
-            echo "<img class=\"L_artImg\" src=\"../assets/img/begonie.jpg\">";
+            echo "<img class=\"L_artImg\" src=\"assets/img/begonie.jpg\">";
         echo "</div>";
 
             //Container für Kaufinfos
