@@ -186,6 +186,11 @@ function aArtikelNeuPruefe(){
         return false;
     }
 
+    if(document.a_artikel_neu_anlegen.a_art_stueck.value ==""){
+        alert ("Bitte Stückzahl eingeben!");
+        document.a_artikel_neu_anlegen.a_art_stueck.focus();
+        return false;
+    }
 
     if(document.a_artikel_neu_anlegen.a_sale_status.value ==1 && document.a_artikel_neu_anlegen.a_sale_preis.value ==""){
         alert ("Bitte Salepreis eingeben!");

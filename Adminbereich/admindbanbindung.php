@@ -124,6 +124,12 @@ if (isset($_POST['userBearbeiten'])){
 
     /******************************************************************************************************************************************************* */
     //Artikel
+
+    // Laden der Daten für die ansicht der Artikelliste
+    $aSqlArtikelListe = "SELECT * FROM artikel";
+   
+
+
     // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
     if (isset($_POST['a_button_ArtikelNeuAnlegen'])){
 
@@ -138,6 +144,7 @@ if (isset($_POST['userBearbeiten'])){
     $a_art_pflege = $_POST["a_art_pflege"];
     $a_art_text = $_POST["a_art_text"];
     $a_art_bild = $_POST["a_art_bild"];
+    $a_art_stueck = $_POST["a_art_stueck"];
 
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
@@ -145,8 +152,8 @@ if (isset($_POST['userBearbeiten'])){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $asql = "INSERT INTO artikel (art_name, kat_bez, art_preis, sale_status, sale_preis, art_ort, art_farbe, art_pflege, art_text, art_bild, art_groesse)
-        VALUES ('$a_art_name', '$a_kat_bez', '$a_art_preis', '$a_sale_status', '$a_sale_preis', '$a_art_ort', '$a_art_farbe', '$a_art_pflege', '$a_art_text', '$a_art_bild' , '$a_art_groesse')";
+        $asql = "INSERT INTO artikel (art_name, kat_bez, art_preis, sale_status, sale_preis, art_ort, art_farbe, art_pflege, art_text, art_bild, art_groesse, art_stueckzahl)
+        VALUES ('$a_art_name', '$a_kat_bez', '$a_art_preis', '$a_sale_status', '$a_sale_preis', '$a_art_ort', '$a_art_farbe', '$a_art_pflege', '$a_art_text', '$a_art_bild' , '$a_art_groesse', '$a_art_stueck')";
         // use exec() because no results are returned
         $conn->exec($asql);
         //echo "New record created successfully";
@@ -156,13 +163,12 @@ if (isset($_POST['userBearbeiten'])){
         echo $asql . "<br>" . $e->getMessage();
         }
     
-    $conn = null;
+   // $conn = null; Verursacht Bug im aufruf der Artikelliste nach neuanlegen von Artikel
     $_POST['a_button_ArtikelNeuAnlegen'] =  null;
     
     }
 
-    // Laden der Daten für die ansicht der Artikelliste
-    $aSqlArtikelListe = "SELECT * FROM artikel";
+    
 
 
 ?>

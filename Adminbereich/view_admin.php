@@ -683,7 +683,7 @@
         //aNeuArtikelPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
         public static function af_admin_artikel_neuanlegen() {
             print "<form name=\"a_artikel_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" method=\"POST\" onsubmit=\"return aArtikelNeuPruefe()\" >";
-                //erster block Name, Kathegorie, Preis
+                //erster block Name, Kathegorie, Preis, stück
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
 
@@ -716,6 +716,15 @@
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
                     <input type=\"text\" name=\"a_art_preis\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Stück</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_stueck\">
                     </div>
                 </div>
 
@@ -867,14 +876,14 @@
                 ".$row['art_name']."
                 </div>
                 <div  class=\"admin-box-liste-artstueck\"> 
-                stückzahl verfügbar machen
+                ".$row['art_stueckzahl']." Stück
                 </div>
                 <div  class=\"admin-box-liste-artpreis\"> 
                 ".$row['art_preis']." €
                 </div>
                 <div  class=\"admin-box-liste-salepreis\">";
                 if($row['sale_status'] == "1"){
-                    print $row['sale_preis']." €";
+                    print"Salepreis ". $row['sale_preis']." €";
                 }
                 print" </div>
 
