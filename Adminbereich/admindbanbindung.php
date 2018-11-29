@@ -168,7 +168,23 @@ if (isset($_POST['userBearbeiten'])){
     
     }
 
+    //Wenn Artikel liste auf ansehen klickt wird die Artikel id gespeichert zur weiteren verwendung für löschung und ansicht der Datensätze
+    if (isset($_GET['a_gewaehlterArtikel'])){
+
+        $asqlartikelwahl = "SELECT * FROM artikel WHERE art_id= ". $_GET['a_gewaehlterArtikel'];
+        //Speichern der Artikel Id in die Session variable
+        $_SESSION['a_gewaehlterArtikel'] = $_GET['a_gewaehlterArtikel'];
+   }
+
+
+   //Artikel Datensatz in Admin bereich löschen 
+   if (isset($_POST ['artikelLoeschen'])){
+        
+    $statement2 = $conn->prepare("DELETE FROM artikel WHERE art_id = :id");
+    $statement2->execute(array('id'=>$_SESSION['a_gewaehlterArtikel']));
     
+    $_GET['artikelLoeschen'] = null;
+    }
 
 
 ?>

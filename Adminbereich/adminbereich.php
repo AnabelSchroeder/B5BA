@@ -208,7 +208,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Artikel X(Variable) anzeigen";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel felder";
+                            a_view::af_admin_artikel_anzeigen();
                         }
                     }
                 else {

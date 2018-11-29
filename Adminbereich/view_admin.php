@@ -646,7 +646,7 @@
 
                         </div>";
 
-                        //Button Block(Muss angepasst werden)
+                        //Button Block
                         /*************************************************************** */
                         Print "<div  class=\"admin-box-linie\">
 
@@ -825,7 +825,7 @@
 
                 <div  class=\"admin-box-textfelder\">
                         <div  class=\"admin-box-texfeld-links\">
-                        <p>Bildname (z.B. bild.img)</p>
+                        <p>Bildname (z.B. bild.jpg)</p>
                         </div>
                         <div  class=\"admin-box-texfeld-rechts\">
                         <input type=\"text\" name=\"a_art_bild\"> 
@@ -900,6 +900,179 @@
     }
 
 
+    /**************************************************************************************************************** */
+        //admin-Artikel-anzeigen
+        /**************************************************************************************************************** */
+        //Seite Artikel neu anlegen
+        //aNeuArtikelPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
+        public static function af_admin_artikel_anzeigen() {
+                global $conn, $asqlartikelwahl;
+                foreach ($conn->query($asqlartikelwahl) as $row) {
+           
+                //erster block Name, Kathegorie, Preis, stück
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Artikel-Name</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['art_name']."
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Kathegorie</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['kat_bez']."
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Preis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['art_preis']." €
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Stück</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['art_stueckzahl']."
+                    </div>
+                </div>
+
+                </div>";
+
+                //zweiter block Sale, Salepreis
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Sale</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    if($row['sale_status'] == "0"){
+                        print "nein";
+                    }
+                    else{
+                        print "ja";
+                    }
+                    
+                 print"</div>
+                    </div>
+                
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Salepreis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['sale_preis']." €
+                    </div>
+                </div>
+
+
+                </div>";
+
+                //Vierter Block Größe, Ort, Farbe, Pflege, Beschreibung, Bild
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Größe</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['art_groesse']." cm
+                        </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Ort</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['art_ort']."
+                        </div>
+                    </div>
+
+
+                    <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Farbe</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    ".$row['art_farbe']."
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Pflege</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['art_pflege']."
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Beschreibung</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['art_text']."
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Bildname</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['art_bild']." <br>
+                        <img width=\"250\" class=\"adminBildArtikelAnsicht\" src=\"img/gespeicherte_bilder/".$row['art_bild']."\" alt=\"".$row['art_bild']."\"> 
+                        </div>
+                    </div>
+
+
+                </div>";
+
+                //Button Block
+                /*************************************************************** */
+                Print "<div  class=\"admin-box-linie\">
+
+                            <div  class=\"admin-box-textfelder\">
+                                <div  class=\"admin-box-texfeld-links\">
+                                
+                                </div>
+                                <div  class=\"admin-box-texfeld-rechts\">
+
+                                <div class=\"button-box\">
+                                <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-bearbeiten\">
+                                <input type=\"submit\" class=\"a-button\" value=\"Bearbeiten\">
+                                </form>
+
+                                <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\">
+                                <input type=\"submit\" name=\"artikelLoeschen\"  class=\"a-button\" value=\"Löschen\">
+                                </form>
+
+                                </div>
+
+                                </div>
+                            </div>
+
+                        </div>";
+                      }
+        }
 
 
 
