@@ -17,9 +17,10 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
 
     echo "<h1 id=\"L_warKorH1\" class=\"L_h1\">Warenkorb</h1>";
 
-
+        //--------------------------------------------------
     echo "<div id=\"L_warKorCon\">";
 
+            //--------------------------------------------------
         echo "<div class=\"L_warKorArt\">";
 
             echo "<div class=\"L_warKorArtImgDiv\">";
@@ -36,13 +37,13 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                             echo "Beispiel";
                         echo "</td>";
 
-                        echo "<td class=\"L_warKorArtMenge\" class=\"L_warKorSpalte2\">";
+                        echo "<td class=\"L_warKorSpalte2\">"; /*class=\"L_warKorArtMenge\" */
                             echo "<input >";
                         echo "</td>";
 
 
                         echo "<td class=\"L_warKorArtSum\" class=\"L_warKorSpalte3\">";
-                            echo "<input >";
+                            echo "12,34 €";
                         echo "</td>";
 
                     echo "</tr>";
@@ -69,7 +70,12 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 echo "</table>";
  
             echo "</div>";
+
         echo "</div>";
+            //--------------------------------------------------
+
+
+        //--------------------------------------------------
     echo "</div>";   
 
 
@@ -91,7 +97,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 echo "</td>";
             echo "</tr>";
 
-            echo "<tr id=\"L_warKorSumTr2\">";
+            echo "<tr id=\"L_warKorSumTr3\">";
                 echo "<td class=\"L_warKorSumTd1\">inkl.MwSt.</td>";
                 echo "<td class=\"L_warKorSumTd2\"></td>";
             echo "</tr>";

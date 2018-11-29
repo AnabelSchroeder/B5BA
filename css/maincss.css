@@ -83,7 +83,7 @@
   width: var(--groesse-haupt-container);
   margin: auto;
   padding-top: 60px;
-  padding-bottom: 120px;
+  padding-bottom: 70px;
 }
 /*-----------------------------------------------------------------------------------*/
 
@@ -535,4 +535,184 @@ footer {
 
 /*-----------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------WARENKORB---*/
+
+#L_warKorH1 {
+  text-align: center;
+
+  height: 100px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+
+  border-bottom: 2px solid var(--L_farbe-grau);
+}
+
+#L_warKorCon {
+  margin: 0;
+  padding: 0;
+
+  /*display: flex;
+  flex-flow: column wrap;
+  justify-content: center;*/
+}
+
+.L_warKorArt {
+  height: 200px;
+
+  margin: 0;
+  padding-bottom: 10px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+
+  /*border-top: 2px solid var(--L_farbe-grau);*/
+  border-bottom: 2px solid var(--L_farbe-grau);
+}
+
+.L_warKorArtImgDiv {
+  width: 250px;
+  margin-left: 10px;
+}
+
+.L_warKorArtImg {
+  height: 180px;
+}
+
+.L_warKorArtInfosCon {
+  padding-bottom: 10px;
+}
+
+.L_warKorTable {
+  border: none;
+
+  padding-bottom: 20px;
+}
+
+.L_warKorTr {
+  height: 45px;
+}
+
+.L_warKorSpalte1 {
+  width: 380px;
+}
+
+.L_warKorArtName {
+  font-size: var(--L_fontsize_menu);
+  font-weight: bold;
+  color: var(--L_farbe-gruen);
+}
+
+.L_warKorArtLöButt {
+  height: 30px;
+
+  background-color: var(--L_farbe-weiß);
+  border: none;
+
+  color: var(--L_farbe-grau);
+  font-size: var(--L_fontsize_button);
+  font-weight: bold;
+}
+
+.L_warKorArtLöButt > img {
+  height: 25px;
+  margin-right: 10px;
+}
+
+.L_warKorSpalte2 {
+  width: 300px;
+}
+
+.L_warKorArtStckPreis {
+  color: var(--L_farbe-grau);
+  font-weight: bold;
+  font-size: var(--L_fontsize_hint);
+}
+
+.L_warKorSpalte3 {
+  width: 210px;
+}
+
+.L_warKorArtSum {
+  color: var(--L_farbe-grau);
+  font-weight: bold;
+  font-size: var(--L_fontsize_text);
+  text-align: right;
+}
+
+#L_warKorRUCon {
+  width: 800px;
+  height: 250px;
+
+  margin: 0;
+  margin-top: 60px;
+  margin-left: 400px;
+
+  text-align: right;
+}
+
+#L_warKorSumTable {
+  width: 500px;
+  border: none;
+
+  margin-left: 280px;
+  margin-bottom: 30px;
+}
+
+.L_warKorSumTd1 {
+  width: 300px;
+
+  text-align: left;
+}
+
+#L_warKorSumTr1 {
+  color: var(--L_farbe-grau);
+  font-size: var(--L_fontsize_menu);
+
+  height: 40px;
+}
+
+#L_warKorSumTr2 {
+  color: var(--L_farbe-black);
+  font-size: var(--L_fontsize_text);
+  font-weight: bold;
+
+  height: 30px;
+}
+
+#L_warKorSumTr3 {
+  color: var(--L_farbe-grau);
+  font-size: var(--L_fontsize_hint);
+  height: 18px;
+}
+
+#L_warKorSumButtCon {
+  width: 780px;
+}
+
+#L_warKorZurKasseButton {
+  width: 500px;
+  height: 40px;
+  margin: 0;
+  margin-left: 50px;
+
+  background-color: var(--L_farbe-gruen);
+  border: none;
+
+  font-size: var(--L_fontsize_menu);
+  font-weight: bold;
+  color: var(--L_farbe-weiß);
+}
+
+#L_warKorWeiterShopButton {
+  height: 40px;
+  width: 160px;
+  margin: 0px;
+
+  background-color: var(--L_farbe-weiß);
+  border: 3px solid var(--L_farbe-gruen);
+
+  font-size: var(--L_fontsize_hint);
+  color: var(--L_farbe-gruen);
+}
 /*-----------------------------------------------------------------------------------*/
