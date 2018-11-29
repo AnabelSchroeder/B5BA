@@ -56,26 +56,34 @@
 
 .L_h1 {
   font-size: var(--L_fontsize_titel);
-  font-style: bold;
+  font-weight: bold;
   color: var(--L_farbe-gruen);
+
+  margin: 30px;
 }
 
 .L_h3 {
   font-size: var(--L_fontsize_text);
-  font-style: bold;
+  font-weight: bold;
   color: var(--L_farbe-gruen);
+
+  margin-bottom: 45px;
+  margin-top: 80px;
 }
 
 .L_p {
   font-size: var(--L_fontsize_text);
   color: var(--L_farbe-black);
   text-align: left;
+
+  line-height: 1.3;
 }
 
 .L_contentbereich {
   width: var(--groesse-haupt-container);
   margin: auto;
-  padding-top: 30px;
+  padding-top: 60px;
+  padding-bottom: 120px;
 }
 /*-----------------------------------------------------------------------------------*/
 
@@ -374,7 +382,7 @@ footer {
   margin-top: 30px;
 
   font-size: var(--L_fontsize_text);
-  font-style: bold;
+  font-weight: bold;
   color: var(--L_farbe-gruen);
 }
 
@@ -385,7 +393,7 @@ footer {
   margin-top: 5px;
 
   font-size: var(--L_fontsize_preis);
-  font-style: bold;
+  font-weight: bold;
   color: var(--L_farbe-gruen);
 }
 
@@ -432,9 +440,99 @@ footer {
 /*-----------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------ARTIKELSEITE---*/
+#L_artAnsichtKopfCont {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+#L_artBild {
+  width: 400px;
+  padding: 0;
+  margin-right: 25px;
+}
+
+.L_artImg {
+  width: 400px;
+}
+
+#L_artKaufInfoCon {
+  position: relative;
+  width: 750px;
+  padding: 0;
+  margin-left: 25px;
+
+  border-bottom: 2px solid var(--L_farbe-grau);
+}
+
+#L_artKaufInfo {
+  position: absolute;
+  right: 0px;
+  bottom: 30px;
+
+  text-align: right;
+}
+
+#L_artPreis {
+  font-size: var(--L_fontsize_preis);
+  font-weight: bold;
+  color: var(--L_farbe-gruen);
+}
+
+#L_artInklMWST {
+  margin-top: 7px;
+  margin-bottom: 2px;
+
+  font-size: var(--L_fontsize_hint);
+  color: var(--L_farbe-grau);
+}
+
+#L_zzglVersandko {
+  margin-top: 2px;
+  margin-bottom: 25px;
+  font-size: var(--L_fontsize_menu);
+  color: var(--L_farbe-grau);
+}
+
+#L_artInBasket {
+  height: 40px;
+  width: 200px;
+
+  margin: 5px;
+  margin-right: 0;
+
+  background-color: var(--L_farbe-gruen);
+  border: none;
+
+  font-size: var(--L_fontsize_button);
+  color: var(--L_farbe-weiß);
+}
+#L_artText {
+  margin-right: 30px;
+  margin-top: 100px;
+}
+
+.L_table {
+  width: 600px;
+  border: none;
+
+  color: var(--L_farbe-black);
+  font-size: var(--L_fontsize_text);
+}
+
+.L_tr {
+  height: 50px;
+}
+
+.L_artProdHinR {
+  width: 300px;
+
+  font-weight: bold;
+}
 
 /*-----------------------------------------------------------------------------------*/
-
 /*-----------------------------------------------------------------------WARENKORB---*/
-
 /*-----------------------------------------------------------------------------------*/

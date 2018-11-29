@@ -19,7 +19,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
 
             //Container für Bild
         echo "<div id=\"L_artBild\">";
-            echo "<img src=\"../assets/img/begonie.jpg\">";
+            echo "<img class=\"L_artImg\" src=\"../assets/img/begonie.jpg\">";
         echo "</div>";
 
             //Container für Kaufinfos
@@ -47,7 +47,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                     //Formular für Menge in den Warenkorb
                 echo "<form action=\"index.php\" method=\"post\">";
                     echo "<input >";
-                    echo "<button name=\"L_artInBasket\" type=\"submit\">In den Warenkorb</button>";
+                    echo "<button id=\"L_artInBasket\" type=\"submit\">In den Warenkorb</button>";
                 echo "</form>";
 
             echo "</div>";
@@ -90,55 +90,60 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
 
                 echo "<table class=\"L_table\">";
 
-                    echo "<tr>";
+                
 
-                        echo "<td class=\"L_artProdHinL\">";
-                            echo "Höhe";
-                        echo "</td>";
+                        echo "<tr class=\"L_tr\">";
 
-                        echo "<td class=\"L_artProdHinR\">";
-                            echo "12 cm";
-                        echo "</td>";
+                            echo "<td>";
+                                echo "Höhe";
+                            echo "</td>";
 
-                    echo "</tr>";
+                            echo "<td class=\"L_artProdHinR\">";
+                                echo "12 cm";
+                            echo "</td>";
 
-                    echo "<tr>";
+                        echo "</tr>";
 
-                        echo "<td class=\"L_artProdHinL\">";
-                            echo "Standort";
-                        echo "</td>";
+                        echo "<tr class=\"L_tr\">";
 
-                        echo "<td class=\"L_artProdHinR\">";
-                            echo "Halbschatten";
-                        echo "</td>";
+                            echo "<td>";
+                                echo "Standort";
+                            echo "</td>";
 
-                    echo "</tr>";
+                            echo "<td class=\"L_artProdHinR\">";
+                                echo "Halbschatten";
+                            echo "</td>";
 
-                    echo "<tr>";
+                        echo "</tr>";
 
-                        echo "<td class=\"L_artProdHinL\">";
-                            echo "Farbe";
-                        echo "</td>";
+                        echo "<tr class=\"L_tr\">";
 
-                        echo "<td class=\"L_artProdHinR\">";
-                            echo "Grün";
-                        echo "</td>";
+                            echo "<td>";
+                                echo "Farbe";
+                            echo "</td>";
 
-                    echo "</tr>";
+                            echo "<td class=\"L_artProdHinR\">";
+                                echo "Grün";
+                            echo "</td>";
 
-                    echo "<tr>";
+                        echo "</tr>";
 
-                        echo "<td class=\"L_artProdHinL\">";
-                            echo "Anlass";
-                        echo "</td>";
+                        echo "<tr class=\"L_tr\">";
 
-                        echo "<td class=\"L_artProdHinR\">";
-                            echo "Geburtstag";
-                        echo "</td>";
+                            echo "<td>";
+                                echo "Anlass";
+                            echo "</td>";
 
-                    echo "</tr>";
+                            echo "<td class=\"L_artProdHinR\">";
+                                echo "Geburtstag";
+                            echo "</td>";
+
+                        echo "</tr>";
+
+                
 
                 echo "</table>";
+    echo "</div>";
 echo "</div>";
 
 ?>
