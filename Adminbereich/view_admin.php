@@ -78,48 +78,51 @@
         /**************************************************************************************************************** */
         //Ansicht kunden oder nutzer konto im admin bereich
         public static function af_Adminbereich() {
+
+            global $conn, $a_sqlEingeloggterUser, $anzeigeBestellungsanzahl;
+                            foreach ($conn->query($a_sqlEingeloggterUser) as $row) {
             
             //erster block Name, Adresse
             /*************************************************************** */
-                       print"<div  class=\"admin-box-linie\">
+                        print "<div  class=\"admin-box-linie\">
 
-                            <div  class=\"admin-box-textfelder\">
-                                <div  class=\"admin-box-texfeld-links\">
-                                Vorname
-                                </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                Anne
-                                </div>
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Vorname
                             </div>
-
-                            <div  class=\"admin-box-textfelder\">
-                                <div  class=\"admin-box-texfeld-links\">
-                                Nachname
-                                </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                schmidt
-                                </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['n_vname']."
                             </div>
+                        </div>
 
-                            <div  class=\"admin-box-textfelder\">
-                                <div  class=\"admin-box-texfeld-links\">
-                                Straße
-                                </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                Musterstraße 12
-                                </div>
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Nachname
                             </div>
-
-                            <div  class=\"admin-box-textfelder\">
-                                <div  class=\"admin-box-texfeld-links\">
-                                PLZ, Ort
-                                </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                12345 Musterhausen
-                                </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['n_nname']."
                             </div>
+                        </div>
 
-                        </div>";
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Straße
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['n_strasse']."
+                            </div>
+                        </div>
+
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            PLZ, Ort
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['n_plz']." ".$row['n_ort']."
+                            </div>
+                        </div>
+
+                    </div>";
 
 
                        //zweiter Block Bestellungen 
@@ -130,8 +133,9 @@
                                 <div  class=\"admin-box-texfeld-links\">
                                 Bestellungen
                                 </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                3 Bestellungen + Bestelungsansehenbutton
+                                <div  class=\"admin-box-texfeld-rechts\">".
+                                $anzeigeBestellungsanzahl['anzahl']." Bestellungen 
+                                <a class=\"linkTexthervorgehobenFließtext\" href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-bestellungsliste\" class=\"admin-nav-ueberschrift\"> ansehen</a>
                                 </div>
                             </div>
 
@@ -145,9 +149,14 @@
                                 <div  class=\"admin-box-texfeld-links\">
                                 Nutzerart
                                 </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                was auch immer gewählt wurde
-                                </div>
+                                <div  class=\"admin-box-texfeld-rechts\">";
+                                if ($row['n_admin'] == 0){
+                                    print "Kunde";
+                                }
+                                else{
+                                    print "Admin";
+                                }
+                                print "</div>
                             </div>
 
                             <div  class=\"admin-box-textfelder\">
@@ -155,7 +164,7 @@
                                 Login Name
                                 </div>
                                 <div  class=\"admin-box-texfeld-rechts\">
-                                Supershoper84
+                                ".$row['n_login']."
                                 </div>
                             </div>
 
@@ -164,7 +173,7 @@
                                 Email
                                 </div>
                                 <div  class=\"admin-box-texfeld-rechts\">
-                                Rote.Rose@gmx.de
+                                ".$row['n_mail']."
                                 </div>
                             </div>
 
@@ -178,9 +187,14 @@
                                 <div  class=\"admin-box-texfeld-links\">
                                 Sperre
                                 </div>
-                                <div  class=\"admin-box-texfeld-rechts\">
-                                Hier wird angezeigt ob man gesperrt ist.
-                                </div>
+                                <div  class=\"admin-box-texfeld-rechts\">";
+                                if ($row['n_sperre'] == 0){
+                                    print "nicht gesperrt";
+                                }
+                                else {
+                                    print "gesperrt";
+                                }
+                                print "</div>
                             </div>
 
                         </div>";
@@ -196,12 +210,12 @@
                                 <div  class=\"admin-box-texfeld-rechts\">
 
                                 <div class=\"button-box\">
-                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-bearbeiten\">
-                                <input type=\"submit\" id=\"a-userbearbeiten\" class=\"a-button\" value=\"Bearbeiten\">
+                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=mein-konto-bearbeiten\">
+                                <input type=\"submit\"  class=\"a-button\" value=\"Bearbeiten\">
                                 </form>
 
                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
-                                <input type=\"submit\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">
+                                <input type=\"submit\"  class=\"a-button\" value=\"Löschen\">
                                 </form>
 
                                 <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
@@ -214,6 +228,148 @@
 
                         </div>";
                     }
+                }
+
+         /**************************************************************************************************************** */
+        //mein-Konto-bearbeiten
+        /**************************************************************************************************************** */
+        public static function af_mein_konto_bearbeiten() {
+            global $conn, $a_sqlEingeloggterUser;
+            
+            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_user_bearbeiten)\" >";
+                //erster block Name, Adresse
+                /*************************************************************** */
+                foreach ($conn->query($a_sqlEingeloggterUser) as $row) {
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Vorname
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_vorname\" value=\"".$row['n_vname']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Nachname
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_nachname\" value=\"".$row['n_nname']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Straße
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_strasse\" value=\"".$row['n_strasse']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    PLZ
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_plz\" value=\"".$row['n_plz']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Ort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_ort\" value=\"".$row['n_ort']."\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //zweiter block Rechte, Login name, Passwort, Email
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Rechte
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <p>Keine Änderungsrechte</p>
+                    </div>
+                    <!--div zuviel? -->
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Login Name
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_loginname\" value=\"".$row['n_login']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Passwort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_passwort\" value=\"".$row['n_passwort']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    E-mail
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_email\" value=\"".$row['n_mail']."\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //Vierter Block Sperre
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        Sperre
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <p>Keine Änderungsrechte</p>
+                        </div>
+                    </div>
+
+                </div>";
+
+                //Button Block
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+
+                        <div class=\"button-box\">
+                        <input type=\"submit\" name=\"meinKontoBearbeiten\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >
+                        </form>
+
+                        <form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen\" method=\"POST\">
+                        <input type=\"submit\"   value=\"Abbrechen\" class=\"a-button\">
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+                }    
+        }
 
 
         /**************************************************************************************************************** */

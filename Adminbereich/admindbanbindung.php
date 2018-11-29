@@ -4,6 +4,55 @@ $username = "root";
 $password = "";
 $dbname = "ba_webshop";
 
+/******************************************************************************* */
+//Mein Konto
+/****************************************************************************** */
+
+//muss mit den anderen abgestimmt werden was im Login vorgang benutz werdenals mechanismen und variablen.
+$a_eingeloggt = true;
+$a_eingeloggterUser = 2;
+if ($a_eingeloggt == true){
+    $a_sqlEingeloggterUser = "SELECT * FROM nutzer WHERE n_id= ". $a_eingeloggterUser;
+}
+
+// Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
+if (isset($_POST['meinKontoBearbeiten'])){
+
+    $a_nname =  $_POST["a_nachname"];
+    $a_vname = $_POST["a_vorname"];
+    $a_strasse = $_POST["a_strasse"];
+    $a_ort = $_POST["a_ort"];
+    $a_plz = $_POST["a_plz"];
+    $a_email = $_POST["a_email"];
+    $a_loginname = $_POST["a_loginname"];
+    $a_passwort = $_POST["a_passwort"];
+   
+    
+    //Speichern der Daten von Neu anlegen eines Users im admin bereich
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=? WHERE n_id=?";
+        $stmt = $conn->prepare($absql);
+        $stmt->execute([ $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort,  $a_eingeloggterUser]);
+        
+        //echo "Datensatz neu hinterlegt";
+        }
+    catch(PDOException $e)
+        {
+        echo $absql . "<br>" . $e->getMessage();
+        }
+    
+   
+    $_POST['meinKontoBearbeiten'] =  null;
+    
+    }
+
+
+/******************************************************************************* */
+//Nutzerkonten
+/****************************************************************************** */
 
 // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
 if (isset($_POST['userNeuAnlegen'])){
@@ -122,8 +171,10 @@ if (isset($_POST['userBearbeiten'])){
     
     
 
-    /******************************************************************************************************************************************************* */
+    /**************************************************************************** */
     //Artikel
+    /***************************************************************************** */
+
 
     // Laden der Daten für die ansicht der Artikelliste
     $aSqlArtikelListe = "SELECT * FROM artikel";

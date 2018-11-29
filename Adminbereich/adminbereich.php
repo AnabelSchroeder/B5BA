@@ -40,7 +40,7 @@ $admin = true;
 //Darstellung der Rechten Box im Adminbereich, hier wird automatisch Befüllt aus der boxrechtsBefüllen funktion. 
 /********************************************************************************************/
 
-        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung"){
+        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten"){
         global $adminBoxRechtsOben, $adminBoxRechtsUnten; 
         //aufruf der Funktion damit der Code ausgeführt werden kann   
         boxRechtsBefuellen();    
@@ -81,6 +81,16 @@ $admin = true;
                         
                     }
                     break;
+
+                //Seite Mein Konto bearbeiten
+                /*************************************************************** */
+                case "mein-konto-bearbeiten":
+                    $adminBoxRechtsOben = "Mein Konto bearbeiten";
+                    function boxRechtsUntenBefuellen(){
+                        a_view::af_mein_konto_bearbeiten();
+                        
+                    }
+                    break;    
 
 
                 //Seite User Kundenliste   
