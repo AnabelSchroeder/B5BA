@@ -14,6 +14,7 @@
   --L_farbe-gruen: rgb(14, 120, 57);
   --L_farbe-weiß: rgb(255, 255, 255);
   --L_farbe-hellgrau: rgb(242, 242, 242);
+  --L_farbe-grau: rgb(126, 126, 126);
   --L_farbe-black: rgb(0, 0, 0);
 
   --L_fontsize_hint: 14px; /* Footer: Text // 
@@ -71,6 +72,11 @@
   text-align: left;
 }
 
+.L_contentbereich {
+  width: var(--groesse-haupt-container);
+  margin: auto;
+  padding-top: 30px;
+}
 /*-----------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------HEADER---*/
@@ -259,6 +265,7 @@ footer {
 
 /*-----------------------------------------------------------------------SHOPSEITE---*/
 
+/*-------------------------------------------------------------filterleiste---*/
 #L_FilterBarCon {
   width: 100%;
   height: 90px;
@@ -300,7 +307,6 @@ footer {
   padding-top: 10px;
   padding-left: 10px;
 
-  /* font-size: var(--L_fontsize_menu); */
   color: var(--L_farbe-gruen);
 }
 
@@ -332,6 +338,69 @@ footer {
   font-size: var(--L_fontsize_menu);
   color: var(--L_farbe-weiß);
 }
+
+/*-----------------------------------------------------------artikelanzeige---*/
+
+#L_shopArtAusgabe {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.L_shopArtContainer {
+  /*display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;*/
+
+  width: 350px;
+  height: 600px;
+
+  margin: 25px;
+
+  text-align: center;
+}
+
+.L_shopArtContainer > img {
+  width: 350px;
+}
+
+.L_shopArtName {
+  height: 50px;
+
+  margin: 0px;
+  margin-top: 30px;
+
+  font-size: var(--L_fontsize_text);
+  font-style: bold;
+  color: var(--L_farbe-gruen);
+}
+
+.L_shopArtPreis {
+  height: 40px;
+
+  margin: 0px;
+  margin-top: 5px;
+
+  font-size: var(--L_fontsize_preis);
+  font-style: bold;
+  color: var(--L_farbe-gruen);
+}
+
+.L_exPreis {
+  height: 25px;
+
+  margin: 0px;
+  margin-top: 5px;
+
+  font-size: var(--L_fontsize_menu);
+  color: var(--L_farbe-grau);
+  text-decoration: line-through;
+}
+
+/*---------------------------------------------------------------PAGINATION---*/
 
 /*-----------------------------------------------------------------------------------*/
 

@@ -75,23 +75,26 @@ echo "<div id=\"L_FilterBarCon\">";
     echo "</div>";
 
 
-// Artikelanzeige (der Suche)
-echo "<div id=\"L_shopArtAusgabe\">";
+//_Artikelanzeige (der Suche)__________________________________________
+echo "<div id=\"L_shopArtAusgabe\" class=\"L_contentbereich\">";
 
     echo "<div class=\"L_shopArtContainer\">";
-        echo "<img src=\"../assets/PH.jpg\" class=\"L_shopArtBild\">";
+        echo "<img src=\"../assets/img/begonie.jpg\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
             echo "PLATZHALTER";
         echo "</p>";
         echo "<p class=\"L_shopArtPreis\">";
             echo "12,34 €";
         echo "</p>";
+        echo "<p class=\"L_exPreis\">";
+            echo "23,45 €";
+        echo "</p>";
     echo "</div>";
 
 echo "</div>";
 
 
-// Seitenzahl der Artikel
+//_Seitenzahl der Artikel______________________________________________
 echo "<div id=\"L_shopPagContBack\">";
     echo "<div id=\"L_shopPagContSigns\">";
         
