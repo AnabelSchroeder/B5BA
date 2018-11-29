@@ -191,9 +191,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-artikel-bearbeiten":
                     if($admin == true){
-                        $adminBoxRechtsOben = "Artikel X(Variable) bearbeiten";
+                        $adminBoxRechtsOben = "Artikel bearbeiten";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel bearbeiten felder";
+                            a_view::af_admin_artikel_bearbeiten();
                         }
                     }
                 else {
@@ -206,7 +206,7 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-artikel-anzeigen":
                     if($admin == true){
-                        $adminBoxRechtsOben = "Artikel X(Variable) anzeigen";
+                        $adminBoxRechtsOben = "Artikel anzeigen";
                         function boxRechtsUntenBefuellen(){
                             a_view::af_admin_artikel_anzeigen();
                         }

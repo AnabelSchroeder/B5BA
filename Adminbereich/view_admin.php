@@ -1075,6 +1075,322 @@
         }
 
 
+         /**************************************************************************************************************** */
+        //admin-Artikel-bearbeiten
+        /**************************************************************************************************************** */
+        //Seite Artikel bearbeiten
+        //aArtikelBearbeitenPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
+        public static function af_admin_artikel_bearbeiten() {
+            global $conn, $sqlAdminArtikelValueBefuellen;
+            print "<form name=\"a_artikel_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" method=\"POST\" onsubmit=\"return aArtikelBearbeitenPruefe()\" >";
+                //erster block Name, Kathegorie, Preis, stück
+                /*************************************************************** */
+                foreach ($conn->query($sqlAdminArtikelValueBefuellen) as $row) {
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Artikel-Name</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_name\" value=\"".$row['art_name']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Kathegorie</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    switch ($row['kat_bez']){
+                        case "nichts":
+                            print"<select name=\"a_kat_bez\">
+                                <option value=\"nichts\">Bitte Wählen</option>
+                                <option value=\"baeumchen\">Bäumchen</option>
+                                <option value=\"gruenpflanze\">Grünpflanze</option>
+                                <option value=\"bluehend\">Blühend</option>
+                            </select>";
+                            break;
+                        case "baeumchen":
+                            print"<select name=\"a_kat_bez\">
+                                <option value=\"nichts\">Bitte Wählen</option>
+                                <option value=\"baeumchen\" selected>Bäumchen</option>
+                                <option value=\"gruenpflanze\">Grünpflanze</option>
+                                <option value=\"bluehend\">Blühend</option>
+                            </select>";
+                            break;   
+                        case "gruenpflanze":
+                            print"<select name=\"a_kat_bez\">
+                                <option value=\"nichts\">Bitte Wählen</option>
+                                <option value=\"baeumchen\">Bäumchen</option>
+                                <option value=\"gruenpflanze\" selected>Grünpflanze</option>
+                                <option value=\"bluehend\">Blühend</option>
+                            </select>";
+                            break;  
+                        case "bluehend":
+                            print"<select name=\"a_kat_bez\">
+                                <option value=\"nichts\">Bitte Wählen</option>
+                                <option value=\"baeumchen\">Bäumchen</option>
+                                <option value=\"gruenpflanze\">Grünpflanze</option>
+                                <option value=\"bluehend\" selected>Blühend</option>
+                            </select>";
+                            break;    
+                    }
+
+                    print"</div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Preis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_preis\" value=\"".$row['art_preis']."\">
+                    </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Stück</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_art_stueck\" value=\"".$row['art_stueckzahl']."\">
+                    </div>
+                </div>
+
+                </div>";
+
+                //zweiter block Sale, Salepreis
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Sale</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    if ($row['sale_status'] == "0"){
+                        print"<input type=\"radio\" name=\"a_sale_status\" value=0 checked> nein
+                        <input type=\"radio\" name=\"a_sale_status\" value=1> ja";
+                    }
+                    else{
+                        print"<input type=\"radio\" name=\"a_sale_status\" value=0 > nein
+                        <input type=\"radio\" name=\"a_sale_status\" value=1 checked> ja";
+                    }
+                    print"</div>
+                    </div>
+                
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Salepreis</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_sale_preis\" value=\"".$row['sale_preis']."\">
+                    </div>
+                </div>
+
+
+                </div>";
+
+                //Vierter Block Größe, Ort, Farbe, Pflege, Beschreibung, Bild
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Größe</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <input type=\"text\" name=\"a_art_groesse\" value=\"".$row['art_groesse']."\"> 
+                        </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Ort</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">";
+                        switch ($row['art_ort']){
+                            case "nichts":
+                                print"<select name=\"a_art_ort\">
+                                    <option value=\"nichts\">Bitte Wählen</option>
+                                    <option value=\"licht\">Licht</option>
+                                    <option value=\"sonnig\">Sonnig</option>
+                                    <option value=\"halbschatten\">Halbschatten</option>
+                                    <option value=\"schatten\">Schatten</option>
+                                </select>";
+                                break;
+                            case "licht":
+                                print"<select name=\"a_art_ort\">
+                                    <option value=\"nichts\">Bitte Wählen</option>
+                                    <option value=\"licht\" selected>Licht</option>
+                                    <option value=\"sonnig\">Sonnig</option>
+                                    <option value=\"halbschatten\">Halbschatten</option>
+                                    <option value=\"schatten\">Schatten</option>
+                                </select>";
+                                break; 
+                            case "sonnig":
+                                print"<select name=\"a_art_ort\">
+                                    <option value=\"nichts\">Bitte Wählen</option>
+                                    <option value=\"licht\">Licht</option>
+                                    <option value=\"sonnig\" selected>Sonnig</option>
+                                    <option value=\"halbschatten\">Halbschatten</option>
+                                    <option value=\"schatten\">Schatten</option>
+                                </select>";
+                                break; 
+                            case "halbschatten":
+                                print"<select name=\"a_art_ort\">
+                                    <option value=\"nichts\">Bitte Wählen</option>
+                                    <option value=\"licht\">Licht</option>
+                                    <option value=\"sonnig\">Sonnig</option>
+                                    <option value=\"halbschatten\" selected>Halbschatten</option>
+                                    <option value=\"schatten\">Schatten</option>
+                                </select>";
+                                break;  
+                            case "schatten":
+                                print"<select name=\"a_art_ort\">
+                                    <option value=\"nichts\">Bitte Wählen</option>
+                                    <option value=\"licht\">Licht</option>
+                                    <option value=\"sonnig\">Sonnig</option>
+                                    <option value=\"halbschatten\">Halbschatten</option>
+                                    <option value=\"schatten\" selected>Schatten</option>
+                                </select>";
+                                break;         
+                        }
+
+
+
+                        print"</div>
+                    </div>
+
+
+                    <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Farbe</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    switch ($row['art_farbe']){
+                        case "nichts":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\">Weiß</option>
+                            <option value=\"rosa\">Rosa</option>
+                            <option value=\"gelb\">gelb</option>
+                            <option value=\"rot\">Rot</option>
+                            <option value=\"gruen\">Grün</option>
+                        </select>";
+                        break;
+                    case "weiss":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\" selected>Weiß</option>
+                            <option value=\"rosa\">Rosa</option>
+                            <option value=\"gelb\">gelb</option>
+                            <option value=\"rot\">Rot</option>
+                            <option value=\"gruen\">Grün</option>
+                        </select>";
+                        break;
+                    case "rosa":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\">Weiß</option>
+                            <option value=\"rosa\" selected>Rosa</option>
+                            <option value=\"gelb\">gelb</option>
+                            <option value=\"rot\">Rot</option>
+                            <option value=\"gruen\">Grün</option>
+                        </select>";
+                        break;
+                    case "gelb":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\">Weiß</option>
+                            <option value=\"rosa\">Rosa</option>
+                            <option value=\"gelb\" selected>gelb</option>
+                            <option value=\"rot\">Rot</option>
+                            <option value=\"gruen\">Grün</option>
+                        </select>";
+                        break;
+                    case "rot":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\">Weiß</option>
+                            <option value=\"rosa\">Rosa</option>
+                            <option value=\"gelb\">gelb</option>
+                            <option value=\"rot\" selected>Rot</option>
+                            <option value=\"gruen\">Grün</option>
+                        </select>";
+                        break;
+                    case "gruen":
+                        print"<select name=\"a_art_farbe\">
+                            <option value=\"nichts\">Bitte Wählen</option>
+                            <option value=\"weiss\">Weiß</option>
+                            <option value=\"rosa\">Rosa</option>
+                            <option value=\"gelb\">gelb</option>
+                            <option value=\"rot\">Rot</option>
+                            <option value=\"gruen\" selected>Grün</option>
+                        </select>";
+                        break;
+                    }
+                    
+                    print"</div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Pflege</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <textarea name=\"a_art_pflege\" cols=\"50\" rows=\"10\"> ".$row['art_pflege']."
+                        </textarea>
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Beschreibung</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <textarea name=\"a_art_text\" cols=\"50\" rows=\"10\">
+                        ".$row['art_text']."
+                        </textarea>
+                        </div>
+                </div>
+
+                <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        <p>Bildname (z.B. bild.jpg)</p>
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        <input type=\"text\" name=\"a_art_bild\" value=\"".$row['art_bild']."\"> 
+                        </div>
+                    </div>
+
+
+                </div>";
+
+                //Button Block
+                /*************************************************************** */
+                print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+
+                        <div class=\"button-box\">
+                        <input type=\"submit\" name=\"a_button_ArtikelBearbeiten\"  value=\"Speichern\" class=\"a-button\" >
+                        </form>
+
+                        <form action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" method=\"POST\">
+                        <input type=\"submit\"   value=\"Abbrechen\" class=\"a-button\">
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+                    }
+        }
 
 
     //Klammer für die klasse 

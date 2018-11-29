@@ -168,6 +168,52 @@ if (isset($_POST['userBearbeiten'])){
     
     }
 
+    // Wenn auf der Seite Bearbeiten Artikel gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
+    if (isset($_POST['a_button_ArtikelBearbeiten'])){
+
+        $a_art_name = $_POST["a_art_name"];
+        $a_kat_bez =  $_POST["a_kat_bez"];
+        $a_art_preis = $_POST["a_art_preis"];
+        $a_sale_status = $_POST["a_sale_status"];
+        $a_sale_preis = $_POST["a_sale_preis"];
+        $a_art_groesse = $_POST["a_art_groesse"];
+        $a_art_ort = $_POST["a_art_ort"];
+        $a_art_farbe = $_POST["a_art_farbe"];
+        $a_art_pflege = $_POST["a_art_pflege"];
+        $a_art_text = $_POST["a_art_text"];
+        $a_art_bild = $_POST["a_art_bild"];
+        $a_art_stueck = $_POST["a_art_stueck"];
+    
+        
+        //Speichern der Daten von Bearbeiten eines Artikels im admin bereich
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $asqlbearbeiten = "UPDATE artikel SET art_name=?, kat_bez=?, art_preis=?, sale_status=?, sale_preis=?, art_ort=?, art_farbe=?, art_pflege=?, art_text=?, art_bild=?, art_groesse=?, art_stueckzahl=? WHERE art_id=?";
+            $stmt1 = $conn->prepare($asqlbearbeiten);
+            $stmt1->execute([$a_art_name, $a_kat_bez, $a_art_preis, $a_sale_status, $a_sale_preis, $a_art_ort, $a_art_farbe, $a_art_pflege, $a_art_text, $a_art_bild , $a_art_groesse, $a_art_stueck, $_SESSION['a_gewaehlterArtikel']]);
+
+           
+            //echo "New record created successfully";
+            }
+        catch(PDOException $e)
+            {
+            echo $asqlbearbeiten . "<br>" . $e->getMessage();
+            }
+        
+       // $conn = null; Verursacht Bug im aufruf der Artikelliste nach neuanlegen von Artikel
+        $_POST['a_button_ArtikelBearbeiten'] =  null;
+        
+        }
+
+    //Artikel bearbeiten, Füllen der Value in den Fomularfeldern beim bearbeiten
+    if (isset($_SESSION['a_gewaehlterArtikel'])){
+    $sqlAdminArtikelValueBefuellen = "SELECT * FROM artikel WHERE art_id= ". $_SESSION['a_gewaehlterArtikel'];
+   }
+
+
+
     //Wenn Artikel liste auf ansehen klickt wird die Artikel id gespeichert zur weiteren verwendung für löschung und ansicht der Datensätze
     if (isset($_GET['a_gewaehlterArtikel'])){
 

@@ -165,7 +165,7 @@ function aNeuPruefe(){
 }
 
  /*********************************************************************************************************************** */
-//Prüfen ob die felder in Kunden bearbeiten auch alle belegt sind
+//Prüfen ob die felder in Artikel neu auch alle belegt sind
 function aArtikelNeuPruefe(){
 
     if(document.a_artikel_neu_anlegen.a_art_name.value ==""){
@@ -236,5 +236,76 @@ function aArtikelNeuPruefe(){
         return false;
     }
 
-
 }
+    /*********************************************************************************************************************** */
+//Prüfen ob die felder in Artikel bearbeiten auch alle belegt sind
+    function aArtikelBearbeitenPruefe(){
+        if(document.a_artikel_bearbeiten.a_art_name.value ==""){
+            alert ("Bitte Artikelnamen eingeben!");
+            document.a_artikel_bearbeiten.a_art_name.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_kat_bez.value =="nichts"){
+            alert ("Bitte Kathegorie wählen!");
+            document.a_artikel_bearbeiten.a_kat_bez.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_preis.value ==""){
+            alert ("Bitte Preis eingeben!");
+            document.a_artikel_bearbeiten.a_art_preis.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_stueck.value ==""){
+            alert ("Bitte Stückzahl eingeben!");
+            document.a_artikel_bearbeiten.a_art_stueck.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_sale_status.value ==1 && document.a_artikel_bearbeiten.a_sale_preis.value ==""){
+            alert ("Bitte Salepreis eingeben!");
+            document.a_artikel_bearbeiten.a_sale_preis.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_groesse.value ==""){
+            alert ("Bitte Größe eingeben!");
+            document.a_artikel_bearbeiten.a_art_groesse.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_ort.value =="nichts"){
+            alert ("Bitte Ort wählen!");
+            document.a_artikel_bearbeiten.a_art_ort.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_farbe.value =="nichts"){
+            alert ("Bitte die Farbe wählen!");
+            document.a_artikel_bearbeiten.a_art_farbe.focus();
+            return false;
+        }
+    
+        //funktioniert nicht, anderes finden, wird nicht überprüft 
+        if(document.a_artikel_bearbeiten.a_art_pflege.value ==""){
+            alert ("Bitte Pflegehinweise hinzufügen!");
+            document.a_artikel_bearbeiten.a_art_pflege.focus();
+            return false;
+        }
+    
+        //funktioniert nicht, anderes finden, wird nicht überprüft
+        if(document.a_artikel_bearbeiten.a_art_text.value ==""){
+            alert ("Bitte eine Beschreibung hinzufügen!");
+            document.a_artikel_bearbeiten.a_art_text.focus();
+            return false;
+        }
+    
+        if(document.a_artikel_bearbeiten.a_art_bild.value ==""){
+            alert ("Bitte ein Bildernamen mit Dateiendung hinzufügen!");
+            document.a_artikel_bearbeiten.a_art_bild.focus();
+            return false;
+        }
+    }
+
