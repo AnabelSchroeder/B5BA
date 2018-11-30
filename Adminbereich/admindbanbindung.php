@@ -283,5 +283,29 @@ if (isset($_POST['userBearbeiten'])){
     $_GET['artikelLoeschen'] = null;
     }
 
+    /*************************************************************************************** */
+    //Bestellung
+    /******************************************************************************** */
+
+    // Laden der Daten für die ansicht der Bestellungen-liste
+    $asqlBestellungenListe = "SELECT * FROM bestellung WHERE n_id =". $_SESSION['adminnutzerwahl'];
+
+    //Nutzbarnachen der bestellid
+    if(isset($_GET['abestellid'])){
+        $_SESSION['abestellid'] = $_GET['abestellid'];
+    }
+
+
+
+    // Laden der Daten für die ansicht der Bestellungs Daten auf der bestellung seite
+    if(isset($_SESSION['abestellid'])){
+    $a_sqlBestellungAnzeige = "SELECT * FROM bestellung WHERE best_id =". $_SESSION['abestellid'];
+    }
+
+    // Laden der Items der Bestellung für die ansicht der Bestellungs Daten auf der bestellung seite
+    if(isset($_SESSION['abestellid'])){
+    $asqlBestellungsItems = "SELECT * FROM bestellte_artikel WHERE best_id =". $_SESSION['abestellid'];
+    }
+
 
 ?>

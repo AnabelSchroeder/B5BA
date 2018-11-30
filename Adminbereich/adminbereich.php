@@ -231,9 +231,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-bestellungsliste":
                     if($admin == true){
-                        $adminBoxRechtsOben = "bestellungen von user x";
+                        $adminBoxRechtsOben = "Bestellungen";
                         function boxRechtsUntenBefuellen(){
-                            echo "bestellungsliste";
+                            a_view::af_admin_bestellungsliste();
                         }
                     }
                 else {
@@ -245,9 +245,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-bestellung":
                     if($admin == true){
-                        $adminBoxRechtsOben = "bestellungen x von user x";
+                        $adminBoxRechtsOben = "Bestellung";
                         function boxRechtsUntenBefuellen(){
-                            echo "bestellungs details";
+                            a_view::af_admin_bestellung();
                         }
                     }
                 else {

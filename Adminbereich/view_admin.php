@@ -1548,6 +1548,199 @@
                     }
         }
 
+    /**************************************************************************************************************** */
+        //Bestellungsliste User
+        /**************************************************************************************************************** */
+        
+        public static function af_admin_bestellungsliste() {
+            
+            global $conn, $asqlBestellungenListe ;
+            foreach ($conn->query($asqlBestellungenListe) as $row) {
+            print"<div  class=\"admin-box-linie\"> 
+            <div  class=\"admin-box-liste\"> 
+
+            
+                <div  class=\"admin-box-liste-kdnr\"> 
+                Best-Nr ".$row['best_id']."
+                </div>
+                <div  class=\"admin-box-liste-name\"> 
+                ".$row['best_datum']." 
+                </div>
+                <div  class=\"admin-box-liste-gesperrt\">";
+
+                 
+               print" </div>
+                <div  class=\"admin-box-liste-ansehen\">
+                <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-bestellung&abestellid=".$row['best_id']."\">
+                    <input type=\"submit\"  class=\"a-button\" value=\"ansehen\">
+                    </form>
+                </div>
+            
+
+            </div>
+        </div>";
+        }
+    }
+
+    /**************************************************************************************************************** */
+        //Bestellung anzeige
+        /**************************************************************************************************************** */
+        //Ansicht kunden oder nutzer konto im admin bereich
+        public static function af_admin_bestellung() {
+
+            global $conn, $a_sqlBestellungAnzeige;
+                            foreach ($conn->query($a_sqlBestellungAnzeige) as $row) {
+            
+            //erster block Name, Adresse
+            /*************************************************************** */
+                    //Druckdiv anfang
+                    print"<div id=\"a_ausdruckenBestellung\">";
+
+                        print "<div  class=\"admin-box-linie\">
+
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Vorname
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['best_n_vname']."
+                            </div>
+                        </div>
+
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Nachname
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['best_n_name']."
+                            </div>
+                        </div>
+
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            Straße
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['lieferstrasse']."
+                            </div>
+                        </div>
+
+                        <div  class=\"admin-box-textfelder\">
+                            <div  class=\"admin-box-texfeld-links\">
+                            PLZ, Ort
+                            </div>
+                            <div  class=\"admin-box-texfeld-rechts\">
+                            ".$row['lieferplz']." ".$row['lieferort']."
+                            </div>
+                        </div>
+
+                    </div>";
+
+
+                    //zeiter block Zahlart, bestell nummer, Besterlldatum
+                    /*************************************************************** */
+                    print "<div  class=\"admin-box-linie\">
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        Zahlungsart
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['best_bezahlart']."
+                        </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        Bestell-Nr
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['best_id']."
+                        </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        Bestell-Datum
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                        ".$row['best_datum']."
+                        </div>
+                    </div>
+
+                </div>";
+
+                            }
+
+                            //Block auflistung der Bestellungsitems
+                            global $conn, $asqlBestellungsItems, $a_gesamtbetrag;
+                            $a_gesamtbetrag = 0 ;
+                            foreach ($conn->query($asqlBestellungsItems) as $row) {
+                            
+                            print"<div  class=\"admin-box-linie\"> 
+                            <div  class=\"admin-box-liste\"> 
+                            
+                            
+                                <div class=\"admin-box-liste-bbild\"> 
+                                <img width=\"100\" src=\"img/gespeicherte_bilder/".$row['best_art_bild']."\" alt=\"".$row['best_art_bild']."\">
+                                </div>
+
+
+                                <div  class=\"admin-box-liste-bname\"> 
+                                ".$row['best_art_name']." 
+                                <div  class=\"admin-box-liste-bartnummer\"> 
+                                Art-Nr. ".$row['art_id']." 
+                                </div>
+                                </div>
+
+
+                                <div  class=\"admin-box-liste-bstueck\">
+                                ".$row['best_anzahl']." Stück
+                                <div  class=\"admin-box-liste-bstueckpreis\"> 
+                                je ".$row['best_art_preis']." € 
+                                </div>
+                                </div>";
+                                
+                                $aitemgesamtpreis =  $row['best_anzahl'] * $row['best_art_preis'];
+
+                                $a_gesamtbetrag += $aitemgesamtpreis;
+
+                                print"<div  class=\"admin-box-liste-bitemgesamtpreis\">
+                                ".$aitemgesamtpreis." €
+                                </div>
+                                </div>
+                            </div>";
+                        
+                            }
+
+                            $a_gesamtbetrag += 4.95;
+
+                            print"<div class=\"sumganzebox\">
+                                <div class=\"sumganzeboxlinks\">
+                                </div>
+                                <div class=\"sumganzeboxrechts\">
+                                    <div class=\"sumganzeboxrechtslinks\">
+                                        <p class=\"aboxversandkosten\">Versandkosten </p>
+                                        <p class=\"aboxgesamtsumme\">Gesamtsumme </p>
+                                        <p class=\"aboxmehrwertsteuer\">incl. MwSt.</p>
+                                    </div>
+                                    <div class=\"sumganzeboxrechtsrechts\">
+                                        <p class=\"aboxversandkosten\">4.95 €</p>
+                                        <p class=\"aboxgesamtsumme\">".$a_gesamtbetrag." €</p>
+                                    </div>
+                                </div>
+                            </div>";
+
+                            //druck div schluss 
+                            print"</div>
+
+                            <div class=\"sumbutton\">
+                            <form>
+                                <input type=\"submit\" value=\"Ausdrucken\" class=\"a-button\" onclick=\"printElem()\">
+                            </form>
+                            </div>";
+
+                        }                
 
     //Klammer für die klasse 
     }

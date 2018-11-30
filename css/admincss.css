@@ -118,3 +118,25 @@ a.button {
     text-decoration: none;
     font-weight: 700;
 }
+
+.sumganzebox{
+    display: flex;
+}
+
+.sumganzeboxlinks{
+    display: flex;
+    flex: 1;
+}
+
+.sumganzeboxrechts{
+    display: flex;
+    flex: 1;
+}
+
+.sumganzeboxrechtslinks{
+    flex: 1;
+}
+
+.sumganzeboxrechtsrechts{
+    flex: 1;
+}
