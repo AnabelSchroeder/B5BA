@@ -1,11 +1,29 @@
 <?php
 if ($seitenid== "index") {
+//Datenbank einbinden
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbase = "ba_webshop";
+
+$verbinde = mysqli_connect($host,$user,$pass);
+$con = mysqli_select_db($verbinde,$dbase);
+
 
 //landing page
 
-  
-    
-    echo "header";
+//vorläufiger arbeitsbutton zur loginseite///////////////////////////////////////////////
+echo "<form action=\"index.php?Seiten_ID=login\" method=\"GET\">";
+echo "<button name=\"Seiten_ID\" type=\"submit\" value=\"login\"> Login </button>";
+echo "</form>";
+//////////////////////////////////////////////////////////////////////
+
+//vorläufiger arbeitsbutton zur kassenseite///////////////////////////////////////////////
+echo "<form action=\"index.php?Seiten_ID=kasse_1\" method=\"GET\">";
+echo "<button name=\"Seiten_ID\"  type=\"submit\" value=\"kasse_1\"> kasse </button>";
+echo "</form>";
+//////////////////////////////////////////////////////////////////////
+
     echo "<br>";
 
 //bilder mosaik
@@ -66,7 +84,9 @@ echo "<div class=\"landing_slogan_container\"> <span class=\"landing_slogan_schr
 //neuheiten anzeigen
 echo "<div class=\"landing_neuheiten_container\">";
 echo "Unsere Neuheiten <br> <br>";
-    
+
+include "Landing_controller.php";
+/*
 echo "<div class=\"landing_neuheiten_artikel\">";
     echo "<img class=\"landing_artikel_bild\" src=\"img/schwertfarn.jpg\">";
     echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
@@ -90,7 +110,7 @@ echo "<div class=\"landing_neuheiten_artikel\">";
     echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
     echo "<span> 29,99€ </span>";
 echo "</div>";
-    
+ */   
 echo "</div>";
 }
 
