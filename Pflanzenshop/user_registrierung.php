@@ -1,19 +1,30 @@
 <?php
  if ($seitenid == "user_registration")
 {
+    //Datenbank einbinden
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbase = "ba_webshop";
+
+$verbinde = mysqli_connect($host,$user,$pass);
+$con = mysqli_select_db($verbinde,$dbase);
 
 //registrieren
-include "registrierung.php";
+//controller für sql includieren
+include "registrierung_controller.php";
 
 echo "header";
+//div container gerüst
 echo "<div class=\"user_login_bg\">";
     echo "<div class=\"user_registration_div\">";
      echo "<div class=\"user_registration_headleiste\"> </div>";
+// formular
     echo "<div class=\"user_registration_form\">";
         echo "<form method=\"POST\"  action=\"#\" name=\"Registration\">";
     
         echo "<table>";
-        
+     //Namensfelder  
             echo "<tr>";
                 echo "<td>Vorname</td>";
                 echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_vname\"> </td>";
@@ -23,10 +34,10 @@ echo "<div class=\"user_login_bg\">";
                  echo "<td> Nachname </td>";
                  echo "<td><input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_nname\"> </td>";
             echo "</td>";
-    
+    //Adresse
             echo "<tr>";
                 echo "<td>Straße </td>";
-                echo "<td><input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_straße\"> </td>";
+                echo "<td><input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_strasse\"> </td>";
             echo "</tr>";
     
             echo "<tr>";
@@ -34,7 +45,7 @@ echo "<div class=\"user_login_bg\">";
                 echo "<td> <input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_plz\"> 
                 <input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_ort\"></td>";
             echo "</tr>";
-    
+    //zahlart
             echo "<tr>";
                 echo "<td>Zahlungsart </td>";
                 echo "<td><select class=\"user_login_form\"name=\"user_registrieren_zahlart\">
@@ -47,7 +58,7 @@ echo "<div class=\"user_login_bg\">";
           
             echo "<tr> <td></td></tr>";
             
-    
+    //logindaten
            
             echo "<tr>";
                 echo "<td>Login Name</td>";
@@ -63,14 +74,15 @@ echo "<div class=\"user_login_bg\">";
                 echo "<td>Passwort wiederholen<td>";
                 echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_passwort2\" min-length=\"8\"> </td>";
             echo "</tr>";
-    
+    //mail
             echo "<tr>";
                 echo "<td> E-Mail </td>";
-                echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_email\"> </td>";
+                echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_mail\"> </td>";
             echo "</tr>";
     
             echo "</table>";
-                echo "<button class=\"button2\"> Abbrechen </button> <input class=\"button1\" onclick=\"return user_registration_pruefe()\" type=\"submit\" name=\"User_Registration_speichern\" value=\"Speichern\">";
+ // Button zum Formular senden           
+                echo "<button class=\"button2\"> Abbrechen </button> <input class=\"button1\" onclick=\"return user_registration_pruefe()\" type=\"submit\" name=\"user_registration_speichern\" value=\"Speichern\">";
     echo"</div>";
 echo "</div>";
 echo "</div>";
