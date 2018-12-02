@@ -1,4 +1,5 @@
 <?php
+session_start();
 echo"<!DOCTYPE html>";
 echo"<head>";
 echo"<meta charset=\"utf-8\" />";
