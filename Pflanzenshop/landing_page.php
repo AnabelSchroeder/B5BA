@@ -9,13 +9,34 @@ $dbase = "ba_webshop";
 $verbinde = mysqli_connect($host,$user,$pass);
 $con = mysqli_select_db($verbinde,$dbase);
 
+/////////////////////////////////////////////////////////////////////////////////
 
+//session 
+session_start();
+$_SESSION['logged_in']= "false";
+$_SESSION['user_cookie']= "false";
+$_SESSION['versuche']=3;
+
+$user_cookie ="false";
+if ($user_cookie=="false")
+{
+    $sid = md5(openssl_random_pseudo_bytes(32));
+setcookie("sid", $sid, time()+3600*24);
+
+
+$user_cookie ="true";
+
+}
 //landing page
 
 //vorläufiger arbeitsbutton zur loginseite///////////////////////////////////////////////
+
 echo "<form action=\"index.php?Seiten_ID=login\" method=\"GET\">";
 echo "<button name=\"Seiten_ID\" type=\"submit\" value=\"login\"> Login </button>";
+//übergabe der seitenid für das zurückkehren nach zb login --> Post??
+//echo "<input type=\"hidden\" name=\"seiten_zrück\" value=\"".$seitenid."\">";
 echo "</form>";
+
 //////////////////////////////////////////////////////////////////////
 
 //vorläufiger arbeitsbutton zur kassenseite///////////////////////////////////////////////
