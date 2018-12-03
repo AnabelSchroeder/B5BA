@@ -1,13 +1,13 @@
 /** Suchfeld im Header: Prüfen, ob un-/sichtbar -> sicht-/unsichtbar machen */
 function L_showSearchField() {
-  var h_suche_sichtbarkeit = document.getElementById("headerSuchfeld").style
+  /*var h_suche_sichtbarkeit = document.getElementById("headerSuchfeld").style
     .visibility;
 
   if (h_suche_sichtbarkeit == "hidden") {
     document.getElementById("headerSuchfeld").style.visibility = "visible";
   } else {
     document.getElementById("headerSuchfeld").style.visibility = "hidden";
-  }
+  }*/
 }
 
 /* Event Keyup Entertaste
