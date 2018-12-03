@@ -48,3 +48,5 @@ echo"</body>";
 echo"</html>";
 
 ?>
+
+<script type="text/javascript" src="js/L.js"></script>
