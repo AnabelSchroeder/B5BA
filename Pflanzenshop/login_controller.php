@@ -9,9 +9,21 @@
     $con = mysqli_select_db($verbinde, $dbase);
 
 
+//session aufnehmen
+session_start();
 
+//einlogversuche zählen
+if (isset($_POST['user_login']))
+{
+    $_SESSION['versuche']--;
 
-//eingabe überprüfen
+    if ($_SESSION['versuche']==0)
+    {
+        echo "captcha abfrage";
+    }
+}
+
+    //eingabe überprüfen
     if (isset( $_POST['login_name']))
     {
 // beide felder gefüllt?
@@ -19,24 +31,39 @@
 
         {
            // überprüfen, ob Daten gültig
+           
 
-            $sql = "SELECT n_id FROM nutzer WHERE n_login =\"".$_POST['login_name']."\" AND n_passwort=\"".$_POST['login_pass']."\";";
+            $sql = "SELECT n_id, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
             $result = mysqli_query($verbinde, $sql);
           
             // wenn Kombination richtig, weiterleitung  zur Index
             if (mysqli_num_rows ($result) > 0)
+            {   
+                while ($zeile = mysqli_fetch_assoc($result))
                 {
-                    while ($zeile = mysqli_fetch_assoc($result))
-                    {
+                $_nutzer = $zeile['n_id'];
+                $passwort = $_POST['login_pass'];
+                $hash = $zeile['n_passwort'];
+               
+
+               echo $hash;
+
+                if (password_verify($passwort, $hash))
+                {
+                    
+                //setcookie("login_cookie",$sid, time()+1800);
                          header("Location: index.php");
-                    }
                 }
+                    
+             
+            
+          
             //Fehlermeldung, wenn Kombination falsch
             else
             {
                 $B_Fehler= "Nutzername oder Passwort falsch!";
             }
-         
+        }
 
         }
         // Fehlermeldung, wenn nicht beide Felder ausgefüllt wurden
@@ -44,6 +71,7 @@
         {
             $B_Fehler2= "Nutzername und Passwort eingeben!";
         }
+    }
     }
 
 ?>
