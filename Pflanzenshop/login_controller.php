@@ -19,40 +19,48 @@ if (isset($_POST['user_login']))
 
     if ($_SESSION['versuche']==0)
     {
-        echo "captcha abfrage";
+        echo "drei Loginversuche verbraucht";
     }
 }
 
     //eingabe überprüfen
     if (isset( $_POST['login_name']))
     {
+        //übermittelte seiten id der vorher aufgerufenen seite speichern
+        $seiten_zurück =$_POST['seiten_zurück'];
 // beide felder gefüllt?
         if($_POST['login_name']!= "" AND $_POST['login_pass']!= "")
 
         {
-           // überprüfen, ob Daten gültig
-           
-
-            $sql = "SELECT n_id, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
+           // überprüfen, ob Loginname gültig
+           $sql = "SELECT n_id, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
             $result = mysqli_query($verbinde, $sql);
-          
-            // wenn Kombination richtig, weiterleitung  zur Index
+         
             if (mysqli_num_rows ($result) > 0)
             {   
                 while ($zeile = mysqli_fetch_assoc($result))
                 {
+                //nutzerid speichern
                 $_nutzer = $zeile['n_id'];
+                //eingegebenes Passwort speichern
                 $passwort = $_POST['login_pass'];
+                //gehashtes Passwort aus der Datenbank 
                 $hash = $zeile['n_passwort'];
                
 
-               echo $hash;
-
+             
+//prüfen, ob Passwort und Hash übereinstimmen
                 if (password_verify($passwort, $hash))
                 {
-                    
+                //login cookie setzen    
                 //setcookie("login_cookie",$sid, time()+1800);
-                         header("Location: index.php");
+
+                // seitenweiterleitung über die id variable
+               // $seitenid = $seiten_zuürck;
+                 header("Location: index.php");
+
+                
+                $_SESSION['loged_in'] = "true";
                 }
                     
              
