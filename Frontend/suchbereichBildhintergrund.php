@@ -14,8 +14,8 @@ echo "<div id=\"L_Content_SucheContainer\">";
         //Formular für's Suchfeld mit Button
     echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
-                    name=\"L_searchfield\" onkeyup=\"L_startSearch()\" 
-                    placeholder=\"Suchen nach Produkten, Farben, Anlässen, ...\">";
+                    name=\"L_searchfield\" "; /*onkeyup=\"L_startSearch()\" */
+                echo "placeholder=\"Suchen nach Produkten, Farben, Anlässen, ...\">";
         echo "<button id=\"L_ContSearchButton\" type=\"submit\">";
             echo "<img id=\"L_ContSearchButtIcon\" src=\"../assets/PH.jpg\">";
         echo "</button>";
