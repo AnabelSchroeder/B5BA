@@ -1195,7 +1195,7 @@
                         </div>
                         <div  class=\"admin-box-texfeld-rechts\">
                         ".$row['art_bild']." <br>
-                        <img width=\"250\" class=\"adminBildArtikelAnsicht\" src=\"img/gespeicherte_bilder/".$row['art_bild']."\" alt=\"".$row['art_bild']."\"> 
+                        <img width=\"250\" class=\"adminBildArtikelAnsicht\" src=\"img/".$row['art_bild']."\" alt=\"".$row['art_bild']."\"> 
                         </div>
                     </div>
 
@@ -1682,7 +1682,7 @@
                             
                             
                                 <div class=\"admin-box-liste-bbild\"> 
-                                <img width=\"100\" src=\"img/gespeicherte_bilder/".$row['best_art_bild']."\" alt=\"".$row['best_art_bild']."\">
+                                <img width=\"100\" src=\"img/".$row['best_art_bild']."\" alt=\"".$row['best_art_bild']."\">
                                 </div>
 
 

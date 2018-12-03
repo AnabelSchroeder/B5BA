@@ -288,7 +288,9 @@ if (isset($_POST['userBearbeiten'])){
     /******************************************************************************** */
 
     // Laden der Daten für die ansicht der Bestellungen-liste
+    if (isset($_SESSION['adminnutzerwahl'])){
     $asqlBestellungenListe = "SELECT * FROM bestellung WHERE n_id =". $_SESSION['adminnutzerwahl'];
+    }
 
     //Nutzbarnachen der bestellid
     if(isset($_GET['abestellid'])){
