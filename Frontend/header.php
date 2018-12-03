@@ -5,7 +5,7 @@
 ///////////////////////////////////////
 
 //Haupt CSS einbinden
-echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
+//echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
 
 
 echo "<header>";
@@ -43,7 +43,7 @@ echo "<div id=\"L_headerLinks\">";
     // Verlinkung zur Shop-Seite anzeigen
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
-                echo "value=\"Shop\">";
+                echo "value=\"shop\">";
             echo "Shop";
         echo "</button>";
     echo "</form>";    
@@ -81,13 +81,18 @@ echo "<div id=\"L_headerRechts\">";
     
     */
 
-    echo "<form action=\"index.php\" method=\"post\">";
+    /*echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"headerSuchfeld\" type=\"text\" style=\"visibility:hidden\" 
-                        name=\"L_searchfield\" placeholder=\"Suche\" onkeyup=\"L_startSearch()\">";
-    echo "</form>"; 
+                        name=\"L_searchfield\" placeholder=\"Suche\" "; /*onkeyup=\"L_startSearch()\"*/  /*+ ">";
+    echo "</form>"; */
+
+    echo "<div id=\"L_headerSuche\">";
+
         echo "<button onclick=\"L_showSearchField()\" class=\"L_headerButton\" >";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
         echo "</button>";
+
+    echo "</div>";
 
         
 //-----------------------------------------------------------------------------------//
@@ -126,6 +131,6 @@ echo "</div>";
 
 echo "</header>";
 
-echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>";
+/*echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>";*/
 
 ?>
