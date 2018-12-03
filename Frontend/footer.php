@@ -5,7 +5,7 @@
 ///////////////////////////////////////
 
 //Haupt CSS einbinden
-echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
+//echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
 
 echo "<footer>";
 
@@ -39,7 +39,7 @@ echo "<footer>";
        // Verlinkung zur Shop-Seite anzeigen
        echo "<form action=\"index.php\" method=\"get\">";
             echo "<button class=\"L_footerButton\" name=\"Seiten_ID\" type=\"submit\" ";
-                    echo "value=\"Shop\">";
+                    echo "value=\"shop\">";
                 echo "Shop";
             echo "</button>";
         echo "</form>";    
@@ -48,7 +48,7 @@ echo "<footer>";
         // Verlinkung zum Impressum
         echo "<button class=\"L_footerButton\" >";
             echo "Impressum";
-        echo "</button>";
+        echo "</button><br>";
 
         //Verlinkung zur Datenschutzerklärung
         echo "<button class=\"L_footerButton\" >";
