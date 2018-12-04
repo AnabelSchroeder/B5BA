@@ -236,7 +236,7 @@
         public static function af_mein_konto_bearbeiten() {
             global $conn, $a_sqlEingeloggterUser;
             
-            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_user_bearbeiten)\" >";
+            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aBearbeitenPruefe(a_user_bearbeiten)\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 foreach ($conn->query($a_sqlEingeloggterUser) as $row) {

@@ -111,7 +111,7 @@ function aNeuPruefe(){
 
  /*********************************************************************************************************************** */
 //Prüfen ob die felder in Kunden bearbeiten auch alle belegt sind
-function aNeuPruefe(){
+function aBearbeitenPruefe(){
     
      
     if(document.a_user_bearbeiten.a_vorname.value ==""){
