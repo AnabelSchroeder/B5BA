@@ -5,8 +5,7 @@
 ///////////////////////////////////////
 
 
-//Haupt CSS einbinden
-echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
+if ($seitenid = "artikelansicht") {
 
 // Einfügen des Suchbereiches
 include "Frontend/suchbereichBildhintergrund.php";
@@ -145,5 +144,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 echo "</table>";
     echo "</div>";
 echo "</div>";
+
+}
 
 ?>
