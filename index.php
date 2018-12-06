@@ -25,7 +25,7 @@ echo"<button name=\"Seiten_ID\" type=\"submit\" value=\"Adminbereich\">Admin</bu
 echo"</form>";
 */
 
-/*
+
 
 if(isset($_GET['Seiten_ID'])) {
     $seitenid = $_GET['Seiten_ID'];
@@ -33,13 +33,21 @@ if(isset($_GET['Seiten_ID'])) {
     $seitenid = "index";
 }
 
+//
+echo $_GET['Seiten_ID']; echo $seitenid;
+
+include "Frontend/shop.php";
+include "Frontend/artikelansicht.php";
+include "Frontend/warenkorb.php";
 
 //Adminbereich einbinden
     include "Adminbereich/adminbereich.php";
     
-*/
+
 
 include "Frontend/footer.php";
+
+
 
 echo"</body>";
 
