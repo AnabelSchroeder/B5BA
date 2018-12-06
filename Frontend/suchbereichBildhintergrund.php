@@ -14,12 +14,19 @@ echo "<div id=\"L_Content_SucheContainer\">";
         //Formular für's Suchfeld mit Button
     echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
-                    name=\"L_searchfield\" "; /*onkeyup=\"L_startSearch()\" */
+                    name=\"L_searchfield\" size=\"50\" "; /*onkeyup=\"L_startSearch()\" */
                 echo "placeholder=\"Suchen nach Produkten, Farben, Anlässen, ...\">";
-        echo "<button id=\"L_ContSearchButton\" type=\"submit\">";
-            echo "<img id=\"L_ContSearchButtIcon\" src=\"../assets/PH.jpg\">";
+        echo "<button id=\"L_ContSearchButton\" name=\"L_suchbutton\" type=\"submit\" "; /*onClick=\"L_suchfeldplatzhalterAendern()\"*/ 
+        echo ">";
+            echo "<img id=\"L_ContSearchButtIcon\" src=\"assets/PH.jpg\">";
         echo "</button>";
     echo "</form>";
 echo "</div>";
+
+if (isset ($_POST['L_suchbutton']) /* && ($_POST['L_searchfield']) != "" */) {
+    $seitenid = "shop";
+} else {
+    $seitenid = $_GET['Seiten_ID'];
+}
 
 ?>
