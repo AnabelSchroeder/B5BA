@@ -1,14 +1,5 @@
-var L_FilterID,
-  L_filterArt,
-  /*L_filterLabel1,
-  L_filterLabel2,
-  L_filterLabel3,
-  L_filterLabel4,
-  L_filterLabel5,*/
-  L_filterLabelArray,
-  text,
-  i,
-  j;
+// Variablen im ganzen Script zur Verfügung stellen
+var L_FilterID, L_filterArt, L_filterLabelArray, text, i, j;
 
 /** Suchfeld im Header: Prüfen, ob un-/sichtbar -> sicht-/unsichtbar machen */
 function L_showSearchField() {
@@ -45,11 +36,13 @@ function L_hideAdminButton() {
   document.getElementById("L_AdminButton").style.visibility = "hidden";
 }
 
+/**Platzhalter im Suchfeld in Suchbegriff ändern */
 function L_suchfeldplatzhalterAendern() {
   var L_suche = document.getElementById("L_ContSuchfeld").value;
   document.getElementById("L_ContSuchfeld").placeholder.value = L_suche;
 }
 
+/**Blaupause für's Aufklappen der Filterauswahlmenus */
 function L_showFilterMenu() {
   text =
     "<span>" +
@@ -65,14 +58,14 @@ function L_showFilterMenu() {
     "filtermenuanzeige' class='L_FilterMenu'>" +
     "<form action='index.php' method='post' class='L_Filteroption'>";
 
-  j = i + 1;
+  //j = i + 1;
 
   for (i = 0; i < L_filterLabelArray.length; i++) {
     text +=
       "<input type='radio' name='L_Filter" +
       L_filterArt +
       "Auswahl' value='" +
-      j +
+      /*j*/ L_filterLabelArray[i] +
       "'>" +
       "<label>" +
       L_filterLabelArray[i] +
@@ -86,6 +79,7 @@ function L_showFilterMenu() {
   document.getElementById(L_FilterID).innerHTML = text;
 }
 
+/**Blaupause für's zuklappen des Filterauswahlmenus  */
 function L_hideFilterMenu() {
   text =
     "<span>" +
@@ -100,6 +94,7 @@ function L_hideFilterMenu() {
   document.getElementById(L_FilterID).innerHTML = text;
 }
 
+/**Aufklappen des Preis-Filterauswahlmenus */
 function L_showPreisFilterMenu() {
   L_FilterID = "L_FilterPreis";
   L_filterArt = "Preis";
@@ -114,6 +109,7 @@ function L_showPreisFilterMenu() {
   L_showFilterMenu();
 }
 
+/**Zuklappen des Preis-Filterauswahlmenus */
 function L_hidePreisFilterMenu() {
   L_FilterID = "L_FilterPreis";
   L_filterArt = "Preis";
@@ -121,14 +117,16 @@ function L_hidePreisFilterMenu() {
   L_hideFilterMenu();
 }
 
+/**Aufklappen des Farb-Filterauswahlmenus */
 function L_showFarbeFilterMenu() {
   L_FilterID = "L_FilterFarbe";
   L_filterArt = "Farbe";
-  L_filterLabelArray = ["grün", "gelb", "weiss"];
+  L_filterLabelArray = ["gr&uuml;n", "gelb", "weiss"];
 
   L_showFilterMenu();
 }
 
+/**Zuklappen des Farb-Filterauswahlmenus */
 function L_hideFarbeFilterMenu() {
   L_FilterID = "L_FilterFarbe";
   L_filterArt = "Farbe";
@@ -136,6 +134,7 @@ function L_hideFarbeFilterMenu() {
   L_hideFilterMenu();
 }
 
+/**Aufklappen des Kategorie-Filterauswahlmenus */
 function L_showKategorieFilterMenu() {
   L_FilterID = "L_FilterKategorie";
   L_filterArt = "Kategorie";
@@ -144,6 +143,7 @@ function L_showKategorieFilterMenu() {
   L_showFilterMenu();
 }
 
+/**Zuklappen des Kategorie-Filterauswahlmenus */
 function L_hideKategorieFilterMenu() {
   L_FilterID = "L_FilterKategorie";
   L_filterArt = "Kategorie";
@@ -151,6 +151,7 @@ function L_hideKategorieFilterMenu() {
   L_hideFilterMenu();
 }
 
+/**Aufklappen des Pflege-Filterauswahlmenus */
 function L_showPflegeFilterMenu() {
   L_FilterID = "L_FilterPflege";
   L_filterArt = "Pflege";
@@ -159,6 +160,7 @@ function L_showPflegeFilterMenu() {
   L_showFilterMenu();
 }
 
+/**Zuklappen des Pflege-Filterauswahlmenus */
 function L_hidePflegeFilterMenu() {
   L_FilterID = "L_FilterPflege";
   L_filterArt = "Pflege";
@@ -166,6 +168,7 @@ function L_hidePflegeFilterMenu() {
   L_hideFilterMenu();
 }
 
+/**Aufklappen des Hoehe-Filterauswahlmenus */
 function L_showHoeheFilterMenu() {
   L_FilterID = "L_FilterHoehe";
   L_filterArt = "Hoehe";
@@ -173,12 +176,13 @@ function L_showHoeheFilterMenu() {
     "1 bis 30 cm",
     "30 bis 50 cm",
     "50 bis 80",
-    "u&uuml;ber 80 cm"
+    "&uuml;ber 80 cm"
   ];
 
   L_showFilterMenu();
 }
 
+/**Zuklappen des Hoehe-Filterauswahlmenus */
 function L_hideHoeheFilterMenu() {
   L_FilterID = "L_FilterHoehe";
   L_filterArt = "Hoehe";
@@ -186,6 +190,7 @@ function L_hideHoeheFilterMenu() {
   L_hideFilterMenu();
 }
 
+/**Aufklappen des Standort-Filterauswahlmenus */
 function L_showStandortFilterMenu() {
   L_FilterID = "L_FilterStandort";
   L_filterArt = "Standort";
@@ -194,6 +199,7 @@ function L_showStandortFilterMenu() {
   L_showFilterMenu();
 }
 
+/**Zuklappen des Standort-Filterauswahlmenus */
 function L_hideStandortFilterMenu() {
   L_FilterID = "L_FilterStandort";
   L_filterArt = "Standort";
