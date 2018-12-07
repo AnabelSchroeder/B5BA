@@ -5,7 +5,7 @@
 ///////////////////////////////////////
 
 
-if ($seitenid = "artikelansicht") {
+if ($seitenid == "artikelansicht") {
 
 // Einfügen des Suchbereiches
 include "Frontend/suchbereichBildhintergrund.php";

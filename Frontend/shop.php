@@ -5,7 +5,7 @@
 ///////////////////////////////////////
 
 
-if ($seitenid = "shop") {
+if ($seitenid == "shop") {
 
 include "Frontend/suchbereichBildhintergrund.php";
 

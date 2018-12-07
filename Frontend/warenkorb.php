@@ -5,9 +5,7 @@
 ///////////////////////////////////////
 
 
-if ($seitenid = "warenkorb") {
-
-
+if ($seitenid == "warenkorb") {
 
 //_Content________________________________________________________
 echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";

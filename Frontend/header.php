@@ -114,7 +114,7 @@ echo "<div id=\"L_headerRechts\">";
     // Icon für Warenkorb mit Artikelanzahlanzeige
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
-                echo "value=\"Warenkorb\">";
+                echo "value=\"warenkorb\">";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
             echo "<div id=\"L_warenkorb_art_anz\">";
                 echo /*$w_art_anz*/ "ZAHL";
