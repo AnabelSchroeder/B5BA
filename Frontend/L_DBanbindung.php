@@ -16,8 +16,7 @@ $conn = new PDO("mysql:host= $servername;dbname= $dbname",$username, $passwort);
 //Anzeige von Artikeln auf der Shopseite
 function L_shopShowArticle() {
     foreach ($conn->query($L_suche) as $L_erg) {
-        echo "<div class=\"L_shopArtContainer\">";
-        
+        echo "<div class=\"L_shopArtContainer\">";       
         echo "<img  src=\"assets/img/" + $L_erg['art_bild'] + "\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
             echo $L_erg['art_name'];
@@ -38,7 +37,6 @@ function L_shopShowArticle() {
             echo "</p>";
         }
         echo "</div>";
-
     }
 };
 
@@ -185,7 +183,51 @@ function L_artansShowArtikel() {
         }
 };
 
+/* UNION nachsehen
+
+if (isset ($_POST["L_FilterFarbeAuswahl"])) {
+    $L_farbauswahl = $_POST["L_FilterFarbeAuswahl"];
+    $L_farbsql = "art_farbe=$farbauswahl";
+} else {
+    $L_farbsql = NULL;
+}
+
+if (isset ($_POST["L_FilterKategorieAuswahl"])) {
+    $L_katauswahl = $_POST["L_FilterKategorieAuswahl"];
+    $L_katsql = "kat_bez=$L_katauswahl";
+}else {
+    $L_katsql = NULL;
+}
+
+if (isset ($_POST["L_FilterPflegeAuswahl"])) {
+    $L_pflegeauswahl = $_POST["L_FilterPflegeAuswahl"];
+    $L_pflegesql = "art_pflege=$L_pflegeauswahl";
+}else {
+    $L_pflegesql = NULL;
+}
 
 
+if (isset ($_POST["L_FilterStandortAuswahl"])) {
+    $L_standortauswahl = $_POST["L_FilterStandortAuswahl"];
+    $L_standortsql = "art_ort=$L_standortauswahl";
+}else {
+    $L_standortsql = NULL;
+}
+
+if (isset ($_POST["L_FilterPreisAuswahl"])) {
+    $L_preisauswahl = $_POST["L_FilterPreisAuswahl"];
+    
+
+}else {
+    $L_preissql = NULL;
+}
+
+if (isset ($_POST["L_FilterHoeheAuswahl"])) {
+    $L_hoeheauswahl = $_POST["L_FilterHoeheAuswahl"];
+}else {
+    $L_hoehesql = NULL;
+}
+ 
+$sql = "SELECT DISTINCT art_id FROM artikel WHERE $L_farbsql, $L_katsql, ";
 /**/
 ?>
