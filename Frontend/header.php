@@ -71,29 +71,14 @@ echo "<div id=\"L_headerRechts\">";
 
 //-----------------------------------------------------------------------------------//
     // Icon für Suchfeld
-
-   /* echo "<form action=\"index.php\" method=\"get\">";
-        echo "<button name=\"Seiten_ID\" type=\"submit\" ";
-                echo "value=\"?\">";
-            echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
-        echo "</button>";
-    echo "</form>"; 
-    
-    */
-
-    /*echo "<form action=\"index.php\" method=\"post\">";
-        echo "<input id=\"headerSuchfeld\" type=\"text\" style=\"visibility:hidden\" 
-                        name=\"L_searchfield\" placeholder=\"Suche\" "; /*onkeyup=\"L_startSearch()\"*/  /*+ ">";
-    echo "</form>"; */
-
     echo "<div id=\"L_headerSuche\">";
-
-        echo "<button onclick=\"L_showSearchField()\" class=\"L_headerButton\" >";
-            echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
-        echo "</button>";
-
+        echo "<form action=\"index.php\" method=\"get\">";
+            echo "<button name=\"Seiten_ID\" type=\"submit\" class=\"L_headerButton\"";
+                    echo "value=\"shop\">";
+                echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
+            echo "</button>";
+        echo "</form>"; 
     echo "</div>";
-
         
 //-----------------------------------------------------------------------------------//
 
