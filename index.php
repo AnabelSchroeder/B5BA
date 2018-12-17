@@ -39,6 +39,7 @@ echo $_GET['Seiten_ID']; echo $seitenid;
 include "Frontend/shop.php";
 include "Frontend/artikelansicht.php";
 include "Frontend/warenkorb.php";
+include "Frontend/L_DBanbindung.php";
 
 //Adminbereich einbinden
     include "Adminbereich/adminbereich.php";
