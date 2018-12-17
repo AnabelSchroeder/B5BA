@@ -1,16 +1,23 @@
 // Variablen im ganzen Script zur Verfügung stellen
-var L_FilterID, L_filterArt, L_filterLabelArray, text, i, j;
+var L_FilterID, L_filterArt, L_filterLabelArray, text, i /*, j*/;
 
-/** Suchfeld im Header: Prüfen, ob un-/sichtbar -> sicht-/unsichtbar machen */
-function L_showSearchField() {
-  /*var h_suche_sichtbarkeit = document.getElementById("headerSuchfeld").style
-    .visibility;
+//---------------------------------------------------------------------------ADMINBUTTON---//
+/** Adminbutton im Header: sichtbar machen */
+function L_showAdminButton() {
+  document.getElementById("L_AdminButton").style.visibility = "visible";
+}
 
-  if (h_suche_sichtbarkeit == "hidden") {
-    document.getElementById("headerSuchfeld").style.visibility = "visible";
-  } else {
-    document.getElementById("headerSuchfeld").style.visibility = "hidden";
-  }*/
+/** Adminbutton im Header: unsichtbar machen */
+function L_hideAdminButton() {
+  document.getElementById("L_AdminButton").style.visibility = "hidden";
+}
+//----------------------------------------------------------------------------------------//
+
+//-----------------------------------------------------------------------------SUCHFELD---//
+/**Platzhalter im Suchfeld in Suchbegriff ändern */
+function L_suchfeldplatzhalterAendern() {
+  var L_suche = document.getElementById("L_ContSuchfeld").value;
+  document.getElementById("L_ContSuchfeld").placeholder.value = L_suche;
 }
 
 /* Event Keyup Entertaste
@@ -26,22 +33,9 @@ document.getElementById("form").addEventListener("keyup", function(event) {
 });
 */
 
-/** Adminbutton im Header: sichtbar machen */
-function L_showAdminButton() {
-  document.getElementById("L_AdminButton").style.visibility = "visible";
-}
+//----------------------------------------------------------------------------------------//
 
-/** Adminbutton im Header: unsichtbar machen */
-function L_hideAdminButton() {
-  document.getElementById("L_AdminButton").style.visibility = "hidden";
-}
-
-/**Platzhalter im Suchfeld in Suchbegriff ändern */
-function L_suchfeldplatzhalterAendern() {
-  var L_suche = document.getElementById("L_ContSuchfeld").value;
-  document.getElementById("L_ContSuchfeld").placeholder.value = L_suche;
-}
-
+//---------------------------------------------------------------FILTER-MENU-FUNKTIONEN---//
 /**Blaupause für's Aufklappen der Filterauswahlmenus */
 function L_showFilterMenu() {
   text =
@@ -72,7 +66,9 @@ function L_showFilterMenu() {
       "</label><br>";
   }
   text +=
-    "<button class='L_FilterMenubutton' type='submit'>Filter anwenden</button>" +
+    "<button class='L_FilterMenubutton' type='submit' name='" +
+    L_filterArt +
+    '">Filter anwenden</button>' +
     "</form>" +
     "</div>";
 
@@ -207,4 +203,8 @@ function L_hideStandortFilterMenu() {
   L_hideFilterMenu();
 }
 
+//----------------------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------//
 console.log(L_FilterID);
