@@ -15,7 +15,7 @@ echo "<div id=\"L_Content_SucheContainer\">";
     echo "<form action=\"index.php\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
                     name=\"L_searchfield\" size=\"50\" "; /*onkeyup=\"L_startSearch()\" */
-                echo "placeholder=\"Suchen nach Produkten, Farben, Anlässen, ...\">";
+                echo "placeholder=\"Suchen nach Produkten, Farben, ...\">";
         echo "<button id=\"L_ContSearchButton\" name=\"L_suchbutton\" type=\"submit\" "; /*onClick=\"L_suchfeldplatzhalterAendern()\"*/ 
         echo ">";
             echo "<img id=\"L_ContSearchButtIcon\" src=\"assets/PH.jpg\">";
