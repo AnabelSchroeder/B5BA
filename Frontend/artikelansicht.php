@@ -11,6 +11,8 @@ if ($seitenid == "artikelansicht") {
 include "Frontend/suchbereichBildhintergrund.php";
 
 //_Content________________________________________________________
+L_artansShowArtikel();
+/*
 echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
 
         //Container für Bild und Kaufinfos -----------------------
@@ -144,6 +146,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 echo "</table>";
     echo "</div>";
 echo "</div>";
+*/
 
 }
 
