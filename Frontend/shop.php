@@ -10,7 +10,7 @@ if ($seitenid == "shop") {
 include "Frontend/suchbereichBildhintergrund.php";
 
 
-// Filterleiste _________________________________________________
+// Filterleiste _______________________________________________________________FILTERLEISTE_______//
 echo "<div id=\"L_FilterBarCon\">";
         //Container für den Content der Filterleiste
 
@@ -88,7 +88,7 @@ echo "<div id=\"L_FilterBarCon\">";
     echo "</div>";
 
 
-//_Artikelanzeige (der Suche)__________________________________________
+//_Artikelanzeige (der Suche)__________________________________________ARTIKELANZEIGE_(SUCHE)__//
 echo "<div id=\"L_shopArtAusgabe\" class=\"L_contentbereich\">";
 
     //function in L_DBanbindung.php
@@ -108,7 +108,7 @@ echo "<div id=\"L_shopArtAusgabe\" class=\"L_contentbereich\">";
 echo "</div>";
 
 
-//_Seitenzahl der Artikel______________________________________________
+//_Seitenzahl der Artikel______________________________________________SEITENZAHL_D_ARTIKEL__//
 echo "<div id=\"L_shopPagContBack\">";
     echo "<div id=\"L_shopPagContSigns\">";
         
