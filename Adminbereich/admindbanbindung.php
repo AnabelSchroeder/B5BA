@@ -18,19 +18,19 @@ if ($a_eingeloggt == true){
 // Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
 if (isset($_POST['meinKontoBearbeiten'])){
 
-    $a_nname =  $_POST["a_nachname"];
-    $a_vname = $_POST["a_vorname"];
-    $a_strasse = $_POST["a_strasse"];
-    $a_ort = $_POST["a_ort"];
-    $a_plz = $_POST["a_plz"];
-    $a_email = $_POST["a_email"];
-    $a_loginname = $_POST["a_loginname"];
-    $a_passwort = $_POST["a_passwort"];
+    $a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
+    $a_vname = htmlspecialchars($_POST["a_vorname"], ENT_QUOTES, 'UTF-8');
+    $a_strasse = htmlspecialchars($_POST["a_strasse"], ENT_QUOTES, 'UTF-8');
+    $a_ort = htmlspecialchars($_POST["a_ort"], ENT_QUOTES, 'UTF-8');
+    $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
+    $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
+    $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
+    $a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
    
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=? WHERE n_id=?";
@@ -57,20 +57,20 @@ if (isset($_POST['meinKontoBearbeiten'])){
 // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
 if (isset($_POST['userNeuAnlegen'])){
 
-$a_rechte = $_POST["a_rechte"];
-$a_nname =  $_POST["a_nachname"];
-$a_vname = $_POST["a_vorname"];
-$a_strasse = $_POST["a_strasse"];
-$a_ort = $_POST["a_ort"];
-$a_plz = $_POST["a_plz"];
-$a_email = $_POST["a_email"];
-$a_loginname = $_POST["a_loginname"];
-$a_passwort = $_POST["a_passwort"];
-$a_sperrung = $_POST["a_sperrung"];
+$a_rechte = htmlspecialchars($_POST["a_rechte"], ENT_QUOTES, 'UTF-8');
+$a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
+$a_vname = htmlspecialchars($_POST["a_vorname"], ENT_QUOTES, 'UTF-8');
+$a_strasse = htmlspecialchars($_POST["a_strasse"], ENT_QUOTES, 'UTF-8');
+$a_ort = htmlspecialchars($_POST["a_ort"], ENT_QUOTES, 'UTF-8');
+$a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
+$a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
+$a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
+$a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+$a_sperrung = htmlspecialchars($_POST["a_sperrung"], ENT_QUOTES, 'UTF-8');
 
 //Speichern der Daten von Neu anlegen eines Users im admin bereich
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $asql = "INSERT INTO nutzer (n_admin, n_nname, n_vname, n_strasse, n_ort, n_plz, n_mail, n_login, n_passwort, n_sperre)
@@ -92,20 +92,20 @@ $_POST['userNeuAnlegen'] =  null;
 // Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
 if (isset($_POST['userBearbeiten'])){
 
-    $a_rechte = $_POST["a_rechte"];
-    $a_nname =  $_POST["a_nachname"];
-    $a_vname = $_POST["a_vorname"];
-    $a_strasse = $_POST["a_strasse"];
-    $a_ort = $_POST["a_ort"];
-    $a_plz = $_POST["a_plz"];
-    $a_email = $_POST["a_email"];
-    $a_loginname = $_POST["a_loginname"];
-    $a_passwort = $_POST["a_passwort"];
-    $a_sperrung = $_POST["a_sperrung"];
+    $a_rechte = htmlspecialchars($_POST["a_rechte"], ENT_QUOTES, 'UTF-8');
+    $a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
+    $a_vname = htmlspecialchars($_POST["a_vorname"], ENT_QUOTES, 'UTF-8');
+    $a_strasse = htmlspecialchars($_POST["a_strasse"], ENT_QUOTES, 'UTF-8');
+    $a_ort = htmlspecialchars($_POST["a_ort"], ENT_QUOTES, 'UTF-8');
+    $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
+    $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
+    $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
+    $a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+    $a_sperrung = htmlspecialchars($_POST["a_sperrung"], ENT_QUOTES, 'UTF-8');
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_sperre=? WHERE n_id=?";
@@ -126,7 +126,7 @@ if (isset($_POST['userBearbeiten'])){
 
 
 
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
     
 
     // Laden der Daten für die ansicht der Kundenliste
@@ -184,23 +184,23 @@ if (isset($_POST['userBearbeiten'])){
     // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
     if (isset($_POST['a_button_ArtikelNeuAnlegen'])){
 
-    $a_art_name = $_POST["a_art_name"];
-    $a_kat_bez =  $_POST["a_kat_bez"];
-    $a_art_preis = $_POST["a_art_preis"];
-    $a_sale_status = $_POST["a_sale_status"];
-    $a_sale_preis = $_POST["a_sale_preis"];
-    $a_art_groesse = $_POST["a_art_groesse"];
-    $a_art_ort = $_POST["a_art_ort"];
-    $a_art_farbe = $_POST["a_art_farbe"];
-    $a_art_pflege = $_POST["a_art_pflege"];
-    $a_art_text = $_POST["a_art_text"];
-    $a_art_bild = $_POST["a_art_bild"];
-    $a_art_stueck = $_POST["a_art_stueck"];
+    $a_art_name = htmlspecialchars($_POST["a_art_name"], ENT_QUOTES, 'UTF-8');
+    $a_kat_bez =  htmlspecialchars($_POST["a_kat_bez"], ENT_QUOTES, 'UTF-8');
+    $a_art_preis = htmlspecialchars($_POST["a_art_preis"], ENT_QUOTES, 'UTF-8');
+    $a_sale_status = htmlspecialchars($_POST["a_sale_status"], ENT_QUOTES, 'UTF-8');
+    $a_sale_preis = htmlspecialchars($_POST["a_sale_preis"], ENT_QUOTES, 'UTF-8');
+    $a_art_groesse = htmlspecialchars($_POST["a_art_groesse"], ENT_QUOTES, 'UTF-8');
+    $a_art_ort = htmlspecialchars($_POST["a_art_ort"], ENT_QUOTES, 'UTF-8');
+    $a_art_farbe = htmlspecialchars($_POST["a_art_farbe"], ENT_QUOTES, 'UTF-8');
+    $a_art_pflege = htmlspecialchars($_POST["a_art_pflege"], ENT_QUOTES, 'UTF-8');
+    $a_art_text = htmlspecialchars($_POST["a_art_text"], ENT_QUOTES, 'UTF-8');
+    $a_art_bild = htmlspecialchars($_POST["a_art_bild"], ENT_QUOTES, 'UTF-8');
+    $a_art_stueck = htmlspecialchars($_POST["a_art_stueck"], ENT_QUOTES, 'UTF-8');
 
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $asql = "INSERT INTO artikel (art_name, kat_bez, art_preis, sale_status, sale_preis, art_ort, art_farbe, art_pflege, art_text, art_bild, art_groesse, art_stueckzahl)
@@ -222,23 +222,23 @@ if (isset($_POST['userBearbeiten'])){
     // Wenn auf der Seite Bearbeiten Artikel gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
     if (isset($_POST['a_button_ArtikelBearbeiten'])){
 
-        $a_art_name = $_POST["a_art_name"];
-        $a_kat_bez =  $_POST["a_kat_bez"];
-        $a_art_preis = $_POST["a_art_preis"];
-        $a_sale_status = $_POST["a_sale_status"];
-        $a_sale_preis = $_POST["a_sale_preis"];
-        $a_art_groesse = $_POST["a_art_groesse"];
-        $a_art_ort = $_POST["a_art_ort"];
-        $a_art_farbe = $_POST["a_art_farbe"];
-        $a_art_pflege = $_POST["a_art_pflege"];
-        $a_art_text = $_POST["a_art_text"];
-        $a_art_bild = $_POST["a_art_bild"];
-        $a_art_stueck = $_POST["a_art_stueck"];
+        $a_art_name = htmlspecialchars($_POST["a_art_name"], ENT_QUOTES, 'UTF-8');
+        $a_kat_bez =  htmlspecialchars($_POST["a_kat_bez"], ENT_QUOTES, 'UTF-8');
+        $a_art_preis = htmlspecialchars($_POST["a_art_preis"], ENT_QUOTES, 'UTF-8');
+        $a_sale_status = htmlspecialchars($_POST["a_sale_status"], ENT_QUOTES, 'UTF-8');
+        $a_sale_preis = htmlspecialchars($_POST["a_sale_preis"], ENT_QUOTES, 'UTF-8');
+        $a_art_groesse = htmlspecialchars($_POST["a_art_groesse"], ENT_QUOTES, 'UTF-8');
+        $a_art_ort = htmlspecialchars($_POST["a_art_ort"], ENT_QUOTES, 'UTF-8');
+        $a_art_farbe = htmlspecialchars($_POST["a_art_farbe"], ENT_QUOTES, 'UTF-8');
+        $a_art_pflege = htmlspecialchars($_POST["a_art_pflege"], ENT_QUOTES, 'UTF-8');
+        $a_art_text = htmlspecialchars($_POST["a_art_text"], ENT_QUOTES, 'UTF-8');
+        $a_art_bild = htmlspecialchars($_POST["a_art_bild"], ENT_QUOTES, 'UTF-8');
+        $a_art_stueck = htmlspecialchars($_POST["a_art_stueck"], ENT_QUOTES, 'UTF-8');
     
         
         //Speichern der Daten von Bearbeiten eines Artikels im admin bereich
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $asqlbearbeiten = "UPDATE artikel SET art_name=?, kat_bez=?, art_preis=?, sale_status=?, sale_preis=?, art_ort=?, art_farbe=?, art_pflege=?, art_text=?, art_bild=?, art_groesse=?, art_stueckzahl=? WHERE art_id=?";
@@ -292,7 +292,7 @@ if (isset($_POST['userBearbeiten'])){
     $asqlBestellungenListe = "SELECT * FROM bestellung WHERE n_id =". $_SESSION['adminnutzerwahl'];
     }
 
-    //Nutzbarnachen der bestellid
+    //Nutzbarmachen der bestellid
     if(isset($_GET['abestellid'])){
         $_SESSION['abestellid'] = $_GET['abestellid'];
     }
