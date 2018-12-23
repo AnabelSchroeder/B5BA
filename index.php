@@ -1,5 +1,10 @@
 <?php
 session_start();
+//muss mit dem einloggen verbunden sein
+if(!isset($_SESSION['csrf_token'])){
+$_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
+}
+
 echo"<!DOCTYPE html>";
 echo"<head>";
 echo"<meta charset=\"utf-8\" />";

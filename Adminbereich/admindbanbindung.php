@@ -18,6 +18,10 @@ if ($a_eingeloggt == true){
 // Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
 if (isset($_POST['meinKontoBearbeiten'])){
 
+    if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
     $a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
     $a_vname = htmlspecialchars($_POST["a_vorname"], ENT_QUOTES, 'UTF-8');
     $a_strasse = htmlspecialchars($_POST["a_strasse"], ENT_QUOTES, 'UTF-8');
@@ -46,6 +50,7 @@ if (isset($_POST['meinKontoBearbeiten'])){
     
    
     $_POST['meinKontoBearbeiten'] =  null;
+    }
     
     }
 
@@ -56,6 +61,11 @@ if (isset($_POST['meinKontoBearbeiten'])){
 
 // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
 if (isset($_POST['userNeuAnlegen'])){
+
+    if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
 
 $a_rechte = htmlspecialchars($_POST["a_rechte"], ENT_QUOTES, 'UTF-8');
 $a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
@@ -88,10 +98,16 @@ $conn = null;
 $_POST['userNeuAnlegen'] =  null;
 
 }
+}
 
 // Wenn auf der Seite Bearbeiten user gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
 if (isset($_POST['userBearbeiten'])){
 
+
+    if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
     $a_rechte = htmlspecialchars($_POST["a_rechte"], ENT_QUOTES, 'UTF-8');
     $a_nname =  htmlspecialchars($_POST["a_nachname"], ENT_QUOTES, 'UTF-8');
     $a_vname = htmlspecialchars($_POST["a_vorname"], ENT_QUOTES, 'UTF-8');
@@ -124,7 +140,7 @@ if (isset($_POST['userBearbeiten'])){
     
     }
 
-
+}
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
     
@@ -153,13 +169,18 @@ if (isset($_POST['userBearbeiten'])){
 
     //user Datensatz in Admin bereich löschen 
     if (isset($_POST ['nutzerLoeschen'])){
-        
+
+
+        if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
         $statement = $conn->prepare("DELETE FROM nutzer WHERE n_id = :id");
         $statement->execute(array('id'=>$_SESSION['adminnutzerwahl']));
         
         $_GET['nutzerLoeschen'] = null;
         }
-
+    }
 
     //Anzahl der Bestellungen für den einzelenen Nutzer, für die ausgabe auf der Nutzeransichtsseite
     if (isset($_GET['adminnutzerwahl'])||isset($_SESSION['adminnutzerwahl'])){
@@ -183,6 +204,11 @@ if (isset($_POST['userBearbeiten'])){
 
     // Wenn auf der Seite Neu anlegen der submit button gedrückt wird, werden die Farmular inhalte in die datenbank geschickt
     if (isset($_POST['a_button_ArtikelNeuAnlegen'])){
+
+        if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+            die("Ungültiger Token");
+          }
+        else{
 
     $a_art_name = htmlspecialchars($_POST["a_art_name"], ENT_QUOTES, 'UTF-8');
     $a_kat_bez =  htmlspecialchars($_POST["a_kat_bez"], ENT_QUOTES, 'UTF-8');
@@ -214,6 +240,7 @@ if (isset($_POST['userBearbeiten'])){
         echo $asql . "<br>" . $e->getMessage();
         }
     
+    }    
    // $conn = null; Verursacht Bug im aufruf der Artikelliste nach neuanlegen von Artikel
     $_POST['a_button_ArtikelNeuAnlegen'] =  null;
     
@@ -221,6 +248,11 @@ if (isset($_POST['userBearbeiten'])){
 
     // Wenn auf der Seite Bearbeiten Artikel gespeichert wird werden die daten in der Datenbank geseichert/überschrieben
     if (isset($_POST['a_button_ArtikelBearbeiten'])){
+
+        if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+            die("Ungültiger Token");
+          }
+        else{
 
         $a_art_name = htmlspecialchars($_POST["a_art_name"], ENT_QUOTES, 'UTF-8');
         $a_kat_bez =  htmlspecialchars($_POST["a_kat_bez"], ENT_QUOTES, 'UTF-8');
@@ -257,6 +289,8 @@ if (isset($_POST['userBearbeiten'])){
         $_POST['a_button_ArtikelBearbeiten'] =  null;
         
         }
+    }
+
 
     //Artikel bearbeiten, Füllen der Value in den Fomularfeldern beim bearbeiten
     if (isset($_SESSION['a_gewaehlterArtikel'])){
@@ -276,12 +310,18 @@ if (isset($_POST['userBearbeiten'])){
 
    //Artikel Datensatz in Admin bereich löschen 
    if (isset($_POST ['artikelLoeschen'])){
+
+    if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
         
     $statement2 = $conn->prepare("DELETE FROM artikel WHERE art_id = :id");
     $statement2->execute(array('id'=>$_SESSION['a_gewaehlterArtikel']));
     
     $_GET['artikelLoeschen'] = null;
     }
+   }
 
     /*************************************************************************************** */
     //Bestellung

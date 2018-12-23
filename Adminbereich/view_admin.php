@@ -215,10 +215,12 @@
                                 </form>
 
                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
+                                <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                                 <input type=\"submit\"  class=\"a-button\" value=\"Löschen\">
                                 </form>
 
                                 <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
+                                <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                                 <input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\">
                                 </form>
                                 </div>
@@ -358,6 +360,7 @@
                         <div  class=\"admin-box-texfeld-rechts\">
 
                         <div class=\"button-box\">
+                        <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                         <input type=\"submit\" name=\"meinKontoBearbeiten\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >
                         </form>
 
@@ -501,6 +504,7 @@
                         <div  class=\"admin-box-texfeld-rechts\">
 
                         <div class=\"button-box\">
+                        <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                         <input type=\"submit\" name=\"userNeuAnlegen\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >
                         </form>
 
@@ -664,6 +668,7 @@
                         <div  class=\"admin-box-texfeld-rechts\">
 
                         <div class=\"button-box\">
+                        <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                         <input type=\"submit\" name=\"userBearbeiten\" id=\"a-userNeuAnlegen\" value=\"Speichern\" class=\"a-button\" >
                         </form>
 
@@ -818,6 +823,7 @@
                                 </form>
 
                                 <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\">
+                                <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">    
                                 <input type=\"submit\" name=\"nutzerLoeschen\" id=\"a-userloeschen\" class=\"a-button\" value=\"Löschen\">
                                 </form>
 
@@ -1001,6 +1007,7 @@
                         <div  class=\"admin-box-texfeld-rechts\">
 
                         <div class=\"button-box\">
+                        <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                         <input type=\"submit\" name=\"a_button_ArtikelNeuAnlegen\"  value=\"Speichern\" class=\"a-button\" >
                         </form>
 
@@ -1218,6 +1225,7 @@
                                 </form>
 
                                 <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\">
+                                <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">    
                                 <input type=\"submit\" name=\"artikelLoeschen\"  class=\"a-button\" value=\"Löschen\">
                                 </form>
 
@@ -1535,6 +1543,7 @@
                         <div  class=\"admin-box-texfeld-rechts\">
 
                         <div class=\"button-box\">
+                        <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                         <input type=\"submit\" name=\"a_button_ArtikelBearbeiten\"  value=\"Speichern\" class=\"a-button\" >
                         </form>
 
