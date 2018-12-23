@@ -236,7 +236,7 @@
         public static function af_mein_konto_bearbeiten() {
             global $conn, $a_sqlEingeloggterUser;
             
-            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aBearbeitenPruefe(a_user_bearbeiten)\" >";
+            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aBearbeitenPruefe()\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 foreach ($conn->query($a_sqlEingeloggterUser) as $row) {
@@ -984,7 +984,7 @@
                         <p>Bildname (z.B. bild.jpg)</p>
                         </div>
                         <div  class=\"admin-box-texfeld-rechts\">
-                        <input type=\"text\" name=\"a_art_bild\"> 
+                        <input type=\"text\" name=\"a_art_bild\">
                         </div>
                     </div>
 
@@ -1742,6 +1742,23 @@
 
                         }                
 
+        /**************************************************************************************************************** */
+        //Bild upload seite
+        /**************************************************************************************************************** */
+        //Seiteninhalt der rechten Box für den Seiteninhalt
+        public static function af_bilderupload() {
+
+            print"
+            <div class=\"upload-box\">
+            <form action=\"http://localhost/b5ba/index.php?Seiten_ID=bilderupload\" method=\"post\" enctype=\"multipart/form-data\">
+                Bild auswählen zum upload:
+                <input  type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
+                <input class=\"a-button\" type=\"submit\" value=\"Bild hochladen\" name=\"submit\">
+            </form><br>
+            ";
+                        uploader::uploaderfunktion();
+            echo"</div>";
+        }
     //Klammer für die klasse 
     }
 

@@ -102,7 +102,7 @@ a.button {
 
     margin: 10px;
     padding: 10px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     background-color: var(--primaer-farbe);
 
@@ -153,4 +153,8 @@ a.button {
 
 .admin-box-liste-bitemgesamtpreis{
     margin-right: 30px;
+}
+
+.upload-box{
+    margin: 30px;
 }

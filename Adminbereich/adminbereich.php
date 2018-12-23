@@ -2,6 +2,7 @@
 
 include ("admindbanbindung.php");
 include ("view_admin.php");
+include ("Komponenten/Fileuploder.php");
 
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
@@ -31,6 +32,7 @@ $admin = true;
                 //Artikelbereich
                 echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" class=\"admin-nav-ueberschrift\">Artikel</a><br>";
                 echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-neuanlegen\" class=\"admin-nav-listenpunkt\">Neu anlegen</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=bilderupload\" class=\"admin-nav-listenpunkt\">Bilder upload</a><br>";
             }
 
         echo"</div>";
@@ -40,7 +42,7 @@ $admin = true;
 //Darstellung der Rechten Box im Adminbereich, hier wird automatisch Befüllt aus der boxrechtsBefüllen funktion. 
 /********************************************************************************************/
 
-        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten"){
+        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten" ||$seitenid == "bilderupload"){
         global $adminBoxRechtsOben, $adminBoxRechtsUnten; 
         //aufruf der Funktion damit der Code ausgeführt werden kann   
         boxRechtsBefuellen();    
@@ -248,6 +250,20 @@ $admin = true;
                         $adminBoxRechtsOben = "Bestellung";
                         function boxRechtsUntenBefuellen(){
                             a_view::af_admin_bestellung();
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+                //Seite Bestellung-user
+                /****************************************************************** */ 
+                case "bilderupload":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Bilder Upload";
+                        function boxRechtsUntenBefuellen(){
+                            a_view::af_bilderupload();
                         }
                     }
                 else {
