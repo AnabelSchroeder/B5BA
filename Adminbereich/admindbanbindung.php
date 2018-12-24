@@ -29,7 +29,9 @@ if (isset($_POST['meinKontoBearbeiten'])){
     $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
     $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
     $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
-    $a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+    $a_passvorhash = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+    $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
+    $a_zahlart = htmlspecialchars($_POST["a_zahlart"], ENT_QUOTES, 'UTF-8');
    
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
@@ -37,9 +39,9 @@ if (isset($_POST['meinKontoBearbeiten'])){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=? WHERE n_id=?";
+        $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_zahlart=? WHERE n_id=?";
         $stmt = $conn->prepare($absql);
-        $stmt->execute([ $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort,  $a_eingeloggterUser]);
+        $stmt->execute([ $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_zahlart,  $a_eingeloggterUser]);
         
         //echo "Datensatz neu hinterlegt";
         }
@@ -75,16 +77,18 @@ $a_ort = htmlspecialchars($_POST["a_ort"], ENT_QUOTES, 'UTF-8');
 $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
 $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
 $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
-$a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+$a_passvorhash = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+$a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
 $a_sperrung = htmlspecialchars($_POST["a_sperrung"], ENT_QUOTES, 'UTF-8');
+$a_zahlart = htmlspecialchars($_POST["a_zahlart"], ENT_QUOTES, 'UTF-8');
 
 //Speichern der Daten von Neu anlegen eines Users im admin bereich
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $asql = "INSERT INTO nutzer (n_admin, n_nname, n_vname, n_strasse, n_ort, n_plz, n_mail, n_login, n_passwort, n_sperre)
-    VALUES ('$a_rechte', '$a_nname', '$a_vname', '$a_strasse', '$a_ort', '$a_plz', '$a_email', '$a_loginname', '$a_passwort', '$a_sperrung' )";
+    $asql = "INSERT INTO nutzer (n_admin, n_nname, n_vname, n_strasse, n_ort, n_plz, n_mail, n_login, n_passwort, n_sperre, n_zahlart)
+    VALUES ('$a_rechte', '$a_nname', '$a_vname', '$a_strasse', '$a_ort', '$a_plz', '$a_email', '$a_loginname', '$a_passwort', '$a_sperrung', '$a_zahlart' )";
     // use exec() because no results are returned
     $conn->exec($asql);
     //echo "New record created successfully";
@@ -116,17 +120,19 @@ if (isset($_POST['userBearbeiten'])){
     $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
     $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
     $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
-    $a_passwort = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+    $a_passvorhash = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
+    $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
     $a_sperrung = htmlspecialchars($_POST["a_sperrung"], ENT_QUOTES, 'UTF-8');
+    $a_zahlart = htmlspecialchars($_POST["a_zahlart"], ENT_QUOTES, 'UTF-8');
     
     //Speichern der Daten von Neu anlegen eines Users im admin bereich
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_sperre=? WHERE n_id=?";
+        $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_sperre=?, n_zahlart=?  WHERE n_id=?";
         $stmt = $conn->prepare($absql);
-        $stmt->execute([$a_rechte, $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_sperrung, $_SESSION['adminnutzerwahl']]);
+        $stmt->execute([$a_rechte, $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_sperrung, $a_zahlart, $_SESSION['adminnutzerwahl']]);
         
         //echo "Datensatz neu hinterlegt";
         }

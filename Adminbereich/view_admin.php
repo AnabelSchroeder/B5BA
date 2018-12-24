@@ -141,9 +141,18 @@
 
                         </div>";
 
-                        //dritter Block Nutzerart, email, Nutzername 
+                        //dritter Block Bezahlart, Nutzerart, email, Nutzername 
                         /*************************************************************** */
                         print "<div  class=\"admin-box-linie\">
+
+                            <div  class=\"admin-box-textfelder\">
+                                <div  class=\"admin-box-texfeld-links\">
+                                Zahlart
+                                </div>
+                                <div  class=\"admin-box-texfeld-rechts\">
+                                ".$row['n_zahlart']."
+                                </div>
+                            </div>
 
                             <div  class=\"admin-box-textfelder\">
                                 <div  class=\"admin-box-texfeld-links\">
@@ -291,9 +300,60 @@
 
                 </div>";
 
-                //zweiter block Rechte, Login name, Passwort, Email
+                //zweiter block zahlart, Rechte, Login name, Passwort, Email
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Zahlart</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    switch ($row['n_zahlart']){
+                        case "":
+                            print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\">Vorkasse</option>
+                                <option value=\"Rechnung\">Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;
+                        case "Vorkasse":
+                            print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" selected>Vorkasse</option>
+                                <option value=\"Rechnung\">Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;
+                        case "Rechnung":
+                        print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" selected>Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;   
+                        case "Paypal":
+                                print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" >Rechnung</option>
+                                <option value=\"Paypal\" selected>Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;  
+                        case "Lastschrift":
+                                print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" >Rechnung</option>
+                                <option value=\"Paypal\" >Paypal</option>
+                                <option value=\"Lastschrift\" selected>Lastschrift</option>
+                            </select>";
+                            break;    
+                    }
+
+                    print"</div>
+                </div>
 
                 <div  class=\"admin-box-textfelder\">
                     <div  class=\"admin-box-texfeld-links\">
@@ -301,8 +361,6 @@
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
                     <p>Keine Änderungsrechte</p>
-                    </div>
-                    <!--div zuviel? -->
                     </div>
                 </div>
 
@@ -433,9 +491,23 @@
 
                 </div>";
 
-                //zweiter block Rechte, Login name, Passwort, Email
+                //zweiter block Zahlart  Rechte, Login name, Passwort, Email
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Zahlart
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" >Rechnung</option>
+                                <option value=\"Paypal\" >Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                    </select>
+                    </div>
+                </div>
 
                 <div  class=\"admin-box-textfelder\">
                     <div  class=\"admin-box-texfeld-links\">
@@ -579,9 +651,60 @@
 
                 </div>";
 
-                //zweiter block Rechte, Login name, Passwort, Email
+                //zweiter block Zahlart, Rechte, Login name, Passwort, Email
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
+
+                <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    <p>Zahlart</p>
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    switch ($row['n_zahlart']){
+                        case "":
+                            print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\">Vorkasse</option>
+                                <option value=\"Rechnung\">Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;
+                        case "Vorkasse":
+                            print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" selected>Vorkasse</option>
+                                <option value=\"Rechnung\">Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;
+                        case "Rechnung":
+                        print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" selected>Rechnung</option>
+                                <option value=\"Paypal\">Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;   
+                        case "Paypal":
+                                print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" >Rechnung</option>
+                                <option value=\"Paypal\" selected>Paypal</option>
+                                <option value=\"Lastschrift\">Lastschrift</option>
+                            </select>";
+                            break;  
+                        case "Lastschrift":
+                                print"<select name=\"a_zahlart\">
+                                <option value=\"Vorkasse\" >Vorkasse</option>
+                                <option value=\"Rechnung\" >Rechnung</option>
+                                <option value=\"Paypal\" >Paypal</option>
+                                <option value=\"Lastschrift\" selected>Lastschrift</option>
+                            </select>";
+                            break;    
+                    }
+
+                    print"</div>
+                </div>
 
                 <div  class=\"admin-box-textfelder\">
                     <div  class=\"admin-box-texfeld-links\">
@@ -752,6 +875,15 @@
                         //dritter Block Nutzerart, email, Nutzername
                         /*************************************************************** */
                         print "<div  class=\"admin-box-linie\">
+
+                            <div  class=\"admin-box-textfelder\">
+                                <div  class=\"admin-box-texfeld-links\">
+                                Zahlart
+                                </div>
+                                <div  class=\"admin-box-texfeld-rechts\">
+                                ".$row['n_zahlart']."
+                                </div>
+                            </div>
 
                             <div  class=\"admin-box-textfelder\">
                                 <div  class=\"admin-box-texfeld-links\">
