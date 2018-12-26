@@ -10,7 +10,7 @@ $dbname = "ba_webshop";
 
 //muss mit den anderen abgestimmt werden was im Login vorgang benutz werdenals mechanismen und variablen.
 $a_eingeloggt = true;
-$a_eingeloggterUser = 2;
+$a_eingeloggterUser = 17;
 if ($a_eingeloggt == true){
     $a_sqlEingeloggterUser = "SELECT * FROM nutzer WHERE n_id= ". $a_eingeloggterUser;
 }
@@ -29,8 +29,6 @@ if (isset($_POST['meinKontoBearbeiten'])){
     $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
     $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
     $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
-    $a_passvorhash = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
-    $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
     $a_zahlart = htmlspecialchars($_POST["a_zahlart"], ENT_QUOTES, 'UTF-8');
    
     
@@ -39,9 +37,9 @@ if (isset($_POST['meinKontoBearbeiten'])){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_zahlart=? WHERE n_id=?";
+        $absql = "UPDATE nutzer SET n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_zahlart=? WHERE n_id=?";
         $stmt = $conn->prepare($absql);
-        $stmt->execute([ $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_zahlart,  $a_eingeloggterUser]);
+        $stmt->execute([ $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_zahlart,  $a_eingeloggterUser]);
         
         //echo "Datensatz neu hinterlegt";
         }
@@ -55,6 +53,54 @@ if (isset($_POST['meinKontoBearbeiten'])){
     }
     
     }
+
+//************************************************************************************************************** */    
+//Passwort speichern nach eingabe eines neuen passwortes
+if (isset($_POST['meinKontoPass'])){
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
+    $passmassage = "";
+
+
+
+    //Überprüfen ob token stimmt
+    if($_POST['csrf'] !== $_SESSION['csrf_token']) {
+        die("Ungültiger Token");
+      }
+    else{
+        //Altespasswort aus formular holen
+        $a_altespass = htmlspecialchars($_POST["a_altesPasswort"], ENT_QUOTES, 'UTF-8');
+        if ($a_eingeloggt == true){
+            //Altes Paswort aus Datenbank holen
+            $sqlhashAltesPass = "SELECT n_passwort FROM nutzer WHERE n_id= ". $a_eingeloggterUser;
+
+            foreach ($conn->query($sqlhashAltesPass) as $row) {
+                $hashAltesPass = $row['n_passwort'];    
+                echo $hashAltesPass;
+            }
+        } 
+        if(isset($a_altespass)){
+            if(password_verify($a_altespass, $hashAltesPass) ) {
+                //Neues Passwort vorbereiten zum Speichern in die Datenbank
+                $a_passvorhash = htmlspecialchars($_POST["a_neuesPasswort"], ENT_QUOTES, 'UTF-8');
+                $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
+
+                //Speichern in die Datenbank
+
+                //Massages
+                $passmassage = "Passwort gespeichert";
+                echo $passmassage;
+            }
+            else{
+                $passmassage = "Passwort falsch!"; 
+                echo $passmassage;
+            }
+        }   
+    }
+
+}
+
+
+        
 
 
 /******************************************************************************* */
@@ -120,8 +166,6 @@ if (isset($_POST['userBearbeiten'])){
     $a_plz = htmlspecialchars($_POST["a_plz"], ENT_QUOTES, 'UTF-8');
     $a_email = htmlspecialchars($_POST["a_email"], ENT_QUOTES, 'UTF-8');
     $a_loginname = htmlspecialchars($_POST["a_loginname"], ENT_QUOTES, 'UTF-8');
-    $a_passvorhash = htmlspecialchars($_POST["a_passwort"], ENT_QUOTES, 'UTF-8');
-    $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
     $a_sperrung = htmlspecialchars($_POST["a_sperrung"], ENT_QUOTES, 'UTF-8');
     $a_zahlart = htmlspecialchars($_POST["a_zahlart"], ENT_QUOTES, 'UTF-8');
     
@@ -130,9 +174,9 @@ if (isset($_POST['userBearbeiten'])){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_passwort=?, n_sperre=?, n_zahlart=?  WHERE n_id=?";
+        $absql = "UPDATE nutzer SET n_admin=?, n_nname=?, n_vname=?, n_strasse=?, n_ort=?, n_plz=?, n_mail=?, n_login=?, n_sperre=?, n_zahlart=?  WHERE n_id=?";
         $stmt = $conn->prepare($absql);
-        $stmt->execute([$a_rechte, $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_passwort, $a_sperrung, $a_zahlart, $_SESSION['adminnutzerwahl']]);
+        $stmt->execute([$a_rechte, $a_nname, $a_vname, $a_strasse, $a_ort, $a_plz, $a_email, $a_loginname, $a_sperrung, $a_zahlart, $_SESSION['adminnutzerwahl']]);
         
         //echo "Datensatz neu hinterlegt";
         }

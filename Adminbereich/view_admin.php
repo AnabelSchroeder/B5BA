@@ -8,7 +8,7 @@
         public static function af_admin_user_kundenliste() {
             
                 
-                
+                //View des Elementes ist in der Komponente
                 a_pagination::paginationF();
               
                 
@@ -202,6 +202,9 @@
                                 <input type=\"submit\"  class=\"a-button\" value=\"Bearbeiten\">
                                 </form>
 
+                                <form action=\"http://localhost/b5ba/index.php?Seiten_ID=passwortBearbeiten\" method=\"POST\">
+                                    <input type=\"submit\"   value=\"Passwort bearb.\" class=\"a-button\"> 
+
                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
                                 <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
                                 <input type=\"submit\"  class=\"a-button\" value=\"Löschen\">
@@ -226,7 +229,7 @@
         public static function af_mein_konto_bearbeiten() {
             global $conn, $a_sqlEingeloggterUser;
             
-            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aBearbeitenPruefe()\" >";
+            print "<form name=\"meinKontoBearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\" onsubmit=\"return aBearbKundenkontoPruefe()\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 foreach ($conn->query($a_sqlEingeloggterUser) as $row) {
@@ -279,7 +282,7 @@
 
                 </div>";
 
-                //zweiter block zahlart, Rechte, Login name, Passwort, Email
+                //zweiter block zahlart, Rechte, Login name,  Email
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
 
@@ -352,15 +355,7 @@
                     </div>
                 </div>
 
-                <div  class=\"admin-box-textfelder\">
-                    <div  class=\"admin-box-texfeld-links\">
-                    Passwort
-                    </div>
-                    <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a_passwort\" value=\"".$row['n_passwort']."\">
-                    </div>
-                </div>
-
+               
                 <div  class=\"admin-box-textfelder\">
                     <div  class=\"admin-box-texfeld-links\">
                     E-mail
@@ -413,12 +408,69 @@
 
 
         /**************************************************************************************************************** */
+        //mein-Konto- Passwort bearbeiten
+        /**************************************************************************************************************** */
+        public static function a_passbearbeitenMeinKonto() {
+            global $conn, $a_sqlEingeloggterUser, $passmassage ;
+                
+            print"<form name=\"a_userpasswort\" action=\"http://localhost/b5ba/index.php?Seiten_ID=passwortBearbeiten\" method=\"POST\" onsubmit=\"return apasswortPruefe()\">
+
+                    <div  class=\"admin-box-textfelder\">
+
+                    <div  class=\"admin-box-texfeld-links\">
+                    Altes Passwort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_altesPasswort\" placeholder=\"altes Passwort\">
+                    </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    Neues Passwort
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">
+                    <input type=\"text\" name=\"a_neuesPasswort\" placeholder=\"neues Passwort\">
+                    </div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                    <div  class=\"admin-box-texfeld-links\">
+                    </div>
+                    <div  class=\"admin-box-texfeld-rechts\">";
+                    if (isset($_POST['meinKontoPass'])){
+                        echo $passmassage;
+                    }
+                    print"</div>
+                    </div>
+
+                    <div  class=\"admin-box-textfelder\">
+                        <div  class=\"admin-box-texfeld-links\">
+                        </div>
+                        <div  class=\"admin-box-texfeld-rechts\">
+                    <div class=\"button-box\">
+                    <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
+                        <input type=\"submit\" name=\"meinKontoPass\"  value=\"Speichern\" class=\"a-button\" >
+                        </form>
+
+                        <form action=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" method=\"POST\">
+                        <input type=\"submit\"   value=\"Abbrechen\" class=\"a-button\">
+                        </form>
+                    </div>  
+                    </div>
+                    </div>
+                      
+                </div>";
+        }
+
+
+        /**************************************************************************************************************** */
         //admin-user-neuanlegen
         /**************************************************************************************************************** */
         //Seite user neu anlegen
         //aNeuPruefe überprüft ob sachen in die felder eingegeben worden sind. Funktion ist in der JS Datei
         public static function af_admin_user_neuanlegen() {
-            print "<form name=\"a_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_neu_anlegen)\" >";
+            print "<form name=\"a_neu_anlegen\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe()\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 print "<div  class=\"admin-box-linie\">
@@ -577,7 +629,7 @@
         public static function af_admin_user_bearbeiten() {
             global $conn, $sqladminnutzervaluebefuellen;
             
-            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aNeuPruefe(a_user_bearbeiten)\" >";
+            print "<form name=\"a_user_bearbeiten\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" method=\"POST\" onsubmit=\"return aBearbeitenPruefe()\" >";
                 //erster block Name, Adresse
                 /*************************************************************** */
                 foreach ($conn->query($sqladminnutzervaluebefuellen) as $row) {

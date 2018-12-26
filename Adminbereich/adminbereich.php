@@ -5,6 +5,7 @@ include ("view_admin.php");
 include ("Komponenten/Fileuploder.php");
 include ("Komponenten/pagination.php");
 
+
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
 
@@ -43,7 +44,7 @@ $admin = true;
 //Darstellung der Rechten Box im Adminbereich, hier wird automatisch Befüllt aus der boxrechtsBefüllen funktion. 
 /********************************************************************************************/
 
-        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten" ||$seitenid == "bilderupload"){
+        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten" ||$seitenid == "bilderupload" ||$seitenid == "passwortBearbeiten"){
         global $adminBoxRechtsOben, $adminBoxRechtsUnten; 
         //aufruf der Funktion damit der Code ausgeführt werden kann   
         boxRechtsBefuellen();    
@@ -94,6 +95,16 @@ $admin = true;
                         
                     }
                     break;    
+
+                //Seite Mein Konto passwort bearbeiten
+                /*************************************************************** */
+                case "passwortBearbeiten":
+                    $adminBoxRechtsOben = "Neues Passwort";
+                    function boxRechtsUntenBefuellen(){
+                        a_view::a_passbearbeitenMeinKonto();
+                    
+                }
+                break;  
 
 
                 //Seite User Kundenliste   
@@ -258,7 +269,7 @@ $admin = true;
                 }
                 break;
 
-                //Seite Bestellung-user
+                //Seite Bilder-Upload
                 /****************************************************************** */ 
                 case "bilderupload":
                     if($admin == true){
