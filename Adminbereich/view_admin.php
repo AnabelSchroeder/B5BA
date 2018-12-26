@@ -769,15 +769,6 @@
 
                 <div  class=\"admin-box-textfelder\">
                     <div  class=\"admin-box-texfeld-links\">
-                    Passwort
-                    </div>
-                    <div  class=\"admin-box-texfeld-rechts\">
-                    <input type=\"text\" name=\"a_passwort\" value=\"".$row['n_passwort']."\">
-                    </div>
-                </div>
-
-                <div  class=\"admin-box-textfelder\">
-                    <div  class=\"admin-box-texfeld-links\">
                     E-mail
                     </div>
                     <div  class=\"admin-box-texfeld-rechts\">
