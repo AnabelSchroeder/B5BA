@@ -241,25 +241,43 @@ function L_shopPagination() {
 //----------------------------------------------------------------------------------------//
 
 
-/* UNION nachsehen
+/* UNION nachsehen */
+
+function Filtersuche(){
+
+    $sql = NULL;
 
 if (isset ($_POST["L_FilterFarbeAuswahl"])) {
     $L_farbauswahl = $_POST["L_FilterFarbeAuswahl"];
-    $L_farbsql = "art_farbe=$farbauswahl";
+    $L_farbsql = "SELECT art_id FROM artikel WHERE art_farbe=$farbauswahl";
+
+    $sql += "$L_farbsql";
 } else {
     $L_farbsql = NULL;
 }
 
 if (isset ($_POST["L_FilterKategorieAuswahl"])) {
     $L_katauswahl = $_POST["L_FilterKategorieAuswahl"];
-    $L_katsql = "kat_bez=$L_katauswahl";
+    $L_katsql = "SELECT art_id FROM artikel WHERE kat_bez=$L_katauswahl";
+
+    if ($sql == NULL){
+        $sql += "$L_katsql";
+    }else {
+        $sql += " UNION $L_katsql";
+    }
 }else {
     $L_katsql = NULL;
 }
 
 if (isset ($_POST["L_FilterPflegeAuswahl"])) {
     $L_pflegeauswahl = $_POST["L_FilterPflegeAuswahl"];
-    $L_pflegesql = "art_pflege=$L_pflegeauswahl";
+    $L_pflegesql = "SELECT art_id FROM artikel WHERE art_pflege=$L_pflegeauswahl";
+
+    if ($sql == NULL){
+        $sql += "$L_pflegesql";
+    }else {
+        $sql += " UNION $L_pflegesql";
+    }
 }else {
     $L_pflegesql = NULL;
 }
@@ -267,26 +285,48 @@ if (isset ($_POST["L_FilterPflegeAuswahl"])) {
 
 if (isset ($_POST["L_FilterStandortAuswahl"])) {
     $L_standortauswahl = $_POST["L_FilterStandortAuswahl"];
-    $L_standortsql = "art_ort=$L_standortauswahl";
+    $L_standortsql = "SELECT art_id FROM artikel WHERE art_ort=$L_standortauswahl";
+
+    if ($sql == NULL){
+        $sql += "$L_standortsql";
+    }else {
+        $sql += " UNION $L_standortsql";
+    }
 }else {
     $L_standortsql = NULL;
 }
 
 if (isset ($_POST["L_FilterPreisAuswahl"])) {
     $L_preisauswahl = $_POST["L_FilterPreisAuswahl"];
-    
 
+    $L_preissql = "SELECT art_id FROM artikel WHERE sale_status=0 AND art_preis=$L_preisauswahl 
+                    UNION 
+                    SELECT art_id FROM artikel WHERE sale_status=1 AND sale_preis=$L_preisauswahl";
+
+    
+    if ($sql == NULL){
+        $sql += "$L_preissql";
+    }else {
+        $sql += " UNION $L_preissql";
+    }
 }else {
     $L_preissql = NULL;
 }
 
 if (isset ($_POST["L_FilterHoeheAuswahl"])) {
     $L_hoeheauswahl = $_POST["L_FilterHoeheAuswahl"];
+    $L_hoehesql = "SELECT art_id FROM artikel WHERE art_groesse=$L_hoeheauswahl";
+
+    if ($sql == NULL){
+        $sql += "$L_hoehesql";
+    }else {
+        $sql += " UNION $L_hoehesql";
+    }
 }else {
     $L_hoehesql = NULL;
 }
- 
-$sql = "SELECT DISTINCT art_id FROM artikel WHERE $L_farbsql, $L_katsql, ";
+
+}
 /**/
 //----------------------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------//
