@@ -158,3 +158,8 @@ a.button {
 .upload-box{
     margin: 30px;
 }
+
+.paginationSatz{
+    margin: 20px;
+    text-align: center;
+}

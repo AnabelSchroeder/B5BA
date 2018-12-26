@@ -3,6 +3,7 @@
 include ("admindbanbindung.php");
 include ("view_admin.php");
 include ("Komponenten/Fileuploder.php");
+include ("Komponenten/pagination.php");
 
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;

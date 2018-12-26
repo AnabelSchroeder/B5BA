@@ -7,34 +7,13 @@
         //Seiteninhalt der rechten Box von der Kundenliste
         public static function af_admin_user_kundenliste() {
             
-                global $conn, $sqlkundenliste ;
-                foreach ($conn->query($sqlkundenliste) as $row) {
-                print"<div  class=\"admin-box-linie\"> 
-                <div  class=\"admin-box-liste\"> 
-
                 
-                    <div  class=\"admin-box-liste-kdnr\"> 
-                    Kd-Nr ".$row['n_id']."
-                    </div>
-                    <div  class=\"admin-box-liste-name\"> 
-                    ".$row['n_vname']." ".$row['n_nname']."
-                    </div>
-                    <div  class=\"admin-box-liste-gesperrt\">";
-
-                    if ($row['n_sperre'] == 1){
-                       print "gesperrt";
-                    } 
-                   print" </div>
-                    <div  class=\"admin-box-liste-ansehen\">
-                    <form method=\"POST\" action=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-anzeigen&adminnutzerwahl=".$row['n_id']."\">
-                        <input type=\"submit\"  class=\"a-button\" value=\"ansehen\">
-                        </form>
-                    </div>
                 
-
-                </div>
-            </div>";
-            }
+                a_pagination::paginationF();
+              
+                
+        
+            
         }
 
         /**************************************************************************************************************** */
