@@ -75,7 +75,6 @@ if (isset($_POST['meinKontoPass'])){
 
             foreach ($conn->query($sqlhashAltesPass) as $row) {
                 $hashAltesPass = $row['n_passwort'];    
-                echo $hashAltesPass;
             }
         } 
         if(isset($a_altespass)){
@@ -85,14 +84,15 @@ if (isset($_POST['meinKontoPass'])){
                 $a_passwort = password_hash($a_passvorhash, PASSWORD_DEFAULT);
 
                 //Speichern in die Datenbank
+                $passsql = "UPDATE nutzer SET n_passwort=? WHERE n_id=?";
+                $stmtpass = $conn->prepare($passsql);
+                $stmtpass->execute([ $a_passwort,  $a_eingeloggterUser]);
 
                 //Massages
                 $passmassage = "Passwort gespeichert";
-                echo $passmassage;
             }
             else{
                 $passmassage = "Passwort falsch!"; 
-                echo $passmassage;
             }
         }   
     }
