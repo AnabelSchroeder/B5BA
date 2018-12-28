@@ -19,7 +19,7 @@ $conn = new PDO("mysql:host= $servername;dbname= $dbname",$username, $passwort);
 /*function L_shopShowArticle() {
     foreach ($conn->query($L_suche) as $L_erg) {
         echo "<div class=\"L_shopArtContainer\">";       
-        echo "<img  src=\"assets/img/" + $L_erg['art_bild'] + "\" class=\"L_shopArtBild\">";
+        echo "<img  src=\"assets/img/" . $L_erg['art_bild'] . "\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
             echo $L_erg['art_name'];
         echo "</p>";
@@ -66,26 +66,28 @@ function L_shopArtikelanzeige() {
 
 // Ausgabe der Artikel in Div-Contaimerm ---!!!!MUSS NOCH FORM POST FÜR ARTIKELSEITE DAZU!!!!!!
 function L_shopShowArticle() {
+
+    $seitenid = "shop";
    
     foreach ($conn->query($L_suche) as $L_erg) {
         echo "<div class=\"L_shopArtContainer\">";       
-        echo "<img  src=\"assets/img/" + $L_erg['art_bild'] + "\" class=\"L_shopArtBild\">";
+        echo "<img  src=\"assets/img/" . $L_erg['art_bild'] . "\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
             echo $L_erg['art_name'];
         echo "</p>";
         if ($L_erg['sale_status']=false){
             echo "<p class=\"L_shopArtPreis\">";
-                echo $L_erg['art_preis'] + " €";
+                echo $L_erg['art_preis'] . " €";
             echo "</p>";
             echo "<p class=\"L_exPreis\">";
                 echo "";
             echo "</p>";
         } else {
             echo "<p class=\"L_shopArtPreis\">";
-                echo $L_erg['sale_preis'] + " €";
+                echo $L_erg['sale_preis'] . " €";
             echo "</p>";
             echo "<p class=\"L_exPreis\">";
-                echo $L_erg['art_preis'] + " €";
+                echo $L_erg['art_preis'] . " €";
             echo "</p>";
         }
         echo "</div>";
@@ -99,14 +101,14 @@ function L_shopsuchanzeige() {
     $sql = "SELECT COUNT (*) 
                 FROM artikel 
                 WHERE art_name OR art_text OR kat_bez OR art_ort OR art_pflege 
-                LIKE %$L_suchbegriff%";
+                LIKE %$L_suchbegriff%;";
 
     if ($res = $conn->query($sql)) {
         if ($res->fetchColumn() > 0) {
             $L_suche = "SELECT DISTINCT art_id, art_name, art_bild, art_preis, sale_status, sale_preis  
             FROM artikel 
             WHERE art_name OR art_text OR kat_bez OR art_ort OR art_pflege 
-            LIKE %$L_suchbegriff%";
+            LIKE %$L_suchbegriff%;";
 
             L_shopShowArticle();            
         } else {
@@ -157,7 +159,7 @@ function L_shopPagination() {
 
 
     $recordSkippage = 1;
-    $nextpage = $currentpage + 1;
+    $nextpage = $currentpage . 1;
     $previouspage = $currentpage - 1;
 
     
@@ -171,23 +173,23 @@ function L_shopPagination() {
         echo "<div class=\"L_shopArtContainer\">"; 
         echo "<form action=\"index.php\" method=\"post\">";
         echo "<button name=\"L_shopArtButton\" type=\"submit\" value=\"".$r['art_id']."\">";     
-        echo "<img  src=\"assets/img/" + $r['art_bild'] + "\" class=\"L_shopArtBild\">";
+        echo "<img  src=\"assets/img/" . $r['art_bild'] . "\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
             echo $r['art_name'];
         echo "</p>";
         if ($r['sale_status']=false){
             echo "<p class=\"L_shopArtPreis\">";
-                echo $r['art_preis'] + " €";
+                echo $r['art_preis'] . " €";
             echo "</p>";
             echo "<p class=\"L_exPreis\">";
                 echo "";
             echo "</p>";
         } else {
             echo "<p class=\"L_shopArtPreis\">";
-                echo $r['sale_preis'] + " €";
+                echo $r['sale_preis'] . " €";
             echo "</p>";
             echo "<p class=\"L_exPreis\">";
-                echo $r['art_preis'] + " €";
+                echo $r['art_preis'] . " €";
             echo "</p>";
         }
         echo "</button>";
@@ -251,7 +253,7 @@ if (isset ($_POST["L_FilterFarbeAuswahl"])) {
     $L_farbauswahl = $_POST["L_FilterFarbeAuswahl"];
     $L_farbsql = "SELECT art_id FROM artikel WHERE art_farbe=$farbauswahl";
 
-    $sql += "$L_farbsql";
+    $sql .= "$L_farbsql";
 } else {
     $L_farbsql = NULL;
 }
@@ -261,9 +263,9 @@ if (isset ($_POST["L_FilterKategorieAuswahl"])) {
     $L_katsql = "SELECT art_id FROM artikel WHERE kat_bez=$L_katauswahl";
 
     if ($sql == NULL){
-        $sql += "$L_katsql";
+        $sql .= "$L_katsql";
     }else {
-        $sql += " UNION $L_katsql";
+        $sql .= " UNION $L_katsql";
     }
 }else {
     $L_katsql = NULL;
@@ -274,9 +276,9 @@ if (isset ($_POST["L_FilterPflegeAuswahl"])) {
     $L_pflegesql = "SELECT art_id FROM artikel WHERE art_pflege=$L_pflegeauswahl";
 
     if ($sql == NULL){
-        $sql += "$L_pflegesql";
+        $sql .= "$L_pflegesql";
     }else {
-        $sql += " UNION $L_pflegesql";
+        $sql .= " UNION $L_pflegesql";
     }
 }else {
     $L_pflegesql = NULL;
@@ -288,9 +290,9 @@ if (isset ($_POST["L_FilterStandortAuswahl"])) {
     $L_standortsql = "SELECT art_id FROM artikel WHERE art_ort=$L_standortauswahl";
 
     if ($sql == NULL){
-        $sql += "$L_standortsql";
+        $sql .= "$L_standortsql";
     }else {
-        $sql += " UNION $L_standortsql";
+        $sql .= " UNION $L_standortsql";
     }
 }else {
     $L_standortsql = NULL;
@@ -305,9 +307,9 @@ if (isset ($_POST["L_FilterPreisAuswahl"])) {
 
     
     if ($sql == NULL){
-        $sql += "$L_preissql";
+        $sql .= "$L_preissql";
     }else {
-        $sql += " UNION $L_preissql";
+        $sql .= " UNION $L_preissql";
     }
 }else {
     $L_preissql = NULL;
@@ -318,14 +320,25 @@ if (isset ($_POST["L_FilterHoeheAuswahl"])) {
     $L_hoehesql = "SELECT art_id FROM artikel WHERE art_groesse=$L_hoeheauswahl";
 
     if ($sql == NULL){
-        $sql += "$L_hoehesql";
+        $sql .= "$L_hoehesql";
     }else {
-        $sql += " UNION $L_hoehesql";
+        $sql .= " UNION $L_hoehesql";
     }
 }else {
     $L_hoehesql = NULL;
 }
 
+if ($totalresult = $conn->query($sql)) {
+    if ($totalresult->fetchColumn() > 0) {
+        $L_suche = "SELECT art_id, art_name, art_bild, art_preis, sale_status, sale_preis 
+                    FROM artikel 
+                    LIMIT $recordSkip, $recordperpage 
+                    ORDER BY art_name";
+        L_shopShowArticle();
+    } else {
+        print "<p>Keine Artikel vorhanden.</p>";
+    }
+}
 }
 /**/
 //----------------------------------------------------------------------------------------//
