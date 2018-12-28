@@ -11,22 +11,28 @@ if ($seitenid == "artikelansicht") {
 include "Frontend/suchbereichBildhintergrund.php";
 
 //_Content________________________________________________________
-L_artansShowArtikel();
+//print L_artansShowArtikel();
 
 //----------------------------------------------------------------------------------------//
 //Artikelansicht
-function L_artansShowArtikel() {
-    $L_artid = $_POST["L_shopArtButton"];
-
+//function L_artansShowArtikel() {
+    $L_artid = $_GET["L_shopArtButton"];
+   
+    $verbinde = mysqli_connect($servername, $username, $passwort);
+    $connmysql = mysqli_select_db($verbinde, $dbname);
+    
     $sql = "SELECT * FROM artikel WHERE art_id=$L_artid";
-    foreach ($conn->query($sql) as $row) {
+
+    $result = mysqli_query($verbinde /*$link*/, $sql);
+    
+    $row = mysqli_fetch_assoc($result);
 
         //oberer Container für Bild und Kaufinfos des Artikels-----------------------
         echo "<div id=\"L_artAnsichtKopfCont\">";
 
                 //Container für Bild
             echo "<div id=\"L_artBild\">";
-                echo "<img class=\"L_artImg\" src=\"assets/img/" + $row['art_bild'] + "\">";
+                echo "<img class=\"L_artImg\" src=\"assets/img/" . $row['art_bild'] . "\">";
             echo "</div>";
 
                 //Container für Kaufinfos
@@ -42,15 +48,15 @@ function L_artansShowArtikel() {
                 // Wenn kein Angebot
                 if ($L_erg['sale_status']=false){                       
                     echo "<p id=\"L_artPreis\">";
-                        echo $row['art_preis'] + " €";
+                        echo $row['art_preis'] . " €";
                     echo "</p>";
                 } //Wenn Angebot
                 else {
                     echo "<p id=\"L_artPreis\">";
-                        echo $L_erg['sale_preis'] + " €";
+                        echo $L_erg['sale_preis'] . " €";
                     echo "</p>";
                     echo "<p class=\"L_exPreis\">";
-                        echo $L_erg['art_preis'] + " €";
+                        echo $L_erg['art_preis'] . " €";
                     echo "</p>";
                 }
 
@@ -137,8 +143,8 @@ function L_artansShowArtikel() {
                 echo "</table>";
 
     echo "</div>";
-        }
-}
+          //  }       
+
 
 /*
 echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
