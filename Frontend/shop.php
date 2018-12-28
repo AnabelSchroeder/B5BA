@@ -91,7 +91,27 @@ echo "<div id=\"L_FilterBarCon\">";
 //_Artikelanzeige (der Suche)__________________________________________ARTIKELANZEIGE_(SUCHE)__//
 echo "<div id=\"L_shopArtAusgabe\" class=\"L_contentbereich\">";
 
-    //function in L_DBanbindung.php
+
+//include "Frontend/L_DB_pdo.php";
+
+include "Frontend/L_DB_mysqli.php";
+
+/* 
+// Üerprüfen, ob Funktionen noch aktuell sind
+    if (isset ($_POST['L_suchbutton']) && ($_POST['L_suchbutton']) != NULL) {
+        print L_shopsuchanzeige();
+    } /* else if ( (isset ($_POST["L_FilterPreis"]) && ($_POST["L_FilterPreis"]) != NULL) || 
+                (isset ($_POST["L_FilterFarbe"]) && ($_POST["L_FilterFarbe"]) != NULL) || 
+                (isset ($_POST["L_FilterKategorie"]) && ($_POST["L_FilterKategorie"]) != NULL )|| 
+                (isset ($_POST["L_FilterPflege"]) && ($_POST["L_FilterPflege"]) != NULL) || 
+                (isset ($_POST["L_FilterHoehe"]) && ($_POST["L_FilterHoehe"]) != NULL) || 
+                (isset ($_POST["L_FilterStandort"]) && ($_POST["L_FilterStandort"]) != NULL) ) {
+                    print Filtersuche();
+                } else {
+                    print L_shopShowArticle();
+                } */
+
+//function in L_DBanbindung.php
     /*echo "<div class=\"L_shopArtContainer\">";
         echo "<img src=\"../assets/img/begonie.jpg\" class=\"L_shopArtBild\">";
         echo "<p class=\"L_shopArtName\">";
