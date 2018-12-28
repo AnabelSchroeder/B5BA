@@ -1894,14 +1894,7 @@
                                 </div>
                             </div>";
 
-                            //druck div schluss 
-                            print"</div>
-
-                            <div class=\"sumbutton\">
-                            <form>
-                                <input type=\"submit\" value=\"Ausdrucken\" class=\"a-button\" onclick=\"printElem()\">
-                            </form>
-                            </div>";
+                            
 
                         }                
 
