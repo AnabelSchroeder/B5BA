@@ -117,7 +117,7 @@ function L_hidePreisFilterMenu() {
 function L_showFarbeFilterMenu() {
   L_FilterID = "L_FilterFarbe";
   L_filterArt = "Farbe";
-  L_filterLabelArray = ["gr&uuml;n", "gelb", "weiss"];
+  L_filterLabelArray = ["gr&uuml;n", "gelb", "weiss", "rosa", "rot"];
 
   L_showFilterMenu();
 }
