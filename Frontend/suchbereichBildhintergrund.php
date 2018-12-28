@@ -23,10 +23,11 @@ echo "<div id=\"L_Content_SucheContainer\">";
     echo "</form>";
 echo "</div>";
 
-if (isset ($_POST['L_suchbutton']) /* && ($_POST['L_searchfield']) != "" */) {
+/*
+if (isset ($_POST['L_suchbutton']) && ($_POST['L_searchfield']) != "" ) {
     $seitenid = "shop";
 } else {
     $seitenid = $_GET['Seiten_ID'];
 }
-
+*/
 ?>
