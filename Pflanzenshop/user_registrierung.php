@@ -24,6 +24,105 @@ echo "<div class=\"user_login_bg\">";
         echo "<form method=\"POST\"  action=\"#\" name=\"Registration\">";
     
         echo "<table>";
+// falls fehlermeldung: nutzername vergeben: Formular mit Daten wieder befüllen
+
+if(isset($R_Fehler))
+{
+    //Namensfelder  
+    echo "<tr>";
+    echo "<td>Vorname</td>";
+    echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_vname\" value=\"".$_POST['user_registrieren_vname']."\"> </td>";
+echo "</tr>";
+
+echo "<tr>";
+     echo "<td> Nachname </td>";
+     echo "<td><input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_nname\" value=\"".$_POST['user_registrieren_nname']."\"> </td>";
+echo "</td>";
+//Adresse
+echo "<tr>";
+    echo "<td>Straße </td>";
+    echo "<td><input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_strasse\" value=\"".$_POST['user_registrieren_strasse']."\"> </td>";
+echo "</tr>";
+
+echo "<tr>";
+    echo "<td>PLZ, Ort </td>";
+    echo "<td> <input class=\"user_login_form\"type=\"text\" name=\"user_registrieren_plz\" value=\"".$_POST['user_registrieren_plz']."\"> 
+    <input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_ort\" value=\"".$_POST['user_registrieren_ort']."\"></td>";
+echo "</tr>";
+//zahlart
+echo "<tr>";
+    echo "<td>Zahlungsart </td>";
+    echo "<td><select class=\"user_login_form\"name=\"user_registrieren_zahlart\">";
+    //Vorbelegung der gewählten Zahlungsart
+    //Vorkasse
+    if ($_POST['user_registrieren_zahlart']== "Vorkasse")
+    {
+      echo"<option selected> Vorkasse </option>
+        <option> Rechnung </option>
+        <option> Pay Pal</option>
+        <option> Lastschrift </option>";
+    }
+    //Rechnung
+    else if ($_POST['user_registrieren_zahlart']=="Rechnung")
+    {
+      echo"<option > Vorkasse </option>
+        <option selected> Rechnung </option>
+        <option> Pay Pal</option>
+        <option> Lastschrift </option>";
+    }
+
+       //Pay Pal
+       else if ($_POST['user_registrieren_zahlart']=="Pay Pal")
+       {
+         echo"<option > Vorkasse </option>
+           <option > Rechnung </option>
+           <option selected> Pay Pal</option>
+           <option> Lastschrift </option>";
+       }
+
+        //Lastschrift
+        else if ($_POST['user_registrieren_zahlart']=="Lastschrift")
+        {
+          echo"<option > Vorkasse </option>
+            <option > Rechnung </option>
+            <option > Pay Pal</option>
+            <option selected> Lastschrift </option>";
+        }
+  echo"</select> </td>";
+echo "</tr>";
+
+echo "<tr> <td></td></tr>";
+
+//logindaten
+//fehlerausgabe
+     echo "<span class=\"fehler\">$R_Fehler</span>";
+    echo"<br>";
+////////
+    echo "<tr>";
+    echo "<td>Login Name</td>";
+    echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_login_name\"> </td>";
+echo "</tr>";
+
+echo "<tr>";
+    echo "<td> Passwort</td>";
+    echo "<td><input class=\"user_login_form\" type=\"password\" name=\"user_registrieren_passwort\" min-length=\"8\" value=\"".$_POST['user_registrieren_passwort']."\"> </td>";
+echo "</tr>";
+
+echo "<tr>";
+    echo "<td>Passwort wiederholen</td>";
+    echo "<td><input class=\"user_login_form\" type=\"password\" name=\"user_registrieren_passwort2\" min-length=\"8\" value=\"".$_POST['user_registrieren_passwort2']."\"> </td>";
+echo "</tr>";
+//mail
+echo "<tr>";
+    echo "<td> E-Mail </td>";
+    echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_mail\" value=\"".$_POST['user_registrieren_mail']."\"> </td>";
+echo "</tr>";
+
+    
+} 
+
+//normales seiten laden
+else{
      //Namensfelder  
             echo "<tr>";
                 echo "<td>Vorname</td>";
@@ -59,7 +158,10 @@ echo "<div class=\"user_login_bg\">";
             echo "<tr> <td></td></tr>";
             
     //logindaten
-           
+    //////////////////////
+            
+///////////////////////
+
             echo "<tr>";
                 echo "<td>Login Name</td>";
                 echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_login_name\"> </td>";
@@ -67,19 +169,19 @@ echo "<div class=\"user_login_bg\">";
     
             echo "<tr>";
                 echo "<td> Passwort</td>";
-                echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_passwort\" min-length=\"8\"> </td>";
+                echo "<td><input class=\"user_login_form\" type=\"password\" name=\"user_registrieren_passwort\" min-length=\"8\"> </td>";
             echo "</tr>";
     
             echo "<tr>";
-                echo "<td>Passwort wiederholen<td>";
-                echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_passwort2\" min-length=\"8\"> </td>";
+                echo "<td>Passwort wiederholen</td>";
+                echo "<td><input class=\"user_login_form\" type=\"password\" name=\"user_registrieren_passwort2\" min-length=\"8\"> </td>";
             echo "</tr>";
     //mail
             echo "<tr>";
                 echo "<td> E-Mail </td>";
                 echo "<td><input class=\"user_login_form\" type=\"text\" name=\"user_registrieren_mail\"> </td>";
             echo "</tr>";
-    
+}
             echo "</table>";
  // Button zum Formular senden           
                 echo "<button class=\"button2\"> Abbrechen </button> <input class=\"button1\" onclick=\"return user_registration_pruefe()\" type=\"submit\" name=\"user_registration_speichern\" value=\"Speichern\">";

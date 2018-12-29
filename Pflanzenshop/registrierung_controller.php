@@ -1,8 +1,27 @@
 <?php
 /*nutzer daten vom registrieren in die Datenbank aufnehmen */
 
+//javascript einbinden formulareingaben überprüfen
+echo "<script src=\"pflanzenshop.js\"></script>";
+
 if (isset ($_POST['user_registration_speichern']))
 {
+    //Loginname überprüfen: noch nicht vorhanden?
+  //  $e_loginname= $_POST['user_registrieren_login_name'];
+    $sql ="SELECT * FROM nutzer WHERE n_login =\"".$_POST['user_registrieren_login_name']."\";";
+    $result= mysqli_query($verbinde, $sql);
+
+    if (mysqli_num_rows ($result) > 0)
+            {   
+                echo "vergeben";
+              //  echo "<script> clear_loginname() </script>";
+              $R_Fehler = "Dieser Loginname ist bereits vergeben!";
+            }
+    else
+    {
+
+    $passwort = $_POST['user_registrieren_passwort'];
+    $hash = password_hash($passwort, PASSWORD_DEFAULT);
     $sql = "INSERT INTO nutzer
             (
                 n_nname,
@@ -28,7 +47,7 @@ if (isset ($_POST['user_registration_speichern']))
                 \"".$_POST['user_registrieren_plz']."\",
                 \"".$_POST['user_registrieren_mail']."\",
                 \"".$_POST['user_registrieren_login_name']."\",
-                \"".$_POST['user_registrieren_passwort']."\",
+                \"".$hash."\",
                 false,
                 \"".$_POST['user_registrieren_zahlart']."\"
             );";
@@ -37,7 +56,7 @@ if (isset ($_POST['user_registration_speichern']))
 
     echo "Daten egspeichert";
 }
-
+}
 
 /*if (isset ($_POST['user_login']))
 {
