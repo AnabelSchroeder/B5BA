@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+//??$cookie_
+
 echo"<!DOCTYPE html>";
 echo"<head>";
 echo"<meta charset=\"utf-8\" />";

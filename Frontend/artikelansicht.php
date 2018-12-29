@@ -73,11 +73,21 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
                         echo "zzgl. Versandkosten";
                     echo "</p>";
 
-                        //Formular für Menge in den Warenkorb
-                    echo "<form action=\"index.php\" method=\"post\">";
-                        echo "<input >";
-                        echo "<button id=\"L_artInBasket\" type=\"submit\">In den Warenkorb</button>";
-                    echo "</form>";
+                        
+                      //ENTWEDER SO ODER BEIM SHOP ARTIKEL MIT MENGE 0 NICHT ANZEIGEN____________!!!!!!!!  
+                        if ($row['art_bestand']>0){
+                            //Formular für Menge in den Warenkorb
+                            echo "<form action=\"index.php\" method=\"post\">";
+                            echo "<select name=\"Menge\">";
+                            for ($i=1; $i<=$row['art_bestand']; $i++){
+                                echo "<option>".$i."</option>";
+                            } 
+                            echo "</select>";
+                            echo "<button id=\"L_artInBasket\" name=\"".$row['art_id']."\" type=\"submit\">In den Warenkorb</button>";
+                            echo "</form>";
+                        }else{echo "<p>Wird nachbestellt.</p>";}
+                        
+                        
 
                  echo "</div>";
 

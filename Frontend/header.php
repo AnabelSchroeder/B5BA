@@ -101,8 +101,8 @@ echo "<div id=\"L_headerRechts\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"warenkorb\">";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
-            echo "<div id=\"L_warenkorb_art_anz\">";
-                echo /*$w_art_anz*/ "ZAHL";
+            echo "<div id=\"L_warenkorb_art_anz\">";            
+                echo warenkorbAnzahl();
             echo "</div>";
         echo "</button>";
     echo "</form>";
@@ -118,4 +118,27 @@ echo "</header>";
 
 /*echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>";*/
 
+function warenkorbAnzahl(){
+    $servername = "localhost";
+$username = "root";
+$passwort = "root";
+$dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
+
+//$port = 8889;
+
+//$link = mysqli_init();
+//$success = mysqli_real_connect($link, $servername, $username, $passwort, $dbname, $port);
+
+$verbinde = mysqli_connect($servername, $username, $passwort);
+$connmysql = mysqli_select_db($verbinde, $dbname);
+
+$L_cookie = $_COOKIE['KEINEAHNUNG']; //!!!!!!!!!
+
+$L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie'"; 
+$L_cookieId = mysqli_query($verbinde, $L_sqlCookieId);
+
+$L_sqlbasketCount = "SELECT COUNT (korb_id) FROM warenkorb WHERE cookie_id='$L_cookieId'";
+$L_basketCount = mysqli_query($verbinde, $L_sqlbasketCount);
+return $L_basketCount;
+}
 ?>
