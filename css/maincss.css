@@ -353,7 +353,7 @@ footer {
 }
 
 .L_FilterMenu {
-  z-index: 10;
+  z-index: 100;
   background-color: var(--L_farbe-hellgrau);
   margin: auto;
   margin-top: 70px;
@@ -376,6 +376,7 @@ label {
 }
 
 .L_FilterMenubutton {
+  z-index: 105;
   background-color: var(--L_farbe-gruen);
   height: 40px;
   width: 150px;
@@ -468,7 +469,7 @@ label {
   padding: 15px;
 }
 
-#L_shopPagAusgabe {
+.L_shopPagAusgabe {
   color: var(--L_farbe-grau);
 
   font-size: var(--L_fontsize_hint);

@@ -16,16 +16,21 @@ include "Frontend/suchbereichBildhintergrund.php";
 //----------------------------------------------------------------------------------------//
 //Artikelansicht
 //function L_artansShowArtikel() {
+
     $L_artid = $_GET["L_shopArtButton"];
    
-    $verbinde = mysqli_connect($servername, $username, $passwort);
-    $connmysql = mysqli_select_db($verbinde, $dbname);
+    $servername = "localhost";
+$username = "root";
+$passwort = "root";
+$dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
+    $L_verbinde = mysqli_connect($servername, $username, $passwort);
+    $L_connmysql = mysqli_select_db($verbinde, $dbname);
     
-    $sql = "SELECT * FROM artikel WHERE art_id=$L_artid";
+    $L_sql = "SELECT * FROM artikel WHERE art_id=$L_artid";
 
-    $result = mysqli_query($verbinde /*$link*/, $sql);
+    $L_result = mysqli_query($verbinde /*$link*/, $L_sql);
     
-    $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($L_result);
 
         //oberer Container für Bild und Kaufinfos des Artikels-----------------------
         echo "<div id=\"L_artAnsichtKopfCont\">";
@@ -46,17 +51,17 @@ include "Frontend/suchbereichBildhintergrund.php";
 
                 //Absatz Preis
                 // Wenn kein Angebot
-                if ($L_erg['sale_status']=false){                       
+                if ($row['sale_status']==false){                       
                     echo "<p id=\"L_artPreis\">";
                         echo $row['art_preis'] . " €";
                     echo "</p>";
                 } //Wenn Angebot
                 else {
                     echo "<p id=\"L_artPreis\">";
-                        echo $L_erg['sale_preis'] . " €";
+                        echo $row['sale_preis'] . " €";
                     echo "</p>";
                     echo "<p class=\"L_exPreis\">";
-                        echo $L_erg['art_preis'] . " €";
+                        echo $row['art_preis'] . " €";
                     echo "</p>";
                 }
 
