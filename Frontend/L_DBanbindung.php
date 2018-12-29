@@ -177,7 +177,7 @@ function L_shopPagination() {
         echo "<p class=\"L_shopArtName\">";
             echo $r['art_name'];
         echo "</p>";
-        if ($r['sale_status']=false){
+        if ($r['sale_status']==false){
             echo "<p class=\"L_shopArtPreis\">";
                 echo $r['art_preis'] . " €";
             echo "</p>";
@@ -201,20 +201,20 @@ function L_shopPagination() {
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--------HIER WEITERMACHEN-------------!!!!!!!!
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------!!!!!!!!!!!!!!!!!!!!!!!!!!!    
         if ($currentpage != $recordSkippage) {
-            echo "<a href=\"?page=".$recordSkippage."\">";
+            echo "<a href=\"?page=".$recordSkippage."\" class=\"L_pagPfeil\">";
             echo $recordSkippage."</a>";
             
         if ($currentpage >= 5){
-            echo "<a href=\"?page=".$previouspage."\">...";
+            echo "<a href=\"?page=".$previouspage."\" class=\"L_shopPagAusgabe\">...";
             echo $previouspage."</a>";
         }
-            echo "<a href=\"?page=".$currentpage."\">";
+            echo "<a href=\"?page=".$currentpage."\" class=\"L_shopPagAusgabe\">";
             echo $currentpage."</a>";
 
         if ($currentpage != $lastpage) {
-            echo "<a href=\"?page=".$nextpage."\">";
+            echo "<a href=\"?page=".$nextpage."\" class=\"L_shopPagAusgabe\">";
             echo $nextpage."...</a>";
-            echo "<a href=\"?page=".$lastpage."\">";
+            echo "<a href=\"?page=".$lastpage."\" class=\"L_pagPfeil\">";
             echo "Last</a>";
         }
 

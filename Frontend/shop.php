@@ -7,6 +7,7 @@
 
 if ($seitenid == "shop") {
 
+
 include "Frontend/suchbereichBildhintergrund.php";
 
 
@@ -81,6 +82,42 @@ echo "<div id=\"L_FilterBarCon\">";
     echo "</div>";
     echo "<div id=\"L_gewFilterAnzeige\">";
                 echo "Gewählte Filter: ";
+                if((isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL) || 
+                (isset ($_POST["L_FilterFarbe"]) & ($_POST["L_FilterFarbe"]) != NULL) || 
+                (isset ($_POST["L_FilterKategorie"]) & ($_POST["L_FilterKategorie"]) != NULL )|| 
+                (isset ($_POST["L_FilterPflege"]) & ($_POST["L_FilterPflege"]) != NULL) || 
+                (isset ($_POST["L_FilterHoehe"]) & ($_POST["L_FilterHoehe"]) != NULL) || 
+                (isset ($_POST["L_FilterStandort"]) & ($_POST["L_FilterStandort"]) != NULL)){
+                    if (isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL){
+                        $L_filtertext = "Preis: ".$_POST["L_FilterPreis"];
+                    }else{$L_filtertext = "";}
+                    if (isset ($_POST["L_FilterFarbe"]) & ($_POST["L_FilterFarbe"]) != NULL){
+                        if ($L_filtertext == ""){
+                            $L_filtertext = "Farbe: ".$_POST["L_FilterFarbe"];
+                        }else{$L_filtertext .= "; Farbe: ".$_POST["L_FilterFarbe"];}
+                    }else{$L_filtertext .= "";}
+                    if (isset ($_POST["L_FilterKategorie"]) & ($_POST["L_FilterKategorie"]) != NULL ){
+                        if ($L_filtertext == ""){
+                            $L_filtertext = "Kategorie: ".$_POST["L_FilterKategorie"];
+                        }else{$L_filtertext .= "; Kategorie: ".$_POST["L_FilterKategorie"];} 
+                    }else{$L_filtertext .= "";}
+                    if (isset ($_POST["L_FilterPflege"]) & ($_POST["L_FilterPflege"]) != NULL){
+                        if ($L_filtertext == ""){
+                            $L_filtertext = "Pflege: ".$_POST["L_FilterPflege"];
+                        }else{$L_filtertext .= "; Pflege: ".$_POST["L_FilterPflege"];}    
+                    }else{$L_filtertext .= "";}
+                    if (isset ($_POST["L_FilterHoehe"]) & ($_POST["L_FilterHoehe"]) != NULL){
+                        if ($L_filtertext == ""){
+                            $L_filtertext = "Ho&uuml;he: ".$_POST["L_FilterHoehe"];
+                        }else{$L_filtertext.="; Ho&uuml;he: ".$_POST["L_FilterHoehe"];}
+                    }else{$L_filtertext.="";}
+                    if (isset ($_POST["L_FilterStandort"]) & ($_POST["L_FilterStandort"]) != NULL){
+                        if ($L_filtertext == ""){
+                            $L_filtertext = "Standort: ".$_POST["L_FilterStandort"];
+                        }else{$L_filtertext .= "; Standort: ".$_POST["L_FilterStandort"];}
+                    }else{$L_filtertext.="";}
+                }
+                echo $L_filtertext;
             echo "</div>";
 
     echo "</div>";
@@ -92,58 +129,16 @@ echo "<div id=\"L_FilterBarCon\">";
 echo "<div id=\"L_shopArtAusgabe\" class=\"L_contentbereich\">";
 
 
+if (isset($_GET['page']) & !empty($_GET['page'])) {
+    $currentpage = $_GET['page'];
+} else {
+    $currentpage = 1;
+}
+
 //include "Frontend/L_DB_pdo.php";
 
-include "Frontend/L_DB_mysqli.php";
-
-/* 
-// Üerprüfen, ob Funktionen noch aktuell sind
-    if (isset ($_POST['L_suchbutton']) && ($_POST['L_suchbutton']) != NULL) {
-        print L_shopsuchanzeige();
-    } /* else if ( (isset ($_POST["L_FilterPreis"]) && ($_POST["L_FilterPreis"]) != NULL) || 
-                (isset ($_POST["L_FilterFarbe"]) && ($_POST["L_FilterFarbe"]) != NULL) || 
-                (isset ($_POST["L_FilterKategorie"]) && ($_POST["L_FilterKategorie"]) != NULL )|| 
-                (isset ($_POST["L_FilterPflege"]) && ($_POST["L_FilterPflege"]) != NULL) || 
-                (isset ($_POST["L_FilterHoehe"]) && ($_POST["L_FilterHoehe"]) != NULL) || 
-                (isset ($_POST["L_FilterStandort"]) && ($_POST["L_FilterStandort"]) != NULL) ) {
-                    print Filtersuche();
-                } else {
-                    print L_shopShowArticle();
-                } */
-
-//function in L_DBanbindung.php
-    /*echo "<div class=\"L_shopArtContainer\">";
-        echo "<img src=\"../assets/img/begonie.jpg\" class=\"L_shopArtBild\">";
-        echo "<p class=\"L_shopArtName\">";
-            echo "PLATZHALTER";
-        echo "</p>";
-        echo "<p class=\"L_shopArtPreis\">";
-            echo "12,34 €";
-        echo "</p>";
-        echo "<p class=\"L_exPreis\">";
-            echo "23,45 €";
-        echo "</p>";
-    echo "</div>";*/
-
-echo "</div>";
-
-
-//_Seitenzahl der Artikel______________________________________________SEITENZAHL_D_ARTIKEL__//
-echo "<div id=\"L_shopPagContBack\">";
-    echo "<div id=\"L_shopPagContSigns\">";
-        
-            echo "<img id=\"L_pfeil_l\" class=\"L_pagPfeil\" src=\"assets/PH.jpg\">";
-        
-            echo "<span id=\"L_shopPagAusgabe\">";
-
-                echo "1 2 3 4";
-
-            echo "</span>";
-
-            echo "<img id=\"L_pfeil_r\" class=\"L_pagPfeil\" src=\"assets/PH.jpg\">";
-            
-    echo "</div>";
-echo "</div>";
+//include "Frontend/L_DB_mysqli.php";
+include "Frontend/L_DB_shop1.php";
 
 }
 
