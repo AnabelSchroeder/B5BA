@@ -89,6 +89,12 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                                     echo "</td>";
                                     echo "<td class=\"L_warKorArtSum\" class=\"L_warKorSpalte3\">";
                                         echo warenlorbArtSumme($L_erg['anzahl_art'], $L_preis)." €";
+                                        if ($warenkorbSummeTotalCalc == null){
+                                            $warenkorbSummeTotalCalc = warenlorbArtSumme($L_erg['anzahl_art'], $L_preis);
+                                        }else{
+                                            $warenkorbSummeTotalCalc = $warenkorbSummeTotalCalc + warenlorbArtSumme($L_erg['anzahl_art'], $L_preis);
+                                        }
+                                        
                                     echo "</td>";
                                 echo "</tr>";
                                 echo "<tr class=\"L_warKorTr\">";
@@ -125,14 +131,16 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                         echo "<tr id=\"L_warKorSumTr1\">";
                             echo "<td class=\"L_warKorSumTd1\">Versandkosten</td>";
                             echo "<td id=\"L_warKorSumVersand\" class=\"L_warKorSumTd2\">";
-                                echo "3,45 €";
+                                $L_versandkosten = 3.45;
+                                echo $L_versandkosten." €";
                             echo "</td>";
                         echo "</tr>";
 
                         echo "<tr id=\"L_warKorSumTr2\">";
                             echo "<td class=\"L_warKorSumTd1\">Gesamtsumme</td>";
                             echo "<td id=\"L_warKorSumTotal\" class=\"L_warKorSumTd2\">";
-                                echo warenkorbSummeTotal()." €";
+                                $warenkorbSummeTotal = $warenkorbSummeTotalCalc + $L_versandkosten;
+                                echo $warenkorbSummeTotal." €";
                             echo "</td>";
                         echo "</tr>";
 
