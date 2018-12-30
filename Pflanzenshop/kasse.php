@@ -66,26 +66,55 @@ echo "<div class=\"kasse_div\">";
 echo "<div class=\"kasse_links\">";    
     echo "<span class=\"kasse_ueberschrift_klein\">Wähle eine Zahlungsmethode aus: </span> <br>";
     echo "<form method=\"POST\">";
-    echo "Zahlungsart   <select name=\"kasse_zahlungsmethode_zahlungsart\">
-                    <option selected>".$kasse_zahlart."</option>
-                    <option> Vorkasse </option>
-                    <option> Rechnung </option>
-                    <option> Pay Pal</option>
-                    <option> Lastschrift </option>
-                    </select> <br>";
+    echo "Zahlungsart   <select name=\"kasse_zahlungsmethode_zahlungsart\">";
+
+    // zahlart vorbelegen
+    if ($kasse_zahlart == "Vorkasse")
+    {
+      echo"<option selected> Vorkasse </option>
+        <option> Rechnung </option>
+        <option> Pay Pal</option>
+        <option> Lastschrift </option>";
+    }
+    //Rechnung
+    else if ($kasse_zahlart=="Rechnung")
+    {
+      echo"<option > Vorkasse </option>
+        <option selected> Rechnung </option>
+        <option> Pay Pal</option>
+        <option> Lastschrift </option>";
+    }
+
+       //Pay Pal
+       else if ($kasse_zahlart=="Pay Pal")
+       {
+         echo"<option > Vorkasse </option>
+           <option > Rechnung </option>
+           <option selected> Pay Pal</option>
+           <option> Lastschrift </option>";
+       }
+
+        //Lastschrift
+        else if ($kasse_zahlart=="Lastschrift")
+        {
+          echo"<option > Vorkasse </option>
+            <option > Rechnung </option>
+            <option > Pay Pal</option>
+            <option selected> Lastschrift </option>";
+        }
+
+        echo"</select> <br>";
     echo "<button class =\"kasse_button_zurück\" name=\"kasse2_zahlart_speichern\" type=\"submit\"> speichern </button>";
     echo "</form>";
     echo " <br> <br> <br> <br> <br> <br> <br> <br><br><br><hr>";
 
     // Buttons
     //zurück zu kasse1: "Adresse"
-    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_1\">";
-    echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_1\"> zurück </button>";
-    echo "</form>";
+    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
+    echo "<button class=\"kasse_button_zurück\"  name=\"Seiten_ID\" value=\"kasse_1\"> zurück </button>";
 
     //weiter zu kasse3: "kauf abschließen"
-    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
-        echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\" type=\"submit\" value=\"kasse_3\"> weiter </button>";
+    echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\"  value=\"kasse_3\"> weiter </button>";
     echo "</form>";
       echo "</div>";
 //rechte Seite
@@ -122,14 +151,10 @@ echo "<div class=\"kasse_links\">";
     //buttons
 
     //zurück zu kasse2: "zahlart"
-       echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_2\">";
+       echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_4\">";
        echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
-       echo "</form>";
-
     //weiter zu kasse4: bestellbestätigung
-    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_4\">";
-  
-   echo "<button id=\"kass3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
+    echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
     echo "</form>";
     echo "</div>";
     
@@ -190,8 +215,9 @@ echo "Gesamtsumme: <br>";
 //zurück
 echo "<form method=\"GET\" action=\"index.php\">";
 echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"index\"> Weiter Shoppen </button>";
-echo "</form>";
+
 echo "<button class=\"kasse_button_weiter\"> Ausdrucken </button>";
+echo "</form>";
 echo "</div>";
 echo "</div>";
 
