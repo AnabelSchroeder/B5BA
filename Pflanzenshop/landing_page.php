@@ -1,4 +1,9 @@
 <?php
+session_start();
+$_SESSION['seiten_zurück']= $seitenid;
+
+
+
 if ($seitenid== "index") {
 //Datenbank einbinden
 $host = "localhost";
@@ -11,22 +16,40 @@ $con = mysqli_select_db($verbinde,$dbase);
 
 /////////////////////////////////////////////////////////////////////////////////
 
-//session 
-session_start();
-$_SESSION['logged_in']= "false";
-$_SESSION['user_cookie']= "false";
-$_SESSION['versuche']=3;
-
-$user_cookie ="false";
-if ($user_cookie=="false")
-{
-    $sid = md5(openssl_random_pseudo_bytes(32));
-setcookie("sid", $sid, time()+3600*24);
 
 
-$user_cookie ="true";
+if (isset($_COOKIE['sid'])) {
+    echo "cookie vorhanden";
+   // in der Datenbank nachschauen, ob Cookie vorhanden
+   $sql ="SELECT cookie_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+   $result = mysqli_query($verbinde, $sql);
+// evtl. Cookie verlängern 
 
 }
+    
+
+
+else {
+    // cookie id zufällig generieren
+    $sid = md5(openssl_random_pseudo_bytes(32));
+    // cookie setzen
+setcookie("sid", $sid, time()+3600*48);
+
+    // In DB speichern
+    $sql = "INSERT INTO cookie
+    ( 
+        cookie_wert
+    )
+    VALUES
+    (
+        \"".$sid."\"
+    );";
+    $sql = mysqli_query($verbinde, $sql);
+    echo "neues cookie gesetzt";
+
+}
+
+
 //landing page
 
 //vorläufiger arbeitsbutton zur loginseite///////////////////////////////////////////////
@@ -37,6 +60,13 @@ echo "<button name=\"Seiten_ID\" type=\"submit\" value=\"login\"> Login </button
 //echo "<input type=\"hidden\" name=\"seiten_zrück\" value=\"".$seitenid."\">";
 echo "</form>";
 
+
+
+
+//vorläufiger auslog button
+echo "<form action=\"#\" method=\"POST\">";
+echo "<button name=\"ausloggen\"> logout </button>";
+echo "</form>";
 //////////////////////////////////////////////////////////////////////
 
 //vorläufiger arbeitsbutton zur kassenseite///////////////////////////////////////////////
