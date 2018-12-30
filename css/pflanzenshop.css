@@ -1,8 +1,4 @@
-//Farbvariablen
 
---bg_hell: #f2f2f2;
---grün: #177744;
---akzent_farbe: #19314f;
 
 
 /*allgemein-------------------------------------------------------------------------------------------------*/
@@ -32,6 +28,14 @@
     margin-top: 15px;
     padding: 2px;
     
+}
+
+/*fehlermeldungen*/
+.fehler
+{
+    color: #FF0000;
+    font-size: 8pt;
+
 }
 
 /*Landing_Page_______________________________________________________________________________________________*/
@@ -335,8 +339,14 @@ a.kasse_nav
     padding-bottom:5px;
     
 }
-a.kasse_nav:active
+a.kasse_nav_active
 {
+    font-weight: bold;
+    margin-right: 50px;
+    font-size: 14px;
+    color: #000000;
+   
+    padding-bottom:5px;
     border-bottom: solid  #177744;
 
 }
@@ -345,7 +355,7 @@ a.kasse_nav:active
     width:100%;
     background-color: #f2f2f2;
     padding-top: 30px;
-    height: 400px;
+    min-height: 400px;
     
 }
 
@@ -357,7 +367,7 @@ a.kasse_nav:active
     float:left;
     width: 500px;
     float:left;
-    height: 300px;
+    min-height: 300px;
     margin-left:90px;
 }
 
@@ -387,6 +397,20 @@ a.kasse_nav:active
     padding: 2px;
 
 }
+.kasse_button_weiter_disabled
+{
+    margin-left:315px;
+      background-color: #709280;
+    color: #ffffff;
+    font-size: 10px;
+    border: none;
+    width: 100px;
+    border: solid 1.5px #528168;
+    margin-top: 15px;
+    padding: 2px;
+
+}
+
 
 .kasse_button_zurück
 {
@@ -402,7 +426,17 @@ a.kasse_nav:active
  
 }
 
+.kasse_artikel_bild
+ {
+        width:40px;
+        height: 60px;
+        margin: 10px;
+}
 
+.kasse_td
+{
+    padding-left: 30px;
+}
 /*kasse:schrift*/
     
 .kasse_ueberschrift_klein
