@@ -80,7 +80,7 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
                             echo "<form action=\"index.php\" method=\"post\">";
                             echo "<select name=\"Menge\">";
                             for ($i=1; $i<=$row['art_bestand']; $i++){
-                                echo "<option>".$i."</option>";
+                                echo "<option value=\"".$i."\">".$i."</option>";
                             } 
                             echo "</select>";
                             echo "<button id=\"L_artInBasket\" name=\"".$row['art_id']."\" type=\"submit\">In den Warenkorb</button>";
