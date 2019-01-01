@@ -1,4 +1,5 @@
 <?php
+
     //Datenbank einbinden
     $host = "localhost";
     $user = "root";
@@ -10,30 +11,21 @@
 
 
 //session aufnehmen
-session_start();
 
-//einlogversuche zählen
-if (isset($_POST['user_login']))
-{
-    $_SESSION['versuche']--;
 
-    if ($_SESSION['versuche']==0)
-    {
-        echo "drei Loginversuche verbraucht";
-    }
-}
+
 
     //eingabe überprüfen
     if (isset( $_POST['login_name']))
     {
         //übermittelte seiten id der vorher aufgerufenen seite speichern
-        $seiten_zurück =$_POST['seiten_zurück'];
+       // $seiten_zurück =$_POST['seiten_zurück'];
 // beide felder gefüllt?
         if($_POST['login_name']!= "" AND $_POST['login_pass']!= "")
 
         {
            // überprüfen, ob Loginname gültig
-           $sql = "SELECT n_id, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
+           $sql = "SELECT n_id, n_admin, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
             $result = mysqli_query($verbinde, $sql);
          
             if (mysqli_num_rows ($result) > 0)
@@ -41,7 +33,7 @@ if (isset($_POST['user_login']))
                 while ($zeile = mysqli_fetch_assoc($result))
                 {
                 //nutzerid speichern
-                $_nutzer = $zeile['n_id'];
+                $nutzer = $zeile['n_id'];
                 //eingegebenes Passwort speichern
                 $passwort = $_POST['login_pass'];
                 //gehashtes Passwort aus der Datenbank 
@@ -52,15 +44,24 @@ if (isset($_POST['user_login']))
 //prüfen, ob Passwort und Hash übereinstimmen
                 if (password_verify($passwort, $hash))
                 {
-                //login cookie setzen    
-                //setcookie("login_cookie",$sid, time()+1800);
+                
+                //neue Session id
+               // function session_regenerate_id();
 
                 // seitenweiterleitung über die id variable
-               // $seitenid = $seiten_zuürck;
-                 header("Location: index.php");
+                $expire = time();
+               // echo $expire;
 
+                $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
+               
                 
-                $_SESSION['loged_in'] = "true";
+
+                $sql = "UPDATE cookie
+                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"abc\"  
+                        WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+                $result = mysqli_query($verbinde, $sql);
+                echo "eingeloggt";
+               header("Location: index.php");
                 }
                     
              
