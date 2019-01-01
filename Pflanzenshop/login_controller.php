@@ -49,7 +49,7 @@
                // function session_regenerate_id();
 
                 // seitenweiterleitung über die id variable
-                $expire = time();
+                $expire = time()+30;
                // echo $expire;
 
                 $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
@@ -71,9 +71,34 @@
             else
             {
                 $B_Fehler= "Nutzername oder Passwort falsch!";
+                
+                //  Login Versuchanzahl auslesen
+                $sql ="SELECT Versuche FROM cookie   WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+                $result = mysqli_query($verbinde, $sql);
+                $zeile = mysqli_fetch_assoc($result);
+
+                // anzahl speichern
+                $versuch_anzahl_alt = $zeile['Versuche'];
+                $versuch_anzahl_neu = $versuch_anzahl_alt -1;
+
+                //wenn anzahl größer null
+                if ($versuch_anzahl_neu >0)
+                {
+                // anzahl verringern
+                $sql = "UPDATE cookie 
+                        SET Versuche=\"".$zeile['Versuche']."-1\"
+                        WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+                
+                $result = mysqli_query($verbinde, $sql);
+                } 
+                // Versuche = 0
+                else
+                {
+                    echo "Loginversuche verbraucht!";
+                }
             }
         }
-
+    }
         }
         // Fehlermeldung, wenn nicht beide Felder ausgefüllt wurden
         else 
@@ -81,7 +106,7 @@
             $B_Fehler2= "Nutzername und Passwort eingeben!";
         }
     }
-    }
+    
 
 ?>
 
