@@ -101,8 +101,13 @@ echo "<div id=\"L_headerRechts\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"warenkorb\">";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
-            echo "<div id=\"L_warenkorb_art_anz\">";            
-                echo warenkorbAnzahl();
+            echo "<div id=\"L_warenkorb_art_anz\">";  
+                /*if (warenkorbAnzahl()!=null) {
+                    echo warenkorbAnzahl();
+                } else {
+                    echo "0";
+                } */
+                include "Frontend/L_DB_Warenkorbanzahl.php";     
             echo "</div>";
         echo "</button>";
     echo "</form>";
@@ -118,5 +123,5 @@ echo "</header>";
 
 /*echo "<script type=\"text/javascript\" src=\"../js/L.js\"></script>";*/
 
-include "Frontend/L_DB_Warenkorbanzahl.php";
+/*include "Frontend/L_DB_Warenkorbanzahl.php";'*/
 ?>
