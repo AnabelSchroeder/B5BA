@@ -139,11 +139,32 @@ if (mysqli_num_rows ($result) > 0)
     // kasse2-zahlart: neue zahlart in Datenbank speichern
     if (isset($_POST['kasse2_zahlart_speichern']))
     {
+        //user daten selektieren
+
+$sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+$result = mysqli_query($verbinde, $sql);
+         
+        if (mysqli_num_rows ($result) > 0)
+        {   
+            while ($zeile = mysqli_fetch_assoc($result))
+            { 
+                $cookie_id=$zeile['cookie_id'];
+                $kasse_n_id = $zeile['n_id'];
+            }
+        }
+        //token prüfen
+        if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+        {
+            die ("ungültiger Token");
+        }
+        //wenn gültig: 
+        else{
         $sql= "UPDATE nutzer 
-                SET n_zahlart = \"".$_POST['kasse_zahlungsmethode_zahlungsart']."\" WHERE n_id = 1;";
+                SET n_zahlart = \"".$_POST['kasse_zahlungsmethode_zahlungsart']."\" WHERE n_id =\"".$kasse_n_id ."\";";
         mysqli_query($verbinde, $sql);
 
         $kasse_zahlart = $_POST['kasse_zahlungsmethode_zahlungsart'];
+       }
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,9 +178,18 @@ if($seitenid == "kasse_3")
 // kasse 3: artikel stückzahl erhöhen ///////////////////////////////////////////////////////   
 if (isset($_POST['kasse_3_anzahl_up']))
 {
+    //csrf prüfen
+    if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token");
+    }
+
+    //csrf gültig
+    else{
     // erhöhen, wenn anzahl kleiner als artikel stückzahl
     if ($_POST['kasse_wk_zahl']< $_POST['kasse_art_zahl'])
     {
+    //csrf prüfen
     $sql = "UPDATE warenkorb
             SET anzahl_art = anzahl_art+1
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
@@ -170,11 +200,20 @@ if (isset($_POST['kasse_3_anzahl_up']))
         echo "<span class=\"fehler\"> Die Stückanzahl kann nicht erhöht werden, 
         da der Lagerbestand bereits erreicht ist! </span>";
     }
+}
 } 
 
 // kasse3: artikel stückzahl verringern////////////////////////////////////////////////////////////
 if (isset($_POST['kasse_3_anzahl_down']))
 {
+    //csrf prüfen
+    if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token");
+    }
+
+    //csrf gültig
+    else{
     if ($_POST['kasse_wk_zahl']>1)
     {
     $sql = "UPDATE warenkorb
@@ -182,15 +221,23 @@ if (isset($_POST['kasse_3_anzahl_down']))
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
              mysqli_query($verbinde, $sql);
     }
-
+}
 } 
 
 //artikel aus warenkorb löschen/////////////////////////////////////////////////////////////////////////
 if (isset($_POST['kasse_3_artikel_delete']))
 {
+    //csrf prüfen
+    if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token");
+    }
+    //csrf gültig
+    else {
     $sql = "DELETE FROM warenkorb
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
              mysqli_query($verbinde, $sql);
+    }
 } 
 
 
@@ -246,6 +293,8 @@ if (mysqli_num_rows ($result) > 0)
              //stückzahl nicht mehr vorhanden:
                 if ($row['art_stueckzahl']< $wkzeile['anzahl_art'])
                 {   echo " <form method=\"POST\" action=\"#\"> <tr> ";
+                     //csrf
+                    echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
                     echo "<tr> ";
                     echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
                     echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button> artikel löschen</button> </td>";
@@ -268,6 +317,8 @@ if (mysqli_num_rows ($result) > 0)
  //Stückzahl vorhanden               
                 else{
                     echo " <form method=\"POST\" action=\"#\"> <tr> ";
+                     //csrf
+                    echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
                     echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
                     echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button type=\"submit\" name=\"kasse_3_artikel_delete\"> artikel löschen</button> </td>";
                     echo "<td class=\"kasse_td\">".$wkzeile['anzahl_art']."

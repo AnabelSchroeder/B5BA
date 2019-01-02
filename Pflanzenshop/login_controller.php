@@ -41,23 +41,44 @@
                
 
              
-//prüfen, ob Passwort und Hash übereinstimmen
-                if (password_verify($passwort, $hash))
+//prüfen, ob Passwort und Hash übereinstimmen////////////////////////////////////////////////////
+              if (password_verify($passwort, $hash))
                 {
                 
-                //neue Session id
-               // function session_regenerate_id();
+                //automatisch neue Session id
+              // function session_regenerate_id();
+              //  session_regenerate_id();
 
-                // seitenweiterleitung über die id variable
-                $expire = time()+30;
-               // echo $expire;
+        /*      // cookie erneuern ////////////////////////////////////////////////////////////////
+              $sql ="SELECT cookie_id FROM cookie WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+              $result = mysqli_query($verbinde, $sql);  
+              $zeile = mysqli_fetch_assoc($result);
 
-                $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
-               
+            
+              // altes cookie löschen
+            setcookie("sid", " ", time()-3600*48);
+
+            //neues cookie setzen
+            $sid = md5(openssl_random_pseudo_bytes(32));
+            setcookie("sid", $sid, time()+3600*48);
+
+            //Datenbank updaten
+            $sql ="UPDATE cookie
+                SET cookie_wert =\"".$_COOKIE['sid']."\"
+                WHERE cookie_id =\"".$zeile['cookie_id']."\";";
+                 $result = mysqli_query($verbinde, $sql); */
+             //////////////////////////////////////////////////////////////////////////////////////// 
                 
 
+             //login expire setzen:
+                $expire = time()+1800;
+               
+            // CSRF Token setzen://////////////////////////////////////////////////////////////
+                $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
+               
+            // Token in Datenbank speichern
                 $sql = "UPDATE cookie
-                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"abc\"  
+                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\"  
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
                 echo "eingeloggt";
@@ -73,7 +94,7 @@
                 $B_Fehler= "Nutzername oder Passwort falsch!";
                 
                 //  Login Versuchanzahl auslesen
-                $sql ="SELECT Versuche FROM cookie   WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+                $sql ="SELECT Versuche FROM cookie WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
                 $zeile = mysqli_fetch_assoc($result);
 
@@ -86,7 +107,7 @@
                 {
                 // anzahl verringern
                 $sql = "UPDATE cookie 
-                        SET Versuche=\"".$zeile['Versuche']."-1\"
+                        SET Versuche=\"2\"
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 
                 $result = mysqli_query($verbinde, $sql);

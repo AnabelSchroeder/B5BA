@@ -3,9 +3,6 @@ include "kasse_controller.php";
  if ($seitenid== "kasse_1")
 {
     
-
-
-
 echo "<div class=\"kasse_headleiste\">";
     echo "Kasse <br>";
     echo "<a  class=\"kasse_nav_active\">Adresse </a> <a class=\"kasse_nav\"> Zahlungsmethode </a> <a class=\"kasse_nav\"> Kauf abschließen </a> <a class=\"kasse_nav\"> Bestellbestätigung </a>";
@@ -29,7 +26,7 @@ if(isset ($K_Fehler))
     echo "<br> <br> <br> <br> <br> <br> <br> <br> <br>";
     echo "<a class=\"kasse_ueberschrift_klein\">Adresse ändern?</a>";
     echo "<hr>";
-
+   
    
     //Buttons weiter und zurück
     echo "<form method=\"GET\"  action=\"index.php?Seiten_ID=kasse_2\">";
@@ -38,10 +35,15 @@ if(isset ($K_Fehler))
     echo "</form>";
     echo "</div>";
 
+
 //rechte Seite
 echo "<div class=\"kasse_rechts\">";
-echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br>";
-echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span>";
+echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
+
+echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span> <br> <br>";
+echo $wk_art_anzahl." Artikel xx€ <br> <hr>";
+echo "Versandkosten 4.95€ <br> <hr>";
+echo "<span class=\"kasse_rechts_klein\">Bruttobetrag xx€ </span> <br> <br>";
 echo "</div>";
 echo "</div>";
 
@@ -66,6 +68,9 @@ echo "<div class=\"kasse_div\">";
 echo "<div class=\"kasse_links\">";    
     echo "<span class=\"kasse_ueberschrift_klein\">Wähle eine Zahlungsmethode aus: </span> <br>";
     echo "<form method=\"POST\">";
+
+    // csrf
+    echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
     echo "Zahlungsart   <select name=\"kasse_zahlungsmethode_zahlungsart\">";
 
     // zahlart vorbelegen
@@ -115,12 +120,20 @@ echo "<div class=\"kasse_links\">";
 
     //weiter zu kasse3: "kauf abschließen"
     echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\"  value=\"kasse_3\"> weiter </button>";
+     
     echo "</form>";
       echo "</div>";
 //rechte Seite
 
 echo "<div class=\"kasse_rechts\">";
-echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br>";
+echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
+// Anschrift ausgeben
+echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
+echo $kasse_vname."<br>";
+echo $kasse_nname."<br>";
+echo $kasse_strasse."<br>";
+echo $kasse_plz." ".$kasse_ort." <br><hr>";
+echo "<br>";
 echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span>";
 echo "</div>";
 echo "</div>";
@@ -155,12 +168,24 @@ echo "<div class=\"kasse_links\">";
        echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
     //weiter zu kasse4: bestellbestätigung
     echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
+   //csrf
+   echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
     echo "</form>";
     echo "</div>";
     
     //rechte Seite
     echo "<div class=\"kasse_rechts\">";
-echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br>";
+echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
+//Anschrift ausgeben
+echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
+echo $kasse_vname."<br>";
+echo $kasse_nname."<br>";
+echo $kasse_strasse."<br>";
+echo $kasse_plz." ".$kasse_ort." <br> <hr>";
+echo "<br>";
+//Zahlart ausgeben
+echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
+echo $kasse_zahlart."<br> <hr>";
 echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span>";
 echo "</div>";
 echo "</div>";
@@ -169,16 +194,21 @@ echo "</div>";
 // bestellbestätigung///////////////////////////////////////////////////////////////////////////////////////////////
 else if ($seitenid == "kasse_4")
 {
+    //crsf prüfen
+    if($_GET['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token!");
+    }
 
-
-
+else
+{
 //nav anzeige
 echo "<div class=\"kasse_headleiste\">";
     echo "Kasse <br>";
     echo "<a class=\"kasse_nav\">Adresse </a> <a class=\"kasse_nav\"> Zahlungsmethode </a> <a class=\"kasse_nav\"> Kauf abschließen </a> <a class=\"kasse_nav_active\"> Bestellbestätigung </a>";
 echo "</div>";
 
-//linke seite
+//linke seite////////////////////////////////////////////////////////////////////////////
 echo "<div class=\"kasse_div\">";
 echo "<div class=\"kasse_links\">";
 echo  "<span class=\"kasse_ueberschrift_klein\"> Der Kauf ist abgeschlossen. Wir wünschen viel Spaß mit unseren Produkten </span><br>";
@@ -186,7 +216,7 @@ echo "<span class=\"kasse_rechts_ueberschrift\">Ihre Bestellung </span> <br><br>
 echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
 
 //Anschrift ausgeben
-echo "Anschrift <br>";
+
 echo $kasse_vname."<br>";
 echo $kasse_nname."<br>";
 echo $kasse_strasse."<br>";
@@ -194,9 +224,10 @@ echo $kasse_plz." ".$kasse_ort." <br>";
 echo "<br>";
 
 //Zahlart ausgeben
-echo "Zahlungsmethode <br>";
+echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
 echo $kasse_zahlart."<br>";
 
+//artikel tabelle darstellen
 echo "<table>";
 echo "<tr> ";
 echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
@@ -206,7 +237,8 @@ echo "<td class=\"kasse_td\">".$row['art_preis'] * $zeile['anzahl_art']." €";
 echo "</tr>";
 echo "</table>";
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////
+//unten: Kosten und Buttons
 echo "Versandkosten: 4,95€ <br>";
 echo "Gesamtsumme: <br>";
 
@@ -220,6 +252,6 @@ echo "<button class=\"kasse_button_weiter\"> Ausdrucken </button>";
 echo "</form>";
 echo "</div>";
 echo "</div>";
-
+}
 };
 ?>
