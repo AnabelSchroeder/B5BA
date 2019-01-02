@@ -2,6 +2,46 @@
 session_start();
 
 //??$cookie_
+//Cookie_Antonia
+$servername = "localhost";
+$username = "root";
+$passwort = "root";
+$dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
+
+//$port = 8889;
+
+//$link = mysqli_init();
+//$success = mysqli_real_connect($link, $servername, $username, $passwort, $dbname, $port);
+
+$verbinde = mysqli_connect($servername, $username, $passwort);
+$connmysql = mysqli_select_db($verbinde, $dbname);
+
+if (isset($_COOKIE['sid'])) {
+    echo "cookie vorhanden";
+   // in der Datenbank nachschauen, ob Cookie vorhanden
+   $sql ="SELECT cookie_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+   $result = mysqli_query($verbinde, $sql);
+// evtl. Cookie verlängern 
+}
+    
+else {
+    // cookie id zufällig generieren
+    $sid = md5(openssl_random_pseudo_bytes(32));
+    // cookie setzen
+setcookie("sid", $sid, time()+3600*48);
+    // In DB speichern
+    $sql = "INSERT INTO cookie
+    ( 
+        cookie_wert
+    )
+    VALUES
+    (
+        \"".$sid."\"
+    );";
+    $sql = mysqli_query($verbinde, $sql);
+    echo "neues cookie gesetzt";
+}
+
 
 echo"<!DOCTYPE html>";
 echo"<head>";
