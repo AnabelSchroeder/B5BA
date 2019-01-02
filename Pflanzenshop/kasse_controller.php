@@ -101,6 +101,8 @@ $result = mysqli_query($verbinde, $sql);
                     $K_Fehler = "Sie sind derzeit gesperrt. Ein Bestellvorgang ist nicht möglich!";
                     echo "<script type=\"text/javascript\"> kasse_sperren(); </script>";
                 }
+
+            
 //////////////////////////////////////////////////////////////////////////////
                 //Name und Adresse in Variablen speichern
                 $kasse_vname= $zeile['n_vname'];
@@ -173,7 +175,17 @@ $result = mysqli_query($verbinde, $sql);
 //kasse3
 if($seitenid == "kasse_3")
 {
-    
+    $sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+    $result = mysqli_query($verbinde, $sql);
+             
+            if (mysqli_num_rows ($result) > 0)
+            {   
+                while ($zeile = mysqli_fetch_assoc($result))
+                { 
+                    $cookie_id=$zeile['cookie_id'];
+                    $kasse_n_id = $zeile['n_id'];
+                }
+            } 
     
 // kasse 3: artikel stückzahl erhöhen ///////////////////////////////////////////////////////   
 if (isset($_POST['kasse_3_anzahl_up']))
@@ -258,38 +270,42 @@ echo "</div>";
         echo "<table>";
 
 
-$sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
-$result = mysqli_query($verbinde, $sql);
-         
-if (mysqli_num_rows ($result) > 0)
-{   
-    //$resultset = array();
-    while ($wkzeile = mysqli_fetch_array($result)) 
-
-  
-       // {
-       //     $resultset[]= $zeile;
-      //  }
-     //   foreach ($resultset as $resultrow)
-        {
-        //einträge zählen
-        echo count ($wkzeile);
-
-        // artikel daten zu den artikel IDs aus dem warenkorb suchen
-        $sql = "SELECT art_id, art_name, art_preis, art_stueckzahl, art_bild 
-        FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
+        $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
         $result = mysqli_query($verbinde, $sql);
+                 
+        if (mysqli_num_rows ($result) > 0)
+        {   
+            //$resultset = array();
+            while ($wkzeile = mysqli_fetch_array($result)) 
+        {
+                //einträge zählen
+                echo count ($wkzeile);
         
-    
+                
+        
+                // artikel daten zu den artikel IDs aus dem warenkorb suchen
+                $sql = "SELECT art_id, art_name, art_preis, sale_status, sale_preis, art_stueckzahl, art_bild 
+                FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
+                $result = mysqli_query($verbinde, $sql);
+            
            
         
     if (mysqli_num_rows ($result) > 0)
         {   
         while ($row = mysqli_fetch_assoc($result))
             {
-               
-             
-//abfrage, ob stückzahl vorhanden
+                
+//abfrage ob sale////////////////////////////////////////////////////////////////////////////
+if($row['sale_status']== true)
+{
+    $kasse_art_preis = $row['sale_preis'];
+}             
+
+if ($row['sale_status']== false)
+{
+    $kasse_art_preis = $row['art_preis'];
+}
+//abfrage, ob stückzahl vorhanden////////////////////////////////////////////////////////////////
              //stückzahl nicht mehr vorhanden:
                 if ($row['art_stueckzahl']< $wkzeile['anzahl_art'])
                 {   echo " <form method=\"POST\" action=\"#\"> <tr> ";
@@ -302,19 +318,19 @@ if (mysqli_num_rows ($result) > 0)
                     echo "<td class=\"kasse_td\">".$row['art_stueckzahl']."
 
                     <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> 
-                    <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> <br> je ".$row['art_preis']." €</td>
+                    <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> <br> je ".$kasse_art_preis." €</td>
                     <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">";
 
-                    echo "<td class=\"kasse_td\">".$row['art_preis'] * $wkzeile['anzahl_art']." €"; 
+                    echo "<td class=\"kasse_td\">".$kasse_art_preis * $wkzeile['anzahl_art']." €"; 
 
                     echo "</tr>  </form>";
-// Fehlerausgabe
+// Fehlerausgabe///////////////////////////////////////////////////////////////////////////////////////////////////
                     echo "<pan class=\"fehler\"> Die gewünschte Menge des Artikel ".$row['art_name']. " ist leider nicht mehr verfügbar!</span>";
                 }
 
- //Stückzahl vorhanden               
+ //Stückzahl vorhanden //////////////////////////////////////////////////////////////////////////////////////////////              
                 else{
                     echo " <form method=\"POST\" action=\"#\"> <tr> ";
                      //csrf
@@ -328,8 +344,8 @@ if (mysqli_num_rows ($result) > 0)
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">
                     <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
                     
-                    <br> je ".$row['art_preis']." €</td>";
-                    echo "<td class=\"kasse_td\">".$row['art_preis'] * $wkzeile['anzahl_art']." €";
+                    <br> je ".$kasse_art_preis." €</td>";
+                    echo "<td class=\"kasse_td\">". $kasse_art_preis * $wkzeile['anzahl_art']." €";
                     echo "</tr> </form>";
                 }
 
@@ -349,6 +365,60 @@ if (mysqli_num_rows ($result) > 0)
     echo "</form>";
     echo "<hr>";
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+if ($seitenid=="kasse_4")
+
+{
+    $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
+$result = mysqli_query($verbinde, $sql);
+         
+if (mysqli_num_rows ($result) > 0)
+{   
+    //$resultset = array();
+    while ($wkzeile = mysqli_fetch_array($result)) 
+{
+        //einträge zählen
+        echo count ($wkzeile);
+
+        
+
+        // artikel daten zu den artikel IDs aus dem warenkorb suchen
+        $sql = "SELECT art_id, art_name, art_preis, art_stueckzahl, art_bild 
+        FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
+        $result = mysqli_query($verbinde, $sql);
+        if (mysqli_num_rows ($result) > 0)
+        {   
+        $row = mysqli_fetch_assoc($result);
+        }
+        
+    
+           
+        
+  /*  if (mysqli_num_rows ($result) > 0)
+        {   
+        while ($row = mysqli_fetch_assoc($result))
+            {
+             
+               echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
+               echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button type=\"submit\" name=\"kasse_3_artikel_delete\"> artikel löschen</button> </td>";
+               echo "<td class=\"kasse_td\">".$wkzeile['anzahl_art']."
+              
+               <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
+               <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
+               <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">
+               <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
+               
+               <br> je ".$row['art_preis']." €</td>";
+               echo "<td class=\"kasse_td\">".$row['art_preis'] * $wkzeile['anzahl_art']." €";
+               echo "</tr> </form>";
+               
+            }
+        } */
+    }
+}
+}
+////////////////////////////////////////////////////////////
 }
 
 
