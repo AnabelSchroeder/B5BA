@@ -26,7 +26,7 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
     $L_verbinde = mysqli_connect($servername, $username, $passwort);
     $L_connmysql = mysqli_select_db($verbinde, $dbname);
     
-    $L_sql = "SELECT * FROM artikel WHERE art_id=$L_artid";
+    $L_sql = "SELECT * FROM artikel WHERE art_id='$L_artid'";
 
     $L_result = mysqli_query($verbinde /*$link*/, $L_sql);
     
@@ -75,11 +75,11 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
 
                         
                       //ENTWEDER SO ODER BEIM SHOP ARTIKEL MIT MENGE 0 NICHT ANZEIGEN____________!!!!!!!!  
-                        if ($row['art_bestand']>0){
+                        if ($row['art_stueckzahl']>0){
                             //Formular für Menge in den Warenkorb
                             echo "<form action=\"index.php\" method=\"post\">";
                             echo "<select name=\"Menge\">";
-                            for ($i=1; $i<=$row['art_bestand']; $i++){
+                            for ($i=1; $i<=$row['art_stueckzahl']; $i++){
                                 echo "<option value=\"".$i."\">".$i."</option>";
                             } 
                             echo "</select>";
