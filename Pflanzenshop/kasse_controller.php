@@ -207,7 +207,7 @@ if (isset($_POST['kasse_3_anzahl_up']))
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
              mysqli_query($verbinde, $sql);
     }
-// Benachrichtigung, wenn keine erhöhung möglich
+//Fehler: Benachrichtigung, wenn keine erhöhung möglich
     else{
         echo "<span class=\"fehler\"> Die Stückanzahl kann nicht erhöht werden, 
         da der Lagerbestand bereits erreicht ist! </span>";
@@ -266,6 +266,8 @@ echo "</div>";
     //linke seite
     echo "<div class=\"kasse_div\">";
     echo "<div class=\"kasse_links\">";
+
+    
         echo "<span class=\"kasse_ueberschrift_klein\">Überprüfe deine Bestellung und schließe den Kauf ab:</span><br>";
         echo "<table>";
 
@@ -313,7 +315,7 @@ if ($row['sale_status']== false)
                     echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
                     echo "<tr> ";
                     echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
-                    echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button> artikel löschen</button> </td>";
+                    echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button> Artikel löschen</button> </td>";
 // stückzahl auf die verfügbare anzahl setzen
                     echo "<td class=\"kasse_td\">".$row['art_stueckzahl']."
 
@@ -326,7 +328,7 @@ if ($row['sale_status']== false)
                     echo "<td class=\"kasse_td\">".$kasse_art_preis * $wkzeile['anzahl_art']." €"; 
 
                     echo "</tr>  </form>";
-// Fehlerausgabe///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fehlerausgabe: Artikelmenge nicht verfügbar///////////////////////////////////////////////////////////////////////////////////////////////////
                     echo "<pan class=\"fehler\"> Die gewünschte Menge des Artikel ".$row['art_name']. " ist leider nicht mehr verfügbar!</span>";
                 }
 
@@ -367,6 +369,7 @@ if ($row['sale_status']== false)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 if ($seitenid=="kasse_4")
 
 {
@@ -380,43 +383,65 @@ if (mysqli_num_rows ($result) > 0)
 {
         //einträge zählen
         echo count ($wkzeile);
-
+        $kasse_4_anzahl = $wkzeile['anzahl_art'];
         
 
         // artikel daten zu den artikel IDs aus dem warenkorb suchen
-        $sql = "SELECT art_id, art_name, art_preis, art_stueckzahl, art_bild 
+        $sql = "SELECT art_id, art_name, art_bild , art_preis, sale_status, sale_preis
         FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
         $result = mysqli_query($verbinde, $sql);
         if (mysqli_num_rows ($result) > 0)
         {   
-        $row = mysqli_fetch_assoc($result);
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            //abfrage ob sale////////////////////////////////////////////////////////////////////////////
+        if($row['sale_status']== true)
+        {
+            $kasse_art_preis = $row['sale_preis'];
+        }             
+
+        if ($row['sale_status']== false)
+        {
+            $kasse_art_preis = $row['art_preis'];
+        }
+        }
         }
         
     
            
         
-  /*  if (mysqli_num_rows ($result) > 0)
-        {   
-        while ($row = mysqli_fetch_assoc($result))
-            {
-             
-               echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
-               echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button type=\"submit\" name=\"kasse_3_artikel_delete\"> artikel löschen</button> </td>";
-               echo "<td class=\"kasse_td\">".$wkzeile['anzahl_art']."
-              
-               <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
-               <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
-               <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">
-               <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
-               
-               <br> je ".$row['art_preis']." €</td>";
-               echo "<td class=\"kasse_td\">".$row['art_preis'] * $wkzeile['anzahl_art']." €";
-               echo "</tr> </form>";
-               
-            }
-        } */
+
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// aktuelles datum
+$best_date= date("Y-m-d H:i:s");
+// bestellung in datenbank : tabelle bestellung/////////////////////////////////////////////////////
+$sql="INSERT INTO bestellung
+(best_datum,
+n_id,
+best_n_vname,
+best_n_name,
+lieferstrasse,
+lieferplz,
+lieferort,
+best_bezahlart)
+
+VALUES
+(
+    \"".$best_date."\",
+    \"". $kasse_n_id."\",
+    \"".$kasse_vname."\",
+    \"". $kasse_nname."\",
+    \"". $kasse_strasse."\",
+    \"". $kasse_plz."\",
+    \"". $kasse_ort."\",
+    \"". $kasse_zahlart."\"
+)";
+$result = mysqli_query($verbinde, $sql);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }
 ////////////////////////////////////////////////////////////
 }
