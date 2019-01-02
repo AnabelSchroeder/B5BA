@@ -32,19 +32,19 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 $verbinde = mysqli_connect($servername, $username, $passwort);
                 $connmysql = mysqli_select_db($verbinde, $dbname);
 
-                $L_cookie = $_COOKIE['KEINEAHNUNG']; //!!!!!!!!!
+                $L_cookie = $_COOKIE['sid']; //!!!!!!!!!
 
-                $L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie'"; 
+                $L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie';"; 
                 $L_cookieId = mysqli_query($verbinde, $L_sqlCookieId);
 
-                $L_sql = "SELECT * FROM warenkorb WHERE cookie_id='$L_cookieId'";
+                $L_sql = "SELECT * FROM warenkorb WHERE cookie_id='$L_cookieId';";
                 $L_basket = mysqli_query($verbinde, $L_sql);
 
                 $L_sqlartBasketJoin = "SELECT warenkorb.korb_id, warenkorb.anzahl_art, 
                                         artikel.art_id, artikel.art_name, artikel.art_preis, 
                                         artikel.sale_status, artikel.sale_preis, artikel.art_bestand 
                                         FROM warenkorb INNER JOIN artikel 
-                                        ON warenkorb.art_id=artikel.art_id";
+                                        ON warenkorb.art_id=artikel.art_id;";
                 $L_artBasketJoin = mysqli_query($verbinde, $L_sqlartBasketJoin);
 
                 
