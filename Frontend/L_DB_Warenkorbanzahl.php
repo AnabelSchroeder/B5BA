@@ -4,7 +4,7 @@
 // Ersteller: Lisa Peters //
 ///////////////////////////////////////
 
-function warenkorbAnzahl(){
+
     $servername = "localhost";
 $username = "root";
 $passwort = "root";
@@ -17,15 +17,37 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
 
 $verbinde = mysqli_connect($servername, $username, $passwort);
 $connmysql = mysqli_select_db($verbinde, $dbname);
-
-$L_cookie = $_COOKIE['KEINEAHNUNG']; //!!!!!!!!!
+/*
+if (mysqli_connect_errno()){
+    printf("Verbindung fehlgeschlagen: %s\n", mysqli_connect_error());
+    exit();
+}
+*/
+$L_cookie = $_COOKIE['sid']; 
 
 $L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie'"; 
 $L_cookieId = mysqli_query($verbinde, $L_sqlCookieId);
+$L_cookieResult = mysqli_fetch_assoc($L_cookieId);
 
-$L_sqlbasketCount = "SELECT COUNT (korb_id) FROM warenkorb WHERE cookie_id='$L_cookieId'";
+/*
+$L_sqlbasketCount = "SELECT COUNT (korb_id) FROM warenkorb WHERE cookie_id='$L_cookieId';";
 $L_basketCount = mysqli_query($verbinde, $L_sqlbasketCount);
 return $L_basketCount;
-}
+*/
 
+$L_sqlbasketCount = "SELECT korb_id FROM warenkorb WHERE cookie_id='$L_cookieResult'";
+$L_basketCount = mysqli_query($verbinde, $L_sqlbasketCount);
+$L_result = $L_basketCount;
+$L_row_cnt = mysqli_num_rows($L_result);
+if ($L_row_cnt!=null) {
+    echo $L_row_cnt;
+} else {
+    echo "0";
+}   
+/*    
+mysqli_free_result($L_cookieResult);
+mysqli_free_result($L_result);
+
+mysqli_close($verbinde);
+*/
 ?>
