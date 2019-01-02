@@ -21,7 +21,7 @@ $verbinde = mysqli_connect($servername, $username, $passwort);
 $connmysql = mysqli_select_db($verbinde, $dbname);
 
 //Wenn das Suchfeld betätigt wurde
-if (isset ($_POST["L_searchfield"]) & ($_POST["L_searchfield"]) != null){
+if (isset ($_POST["L_searchfield"]) && ($_POST["L_searchfield"]) != null){
     $L_suchbegriff = htmlspecialchars($_POST["L_searchfield"], ENT_QUOTES, 'UTF-8');
     $L_suche ="SELECT COUNT (*) 
     FROM artikel 
@@ -29,59 +29,59 @@ if (isset ($_POST["L_searchfield"]) & ($_POST["L_searchfield"]) != null){
     LIKE %$L_suchbegriff%";
 }
 //Wenn mind. ein Filter gesetzt wurde
-else if ((isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL) || 
-(isset ($_POST["L_FilterFarbe"]) & ($_POST["L_FilterFarbe"]) != NULL) || 
-(isset ($_POST["L_FilterKategorie"]) & ($_POST["L_FilterKategorie"]) != NULL )|| 
-(isset ($_POST["L_FilterPflege"]) & ($_POST["L_FilterPflege"]) != NULL) || 
-(isset ($_POST["L_FilterHoehe"]) & ($_POST["L_FilterHoehe"]) != NULL) || 
-(isset ($_POST["L_FilterStandort"]) & ($_POST["L_FilterStandort"]) != NULL) ){
+else if ((isset ($_POST["L_FilterPreis"]) && ($_POST["L_FilterPreis"]) != NULL) || 
+(isset ($_POST["L_FilterFarbe"]) && ($_POST["L_FilterFarbe"]) != NULL) || 
+(isset ($_POST["L_FilterKategorie"]) && ($_POST["L_FilterKategorie"]) != NULL )|| 
+(isset ($_POST["L_FilterPflege"]) && ($_POST["L_FilterPflege"]) != NULL) || 
+(isset ($_POST["L_FilterHoehe"]) && ($_POST["L_FilterHoehe"]) != NULL) || 
+(isset ($_POST["L_FilterStandort"]) && ($_POST["L_FilterStandort"]) != NULL) ){
     $L_suche = "";
     //Gewählten Filter in Variabler für Suchanfrage speichern
-    if (isset ($_POST["L_FilterFarbeAuswahl"]) & ($_POST["L_FilterFarbeAuswahl"]) != null) {
+    if (isset ($_POST["L_FilterFarbeAuswahl"]) && ($_POST["L_FilterFarbeAuswahl"]) != null) {
         $L_farbauswahl = $_POST["L_FilterFarbeAuswahl"];
         $L_farbsql = "SELECT art_id FROM artikel WHERE art_farbe=$farbauswahl";
         $L_suche .= "$L_farbsql";
     } else {
-        $L_farbsql = null;
+        $L_farbsql = "";
     }
     //Gewählten Filter in Variabler für Suchanfrage speichern
     if (isset ($_POST["L_FilterKategorieAuswahl"])) {
         $L_katauswahl = $_POST["L_FilterKategorieAuswahl"];
         $L_katsql = "SELECT art_id FROM artikel WHERE kat_bez=$L_katauswahl";
         //Prüfen, ob schon eine Suchanfrage in der Variable gespeichert ist, wenn ja Suchanfragen vereinen
-        if ($L_suche == NULL){
+        if ($L_suche == ""){
             $L_suche .= "$L_katsql";
         }else {
             $L_suche .= " UNION $L_katsql";
         }
     }else {
-        $L_katsql = NULL;
+        $L_katsql = "";
     }
     //Gewählten Filter in Variabler für Suchanfrage speichern
     if (isset ($_POST["L_FilterPflegeAuswahl"])) {
         $L_pflegeauswahl = $_POST["L_FilterPflegeAuswahl"];
         $L_pflegesql = "SELECT art_id FROM artikel WHERE art_pflege=$L_pflegeauswahl";    
         //Prüfen, ob schon eine Suchanfrage in der Variable gespeichert ist, wenn ja Suchanfragen vereinen
-        if ($L_suche == NULL){
+        if ($L_suche == ""){
             $L_suche .= "$L_pflegesql";
         }else {
             $L_suche .= " UNION $L_pflegesql";
         }
     }else {
-        $L_pflegesql = NULL;
+        $L_pflegesql = "";
     }
     //Gewählten Filter in Variabler für Suchanfrage speichern    
     if (isset ($_POST["L_FilterStandortAuswahl"])) {
         $L_standortauswahl = $_POST["L_FilterStandortAuswahl"];
         $L_standortsql = "SELECT art_id FROM artikel WHERE art_ort=$L_standortauswahl";    
         //Prüfen, ob schon eine Suchanfrage in der Variable gespeichert ist, wenn ja Suchanfragen vereinen
-        if ($L_suche == NULL){
+        if ($L_suche == ""){
             $L_suche .= "$L_standortsql";
         }else {
             $L_suche .= " UNION $L_standortsql";
         }
     }else {
-        $L_standortsql = NULL;
+        $L_standortsql = "";
     }
     //Gewählten Filter in Variabler für Suchanfrage speichern
     if (isset ($_POST["L_FilterPreisAuswahl"])) {
@@ -90,28 +90,28 @@ else if ((isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL) |
                         UNION 
                         SELECT art_id FROM artikel WHERE sale_status=1 AND sale_preis=$L_preisauswahl";        
         //Prüfen, ob schon eine Suchanfrage in der Variable gespeichert ist, wenn ja Suchanfragen vereinen
-        if ($L_suche == NULL){
+        if ($L_suche == ""){
             $sql .= "$L_preissql";
         }else {
             $L_suche .= " UNION $L_preissql";
         }
     }else {
-        $L_preissql = NULL;
+        $L_preissql = "";
     }
     //Gewählten Filter in Variabler für Suchanfrage speichern
     if (isset ($_POST["L_FilterHoeheAuswahl"])) {
         $L_hoeheauswahl = $_POST["L_FilterHoeheAuswahl"];
         $L_hoehesql = "SELECT art_id FROM artikel WHERE art_groesse=$L_hoeheauswahl";   
         //Prüfen, ob schon eine Suchanfrage in der Variable gespeichert ist, wenn ja Suchanfragen vereinen
-        if ($L_suche == NULL){
+        if ($L_suche == ""){
             $L_suche .= "$L_hoehesql";
         }else {
             $L_suche .= " UNION $L_hoehesql";
         }
     }else {
-        $L_hoehesql = NULL;
+        $L_hoehesql = "";
     }
-    
+    //$L_suche .= ";";
 }  
 //Wenn Seite "normal" aufgerufen wird
 else {
@@ -131,7 +131,7 @@ else {
  $recordSkip = ($currentpage * $recordperpage) - $recordperpage;
 
 $totalpageCounted = mysqli_query($verbinde /*$link*/, $L_suche);
-$totalresult = mysqli_num_rows($firstresult);
+$totalresult = mysqli_num_rows($totalpageCounted);
 
 
 
@@ -143,7 +143,7 @@ if ($totalresult < 0)
 
     $lastpage = ceil($totalresult / $recordperpage);
     $recordSkippage = 1;
-    $nextpage = $currentpage . 1;
+    $nextpage = $currentpage + 1;
     $previouspage = $currentpage - 1;
 
     $L_suchePag = "$L_suche LIMIT $recordSkip, $recordperpage";
@@ -186,7 +186,7 @@ if ($totalresult < 0)
             echo "<a href=\"?Seiten_ID=shop&page=".$recordSkippage."\" class=\"L_pagPfeil\">";
             echo "Erste</a>";
         }  
-        if ($currentpage >= 5){
+        if ($currentpage >= 3){
             echo "<a href=\"?Seiten_ID=shop&page=".$previouspage."\" class=\"L_shopPagAusgabe\">...";
             echo $previouspage."     </a>";
         }
