@@ -1,4 +1,42 @@
-//user login eingabe prüfen
+//kasse_3: AGB checkbox prüfen und bestellbutton enablen
+/*
+if (document.getElementById('AGB_check').checked==true)
+{
+    document.getElementById('kasse3_bestellen').enabled;
+    document.getElementById('kasse3_bestellen').className='kasse_button_weiter';
+
+}
+*/
+//////////////////////////////////////////
+//kasse: sperren bei sperre
+function kasse_sperren()
+{
+    document.getElementById('kasse_1_weiter').className='kasse_button_weiter_disabled';
+    document.getElementById('kasse_1_weiter').disabled=true;
+}
+///////////////////////////////////////////////////////////////////////////
+//kasse 3: bestell button enablen, wenn AGB akzeptiert
+function clickbar()
+    {
+        if (document.getElementById('AGB_check').checked==true)
+        {
+        document.getElementById('kasse3_bestellen').className='kasse_button_weiter';
+        document.getElementById('kasse3_bestellen').disabled=false;
+        }
+        else 
+        {
+            document.getElementById('kasse3_bestellen').className='kasse_button_weiter_disabled';
+            document.getElementById('kasse3_bestellen').disabled=true;
+        }
+    }
+
+
+
+
+
+
+//user login eingabe prüfen 
+/*!!ANDERS GELÖST!!
 function user_login_pruefe()
 {
     if (document.Login.login_name.value == "" || document.Login.login_pass.value == "" )
@@ -8,9 +46,9 @@ function user_login_pruefe()
             return false;
         }
 }
+*/
 
-
-//user registrierungs formular eingaben überprüfen
+//user registrierungs formular eingaben überprüfen///////////////////////////////////////////////////////////////
 function user_registration_pruefe()
 {
     if (document.Registration.user_registrieren_vname.value == "")
@@ -27,21 +65,21 @@ function user_registration_pruefe()
             return false;
         }
     
-    if (document.Registration.user_registrieren_straße.value == "")
+    if (document.Registration.user_registrieren_strasse.value == "")
         {
             alert ("Bitte Adresse eingeben!")
-            document.Registration.user_registrieren_straße.focus();
+            document.Registration.user_registrieren_strasse.focus();
             return false;
         }
     
-       if (document.Registration.user_registrieren_plz.value == "")
+      if (document.Registration.user_registrieren_plz.value == "")
         {
             alert ("Bitte Postleitzahl eingeben!")
             document.Registration.user_registrieren_plz.focus();
             return false;
         }
     
-       if (document.Registration.user_registrieren_ort.value == "")
+      if (document.Registration.user_registrieren_ort.value == "")
         {
             alert ("Bitte Ort eingeben!")
             document.Registration.user_registrieren_ort.focus();
@@ -63,7 +101,7 @@ function user_registration_pruefe()
             return false;
         }
 
-   if (document.Registration.user_registrieren_passwort.value.length < 8)
+    if (document.Registration.user_registrieren_passwort.value.length < 8)
 
 
         {
@@ -97,17 +135,17 @@ function user_registration_pruefe()
         
 
     
-        if (document.Registration.user_registrieren_email.value == "")
+       if (document.Registration.user_registrieren_mail.value == "")
             {
             alert ("Bitte  E-Mail-Adresse eingeben!")
-            document.Registration.user_registrieren_email.focus();
+            document.Registration.user_registrieren_mail.focus();
             return false;
             }
     
-        if (document.Registration.user_registrieren_email.value.indexOf("@") == -1)
+       if (document.Registration.user_registrieren_mail.value.indexOf("@") == -1)
             {
             alert ("Bitte  gültige E-Mail-Adresse eingeben!")
-            document.Registration.user_registrieren_email.focus();
+            document.Registration.user_registrieren_mail.focus();
             return false;
             }
     
@@ -116,3 +154,20 @@ function user_registration_pruefe()
         return true;
     }
 }
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+//bei bereits vergebenem loginnamen das feld clearen
+/*function clear_loginname ()
+{
+    document.Registration.user_registrieren_login_name.value == "");
+        
+            alert ("Dieser Loginname ist bereits vergeben!")
+            document.Registration.user_registrieren_login_name.focus();
+            return false;
+        
+}
+*/
+
