@@ -20,7 +20,7 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
 $verbinde = mysqli_connect($servername, $username, $passwort);
 $connmysql = mysqli_select_db($verbinde, $dbname);
 
-$L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert=$_COOKIE[KEINEAHNUNG]"; //!!!!!!!!!
+$L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert=\"".$_COOKIE['sid']."\";"; //!!!!!!!!!
 $L_cookieId = mysqli_query($verbinde, $L_sqlCookieId);
 
 if (isset ($_POST['Menge']))
