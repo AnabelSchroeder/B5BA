@@ -21,12 +21,12 @@ echo "<div class=\"user_login_bg\">";
         echo "<div class=\"user_login_div_headleiste_l\"> Login </div>";
     
         echo "<div class=\"user_login_div_links\">";
-//evebntuelle fehlermeldungen
-        if(isset($B_Fehler))
+//evebntuelle fehlermeldungen zum Loginversuch
+       if(isset($B_Fehler))
         {
             echo "<span class=\"fehler\">$B_Fehler</span>";
             echo"<br>";
-        }
+        } 
 
         if(isset($B_Fehler2))
         {
@@ -37,10 +37,13 @@ echo "<div class=\"user_login_bg\">";
     
 //Eingabefelder        
         echo "Benutzer <input class=\"user_login_form\" type=\"text\" name=\"login_name\" placeholder=\"Nutzername\"> <br>";
-        echo "Passwort <input class=\"user_login_form\" type=\"text\" name=\"login_pass\" placeholder=\"Passwort\"> <br>";
+        echo "Passwort <input class=\"user_login_form\" type=\"password\" name=\"login_pass\" placeholder=\"Passwort\"> <br>";
+        
 //button zum absenden und seitenweiterleitung
 
         echo "<button class=\"button1\" name=\"user_login\"  type=\"submit\"  onclick=\"return user_login_pruefe()\" value=\"Login\"> Login </button>";
+        //recaptcha
+        echo "<div class=\"g-recaptcha\" data-sitekey=\"6LdQDIYUAAAAAB6fzeSQAOSCKlwajln6d_B6dI4L\"></div>";
     echo "</form>";
         echo "</div>";
     echo "</div>";

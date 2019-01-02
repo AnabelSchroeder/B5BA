@@ -25,8 +25,8 @@
 
         {
            // überprüfen, ob Loginname gültig
-           $sql = "SELECT n_id, n_admin, n_passwort FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
-            $result = mysqli_query($verbinde, $sql);
+           $sql = "SELECT n_id, n_admin, n_passwort, n_sperre FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
+            $result = mysqli_query($verbinde, $sql)OR die(mysqli_error);
          
             if (mysqli_num_rows ($result) > 0)
             {   
@@ -39,6 +39,11 @@
                 //gehashtes Passwort aus der Datenbank 
                 $hash = $zeile['n_passwort'];
                
+                //sperre auslesen
+                $login_sperre = $zeile['n_sperre'];
+
+                //admin
+                $login_admin = $zeile['n_admin'];
 
              
 //prüfen, ob Passwort und Hash übereinstimmen////////////////////////////////////////////////////
@@ -81,8 +86,20 @@
                         SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\"  
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
+
+            // sperre prüfen
+            if($login_sperre ==true)
+            {
+                echo "<script type=\"text/javascript\"> kasse_sperren(); </script>";
+            }
+
+
+
                 echo "eingeloggt";
                header("Location: index.php");
+
+
+
                 }
                     
              
@@ -107,7 +124,7 @@
                 {
                 // anzahl verringern
                 $sql = "UPDATE cookie 
-                        SET Versuche=\"2\"
+                        SET Versuche=\"".$versuch_anzahl_neu."\"
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 
                 $result = mysqli_query($verbinde, $sql);

@@ -1,21 +1,15 @@
-//kasse_3: AGB checkbox prüfen und bestellbutton enablen
-/*
-if (document.getElementById('AGB_check').checked==true)
-{
-    document.getElementById('kasse3_bestellen').enabled;
-    document.getElementById('kasse3_bestellen').className='kasse_button_weiter';
+//KASSE
 
-}
-*/
 //////////////////////////////////////////
-//kasse: sperren bei sperre
+//kasse 1: sperren bei sperre
 function kasse_sperren()
 {
+    alert("Achtung: Sie sind gesperrt. Derzeit ist keine Bestellung möglich.");
     document.getElementById('kasse_1_weiter').className='kasse_button_weiter_disabled';
     document.getElementById('kasse_1_weiter').disabled=true;
 }
 ///////////////////////////////////////////////////////////////////////////
-//kasse 3: bestell button enablen, wenn AGB akzeptiert
+//kasse 3: bestell-button enablen, wenn AGB akzeptiert
 function clickbar()
     {
         if (document.getElementById('AGB_check').checked==true)
@@ -30,27 +24,16 @@ function clickbar()
         }
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////
 
 
+//REGISTRIERUNG
 
-
-
-//user login eingabe prüfen 
-/*!!ANDERS GELÖST!!
-function user_login_pruefe()
-{
-    if (document.Login.login_name.value == "" || document.Login.login_pass.value == "" )
-        {
-            alert ("Bitte Passwort und Nutzername eingeben!")
-            document.Login.login_name.value.focus();
-            return false;
-        }
-}
-*/
-
-//user registrierungs formular eingaben überprüfen///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//user registrierungs formular eingaben überprüfen
 function user_registration_pruefe()
 {
+    //Name
     if (document.Registration.user_registrieren_vname.value == "")
         {
             alert ("Bitte Namen eingeben!")
@@ -64,7 +47,7 @@ function user_registration_pruefe()
             document.Registration.user_registrieren_nname.focus();
             return false;
         }
-    
+    //Adresse
     if (document.Registration.user_registrieren_strasse.value == "")
         {
             alert ("Bitte Adresse eingeben!")
@@ -86,14 +69,14 @@ function user_registration_pruefe()
             return false;
         }
     
-    
+    //logindaten
     if (document.Registration.user_registrieren_login_name.value == "")
         {
             alert ("Bitte geben Sie einen Login Namen an!")
             document.Registration.user_registrieren_login_name.focus();
             return false;
         }
-    
+    //Passwort
     if (document.Registration.user_registrieren_passwort.value == "")
         {
             alert ("Bitte Passwort eingeben!")
@@ -112,7 +95,7 @@ function user_registration_pruefe()
         
         }
     
-
+        // Passwort Wiederholung
         if (document.Registration.user_registrieren_passwort2.value == "")
         {
             alert ("Bitte Passwort wiederholen!")
@@ -123,18 +106,14 @@ function user_registration_pruefe()
 
      if (document.Registration.user_registrieren_passwort2.value !=  document.Registration.user_registrieren_passwort.value)
         {
-           /* $pass2 = document.Registration.user_registrieren_passwort2.value;
-            
-            if ($pass != $pass2) */
-            
-                alert ("Passwörter stimmen nicht überein!")
+        alert ("Passwörter stimmen nicht überein!")
             document.Registration.user_registrieren_passwort2.focus();
             return false;
             
         }
         
 
-    
+    //Mail
        if (document.Registration.user_registrieren_mail.value == "")
             {
             alert ("Bitte  E-Mail-Adresse eingeben!")

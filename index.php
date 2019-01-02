@@ -9,9 +9,11 @@ echo"<title>Pflanzenshop</title>";
 echo"<link rel=\"stylesheet\" href=\"CSS/maincss.css\" type=\"text/css\">";
 //Adminbereich CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
-// Landing CSS einbinden
+// Landing/Login/Kasse CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/pflanzenshop.css\" type=\"text/css\">";
 
+//recaptcha 
+echo "<script src='https://www.google.com/recaptcha/api.js'></script>";
 echo"</head>";
 
 

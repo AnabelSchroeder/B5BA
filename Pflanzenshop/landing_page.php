@@ -19,11 +19,16 @@ $con = mysqli_select_db($verbinde,$dbase);
 
 
 if (isset($_COOKIE['sid'])) {
-    echo "cookie vorhanden";
+    echo "cookie vorhanden ";
    // in der Datenbank nachschauen, ob Cookie vorhanden
    $sql ="SELECT cookie_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
    $result = mysqli_query($verbinde, $sql);
+   $zeile = mysqli_fetch_assoc($result);
+   echo "Cookie: ".$zeile['cookie_id'];
+ 
 // evtl. Cookie verlängern 
+    $sid =$_COOKIE['sid'];
+    setcookie("sid", $sid, time()+3600*48);
 
 }
     

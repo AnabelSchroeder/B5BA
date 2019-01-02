@@ -38,7 +38,13 @@ else{
     echo "nope";
 }
    
-
+if (isset($_POST['ausloggen']))
+{
+    $sql="UPDATE cookie
+        SET logged_in = \"false\", expire=0, Versuche=\"3\"
+        WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+    $result = mysqli_query($verbinde, $sql);
+}
 
 
 ?>

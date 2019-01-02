@@ -15,10 +15,10 @@ echo "<div class=\"kasse_links\">";
 if(isset ($K_Fehler))
 {
      echo "<span class=\"fehler\">$K_Fehler</span>";
-    echo"<br>";
+    echo"<br><br>";
 }
 //Ausgabe der Nutzerdaten
-    echo "<span class=\"kasse_ueberschrift_klein\">Name und Adresse </span> <br>";
+    echo "<span class=\"kasse_ueberschrift_klein\">Name und Adresse </span><br><br>";
     echo"Vorname:  ".$kasse_vname."<br>";
     echo "Nachname:  ".$kasse_nname."<br>";
     echo "Straße:  ".$kasse_strasse."<br>";
@@ -66,7 +66,7 @@ echo "</div>";
     
 echo "<div class=\"kasse_div\">";
 echo "<div class=\"kasse_links\">";    
-    echo "<span class=\"kasse_ueberschrift_klein\">Wähle eine Zahlungsmethode aus: </span> <br>";
+    echo "<span class=\"kasse_ueberschrift_klein\">Wähle eine Zahlungsmethode aus: </span> <br><br> <br>";
     echo "<form method=\"POST\">";
 
     // csrf
@@ -191,6 +191,7 @@ echo "</div>";
 echo "</div>";
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 // bestellbestätigung///////////////////////////////////////////////////////////////////////////////////////////////
 else if ($seitenid == "kasse_4")
 {
@@ -225,20 +226,24 @@ echo "<br>";
 
 //Zahlart ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
-echo $kasse_zahlart."<br>";
+echo $kasse_zahlart."<br><br> <br>";
 
 //artikel tabelle darstellen
+echo "<span class=\"kasse_ueberschrift_klein\"> bestellte Artikel </span><br>";
 echo "<table>";
 echo "<tr> ";
 echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
-echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button> artikel löschen</button> </td>";
-echo "<td class=\"kasse_td\">".$zeile['anzahl_art']."<br> je ".$row['art_preis']." €</td>";
-echo "<td class=\"kasse_td\">".$row['art_preis'] * $zeile['anzahl_art']." €";
+echo "<td class=\"kasse_td\">".$row['art_name']."</td>";
+echo "<td class=\"kasse_td\"> St&uuml;ckzahl: ".$kasse_4_anzahl."<br> je ". $kasse_art_preis." €</td>";
+echo "<td class=\"kasse_td\">".$kasse_art_preis * $kasse_4_anzahl." €";
 echo "</tr>";
 echo "</table>";
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////
-//unten: Kosten und Buttons
+//unten: Kosten und 
+echo "<br> <br> <br><br><hr>";
 echo "Versandkosten: 4,95€ <br>";
 echo "Gesamtsumme: <br>";
 
