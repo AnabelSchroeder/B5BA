@@ -202,7 +202,7 @@ if (mysqli_num_rows ($result) > 0)
     while ($wkzeile = mysqli_fetch_array($result)) 
 {
         //einträge zählen
-         count ($wkzeile);
+         $wk_art_anzahl = mysqli_num_rows($result);
 
 
 
@@ -358,7 +358,7 @@ if (isset($_POST['kasse_3_artikel_delete']))
             while ($wkzeile = mysqli_fetch_array($result)) 
         {
                 //einträge zählen
-                 count ($wkzeile);
+                $wk_art_anzahl= mysqli_num_rows($result);
         
 ;
         
@@ -473,7 +473,9 @@ if ($row['sale_status']== false)
 /********************************************************************************************* */
 if ($seitenid=="kasse_4")
 
-{   if($_GET['csrf'] == $_SESSION['csrf_token'])
+{   $kasse_gesamt_preis =0;
+    //csrf gültig
+    if($_GET['csrf'] == $_SESSION['csrf_token'])
     {
 /******************************************************************************************** */
 // KASSE 4: SeitenAufbau
@@ -520,7 +522,7 @@ if (mysqli_num_rows ($result) > 0)
     while ($wkzeile = mysqli_fetch_array($result)) 
 {
         //einträge zählen
-         count ($wkzeile);
+         $wk_art_anzahl =mysqli_num_rows($result);
         $kasse_4_anzahl = $wkzeile['anzahl_art'];
         
 
@@ -571,6 +573,29 @@ echo "</table>";
 
 $kasse_gesamt_preis = $kasse_gesamt_preis + $kasse_zeilen_preis;
 $kasse_bruttobetrag = $kasse_gesamt_preis + $versand;
+
+// bestellartikeltabelle füllen
+/*$sql3 = "INSERT into bestellte_artikel
+        (best_id,
+        art_id,
+        best_art_name,
+        best_art_bild,
+        best_anzahl,
+        best_art_preis)
+        
+        VALUES
+        (
+            \"".$row['art_id']."\",
+            \"".$row['art_name']."\",
+            \"".$row['art_bild']."\",
+            \"".$kasse_4_anzahl."\",
+            \"".$kasse_art_preis."\"
+
+
+        )";
+        $result = mysqli_query($verbinde, $sql3);*/
+
+
         
     }      
 }
@@ -612,6 +637,11 @@ VALUES
 $result = mysqli_query($verbinde, $sql);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*
+//warenkorb löschen
+ $sql = "DELETE FROM warenkorb
+WHERE cookie_id=\"".$cookie_id."\";";
+ mysqli_query($verbinde, $sql);"        */
 
 }
 ////////////////////////////////////////////////////////////

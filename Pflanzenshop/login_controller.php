@@ -83,7 +83,7 @@
                
             // Token in Datenbank speichern
                 $sql = "UPDATE cookie
-                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\"  
+                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\", Versuche=\"3\"
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
 

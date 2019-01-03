@@ -261,7 +261,7 @@ echo $kasse_zahlart."<br><br> <br>"; */
 //unten: Kosten und Gesamtbetrag
 echo "<br> <br> <br><br><hr>";
 echo "Versandkosten:". $versand." € <br>";
-echo "Gesamtsumme:" .$kasse_bruttobetrag. "<br>";
+echo "Gesamtsumme:" .$kasse_bruttobetrag. " €<br>";
 
 
 //Buttons
