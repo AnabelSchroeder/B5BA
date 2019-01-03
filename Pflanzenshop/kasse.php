@@ -50,11 +50,14 @@ if(isset ($K_Fehler))
 //rechte Seite/////////////////////////////////////////////////////////////////////////////////////
 echo "<div class=\"kasse_rechts\">";
 echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
+//Anschrift ausgeben
 
-echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span> <br> <br>";
-echo $wk_art_anzahl." Artikel xx€ <br> <hr>";
-echo "Versandkosten 4.95€ <br> <hr>";
-echo "<span class=\"kasse_rechts_klein\">Bruttobetrag xx€ </span> <br> <br>";
+//Gesamtbetrag und Artikelzahl
+
+echo "<span class=\"kasse_ueberschrift_klein\">Gesamtbetrag: </span> <br>";
+echo $wk_art_anzahl." Artikel: ".$kasse_gesamt_preis. " € <br> <hr>";
+echo "Versandkosten ".$versand." € <br> <hr>";
+echo "Bruttobetrag  ".$kasse_bruttobetrag. "€";
 echo "</div>";
 echo "</div>";
 
@@ -146,15 +149,20 @@ echo "<div class=\"kasse_links\">";
 
 echo "<div class=\"kasse_rechts\">";
 echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
-// Anschrift ausgeben///////////////////////////////////////////////////////////////////////
+//Anschrift ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
 echo $kasse_vname."<br>";
 echo $kasse_nname."<br>";
 echo $kasse_strasse."<br>";
-echo $kasse_plz." ".$kasse_ort." <br><hr>";
+echo $kasse_plz." ".$kasse_ort." <br> <hr>";
 echo "<br>";
-//Artikelanzahl und Gesamtbetrag////////////////////////////////////////////////////////
-echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span>";
+
+//Gesamtbetrag und Artikelzahl
+
+echo "<span class=\"kasse_ueberschrift_klein\">Gesamtbetrag: </span> <br>";
+echo $wk_art_anzahl." Artikel: ".$kasse_gesamt_preis. " € <br> <hr>";
+echo "Versandkosten ".$versand." € <br> <hr>";
+echo "Bruttobetrag  ".$kasse_bruttobetrag. "€";
 echo "</div>";
 echo "</div>";
 }
@@ -252,8 +260,8 @@ echo $kasse_zahlart."<br><br> <br>"; */
 //////////////////////////////////////////////////////////////////////////////////////////////
 //unten: Kosten und Gesamtbetrag
 echo "<br> <br> <br><br><hr>";
-echo "Versandkosten: 4,95€ <br>";
-echo "Gesamtsumme: <br>";
+echo "Versandkosten:". $versand." € <br>";
+echo "Gesamtsumme:" .$kasse_bruttobetrag. "<br>";
 
 
 //Buttons
