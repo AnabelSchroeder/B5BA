@@ -207,12 +207,12 @@
 
                               <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
                                 <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
-                                <input type=\"submit\"  class=\"a-button\" value=\"Löschen\">
+                                <input type=\"submit\"  class=\"a-button\" value=\"Löschen\" name=\"angemeldetenUserLoeschen\">
                                 </form>
 
                                 <form method=\"POST\" action=\"http://localhost/b5ba/index.php\">
                                 <input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">
-                                <input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\">
+                                <input type=\"submit\" id=\"a-userlogaut\" class=\"a-button\" value=\"Logout\" name=\"angemeldetenUserLougout\">
                                 </form>
                                 </div>
 

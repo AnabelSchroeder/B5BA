@@ -5,6 +5,9 @@ include ("view_admin.php");
 include ("Komponenten/Fileuploder.php");
 include ("Komponenten/pagination.php");
 
+//verbindung zum loggin von antonia
+//global $login_admin;
+//$admin = $login_admin;
 
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
@@ -74,36 +77,51 @@ $admin = true;
 /********************************************************************************************** */
 
         function boxRechtsBefuellen(){
-            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid, $admin;     
+            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid, $admin, $a_eingeloggt;     
             switch ($seitenid){
                 //Seite Mein Konto
                 /*************************************************************** */
                 case "Adminbereich":
+                    if($a_eingeloggt == true){
                     $adminBoxRechtsOben = "Mein Konto";
                     function boxRechtsUntenBefuellen(){
                         a_view::af_Adminbereich();
-                        
+                        }   
                     }
+                    else {
+                        umleitungAufStartseite();
+                            
+                        }
                     break;
 
                 //Seite Mein Konto bearbeiten
                 /*************************************************************** */
                 case "mein-konto-bearbeiten":
+                    if($a_eingeloggt == true){
                     $adminBoxRechtsOben = "Mein Konto bearbeiten";
                     function boxRechtsUntenBefuellen(){
                         a_view::af_mein_konto_bearbeiten();
-                        
+                        }   
                     }
+                    else {
+                        umleitungAufStartseite();
+                            
+                        }
                     break;    
 
                 //Seite Mein Konto passwort bearbeiten
                 /*************************************************************** */
                 case "passwortBearbeiten":
+                    if($a_eingeloggt == true){
                     $adminBoxRechtsOben = "Neues Passwort";
                     function boxRechtsUntenBefuellen(){
                         a_view::a_passbearbeitenMeinKonto();
-                    
-                }
+                        }   
+                    }
+                    else {
+                        umleitungAufStartseite();
+                        
+                    }
                 break;  
 
 
