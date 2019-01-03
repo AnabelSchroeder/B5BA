@@ -13,6 +13,7 @@ global $nutzer;
 //Mein Konto
 /****************************************************************************** */
 
+//////////////////////////////////////////////////////////////////////////////////////////
 //muss mit den anderen abgestimmt werden was im Login vorgang benutz werdenals mechanismen und variablen.
 $a_eingeloggt = true;
 $a_eingeloggterUser = 17;

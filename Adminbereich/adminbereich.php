@@ -12,6 +12,7 @@ include ("Komponenten/pagination.php");
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
 
+///////////////////////////////////////////////////////////////////////////////////
 //Programmierungshilfe muss rausgelöscht werden im verlauf
 $admin = true;
 
