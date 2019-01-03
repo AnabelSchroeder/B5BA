@@ -234,13 +234,13 @@ $kasse_art_preis = $row['art_preis'];
 }
 
 
-
+//prüfen, ob stückzahl vorhanden
 if ($row['art_stueckzahl']< $wkzeile['anzahl_art'])
 {
     $kasse_zeilen_preis= $kasse_art_preis * $row['art_stueckzahl'];
 }
 
-if ($row['art_stueckzahl']> $wkzeile['anzahl_art'])
+if ($row['art_stueckzahl']>= $wkzeile['anzahl_art'])
 {
     $kasse_zeilen_preis= $kasse_art_preis * $wkzeile['anzahl_art'];
 }}}
@@ -359,6 +359,7 @@ if (isset($_POST['kasse_3_artikel_delete']))
         {
                 //einträge zählen
                 $wk_art_anzahl= mysqli_num_rows($result);
+                $wk_korb_id =$wkzeile['korb_id'];
         
 ;
         
@@ -403,11 +404,19 @@ if ($row['sale_status']== false)
 // stückzahl auf die verfügbare anzahl setzen////////////////////////////////////////////////////////////////
                     echo "<td class=\"kasse_td\">".$row['art_stueckzahl']."
 
+
                     <button type=\"submit\" name=\"kasse_3_anzahl_up\" class=\"more_less\"> + </button> 
                     <button type=\"submit\" name=\"kasse_3_anzahl_down\" class=\"more_less\"> - </button> <br> je ".$kasse_art_preis." €</td>
                     <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">";
+
+//stückzahl in datenbank ändern
+$sql4="UPDATE warenkorb
+        SET anzahl_art= \"".$row['art_stueckzahl']."\"
+        WHERE korb_id =\"".$wk_korb_id."\";";
+        $result4 = mysqli_query($verbinde, $sql4);
+
 // zeilen preis 
                     $kasse_zeilen_preis= $kasse_art_preis * $row['art_stueckzahl'];
                     echo "<td class=\"kasse_td\">".$kasse_zeilen_preis." €"; 
