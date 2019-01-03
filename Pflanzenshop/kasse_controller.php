@@ -163,7 +163,7 @@ $result = mysqli_query($verbinde, $sql);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /******************************************************************************************** */
-/*KASSE 2*/
+/*KASSE 3*/
 /********************************************************************************************* */
 if($seitenid == "kasse_3")
 {
@@ -292,15 +292,15 @@ echo "</div>";
                 
         
                 // artikel daten zu den artikel IDs aus dem warenkorb suchen
-                $sql = "SELECT art_id, art_name, art_preis, sale_status, sale_preis, art_stueckzahl, art_bild 
+                $sql2 = "SELECT art_id, art_name, art_preis, sale_status, sale_preis, art_stueckzahl, art_bild 
                 FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
-                $result = mysqli_query($verbinde, $sql);
+                $result2 = mysqli_query($verbinde, $sql2);
             
            
         
-    if (mysqli_num_rows ($result) > 0)
+    if (mysqli_num_rows ($result2) > 0)
         {   
-        while ($row = mysqli_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result2))
             {
  
 /******************************************************************************************** */
@@ -331,8 +331,8 @@ if ($row['sale_status']== false)
 // stückzahl auf die verfügbare anzahl setzen////////////////////////////////////////////////////////////////
                     echo "<td class=\"kasse_td\">".$row['art_stueckzahl']."
 
-                    <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> 
-                    <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> <br> je ".$kasse_art_preis." €</td>
+                    <button type=\"submit\" name=\"kasse_3_anzahl_up\" class=\"more_less\"> + </button> 
+                    <button type=\"submit\" name=\"kasse_3_anzahl_down\" class=\"more_less\"> - </button> <br> je ".$kasse_art_preis." €</td>
                     <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">";
@@ -358,8 +358,9 @@ if ($row['sale_status']== false)
                    
                     <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
+                    <button type=\"submit\" name=\"kasse_3_anzahl_up\" class=\"more_less\"> + </button>
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">
-                    <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
+                    <button class=\"more_less\"type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
                     
                     <br> je ".$kasse_art_preis." €</td>";
                     // zeilen preis
