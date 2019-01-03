@@ -194,9 +194,13 @@ echo $kasse_plz." ".$kasse_ort." <br> <hr>";
 echo "<br>";
 //Zahlart ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
-echo $kasse_zahlart."<br> <hr>";
+echo $kasse_zahlart."<br> <hr><br>";
 //Gesamtbetrag und Artikelzahl
-echo "<span class=\"kasse_rechts_klein\">Gesamtbetrag: </span>";
+
+echo "<span class=\"kasse_ueberschrift_klein\">Gesamtbetrag: </span> <br>";
+echo $wk_art_anzahl." Artikel: ".$kasse_gesamt_preis. " € <br> <hr>";
+echo "Versandkosten ".$versand." € <br> <hr>";
+echo "Bruttobetrag  ".$kasse_bruttobetrag. "€";
 echo "</div>";
 echo "</div>";
 }

@@ -277,6 +277,9 @@ echo "</div>";
         echo "<span class=\"kasse_ueberschrift_klein\">Überprüfe deine Bestellung und schließe den Kauf ab:</span><br>";
         echo "<table>";
 
+// preis berechenen
+$kasse_gesamt_preis = 0;
+$versand = 4.95;
 
         $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
         $result = mysqli_query($verbinde, $sql);
@@ -289,7 +292,7 @@ echo "</div>";
                 //einträge zählen
                  count ($wkzeile);
         
-                
+;
         
                 // artikel daten zu den artikel IDs aus dem warenkorb suchen
                 $sql2 = "SELECT art_id, art_name, art_preis, sale_status, sale_preis, art_stueckzahl, art_bild 
@@ -303,6 +306,7 @@ echo "</div>";
         while ($row = mysqli_fetch_assoc($result2))
             {
  
+
 /******************************************************************************************** */
 //Kasse 3: Abfrage ob sale
 /********************************************************************************************* */
@@ -337,6 +341,7 @@ if ($row['sale_status']== false)
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">";
 // zeilen preis 
+                    $kasse_zeilen_preis= $kasse_art_preis * $wkzeile;
                     echo "<td class=\"kasse_td\">".$kasse_art_preis * $wkzeile['anzahl_art']." €"; 
 
                     echo "</tr>  </form>";
@@ -364,8 +369,12 @@ if ($row['sale_status']== false)
                     
                     <br> je ".$kasse_art_preis." €</td>";
                     // zeilen preis
-                    echo "<td class=\"kasse_td\">". $kasse_art_preis * $wkzeile['anzahl_art']." €";
+                    $kasse_zeilen_preis= $kasse_art_preis * $wkzeile['anzahl_art'];
+                    echo "<td class=\"kasse_td\">". $kasse_zeilen_preis." €";
                     echo "</tr> </form>";
+
+                    $kasse_gesamt_preis = $kasse_gesamt_preis + $kasse_zeilen_preis;
+                    $kasse_bruttobetrag = $kasse_gesamt_preis + $versand;
                 }
 
             }
@@ -396,6 +405,10 @@ if ($seitenid=="kasse_4")
 
 {   if($_GET['csrf'] == $_SESSION['csrf_token'])
     {
+/******************************************************************************************** */
+// KASSE 4: SeitenAufbau
+/********************************************************************************************* */
+
     //headleiste//////////////////////////////////////
     echo "<div class=\"kasse_headleiste\">";
         echo "Kasse <br>";
@@ -421,8 +434,13 @@ if ($seitenid=="kasse_4")
     echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
     echo $kasse_zahlart."<br><br> <br>"; 
 
+    // Artikeltabelle
     echo "<span class=\"kasse_ueberschrift_klein\"> bestellte Artikel </span><br>";
-    // warenkorb daten
+    $kasse_4_preis;    
+
+/******************************************************************************************** */
+// KASSE 4: Artikeltabelle bestellte Artikel
+/********************************************************************************************* */
     $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
     $result = mysqli_query($verbinde, $sql);
          
