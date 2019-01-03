@@ -1,27 +1,35 @@
 <?php
-/*nutzer daten vom registrieren in die Datenbank aufnehmen */
+/******************************************************************************************** */
+// Login: Registrierung: Controller
+/********************************************************************************************* */
 
 //javascript einbinden formulareingaben überprüfen
 echo "<script src=\"pflanzenshop.js\"></script>";
 
+//wenn button gesetzt
 if (isset ($_POST['user_registration_speichern']))
 {
-    //Loginname überprüfen: noch nicht vorhanden?
-  //  $e_loginname= $_POST['user_registrieren_login_name'];
+    
+/******************************************************************************************** */
+// prüfen ob Loginname schon vergeben
+/********************************************************************************************* */
     $sql ="SELECT * FROM nutzer WHERE n_login =\"".$_POST['user_registrieren_login_name']."\";";
-    $result= mysqli_query($verbinde, $sql);
+    $result= mysqli_query($verbinde, $sql)OR die(mysqli_error);
 
     if (mysqli_num_rows ($result) > 0)
-            {   
+            {
+// Loginname schon vergeben//////////////////////////////////////////////////      
                 echo "vergeben";
-              //  echo "<script> clear_loginname() </script>";
-              $R_Fehler = "Dieser Loginname ist bereits vergeben!";
+             $R_Fehler = "Dieser Loginname ist bereits vergeben!";
             }
+//Loginname frei: User Registrierung durchführen
     else
     {
 
     $passwort = $_POST['user_registrieren_passwort'];
+    //Passwort hashen
     $hash = password_hash($passwort, PASSWORD_DEFAULT);
+    //Daten in Tabelle nutzer einfügen
     $sql = "INSERT INTO nutzer
             (
                 n_nname,
@@ -58,11 +66,5 @@ if (isset ($_POST['user_registration_speichern']))
 }
 }
 
-/*if (isset ($_POST['user_login']))
-{
-    
-    
-}
 
-*/
 ?>

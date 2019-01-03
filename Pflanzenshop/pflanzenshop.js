@@ -5,9 +5,9 @@
 function kasse_sperren()
 {
     alert("Achtung: Sie sind gesperrt. Derzeit ist keine Bestellung möglich.");
-    document.getElementById('kasse_1_weiter').className='kasse_button_weiter_disabled';
-    document.getElementById('kasse_1_weiter').disabled=true;
-}
+   document.getElementById('kasse_1_weiter').className='kasse_button_weiter_disabled';
+   document.getElementById('kasse_1_weiter').disabled=true;
+} 
 ///////////////////////////////////////////////////////////////////////////
 //kasse 3: bestell-button enablen, wenn AGB akzeptiert
 function clickbar()
@@ -26,7 +26,15 @@ function clickbar()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
+//LOGIN
+////////////////////////////////////////////////////////////////////////////////////////////
+//login button disablen, wenn loginversuche verbraucht
+function login_sperren()
+{
+    document.getElementById('user_login').className='kasse_button_weiter_disabled';
+    document.getElementById('user_login').disabled=true;
+    
+}
 //REGISTRIERUNG
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +63,9 @@ function user_registration_pruefe()
             return false;
         }
     
-      if (document.Registration.user_registrieren_plz.value == "")
+      if (document.Registration.user_registrieren_plz.value == "" || 
+      document.Registration.user_registrieren_plz.value <10000 ||
+       document.Registration.user_registrieren_plz.value> 99999)
         {
             alert ("Bitte Postleitzahl eingeben!")
             document.Registration.user_registrieren_plz.focus();

@@ -17,7 +17,9 @@ $con = mysqli_select_db($verbinde,$dbase);
 /////////////////////////////////////////////////////////////////////////////////
 
 
-
+/******************************************************************************************** */
+//cookie vorhanden
+/********************************************************************************************* */
 if (isset($_COOKIE['sid'])) {
     echo "cookie vorhanden ";
    // in der Datenbank nachschauen, ob Cookie vorhanden
@@ -26,14 +28,16 @@ if (isset($_COOKIE['sid'])) {
    $zeile = mysqli_fetch_assoc($result);
    echo "Cookie: ".$zeile['cookie_id'];
  
-// evtl. Cookie verlängern 
+//  Cookie verlängern 
     $sid =$_COOKIE['sid'];
     setcookie("sid", $sid, time()+3600*48);
 
 }
     
 
-
+/******************************************************************************************** */
+// neues cookie setzen
+/********************************************************************************************* */
 else {
     // cookie id zufällig generieren
     $sid = md5(openssl_random_pseudo_bytes(32));
@@ -55,7 +59,9 @@ setcookie("sid", $sid, time()+3600*48);
 }
 
 
-//landing page
+/******************************************************************************************** */
+// Landing Page: Ausgabe
+/********************************************************************************************* */
 
 //vorläufiger arbeitsbutton zur loginseite///////////////////////////////////////////////
 
@@ -82,9 +88,10 @@ echo "</form>";
 
     echo "<br>";
 
-//bilder mosaik
+//kategorien-bilder mosaik////////////////////////////////////////////////////////////////
 echo "<div class=\"landing_container\">";
-// form zum übergeben der seiten id    
+// form zum übergeben der seiten id  
+//Bonsai ////////////////////////////////////////////////////////////////////////////// 
     echo "<form action=\"index.php?Seiten_ID=login\" method=\"GET\">";
     echo "<div class=\"landing_mosaik_1\">";
     
@@ -94,7 +101,7 @@ echo "<div class=\"landing_container\">";
     echo "</div>";
     
     
-    
+ //Blume /////////////////////////////////////////////////////////////////////////////////  
       echo "<div class=\"landing_mosaik_2\">";
     
             echo "<span class=\"landing_mosaik_weiß\"> Blume </span> <br>";
@@ -102,7 +109,7 @@ echo "<div class=\"landing_container\">";
             echo "<button name=\"Seiten_ID\" class=\"button1\"> Jetzt kaufen </button>";
       echo "</div>";
     
-    
+ //Kaktus//////////////////////////////////////////////////////////////////////////////////   
      echo "<div class=\"landing_mosaik_3\">";
   
         echo "<span class=\"landing_mosaik_weiß\"> Kaktus </span> <br>";
@@ -112,7 +119,7 @@ echo "<div class=\"landing_container\">";
     
     
     
-    
+ //Grünpflanze////////////////////////////////////////////////////////////////////////////////   
      echo "<div class=\"landing_mosaik_4\">";
 
         echo "<span class=\"landing_mosaik_weiß\"> Gr&uuml;npflanze </span> <br>";
@@ -122,7 +129,7 @@ echo "<div class=\"landing_container\">";
     
     
  
-    
+ //Schenken////////////////////////////////////////////////////////////////////////////////   
     echo "<div class=\"landing_mosaik_5\">";
     
         echo "<span class=\"landing_mosaik_weiß\"> Schenken </span> <br>";
@@ -133,40 +140,20 @@ echo "<div class=\"landing_container\">";
 echo "</form>";
 echo "</div> <br><br>";
 
-// slogan
+/******************************************************************************************** */
+// Slogan
+/********************************************************************************************* */
 
 echo "<div class=\"landing_slogan_container\"> <span class=\"landing_slogan_schrift\"> SLOGAN </span> </div>";
 
-//neuheiten anzeigen
+/******************************************************************************************** */
+// neuheiten
+/********************************************************************************************* */
 echo "<div class=\"landing_neuheiten_container\">";
 echo "Unsere Neuheiten <br> <br>";
 
 include "Landing_controller.php";
-/*
-echo "<div class=\"landing_neuheiten_artikel\">";
-    echo "<img class=\"landing_artikel_bild\" src=\"img/schwertfarn.jpg\">";
-    echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
-    echo "<span> 29,99€ </span>";
-echo "</div>";
  
-echo "<div class=\"landing_neuheiten_artikel\">";
-    echo "<img class=\"landing_artikel_bild\" src=\"img/schwertfarn.jpg\">";
-    echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
-    echo "<span> 29,99€ </span>";
-echo "</div>";
-    
-echo "<div class=\"landing_neuheiten_artikel\">";
-    echo "<img class=\"landing_artikel_bild\" src=\"img/schwertfarn.jpg\">";
-    echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
-    echo "<span> 29,99€ </span>";
-echo "</div>";
-    
-echo "<div class=\"landing_neuheiten_artikel\">";
-    echo "<img class=\"landing_artikel_bild\" src=\"img/schwertfarn.jpg\">";
-    echo "<span class=\"landing_unterschrift\"> Schwertfarn </span><br>";
-    echo "<span> 29,99€ </span>";
-echo "</div>";
- */   
 echo "</div>";
 }
 

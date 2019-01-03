@@ -9,7 +9,9 @@
   $con = mysqli_select_db($verbinde,$dbase);
 
 
-
+/**************************************************************************************** */
+/*KASSE: Login und Sperre prüfen*/
+/******************************************************************************************* */
 
 //überprüfung, ob eingeloggt//////////////////////////////////////////////////////////////
 if ($seitenid== "kasse_1" || "kasse_2" || "kasse_3" || "kasse_4")
@@ -21,51 +23,42 @@ if (mysqli_num_rows ($result) > 0)
         {   
             while ($zeile = mysqli_fetch_assoc($result))
             {
+                // login und expire speichern
                 $logged_in = $zeile['logged_in'];
                 $expire = $zeile['expire'];
+                // aktuelle Zeit speichern
                 $time_aktuell = time();
                 
             }
         }
-//nicht eingeloggt
-//weiterleitung zu login wenn nicht eingeloggt////////////////////////////////////////////
-
-
-
-   if ($logged_in == false  AND $seitenid =="kasse_1")
+//nicht eingeloggt////////////////////////////////////////////////////////////////////////
+//weiterleitung zu login wenn nicht eingeloggt
+if ($logged_in == false  AND $seitenid =="kasse_1")
     {
         echo "nicht eingeloggt";
   
         header("Location:index.php?Seiten_ID=login");
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
 
-//eingeloggt
+//eingeloggt/////////////////////////////////////////////////////////////////////////////////
 
-//expire überprüfen: abgelaufen:
+//expire überprüfen///////////////////////////////////////////////////////////////////////
+//abgelaufen:
 if ($logged_in == true AND $expire < $time_aktuell AND $seitenid =="kasse_1" )
     {
        $sql = "UPDATE cookie
        SET logged_in = false
        WHERE cookie_wert=\"".$_COOKIE['sid']."\";";
        $result = mysqli_query($verbinde, $sql);
-  
+        // weiterleitung zur Loginseite
         header("Location:index.php?Seiten_ID=login");
     }
 
-// Nutzerdaten zur Nutzerid (übermittelt vom Login) selektieren
-
-
-
-    if ($logged_in==true AND $expire > $time_aktuell)
- 
-//cookie id ermitteln
+//nicht abgelaufen:
+if ($logged_in==true AND $expire > $time_aktuell)
 {
-
-
-//user daten selektieren
-
+//cookie id und nutzer id herausfinden
 $sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
 $result = mysqli_query($verbinde, $sql);
          
@@ -78,11 +71,7 @@ $result = mysqli_query($verbinde, $sql);
             }
         }
 
-
-
-
-
-      //nutzerdaten selektieren
+//nutzerdaten selektieren
        $sql = "SELECT * FROM nutzer WHERE n_id=\"".$kasse_n_id."\";";
         $result = mysqli_query($verbinde, $sql);
          
@@ -94,16 +83,15 @@ $result = mysqli_query($verbinde, $sql);
  //sperre abprüfen//////////////////////////////////////////////////////////////
                 $sperre=$zeile['n_sperre'];
 
-//gesperrt:
-// benachrichtigung und weiter button disablen
+//gesperrt:///////////////////////////////////////////////////////////////
                 if($sperre== 1)
                 {
+                    // benachrichtigung und weiter button disablen
                     $K_Fehler = "Sie sind derzeit gesperrt. Ein Bestellvorgang ist nicht möglich!";
                     echo "<script type=\"text/javascript\"> kasse_sperren(); </script>";
                 }
-
-            
 //////////////////////////////////////////////////////////////////////////////
+
                 //Name und Adresse in Variablen speichern
                 $kasse_vname= $zeile['n_vname'];
                
@@ -137,11 +125,14 @@ if (mysqli_num_rows ($result) > 0)
     }
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+
+/******************************************************************************************** */
+/*KASSE 2*/
+/********************************************************************************************* */
     // kasse2-zahlart: neue zahlart in Datenbank speichern
     if (isset($_POST['kasse2_zahlart_speichern']))
     {
-        //user daten selektieren
+//user daten selektieren
 
 $sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
 $result = mysqli_query($verbinde, $sql);
@@ -154,7 +145,7 @@ $result = mysqli_query($verbinde, $sql);
                 $kasse_n_id = $zeile['n_id'];
             }
         }
-        //token prüfen
+//token prüfen/////////////////////////////////////////////////////////////////////////////////////
         if ($_POST['csrf'] !== $_SESSION['csrf_token'])
         {
             die ("ungültiger Token");
@@ -170,11 +161,13 @@ $result = mysqli_query($verbinde, $sql);
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//kasse3
+/******************************************************************************************** */
+/*KASSE 2*/
+/********************************************************************************************* */
 if($seitenid == "kasse_3")
 {
+    //user daten selektieren
     $sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
     $result = mysqli_query($verbinde, $sql);
              
@@ -186,11 +179,15 @@ if($seitenid == "kasse_3")
                     $kasse_n_id = $zeile['n_id'];
                 }
             } 
-    
+ 
+/******************************************************************************************** */
+// kasse: artikel anzahl bearbeiten 
+/********************************************************************************************* */
+
 // kasse 3: artikel stückzahl erhöhen ///////////////////////////////////////////////////////   
 if (isset($_POST['kasse_3_anzahl_up']))
 {
-    //csrf prüfen
+    //csrf prüfen/////////////////////////////////////////////////////////////////////////////
     if ($_POST['csrf'] !== $_SESSION['csrf_token'])
     {
         die ("ungültiger Token");
@@ -201,7 +198,7 @@ if (isset($_POST['kasse_3_anzahl_up']))
     // erhöhen, wenn anzahl kleiner als artikel stückzahl
     if ($_POST['kasse_wk_zahl']< $_POST['kasse_art_zahl'])
     {
-    //csrf prüfen
+    //warenkorb tabelle updaten: Artikel erhöhen
     $sql = "UPDATE warenkorb
             SET anzahl_art = anzahl_art+1
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
@@ -218,7 +215,7 @@ if (isset($_POST['kasse_3_anzahl_up']))
 // kasse3: artikel stückzahl verringern////////////////////////////////////////////////////////////
 if (isset($_POST['kasse_3_anzahl_down']))
 {
-    //csrf prüfen
+    //csrf prüfen/////////////////////////////////////////////////////////////////////////////////
     if ($_POST['csrf'] !== $_SESSION['csrf_token'])
     {
         die ("ungültiger Token");
@@ -228,6 +225,7 @@ if (isset($_POST['kasse_3_anzahl_down']))
     else{
     if ($_POST['kasse_wk_zahl']>1)
     {
+        // warenkorb tabelle updaten: artikel stückzahl verringern
     $sql = "UPDATE warenkorb
             SET anzahl_art = anzahl_art-1
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
@@ -235,17 +233,20 @@ if (isset($_POST['kasse_3_anzahl_down']))
     }
 }
 } 
-
+/******************************************************************************************** */
+// kasse: artikel löschen
+/********************************************************************************************* */
 //artikel aus warenkorb löschen/////////////////////////////////////////////////////////////////////////
 if (isset($_POST['kasse_3_artikel_delete']))
 {
-    //csrf prüfen
+    //csrf prüfen////////////////////////////////////////////////////////////////////
     if ($_POST['csrf'] !== $_SESSION['csrf_token'])
     {
         die ("ungültiger Token");
     }
     //csrf gültig
     else {
+    // warenkorb tabelle updaten: artikel löschen
     $sql = "DELETE FROM warenkorb
             WHERE cookie_id=\"".$cookie_id."\" AND art_id =\"".$_POST['kasse_art_id']."\";";
              mysqli_query($verbinde, $sql);
@@ -256,6 +257,11 @@ if (isset($_POST['kasse_3_artikel_delete']))
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+/******************************************************************************************** */
+// KASSE 3: Seitenausgabe
+/********************************************************************************************* */
+
 // warenkorb daten selektieren/////////////////////////////////////////////////////////////
     //ausgabe nav zeile
     echo "<div class=\"kasse_headleiste\">";
@@ -263,7 +269,7 @@ if (isset($_POST['kasse_3_artikel_delete']))
     echo "<a class=\"kasse_nav\">Adresse </a> <a class=\"kasse_nav\"> Zahlungsmethode </a> <a class=\"kasse_nav_active\"> Kauf abschließen </a> <a class=\"kasse_nav\"> Bestellbestätigung </a>";
 echo "</div>";
 
-    //linke seite
+    //linke seite///////////////////////////////////////////////////////////////////////////////
     echo "<div class=\"kasse_div\">";
     echo "<div class=\"kasse_links\">";
 
@@ -281,7 +287,7 @@ echo "</div>";
             while ($wkzeile = mysqli_fetch_array($result)) 
         {
                 //einträge zählen
-                echo count ($wkzeile);
+                 count ($wkzeile);
         
                 
         
@@ -296,19 +302,25 @@ echo "</div>";
         {   
         while ($row = mysqli_fetch_assoc($result))
             {
-                
-//abfrage ob sale////////////////////////////////////////////////////////////////////////////
+ 
+/******************************************************************************************** */
+//Kasse 3: Abfrage ob sale
+/********************************************************************************************* */
+//sale 
 if($row['sale_status']== true)
 {
     $kasse_art_preis = $row['sale_preis'];
 }             
-
+//nicht sale
 if ($row['sale_status']== false)
 {
     $kasse_art_preis = $row['art_preis'];
 }
-//abfrage, ob stückzahl vorhanden////////////////////////////////////////////////////////////////
-             //stückzahl nicht mehr vorhanden:
+/******************************************************************************************** */
+// KASSE 3: Stückzahl abfrage
+/********************************************************************************************* */
+
+//Artikelanzeige: stückzahl nicht mehr vorhanden:////////////////////////////////////////////////////////////////////////
                 if ($row['art_stueckzahl']< $wkzeile['anzahl_art'])
                 {   echo " <form method=\"POST\" action=\"#\"> <tr> ";
                      //csrf
@@ -316,7 +328,7 @@ if ($row['sale_status']== false)
                     echo "<tr> ";
                     echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
                     echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button> Artikel löschen</button> </td>";
-// stückzahl auf die verfügbare anzahl setzen
+// stückzahl auf die verfügbare anzahl setzen////////////////////////////////////////////////////////////////
                     echo "<td class=\"kasse_td\">".$row['art_stueckzahl']."
 
                     <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> 
@@ -324,19 +336,22 @@ if ($row['sale_status']== false)
                     <input type=\"hidden\" name=\"kasse_art_id\" value=\"".$row['art_id']."\">
                     <input type=\"hidden\" name=\"kasse_wk_zahl\" value=\"".$wkzeile['anzahl_art']."\">
                     <input type=\"hidden\" name=\"kasse_art_zahl\" value=\"".$row['art_stueckzahl']."\">";
-
+// zeilen preis 
                     echo "<td class=\"kasse_td\">".$kasse_art_preis * $wkzeile['anzahl_art']." €"; 
 
                     echo "</tr>  </form>";
 // Fehlerausgabe: Artikelmenge nicht verfügbar///////////////////////////////////////////////////////////////////////////////////////////////////
-                    echo "<pan class=\"fehler\"> Die gewünschte Menge des Artikel ".$row['art_name']. " ist leider nicht mehr verfügbar!</span>";
+                    echo "<span class=\"fehler\"> Die gewünschte Menge des Artikel ".$row['art_name']. " ist leider nicht mehr verfügbar!</span>";
                 }
 
- //Stückzahl vorhanden //////////////////////////////////////////////////////////////////////////////////////////////              
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //Artikelanzeige: Stückzahl vorhanden //////////////////////////////////////////////////////////////////////////////////////////////              
                 else{
                     echo " <form method=\"POST\" action=\"#\"> <tr> ";
                      //csrf
                     echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
+                    //artikeldaten
                     echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
                     echo "<td class=\"kasse_td\">".$row['art_name']."<br> <button type=\"submit\" name=\"kasse_3_artikel_delete\"> artikel löschen</button> </td>";
                     echo "<td class=\"kasse_td\">".$wkzeile['anzahl_art']."
@@ -347,6 +362,7 @@ if ($row['sale_status']== false)
                     <button type=\"submit\" name=\"kasse_3_anzahl_up\"> + </button> <button type=\"submit\" name=\"kasse_3_anzahl_down\"> - </button> 
                     
                     <br> je ".$kasse_art_preis." €</td>";
+                    // zeilen preis
                     echo "<td class=\"kasse_td\">". $kasse_art_preis * $wkzeile['anzahl_art']." €";
                     echo "</tr> </form>";
                 }
@@ -358,6 +374,7 @@ if ($row['sale_status']== false)
  
 
     }
+    //Kasse 3: AGB checkbox/////////////////////////////////////////////////////////////
     echo "</table>";
     echo "<form action=\"#\" method=\"POST\">";
     echo "<input type=\"checkbox\" id=\"AGB_check\" name=\"AGB_check\" onchange=\"return clickbar()\">
@@ -370,11 +387,16 @@ if ($row['sale_status']== false)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
+
+/******************************************************************************************** */
+// KASSE 4: 
+/********************************************************************************************* */
 if ($seitenid=="kasse_4")
 
 {
+    // warenkorb daten
     $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
-$result = mysqli_query($verbinde, $sql);
+    $result = mysqli_query($verbinde, $sql);
          
 if (mysqli_num_rows ($result) > 0)
 {   
@@ -394,12 +416,16 @@ if (mysqli_num_rows ($result) > 0)
         {   
         while ($row = mysqli_fetch_assoc($result))
         {
-            //abfrage ob sale////////////////////////////////////////////////////////////////////////////
+
+/******************************************************************************************** */
+// KASSE 4: Sale abfrage
+/********************************************************************************************* */
+       //sale
         if($row['sale_status']== true)
         {
             $kasse_art_preis = $row['sale_preis'];
         }             
-
+        //nicht sale
         if ($row['sale_status']== false)
         {
             $kasse_art_preis = $row['art_preis'];
@@ -416,7 +442,11 @@ if (mysqli_num_rows ($result) > 0)
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // aktuelles datum
 $best_date= date("Y-m-d H:i:s");
-// bestellung in datenbank : tabelle bestellung/////////////////////////////////////////////////////
+
+/******************************************************************************************** */
+// KASSE 4: Bestellung speichern
+/********************************************************************************************* */
+// bestellung in datenbank : tabelle bestellung
 $sql="INSERT INTO bestellung
 (best_datum,
 n_id,

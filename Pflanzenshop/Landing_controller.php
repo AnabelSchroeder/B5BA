@@ -10,11 +10,12 @@
 
 
 
+/***************************************************************************************** */
+/*landing_page*/
+/********************************************************************************************* */
 
-//landing_page
-//artikel neuheiten anzeigen
 
-//informationen aud Datenbank ziehen
+//informationen zu den Artikeln aus Datenbank ziehen///////////////////////////////////////////////////////////////
 $sql = "SELECT art_id, art_name, art_preis, art_bild FROM artikel ORDER BY art_id DESC LIMIT 0,4;";
 $result = mysqli_query($verbinde, $sql);
 
@@ -33,11 +34,9 @@ if (mysqli_num_rows ($result) > 0)
         echo "</button></div>";
     }
 }
-// rückmeldung bei fehler
-else{
-    echo "nope";
-}
-   
+
+/******************************************************************************************************* */
+/*Ausloggen*/   
 if (isset($_POST['ausloggen']))
 {
     $sql="UPDATE cookie

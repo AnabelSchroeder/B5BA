@@ -12,12 +12,13 @@ echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
 // Landing/Login/Kasse CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/pflanzenshop.css\" type=\"text/css\">";
 
-//recaptcha 
+//recaptcha /////////////////////////////////////////////////////////////////
 echo "<script src='https://www.google.com/recaptcha/api.js'></script>";
 echo"</head>";
 
 
 echo"<body>";
+
 
 
 // der Button muss später in den Header

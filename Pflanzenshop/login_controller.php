@@ -9,22 +9,17 @@
     $verbinde = mysqli_connect($host,$user,$pass);
     $con = mysqli_select_db($verbinde, $dbase);
 
-
-//session aufnehmen
-
-
-
-
-    //eingabe überprüfen
+/******************************************************************************************** */
+// Login: eingabe überprüfen
+/********************************************************************************************* */
     if (isset( $_POST['login_name']))
     {
-        //übermittelte seiten id der vorher aufgerufenen seite speichern
-       // $seiten_zurück =$_POST['seiten_zurück'];
-// beide felder gefüllt?
+        
+// prüfen: beide felder gesetzt/////////////////////////////////////////////////////////////
         if($_POST['login_name']!= "" AND $_POST['login_pass']!= "")
 
         {
-           // überprüfen, ob Loginname gültig
+           // überprüfen, ob Loginname gültig////////////////////////////////////////////////////
            $sql = "SELECT n_id, n_admin, n_passwort, n_sperre FROM nutzer WHERE n_login =\"".$_POST['login_name']."\";";
             $result = mysqli_query($verbinde, $sql)OR die(mysqli_error);
          
@@ -74,10 +69,15 @@
                  $result = mysqli_query($verbinde, $sql); */
              //////////////////////////////////////////////////////////////////////////////////////// 
                 
-
+/******************************************************************************************** */
+// Login: expire setzen
+/********************************************************************************************* */
              //login expire setzen:
                 $expire = time()+1800;
-               
+ 
+/******************************************************************************************** */
+// login: csrf token
+/********************************************************************************************* */
             // CSRF Token setzen://////////////////////////////////////////////////////////////
                 $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
                
@@ -87,36 +87,46 @@
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
 
+/******************************************************************************************** */
+// login: sperre prüfen
+/********************************************************************************************* */
             // sperre prüfen
             if($login_sperre ==true)
             {
                 echo "<script type=\"text/javascript\"> kasse_sperren(); </script>";
             }
-
-
-
                 echo "eingeloggt";
                header("Location: index.php");
-
-
-
-                }
+ }
                     
-             
-            
-          
-            //Fehlermeldung, wenn Kombination falsch
+/******************************************************************************************** */
+// Fehlerausgabe: Kombination falsch
+/********************************************************************************************* */
             else
             {
                 $B_Fehler= "Nutzername oder Passwort falsch!";
-                
+ 
+/******************************************************************************************** */
+// Einlogversuche abprüfen
+/********************************************************************************************* */
                 //  Login Versuchanzahl auslesen
                 $sql ="SELECT Versuche FROM cookie WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 $result = mysqli_query($verbinde, $sql);
                 $zeile = mysqli_fetch_assoc($result);
 
                 // anzahl speichern
+
                 $versuch_anzahl_alt = $zeile['Versuche'];
+
+                //wenn 0
+                if($versuch_anzahl_alt ==0)
+                {
+                    $captcha = "Loginversuche verbraucht!";
+                    //login button disablen
+                    echo "<script> login_sperren(); </script>";
+                }
+                else
+                {
                 $versuch_anzahl_neu = $versuch_anzahl_alt -1;
 
                 //wenn anzahl größer null
@@ -132,13 +142,26 @@
                 // Versuche = 0
                 else
                 {
-                    echo "Loginversuche verbraucht!";
+                    // Versuche auf 0 setzen
+                    $sql = "UPDATE cookie 
+                    SET Versuche=\"0\"
+                    WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
+            
+                    $result = mysqli_query($verbinde, $sql);
+                    
+                    $captcha = "Loginversuche verbraucht!";
+                    //login button disablen
+                    echo "<script> login_sperren(); </script>";
                 }
             }
-        }
+        }}
     }
         }
-        // Fehlermeldung, wenn nicht beide Felder ausgefüllt wurden
+
+/******************************************************************************************** */
+// Login Fehler: nicht beide Felder gefüllt
+/********************************************************************************************* */
+        
         else 
         {
             $B_Fehler2= "Nutzername und Passwort eingeben!";

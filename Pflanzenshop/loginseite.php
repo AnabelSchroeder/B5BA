@@ -7,21 +7,17 @@
     //sql controller inkludieren
     include ("login_controller.php");
 
-// login///////////////////////////////////////////////////////////////////////////////////
-
-   
-echo "header";
-
-//linker container (login)
+//linker container (login)///////////////////////////////////////////////////////////////////////
 echo "<div class=\"user_login_bg\">";
     echo "<div class=\"user_login_container\">";
-//Formular
+
+//Formular//////////////////////////////////////////////////////////////////////////////////////
     echo "<form  name=\"Login\"  method=\"POST\">";
     echo "<div class=\"user_login_div\">";
         echo "<div class=\"user_login_div_headleiste_l\"> Login </div>";
     
         echo "<div class=\"user_login_div_links\">";
-//evebntuelle fehlermeldungen zum Loginversuch
+//eventuelle fehlermeldungen zum Loginversuch////////////////////////////////////////////////////
        if(isset($B_Fehler))
         {
             echo "<span class=\"fehler\">$B_Fehler</span>";
@@ -35,22 +31,32 @@ echo "<div class=\"user_login_bg\">";
         }
 
     
-//Eingabefelder        
+//Eingabefelder//////////////////////////////////////////////////////////////////////////////////////////////        
         echo "Benutzer <input class=\"user_login_form\" type=\"text\" name=\"login_name\" placeholder=\"Nutzername\"> <br>";
         echo "Passwort <input class=\"user_login_form\" type=\"password\" name=\"login_pass\" placeholder=\"Passwort\"> <br>";
+ 
         
-//button zum absenden und seitenweiterleitung
+//button zum Absenden und Seitenweiterleitung
 
-        echo "<button class=\"button1\" name=\"user_login\"  type=\"submit\"  onclick=\"return user_login_pruefe()\" value=\"Login\"> Login </button>";
-        //recaptcha
+        echo "<button class=\"button1\" id=\"user_login\" name=\"user_login\"  type=\"submit\"  onclick=\"return user_login_pruefe()\" value=\"Login\"> Login </button>";
+
+      
+        //recaptcha/////////////////////////////////////////////////////////////////////////////////
+        if(isset ($captcha))
+        {
         echo "<div class=\"g-recaptcha\" data-sitekey=\"6LdQDIYUAAAAAB6fzeSQAOSCKlwajln6d_B6dI4L\"></div>";
+        }
     echo "</form>";
         echo "</div>";
     echo "</div>";
 
 
-//registrieren///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//rechter container (registrieren)
+
+/******************************************************************************************** */
+// Login: registrieren
+/********************************************************************************************* */
+
+//rechter container (registrieren)/////////////////////////////////////////////////////////////////////////////////
  echo "<div class=\"user_login_div\">";
 echo "<div class=\"user_login_div_headleiste_r\"> Konto erstellen </div>";
     echo"<form action=\"index.php?Seiten_ID=login\"  name=\"Login\" method=\"GET\">";
@@ -58,7 +64,8 @@ echo "<div class=\"user_login_div_headleiste_r\"> Konto erstellen </div>";
         
         echo "Du hast noch kein Konto bei uns? <br> <br>";
         echo "Dann Melde dich einfach an!";
-//button zum registrieren (Seitenweiterleitung)
+
+//button zum registrieren (Seitenweiterleitung)////////////////////////////////////////////////////////////
         echo "<button name=\"Seiten_ID\" class=\"button1\"  type=\"submit\" value=\"user_registration\"> Jetzt registrieren </button> <br>";
            
         echo "</div>";
