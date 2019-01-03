@@ -1,9 +1,20 @@
 <?php
+
+include ("admindbanbindung.php");
+include ("view_admin.php");
+include ("Komponenten/Fileuploder.php");
+include ("Komponenten/pagination.php");
+
+//verbindung zum loggin von antonia
+global $login_admin;
+$admin = $login_admin;
+
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
 
+///////////////////////////////////////////////////////////////////////////////////
 //Programmierungshilfe muss rausgelöscht werden im verlauf
-$admin = true;
+//$admin = true;
 
 /************************************************************************************ */
 //Stellt die Navbox in den Adminbereich-unterseiten dar
@@ -15,18 +26,19 @@ $admin = true;
         //Seitennavigations-Box
         echo"<div class=\"admin-nav\">";
             //Mein Konto bereich
-            echo"<a class=\"admin-nav-ueberschrift\">Mein Konto</a><br><br>";
+            echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=Adminbereich\" class=\"admin-nav-ueberschrift\">Mein Konto</a><br><br>";
 
             if ($admin == true){
                 //User bereich
-                echo"<a class=\"admin-nav-ueberschrift\">User</a><br>"; 
-                echo"<a class=\"admin-nav-listenpunkt\">Kunde</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Admin</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Neu anlegen</a><br><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" class=\"admin-nav-ueberschrift\">User</a><br>"; 
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-kundenliste\" class=\"admin-nav-listenpunkt\">Kunde</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-adminliste\" class=\"admin-nav-listenpunkt\">Admin</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-user-neuanlegen\" class=\"admin-nav-listenpunkt\">Neu anlegen</a><br><br>";
                 
                 //Artikelbereich
-                echo"<a class=\"admin-nav-ueberschrift\">Artikel</a><br>";
-                echo"<a class=\"admin-nav-listenpunkt\">Neu anlegen</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-liste\" class=\"admin-nav-ueberschrift\">Artikel</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=admin-artikel-neuanlegen\" class=\"admin-nav-listenpunkt\">Neu anlegen</a><br>";
+                echo"<a href=\"http://localhost/b5ba/index.php?Seiten_ID=bilderupload\" class=\"admin-nav-listenpunkt\">Bilder upload</a><br>";
             }
 
         echo"</div>";
@@ -36,7 +48,7 @@ $admin = true;
 //Darstellung der Rechten Box im Adminbereich, hier wird automatisch Befüllt aus der boxrechtsBefüllen funktion. 
 /********************************************************************************************/
 
-        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung"){
+        if ($seitenid == "Adminbereich"||$seitenid == "admin-user-kundenliste"||$seitenid == "admin-user-adminliste"||$seitenid == "admin-user-neuanlegen"||$seitenid == "admin-user-bearbeiten"||$seitenid == "admin-user-anzeigen"||$seitenid == "admin-artikel-liste"||$seitenid == "admin-artikel-neuanlegen"||$seitenid == "admin-artikel-bearbeiten"||$seitenid == "admin-artikel-anzeigen"||$seitenid == "admin-bestellungsliste"||$seitenid == "admin-bestellung" ||$seitenid == "mein-konto-bearbeiten" ||$seitenid == "bilderupload" ||$seitenid == "passwortBearbeiten"){
         global $adminBoxRechtsOben, $adminBoxRechtsUnten; 
         //aufruf der Funktion damit der Code ausgeführt werden kann   
         boxRechtsBefuellen();    
@@ -66,16 +78,52 @@ $admin = true;
 /********************************************************************************************** */
 
         function boxRechtsBefuellen(){
-            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid, $admin;     
+            global $adminBoxRechtsOben, $adminBoxRechtsUnten, $seitenid, $admin, $a_eingeloggt;     
             switch ($seitenid){
                 //Seite Mein Konto
                 /*************************************************************** */
                 case "Adminbereich":
+                    if($a_eingeloggt == true){
                     $adminBoxRechtsOben = "Mein Konto";
                     function boxRechtsUntenBefuellen(){
-                        echo " aus der unterfunktion befüllt";
+                        a_view::af_Adminbereich();
+                        }   
                     }
+                    else {
+                        umleitungAufStartseite();
+                            
+                        }
                     break;
+
+                //Seite Mein Konto bearbeiten
+                /*************************************************************** */
+                case "mein-konto-bearbeiten":
+                    if($a_eingeloggt == true){
+                    $adminBoxRechtsOben = "Mein Konto bearbeiten";
+                    function boxRechtsUntenBefuellen(){
+                        a_view::af_mein_konto_bearbeiten();
+                        }   
+                    }
+                    else {
+                        umleitungAufStartseite();
+                            
+                        }
+                    break;    
+
+                //Seite Mein Konto passwort bearbeiten
+                /*************************************************************** */
+                case "passwortBearbeiten":
+                    if($a_eingeloggt == true){
+                    $adminBoxRechtsOben = "Neues Passwort";
+                    function boxRechtsUntenBefuellen(){
+                        a_view::a_passbearbeitenMeinKonto();
+                        }   
+                    }
+                    else {
+                        umleitungAufStartseite();
+                        
+                    }
+                break;  
 
 
                 //Seite User Kundenliste   
@@ -84,7 +132,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Kunden Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "Liste der Kunden.";
+                        a_view::af_admin_user_kundenliste();
                         }
                     }
                     else {
@@ -99,7 +147,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Admin Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "Liste der Admins.";
+                            a_view::af_admin_user_adminliste();
                         }
                     }
                 else {
@@ -114,7 +162,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User neu anlegen";
                         function boxRechtsUntenBefuellen(){
-                            echo "neu anlegen";
+                            a_view::af_admin_user_neuanlegen();
                         }
                     }
                 else {
@@ -126,9 +174,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-user-anzeigen":
                     if($admin == true){
-                        $adminBoxRechtsOben = "User Name Variable";
+                        $adminBoxRechtsOben = "User";
                         function boxRechtsUntenBefuellen(){
-                            echo "User";
+                            a_view::af_admin_user_anzeigen();
                         }
                     }
                 else {
@@ -143,7 +191,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "User bearbeiten";
                         function boxRechtsUntenBefuellen(){
-                            echo "bearbeiten";
+                            a_view::af_admin_user_bearbeiten();
                         }
                     }
                 else {
@@ -158,7 +206,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Artikel Liste";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel liste";
+                            a_view::af_admin_user_artikelliste();
                         }
                     }
                 else {
@@ -173,7 +221,7 @@ $admin = true;
                     if($admin == true){
                         $adminBoxRechtsOben = "Artikel neu anlegen";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel neu";
+                            a_view::af_admin_artikel_neuanlegen();
                         }
                     }
                 else {
@@ -186,9 +234,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-artikel-bearbeiten":
                     if($admin == true){
-                        $adminBoxRechtsOben = "Artikel X(Variable) bearbeiten";
+                        $adminBoxRechtsOben = "Artikel bearbeiten";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel bearbeiten felder";
+                            a_view::af_admin_artikel_bearbeiten();
                         }
                     }
                 else {
@@ -201,9 +249,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-artikel-anzeigen":
                     if($admin == true){
-                        $adminBoxRechtsOben = "Artikel X(Variable) anzeigen";
+                        $adminBoxRechtsOben = "Artikel anzeigen";
                         function boxRechtsUntenBefuellen(){
-                            echo "artikel felder";
+                            a_view::af_admin_artikel_anzeigen();
                         }
                     }
                 else {
@@ -216,9 +264,9 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-bestellungsliste":
                     if($admin == true){
-                        $adminBoxRechtsOben = "bestellungen von user x";
+                        $adminBoxRechtsOben = "Bestellungen";
                         function boxRechtsUntenBefuellen(){
-                            echo "bestellungsliste";
+                            a_view::af_admin_bestellungsliste();
                         }
                     }
                 else {
@@ -230,9 +278,23 @@ $admin = true;
                 /****************************************************************** */ 
                 case "admin-bestellung":
                     if($admin == true){
-                        $adminBoxRechtsOben = "bestellungen x von user x";
+                        $adminBoxRechtsOben = "Bestellung";
                         function boxRechtsUntenBefuellen(){
-                            echo "bestellungs details";
+                            a_view::af_admin_bestellung();
+                        }
+                    }
+                else {
+                    umleitungAufStartseite();
+                }
+                break;
+
+                //Seite Bilder-Upload
+                /****************************************************************** */ 
+                case "bilderupload":
+                    if($admin == true){
+                        $adminBoxRechtsOben = "Bilder Upload";
+                        function boxRechtsUntenBefuellen(){
+                            a_view::af_bilderupload();
                         }
                     }
                 else {
@@ -253,14 +315,6 @@ $admin = true;
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=http://localhost/b5ba/index.php\">";
         }
 
-
-
-
-
-            
-        
-
- 
-
-
 ?>
+
+<script src="adminbereich/admin.js"></script>
