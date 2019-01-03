@@ -48,14 +48,14 @@ if (isset ($_POST['user_registration_speichern']))
             VALUES
             (
                 
-                \"".$_POST['user_registrieren_nname']."\",
-                \"".$_POST['user_registrieren_vname']."\",
-                \"".$_POST['user_registrieren_strasse']."\",
-                \"".$_POST['user_registrieren_ort']."\",
-                \"".$_POST['user_registrieren_plz']."\",
-                \"".$_POST['user_registrieren_mail']."\",
-                \"".$_POST['user_registrieren_login_name']."\",
-                \"".$hash."\",
+                \"".htmlspecialchars($_POST['user_registrieren_nname'], ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_vname'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_strasse'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_ort'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_plz'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_mail'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($_POST['user_registrieren_login_name'],ENT_QUOTES, 'utf-8')."\",
+                \"".htmlspecialchars($hash,ENT_QUOTES, 'utf-8')."\",
                 false,
                 \"".$_POST['user_registrieren_zahlart']."\"
             );";
