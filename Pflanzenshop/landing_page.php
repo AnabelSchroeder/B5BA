@@ -76,6 +76,7 @@ echo "</form>";
 
 //vorläufiger auslog button
 echo "<form action=\"#\" method=\"POST\">";
+echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
 echo "<button name=\"ausloggen\"> logout </button>";
 echo "</form>";
 //////////////////////////////////////////////////////////////////////

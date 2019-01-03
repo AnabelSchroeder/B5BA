@@ -38,11 +38,49 @@ if (mysqli_num_rows ($result) > 0)
 /******************************************************************************************************* */
 /*Ausloggen*/   
 if (isset($_POST['ausloggen']))
+// if(isset($_POST['angemeldetenUserLogout']))
 {
+    //csrf prüfen////////////////////////////////////////////////////////////////////
+    if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token");
+    }
+    //csrf gültig
+    else {
+
     $sql="UPDATE cookie
         SET logged_in = \"false\", expire=0, Versuche=\"3\"
         WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
     $result = mysqli_query($verbinde, $sql);
+
+    //session variable auf false setzen
+    $_SESSION['eingeloggt']=false;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//nutzer löschen und ausloggen
+if (isset($_POST['angemeldetenUserLoeschen']))
+// if(isset($_POST['angemeldetenUserLogout']))
+{
+    //csrf prüfen////////////////////////////////////////////////////////////////////
+    if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+    {
+        die ("ungültiger Token");
+    }
+    //csrf gültig
+    else {
+
+    $sql="UPDATE cookie
+        SET logged_in = \"false\", expire=0, Versuche=\"3\"
+        WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+    $result = mysqli_query($verbinde, $sql);
+
+    $sql ="DELETE FROM nutzer
+        WHERE n_id =\"".$nutzer."\";";
+    $result = mysqli_query($verbinde, $sql);  
+    }
 }
 
 

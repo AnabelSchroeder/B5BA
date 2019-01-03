@@ -81,6 +81,8 @@
             // CSRF Token setzen://////////////////////////////////////////////////////////////
                 $_SESSION['csrf_token'] = md5(openssl_random_pseudo_bytes(32));
                
+            // Session-Variable: eingeloggt
+            $_SESSION['eingeloggt'] = true;
             // Token in Datenbank speichern
                 $sql = "UPDATE cookie
                         SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\", Versuche=\"3\"
@@ -92,7 +94,10 @@
 /********************************************************************************************* */
             // sperre prüfen
             if($login_sperre ==true)
+        
             {
+                //Session variable sperre
+                $_SESSION['gesperrt']= true;
                 echo "<script type=\"text/javascript\"> kasse_sperren(); </script>";
             }
                 echo "eingeloggt";

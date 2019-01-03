@@ -12,6 +12,9 @@ echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
 // Landing/Login/Kasse CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/pflanzenshop.css\" type=\"text/css\">";
 
+//Haupt CSS einbinden
+echo"<link rel=\"stylesheet\" href=\"Pflanzenshop/header-test/L_maincss.css\" type=\"text/css\">";
+
 //recaptcha /////////////////////////////////////////////////////////////////
 echo "<script src='https://www.google.com/recaptcha/api.js'></script>";
 echo"</head>";
@@ -32,7 +35,8 @@ if(isset($_GET['Seiten_ID'])) {
 } else {
     $seitenid = "index";
 }
-
+// header einbinden
+include "Pflanzenshop/header-test/header.php";
 
 //Adminbereich einbinden
     include "Adminbereich/adminbereich.php";
@@ -44,6 +48,8 @@ if(isset($_GET['Seiten_ID'])) {
     include "Pflanzenshop/user_registrierung.php";
 //Kasse einbinden
     include "Pflanzenshop/kasse.php";
+
+
 
 
 echo"</body>";
