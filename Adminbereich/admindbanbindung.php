@@ -6,8 +6,8 @@ $dbname = "ba_webshop";
 
 //Daten für den eingeloggten user von Antonia
 global $nutzer;
-//$a_eingeloggterUser = $nutzer;
-//$a_eingeloggt = $_SESSION['eingeloggt'];
+$a_eingeloggterUser = $nutzer;
+$a_eingeloggt = $_SESSION['eingeloggt'];
 
 /******************************************************************************* */
 //Mein Konto
@@ -15,8 +15,8 @@ global $nutzer;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //muss mit den anderen abgestimmt werden was im Login vorgang benutz werdenals mechanismen und variablen.
-$a_eingeloggt = true;
-$a_eingeloggterUser = 17;
+//$a_eingeloggt = true;
+//$a_eingeloggterUser = 17;
 
 //DB für die darstllung des Nutzerkontos
 if ($a_eingeloggt == true){

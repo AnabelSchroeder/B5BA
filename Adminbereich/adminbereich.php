@@ -6,15 +6,15 @@ include ("Komponenten/Fileuploder.php");
 include ("Komponenten/pagination.php");
 
 //verbindung zum loggin von antonia
-//global $login_admin;
-//$admin = $login_admin;
+global $login_admin;
+$admin = $login_admin;
 
 $adminBoxRechtsOben;
 $adminBoxRechtsUnten;
 
 ///////////////////////////////////////////////////////////////////////////////////
 //Programmierungshilfe muss rausgelöscht werden im verlauf
-$admin = true;
+//$admin = true;
 
 /************************************************************************************ */
 //Stellt die Navbox in den Adminbereich-unterseiten dar
