@@ -394,7 +394,34 @@ if ($row['sale_status']== false)
 /********************************************************************************************* */
 if ($seitenid=="kasse_4")
 
-{
+{   if($_GET['csrf'] == $_SESSION['csrf_token'])
+    {
+    //headleiste//////////////////////////////////////
+    echo "<div class=\"kasse_headleiste\">";
+        echo "Kasse <br>";
+        echo "<a class=\"kasse_nav\">Adresse </a> <a class=\"kasse_nav\"> Zahlungsmethode </a> <a class=\"kasse_nav\"> Kauf abschließen </a> <a class=\"kasse_nav_active\"> Bestellbestätigung </a>";
+    echo "</div>";
+    
+    //linke seite////////////////////////////////////////////////////////////////////////////
+    echo "<div class=\"kasse_div\">";
+    echo "<div class=\"kasse_links\">";
+    echo  "<span class=\"kasse_ueberschrift_klein\"> Der Kauf ist abgeschlossen. Wir wünschen viel Spaß mit unseren Produkten </span><br>";
+    echo "<span class=\"kasse_rechts_ueberschrift\">Ihre Bestellung </span> <br><br>";
+    echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
+    
+    //Anschrift ausgeben
+    
+    echo $kasse_vname."<br>";
+    echo $kasse_nname."<br>";
+    echo $kasse_strasse."<br>";
+    echo $kasse_plz." ".$kasse_ort." <br>";
+    echo "<br>";
+    
+    //Zahlart ausgeben
+    echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
+    echo $kasse_zahlart."<br><br> <br>"; 
+
+    echo "<span class=\"kasse_ueberschrift_klein\"> bestellte Artikel </span><br>";
     // warenkorb daten
     $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
     $result = mysqli_query($verbinde, $sql);
@@ -410,18 +437,25 @@ if (mysqli_num_rows ($result) > 0)
         
 
         // artikel daten zu den artikel IDs aus dem warenkorb suchen
-        $sql = "SELECT art_id, art_name, art_bild , art_preis, sale_status, sale_preis
+        $sql2 = "SELECT art_id, art_name, art_bild , art_preis, sale_status, sale_preis
         FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
-        $result = mysqli_query($verbinde, $sql);
-        if (mysqli_num_rows ($result) > 0)
+        $result2 = mysqli_query($verbinde, $sql2);
+        if (mysqli_num_rows ($result2) > 0)
         {   
-        while ($row = mysqli_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result2))
         {
+
+
 
 /******************************************************************************************** */
 // KASSE 4: Sale abfrage
 /********************************************************************************************* */
-       //sale
+
+      
+
+
+
+//sale
         if($row['sale_status']== true)
         {
             $kasse_art_preis = $row['sale_preis'];
@@ -431,15 +465,28 @@ if (mysqli_num_rows ($result) > 0)
         {
             $kasse_art_preis = $row['art_preis'];
         }
-        }
-        }
-        
-    
-           
-        
 
-    }
+
+                //artikel tabelle darstellen
+
+echo "<table>";
+echo "<tr> ";
+echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
+echo "<td class=\"kasse_td\">".$row['art_name']."</td>";
+echo "<td class=\"kasse_td\"> St&uuml;ckzahl: ".$kasse_4_anzahl."<br> je ". $kasse_art_preis." €</td>";
+echo "<td class=\"kasse_td\">".$kasse_art_preis * $kasse_4_anzahl." €";
+echo "</tr>";
+echo "</table>";   
+        
+        
+    }      
 }
+           
+}      
+}
+}
+    
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // aktuelles datum
 $best_date= date("Y-m-d H:i:s");

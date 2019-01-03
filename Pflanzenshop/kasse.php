@@ -212,7 +212,7 @@ else if ($seitenid == "kasse_4")
     if($_GET['csrf'] !== $_SESSION['csrf_token'])
     {
         die ("ungültiger Token!");
-    }
+    } /*
 //gültig
 else
 {
@@ -239,18 +239,9 @@ echo "<br>";
 
 //Zahlart ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
-echo $kasse_zahlart."<br><br> <br>";
+echo $kasse_zahlart."<br><br> <br>"; */
 
-//artikel tabelle darstellen
-echo "<span class=\"kasse_ueberschrift_klein\"> bestellte Artikel </span><br>";
-echo "<table>";
-echo "<tr> ";
-echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
-echo "<td class=\"kasse_td\">".$row['art_name']."</td>";
-echo "<td class=\"kasse_td\"> St&uuml;ckzahl: ".$kasse_4_anzahl."<br> je ". $kasse_art_preis." €</td>";
-echo "<td class=\"kasse_td\">".$kasse_art_preis * $kasse_4_anzahl." €";
-echo "</tr>";
-echo "</table>";
+
 
 
 
@@ -271,6 +262,6 @@ echo "<button class=\"kasse_button_weiter\"> Ausdrucken </button>";
 echo "</form>";
 echo "</div>";
 echo "</div>";
-}
+
 };
 ?>
