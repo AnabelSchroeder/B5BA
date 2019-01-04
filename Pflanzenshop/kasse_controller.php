@@ -591,7 +591,7 @@ echo $_SESSION['kasse_zahlart']."<br> <hr><br>";
 /******************************************************************************************** */
 // KASSE 4: Artikeltabelle bestellte Artikel
 /********************************************************************************************* */
-$sql5= "SELECT * FROM warenkorb WHERE cookie_id=\"16\";";
+$sql5= "SELECT * FROM bestellte_artikel WHERE best_id=\"".$_SESSION['index']."\";";
 $result5 = mysqli_query($verbinde, $sql5);
          
 if (mysqli_num_rows ($result5) > 0)
@@ -601,50 +601,18 @@ if (mysqli_num_rows ($result5) > 0)
 {
         //einträge zählen
          $wk_art_anzahl =mysqli_num_rows($result5);
-        $kasse_4_anzahl = $wkzeile['anzahl_art'];
-        
-
-        // artikel daten zu den artikel IDs aus dem warenkorb suchen
-        $sql2 = "SELECT art_id, art_name, art_bild , art_preis, sale_status, sale_preis
-        FROM artikel WHERE art_id=\"".$wkzeile['art_id']."\";";
-        $result2 = mysqli_query($verbinde, $sql2);
-        if (mysqli_num_rows ($result2) > 0)
-        {   
-        while ($row = mysqli_fetch_assoc($result2))
-        {
-
-
-
-/******************************************************************************************** */
-// KASSE 4: Sale abfrage
-/********************************************************************************************* */
-
       
-
-
-
-//sale
-        if($row['sale_status']== true)
-        {
-            $kasse_art_preis = $row['sale_preis'];
-        }             
-        //nicht sale
-        if ($row['sale_status']== false)
-        {
-            $kasse_art_preis = $row['art_preis'];
-        }
-
-
-                //artikel tabelle darstellen
+        
+//artikel tabelle darstellen
 
 echo "<table>";
 echo "<tr> ";
-echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$row['art_bild']."\"> </td>";
-echo "<td class=\"kasse_td\">".$row['art_name']."</td>";
-echo "<td class=\"kasse_td\"> St&uuml;ckzahl: ".$kasse_4_anzahl."<br> je ". $kasse_art_preis." €</td>";
+echo "<td class=\"kasse_td\"> <img class=\"kasse_artikel_bild\" src=\"img/".$wkzeile['best_art_bild']."\"> </td>";
+echo "<td class=\"kasse_td\">".$wkzeile['best_art_name']."</td>";
+echo "<td class=\"kasse_td\"> St&uuml;ckzahl: ".$wkzeile['best_anzahl']."<br> je ". $wkzeile['best_art_preis']." €</td>";
 
     // zeilen preis
-    $kasse_zeilen_preis= $kasse_art_preis * $kasse_4_anzahl;  
+    $kasse_zeilen_preis= $wkzeile['best_art_preis'] * $wkzeile['best_anzahl'];  
 echo "<td class=\"kasse_td\">".$kasse_zeilen_preis." €";
 echo "</tr>";
 echo "</table>";   
@@ -652,33 +620,14 @@ echo "</table>";
 $kasse_gesamt_preis = $kasse_gesamt_preis + $kasse_zeilen_preis;
 $kasse_bruttobetrag = $kasse_gesamt_preis + $versand;
 
-// bestellartikeltabelle füllen
-$sql3 = "INSERT into bestellte_artikel
-        (best_id,
-        art_id,
-        best_art_name,
-        best_art_bild,
-        best_anzahl,
-        best_art_preis)
-        
-        VALUES
-        (
-            \"".$row['art_id']."\",
-            \"".$row['art_name']."\",
-            \"".$row['art_bild']."\",
-            \"".$kasse_4_anzahl."\",
-            \"".$kasse_art_preis."\"
 
-
-        )";
-        $result = mysqli_query($verbinde, $sql3);
 
 
         
     }      
 }
            
-}      
+      
 }
 
     
@@ -686,7 +635,7 @@ $sql3 = "INSERT into bestellte_artikel
 
 
 
-}
+
 ////////////////////////////////////////////////////////////
 
 
@@ -748,7 +697,7 @@ $best_nutzer_id = $best_nutzer['n_id'];
 $sql = " SELECT best_id, best_datum FROM bestellung WHERE n_id=\"".$best_nutzer_id."\" ORDER BY best_datum DESC";
 $ergebnis = mysqli_query($verbinde, $sql);
 $best_array = mysqli_fetch_array($ergebnis);
-$index = (isset($best_array[0])) ? $best_array[0] : null;
+$_SESSION['index'] = (isset($best_array[0])) ? $best_array[0] : null;
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -802,7 +751,7 @@ best_art_preis
 VALUES
 ( 
     \"".$row['art_id']."\",
-    \"".$index."\",
+    \"".$_SESSION['index']."\",
     \"".$row['art_name']."\",
     \"".$row['art_bild']."\",
     \"".$best['anzahl_art']."\",
@@ -840,7 +789,7 @@ $sql ="INSERT INTO rechnung
 VALUES
 (
     \"".$best_date."\",
-    \"".$index."\",
+    \"".$_SESSION['index']."\",
     \"".$best_nutzer_id."\",
     \"".$best['n_nname']."\",
     \"".$best['n_vname']."\",
