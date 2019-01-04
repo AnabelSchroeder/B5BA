@@ -729,7 +729,7 @@ best_bezahlart)
 VALUES
 (
 \"".$best_date."\",
-\"". $kasse_n_id."\",
+\"".$kasse_n_id."\",
 \"".$_SESSION['kasse_vname']."\",
 \"".$_SESSION['kasse_nname']."\",
 \"".$_SESSION['kasse_strasse']."\",
@@ -741,6 +741,20 @@ $result = mysqli_query($verbinde, $sql6);
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+//bestell_id herausfinden
+$sql ="SELECT n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+$result=mysqli_query($verbinde, $sql);
+$best_nutzer = mysqli_fetch_array($result);
+$best_nutzer_id = $best_nutzer['n_id'];
+
+
+
+$sql = " SELECT best_id, best_datum FROM bestellung WHERE n_id=\"".$best_nutzer_id."\" ORDER BY best_datum DESC";
+$ergebnis = mysqli_query($verbinde, $sql);
+$best_array = mysqli_fetch_array($ergebnis);
+$index = (isset($best_array[0])) ? $best_array[0] : null;
+
+////////////////////////////////////////////////////////////////////////////////////
 
 //tabelle best artikel
 $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
@@ -781,6 +795,7 @@ $best_art_preis = $row['art_preis'];
 
 $sql7="INSERT INTO bestellte_artikel
 (   art_id,
+best_id,
 best_art_name,
 best_art_bild,
 best_anzahl,
@@ -790,6 +805,7 @@ best_art_preis
 VALUES
 ( 
     \"".$row['art_id']."\",
+    \"".$index."\",
     \"".$row['art_name']."\",
     \"".$row['art_bild']."\",
     \"".$best['anzahl_art']."\",
