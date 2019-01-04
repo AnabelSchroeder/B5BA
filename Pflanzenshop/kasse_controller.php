@@ -13,42 +13,6 @@
 /*KASSE: nutzerdaten selektieren und variablen anlegen
 /******************************************************************************************* */
 
-//bestellung speichern
-if (isset ($POST['bestellung']))
-{  
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-// aktuelles datum
-$best_date= date("Y-m-d H:i:s");  
-/******************************************************************************************** */
-// KASSE 3: Bestellung speichern
-/********************************************************************************************* */
-
-
-
-// bestellung in datenbank : tabelle bestellung
-$sql="INSERT INTO bestellung
-(best_datum,
-n_id,
-best_n_vname,
-best_n_name,
-lieferstrasse,
-lieferplz,
-lieferort,
-best_bezahlart)
-
-VALUES
-(
-\"".$best_date."\",
-\"". $kasse_n_id."\",
-\"".$_SESSION['kasse_vname']."\",
-\"".$_SESSION['kasse_nname']."\",
-\"".$_SESSION['kasse_strasse']."\",
-\"".$_SESSION['kasse_plz']."\",
-\"".$_SESSION['kasse_ort']."\",
-\"".$_SESSION['kasse_zahlart']."\"
-)";
-$result = mysqli_query($verbinde, $sql);
-}
 //überprüfung, ob eingeloggt//////////////////////////////////////////////////////////////
 if (isset ($_POST['kasse']))
 
@@ -730,5 +694,111 @@ WHERE cookie_id=\"".$cookie_id."\";";
 ////////////////////////////////////////////////////////////
 
 
+
+
+
+
+
+
+
+
+
+//bestellung speichern
+if (isset ($_POST['bestellung']))
+{  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+// aktuelles datum
+$best_date= date("Y-m-d H:i:s");  
+/******************************************************************************************** */
+// KASSE 3: Bestellung speichern
+/********************************************************************************************* */
+
+
+
+// bestellung in datenbank : tabelle bestellung
+$sql6="INSERT INTO bestellung
+(best_datum,
+n_id,
+best_n_vname,
+best_n_name,
+lieferstrasse,
+lieferplz,
+lieferort,
+best_bezahlart)
+
+VALUES
+(
+\"".$best_date."\",
+\"". $kasse_n_id."\",
+\"".$_SESSION['kasse_vname']."\",
+\"".$_SESSION['kasse_nname']."\",
+\"".$_SESSION['kasse_strasse']."\",
+\"".$_SESSION['kasse_plz']."\",
+\"".$_SESSION['kasse_ort']."\",
+\"".$_SESSION['kasse_zahlart']."\"
+)";
+$result = mysqli_query($verbinde, $sql6);
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//tabelle best artikel
+$sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
+$erg = mysqli_query($verbinde, $sql);
+         
+if (mysqli_num_rows ($erg) > 0)
+{   
+    //$resultset = array();
+    while ($best = mysqli_fetch_array($erg)) 
+{
+        
+        // artikel daten zu den artikel IDs aus dem warenkorb suchen
+        $sql2 = "SELECT art_id, art_name, art_preis, sale_status, sale_preis, art_stueckzahl, art_bild 
+        FROM artikel WHERE art_id=\"".$best['art_id']."\";";
+        $result2 = mysqli_query($verbinde, $sql2);
+    
+   
+
+        if (mysqli_num_rows ($result2) > 0)
+        {   
+        while ($row = mysqli_fetch_assoc($result2))
+        {
+
+
+/******************************************************************************************** */
+//Kasse 3: Abfrage ob sale
+/********************************************************************************************* */
+//sale 
+if($row['sale_status']== true)
+{
+$best_art_preis = $row['sale_preis'];
+}             
+//nicht sale
+if ($row['sale_status']== false)
+{
+$best_art_preis = $row['art_preis'];
+}
+
+$sql7="INSERT INTO bestellte_artikel
+(   art_id,
+best_art_name,
+best_art_bild,
+best_anzahl,
+best_art_preis
+
+)
+VALUES
+( 
+    \"".$row['art_id']."\",
+    \"".$row['art_name']."\",
+    \"".$row['art_bild']."\",
+    \"".$best['anzahl_art']."\",
+    \"".$best_art_preis."\"
+
+
+)";
+$result = mysqli_query($verbinde, $sql7);
+        }}}}
+}
 
 ?>
