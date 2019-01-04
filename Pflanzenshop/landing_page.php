@@ -63,6 +63,7 @@ setcookie("sid", $sid, time()+3600*48);
 // Landing Page: Ausgabe
 /********************************************************************************************* */
 
+
 //vorläufiger arbeitsbutton zur loginseite///////////////////////////////////////////////
 
 echo "<form action=\"index.php?Seiten_ID=login\" method=\"GET\">";
@@ -76,14 +77,14 @@ echo "</form>";
 
 //vorläufiger auslog button
 echo "<form action=\"#\" method=\"POST\">";
-echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
+//echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
 echo "<button name=\"ausloggen\"> logout </button>";
 echo "</form>";
 //////////////////////////////////////////////////////////////////////
 
 //vorläufiger arbeitsbutton zur kassenseite///////////////////////////////////////////////
-echo "<form action=\"index.php?Seiten_ID=kasse_1\" method=\"GET\">";
-echo "<button name=\"Seiten_ID\"  type=\"submit\" value=\"kasse_1\"> kasse </button>";
+echo "<form action=\"index.php?Seiten_ID=kasse_1\" method=\"POST\">";
+echo "<button  name=\"kasse\" type=\"submit\" value=\"kasse_1\"> kasse </button>";
 echo "</form>";
 //////////////////////////////////////////////////////////////////////
 
