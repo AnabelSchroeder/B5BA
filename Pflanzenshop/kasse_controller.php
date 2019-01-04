@@ -684,11 +684,7 @@ $sql3 = "INSERT into bestellte_artikel
     
 
 
-/*
-//warenkorb löschen
- $sql = "DELETE FROM warenkorb
-WHERE cookie_id=\"".$cookie_id."\";";
- mysqli_query($verbinde, $sql);"        */
+
 
 }
 ////////////////////////////////////////////////////////////
@@ -700,8 +696,8 @@ WHERE cookie_id=\"".$cookie_id."\";";
 
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //bestellung speichern
 if (isset ($_POST['bestellung']))
@@ -755,6 +751,7 @@ $best_array = mysqli_fetch_array($ergebnis);
 $index = (isset($best_array[0])) ? $best_array[0] : null;
 
 ////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 
 //tabelle best artikel
 $sql= "SELECT * FROM warenkorb WHERE cookie_id=\"".$cookie_id."\";";
@@ -815,6 +812,57 @@ VALUES
 )";
 $result = mysqli_query($verbinde, $sql7);
         }}}}
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//rechnung aufstellen
+
+// nutzerdaten selektieren
+$sql = "SELECT * FROM nutzer WHERE n_id =\"".$best_nutzer_id."\";";
+$result = mysqli_query($verbinde, $sql) OR die(mysqli_error);
+$best= mysqli_fetch_assoc($result);
+
+
+$sql ="INSERT INTO rechnung
+(
+    r_datum,
+    best_id,
+    n_id,
+    r_n_name,
+    r_n_vname,
+    r_n_strasse,
+    r_n_ort,
+    r_n_plz,
+    r_n_mail,
+    r_n_zahlart
+)
+VALUES
+(
+    \"".$best_date."\",
+    \"".$index."\",
+    \"".$best_nutzer_id."\",
+    \"".$best['n_nname']."\",
+    \"".$best['n_vname']."\",
+    \"".$best['n_strasse']."\",
+    \"".$best['n_ort']."\",
+    \"".$best['n_plz']."\",
+    \"".$best['n_mail']."\",
+    \"".$_SESSION['kasse_zahlart']."\"
+
+)";
+$esult = mysqli_query($verbinde, $sql) OR die(mysqli_error);
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+//warenkorb löschen
+
+
+//warenkorb löschen
+/* $sql = "DELETE FROM warenkorb
+WHERE cookie_id=\"".$cookie_id."\";";
+ mysqli_query($verbinde, $sql);";" */       
 }
 
 ?>
