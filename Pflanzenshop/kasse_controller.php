@@ -687,10 +687,11 @@ $result = mysqli_query($verbinde, $sql6);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 //bestell_id herausfinden
-$sql ="SELECT n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+$sql ="SELECT cookie_id, n_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
 $result=mysqli_query($verbinde, $sql);
 $best_nutzer = mysqli_fetch_array($result);
 $best_nutzer_id = $best_nutzer['n_id'];
+$best_wk = $best_nutzer['cookie_id'];
 
 
 
@@ -809,9 +810,9 @@ $esult = mysqli_query($verbinde, $sql) OR die(mysqli_error);
 
 
 //warenkorb löschen
-/* $sql = "DELETE FROM warenkorb
-WHERE cookie_id=\"".$cookie_id."\";";
- mysqli_query($verbinde, $sql);";" */       
+$sql = "DELETE FROM warenkorb
+WHERE cookie_id=\"".$best_wk."\";";
+mysqli_query($verbinde, $sql) OR die(mysqli_error);        
 }
 
 ?>
