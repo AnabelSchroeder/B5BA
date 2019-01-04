@@ -28,24 +28,48 @@ if(isset ($K_Fehler))
     echo"<br><br>";
 }
 //Ausgabe der Nutzerdaten//////////////////////////////////////////////////////////////////////
-    echo "<span class=\"kasse_ueberschrift_klein\">Name und Adresse </span><br><br>";
-    echo"Vorname:  ".$kasse_vname."<br>";
-    echo "Nachname:  ".$kasse_nname."<br>";
-    echo "Straße:  ".$kasse_strasse."<br>";
-    echo "PLZ,Ort:  ".$kasse_plz." ".$kasse_ort." <br>";
-    echo "<br> <br> <br> <br> <br> <br> <br> <br> <br>";
-    // änderungs link
-    echo "<a class=\"kasse_ueberschrift_klein\">Adresse ändern?</a>";
+    echo "<span class=\"kasse_ueberschrift_klein\">Name und Adresse <br><br>
+    Bei abweichender Lieferanschrift bitte hier ändern.</span><br><br>";
+    //Formular
+    echo "<form action=\"#\" method=\"POST\">";
+
+    // csrf////////////////////////////////////////////////////////////////////////////////
+    echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
+
+    echo"Vorname:<input type=\"text\" name=\"liefer_vname\"value=\"".$_SESSION['kasse_vname']."\"><br>";
+    echo "Nachname: <input type=\"text\" name=\"liefer_nname\" value=\"".$_SESSION['kasse_nname']."\"><br><br>";
+    echo "Strasse: <input type=\"text\" name=\"liefer_strasse\" value=\"".$_SESSION['kasse_strasse']."\"> <br>";
+    echo "PLZ: <input type=\"text\" name=\"liefer_plz\" value=\"".$_SESSION['kasse_plz']."\"> <br>";
+    echo "Ort: <input type=\"text\" name=\"liefer_ort\" value=\"".$_SESSION['kasse_ort']."\"> <br>";
+    echo "<br> <br>";
+     // änderungs link
+     echo "<input type=\"submit\"  name=\"kasse1_adresse_aendern\" value=\"speichern\">";
+    echo "</form> <br> <br> <br> <br> <br> <br> <br>";
+   
     echo "<hr>";
    
    //seitenweiterleitung
+   //prüfen ob gesperrt
+   //gesperrt:
+ if (isset($_SESSION['gesperrt']) AND $_SESSION['gesperrt']== true)
+   {
     //Buttons weiter und zurück////////////////////////////////////////////////////////////////////
     echo "<form method=\"GET\"  action=\"index.php?Seiten_ID=kasse_2\">";
-    echo "<button class=\"kasse_button_zurück\"> zurück </button> 
-    <button class=\"kasse_button_weiter\" id=\"kasse_1_weiter\" name=\"Seiten_ID\" value=\"kasse_2\"> weiter </button>";
+    echo "<button class=\"kasse_button_zurück\"> abbrechen </button> 
+    <button class=\"kasse_button_weiter_disabled\" id=\"kasse_1_weiter\" name=\"Seiten_ID\" value=\"kasse_2\" disabled > weiter </button>";
     echo "</form>";
     echo "</div>";
-
+    
+   }
+   else{
+        //Buttons weiter und zurück////////////////////////////////////////////////////////////////////
+    echo "<form method=\"GET\"  action=\"index.php?Seiten_ID=kasse_2\">";
+    echo "<button class=\"kasse_button_zurück\"> abbrechen </button> 
+    <button class=\"kasse_button_weiter\" id=\"kasse_1_weiter\" name=\"Seiten_ID\" value=\"kasse_2\"enabled> weiter </button>";
+    echo "</form>";
+    echo "</div>";
+   }
+  
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //rechte Seite/////////////////////////////////////////////////////////////////////////////////////
 echo "<div class=\"kasse_rechts\">";
@@ -82,9 +106,17 @@ echo "</div>";
  //div container
  //linke seite////////////////////////////////////////////////////////////////////////////////////   
 echo "<div class=\"kasse_div\">";
-echo "<div class=\"kasse_links\">";    
+echo "<div class=\"kasse_links\">"; 
+
+//eventuelle Meldung bei Nutzersperre//////////////////////////////////////////////
+if(isset ($K_Fehler))
+{
+     echo "<span class=\"fehler\">$K_Fehler</span>";
+    echo"<br><br>";
+}
+//////////////////////////////////////////////////////////////////////////
     echo "<span class=\"kasse_ueberschrift_klein\">Wähle eine Zahlungsmethode aus: </span> <br><br> <br>";
-    echo "<form method=\"POST\">";
+    echo "<form action=\"#\" method=\"POST\">";
 
     // csrf////////////////////////////////////////////////////////////////////////////////
     echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
@@ -92,7 +124,7 @@ echo "<div class=\"kasse_links\">";
 
     // zahlart vorbelegen//////////////////////////////////////////////////////////////////////////////////
     //Vorkasse
-    if ($kasse_zahlart == "Vorkasse")
+    if ($_SESSION['kasse_zahlart'] == "Vorkasse")
     {
       echo"<option selected> Vorkasse </option>
         <option> Rechnung </option>
@@ -100,7 +132,7 @@ echo "<div class=\"kasse_links\">";
         <option> Lastschrift </option>";
     }
     //Rechnung
-    else if ($kasse_zahlart=="Rechnung")
+    else if ($_SESSION['kasse_zahlart']=="Rechnung")
     {
       echo"<option > Vorkasse </option>
         <option selected> Rechnung </option>
@@ -109,7 +141,7 @@ echo "<div class=\"kasse_links\">";
     }
 
        //Pay Pal
-       else if ($kasse_zahlart=="Pay Pal")
+       else if ($_SESSION['kasse_zahlart']=="Pay Pal")
        {
          echo"<option > Vorkasse </option>
            <option > Rechnung </option>
@@ -118,7 +150,7 @@ echo "<div class=\"kasse_links\">";
        }
 
         //Lastschrift
-        else if ($kasse_zahlart=="Lastschrift")
+        else if ($_SESSION['kasse_zahlart']=="Lastschrift")
         {
           echo"<option > Vorkasse </option>
             <option > Rechnung </option>
@@ -133,14 +165,32 @@ echo "<div class=\"kasse_links\">";
     echo " <br> <br> <br> <br> <br> <br> <br> <br><br><br><hr>";
 
     //Seitenweiterleitung: Buttons///////////////////////////////////////////////////////////////////
+     //prüfen ob gesperrt
+   //gesperrt:
+   if (isset($_SESSION['gesperrt']) AND $_SESSION['gesperrt']== true)
+   {
+       //zurück zu kasse1: "Adresse"
+    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
+    echo "<button class=\"kasse_button_zurück\"  name=\"Seiten_ID\" value=\"kasse_1\" disabled> zurück </button>";
+
+    //weiter zu kasse3: "kauf abschließen"
+    echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\"  value=\"kasse_3\" disabled> weiter </button>";
+     
+    echo "</form>";
+   }
+
+   else{
     //zurück zu kasse1: "Adresse"
     echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
     echo "<button class=\"kasse_button_zurück\"  name=\"Seiten_ID\" value=\"kasse_1\"> zurück </button>";
+    echo "</form>";
 
     //weiter zu kasse3: "kauf abschließen"
+    echo "<form method=\"Post\" action=\"index.php?Seiten_ID=kasse_3\">";
     echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\"  value=\"kasse_3\"> weiter </button>";
-     
+    echo "<input type=\"hidden\" name=\"kontrolle\">";
     echo "</form>";
+   }
       echo "</div>";
 
 
@@ -151,10 +201,10 @@ echo "<div class=\"kasse_rechts\">";
 echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
 //Anschrift ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
-echo $kasse_vname."<br>";
-echo $kasse_nname."<br>";
-echo $kasse_strasse."<br>";
-echo $kasse_plz." ".$kasse_ort." <br> <hr>";
+echo $_SESSION['kasse_vname']."<br>";
+echo $_SESSION['kasse_nname']."<br>";
+echo $_SESSION['kasse_strasse']."<br>";
+echo $_SESSION['kasse_plz']." ".$_SESSION['kasse_ort']." <br> <hr>";
 echo "<br>";
 
 //Gesamtbetrag und Artikelzahl
@@ -179,14 +229,19 @@ else if ($seitenid== "kasse_3")
     //buttons zur Seitenweiterleitung///////////////////////////////////////////////////
 
     //zurück zu kasse2: "zahlart"
-       echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_4\">";
-       echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
+    if(!isset($_SESSION['gesperrt']) && isset($_POST['kontrolle']))
+ {
+    echo "<form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
+    echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
+     echo "</form>";
+     echo "<form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
     //weiter zu kasse4: bestellbestätigung
-    echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
-   
-    //csrf///////////////////////////////////////////////////////////////////////
-   echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
-    echo "</form>";
+ echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"bestellung\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
+
+ //csrf///////////////////////////////////////////////////////////////////////
+echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
+ echo "</form>";
+   }
     echo "</div>";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,14 +250,14 @@ else if ($seitenid== "kasse_3")
 echo "<span class=\"kasse_rechts_ueberschrift\">Bestellübersicht </span> <br><hr>";
 //Anschrift ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Anschrift </span><br>";
-echo $kasse_vname."<br>";
-echo $kasse_nname."<br>";
-echo $kasse_strasse."<br>";
-echo $kasse_plz." ".$kasse_ort." <br> <hr>";
+echo $_SESSION['kasse_vname']."<br>";
+echo $_SESSION['kasse_nname']."<br>";
+echo $_SESSION['kasse_strasse']."<br>";
+echo $_SESSION['kasse_plz']." ".$_SESSION['kasse_ort']." <br> <hr>";
 echo "<br>";
 //Zahlart ausgeben
 echo "<span class=\"kasse_ueberschrift_klein\"> Zahlungmethode </span><br>";
-echo $kasse_zahlart."<br> <hr><br>";
+echo $_SESSION['kasse_zahlart']."<br> <hr><br>";
 //Gesamtbetrag und Artikelzahl
 
 echo "<span class=\"kasse_ueberschrift_klein\">Gesamtbetrag: </span> <br>";
@@ -221,10 +276,10 @@ echo "</div>";
 else if ($seitenid == "kasse_4")
 {
     //crsf prüfen///////////////////////////////////////// ?????????????????????
-    if($_GET['csrf'] !== $_SESSION['csrf_token'])
+   /* if($_GET['csrf'] !== $_SESSION['csrf_token'])
     {
         die ("ungültiger Token!");
-    } /*
+    } 
 //gültig
 else
 {
