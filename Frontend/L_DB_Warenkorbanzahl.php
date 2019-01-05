@@ -23,11 +23,12 @@ if (mysqli_connect_errno()){
     exit();
 }
 */
-$L_cookie = $_COOKIE['sid']; 
+$L_cookie = $_COOKIE['sid'];
+$L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie'"; //!!!!!!!!!
+$L_cookieIdres = mysqli_query($verbinde, $L_sqlCookieId);
+$L_cookieIdarray = mysqli_fetch_assoc($L_cookieIdres);
 
-$L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie'"; 
-$L_cookieId = mysqli_query($verbinde, $L_sqlCookieId);
-$L_cookieResult = mysqli_fetch_assoc($L_cookieId);
+$L_cookieId = $L_cookieIdarray["cookie_id"];
 
 /*
 $L_sqlbasketCount = "SELECT COUNT (korb_id) FROM warenkorb WHERE cookie_id='$L_cookieId';";
@@ -35,7 +36,7 @@ $L_basketCount = mysqli_query($verbinde, $L_sqlbasketCount);
 return $L_basketCount;
 */
 
-$L_sqlbasketCount = "SELECT korb_id FROM warenkorb WHERE cookie_id='$L_cookieResult'";
+$L_sqlbasketCount = "SELECT korb_id FROM warenkorb WHERE cookie_id=$L_cookieId";
 $L_basketCount = mysqli_query($verbinde, $L_sqlbasketCount);
 $L_result = $L_basketCount;
 $L_row_cnt = mysqli_num_rows($L_result);
