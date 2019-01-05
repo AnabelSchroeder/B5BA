@@ -9,7 +9,9 @@ if ($seitenid == "shop") {
 
 
 include "Frontend/suchbereichBildhintergrund.php";
+include "Frontend/L_DB_shop_reset1.php";
 
+include "Frontend/L_DB_shop2_ifisset.php";
 
 // Filterleiste _______________________________________________________________FILTERLEISTE_______//
 echo "<div id=\"L_FilterBarCon\">";
@@ -83,11 +85,14 @@ echo "<div id=\"L_FilterBarCon\">";
         echo "<button id=\"L_filterReset\" name=\"L_resetFilter\" type=\"submit\">Filter zurücksetzen</button>";
 
     echo "</form>";
-include "Frontend/L_DB_shop_reset1.php";
+
     echo "</div>";
     echo "<div id=\"L_gewFilterAnzeige\">";
                 echo "Gewählte Filter: ";
-                if(
+                if(isset($_POST["L_searchfield"]) && ($_POST["L_searchfield"]) != null){
+                    $L_filtertext.="Suchbegriff=".$_POST["L_searchfield"];
+                }
+                else if(
                     //(isset ($_POST["Preis"]) && ($_POST["L_FilterPreisAuswahl"]) != NULL) || 
                     (isset($_SESSION["L_filterPreis"]) && $_SESSION["L_filterPreis"] != null) || 
                     //(isset ($_POST["Farbe"]) && ($_POST["L_FilterFarbeAuswahl"]) != NULL) || 
@@ -163,8 +168,11 @@ if (isset($_GET['page']) & !empty($_GET['page'])) {
 //include "Frontend/L_DB_pdo.php";
 
 //include "Frontend/L_DB_mysqli.php";
-include "Frontend/L_DB_shop1.php";
-include "Frontend/L_DB_shop_reset1.php";
+
+//include "Frontend/L_DB_shop1.php"; //KLAPPT
+
+include "Frontend/L_DB_shop3_datenadd.php";
+
 }
 
 ?>
