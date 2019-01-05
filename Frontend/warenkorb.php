@@ -123,7 +123,7 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                                     echo "<td class=\"L_warKorSpalte1\">";
                                         echo "<form action=\"index.php?Seiten_ID=warenkorb\" method=\"post\">";
                                             echo "<button class=\"L_warKorArtLöButt\" name=\"basketArtDel\" value=".$L_erg['korb_id'].">";
-                                                echo "<img src=\"assets/PH.jpg\">Artikel l&ouml;schen";
+                                                echo "<img src=\"assets/icons/round-delete-24px.svg\">Artikel l&ouml;schen";
                                             echo "</button>";
                                         echo "</form>";
                                     echo "</td>";

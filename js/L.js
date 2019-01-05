@@ -45,7 +45,7 @@ function L_showFilterMenu() {
     "<button onClick='L_hide" +
     L_filterArt +
     "FilterMenu()'>" +
-    "<img class='L_FilterButtonIcon' src='assets/PH.jpg'>" +
+    "<img class='L_FilterButtonIcon' src='assets/icons/round-keyboard_arrow_up-24px.svg'>" +
     "</button>" +
     "<div id='L_" +
     L_filterArt +
@@ -85,7 +85,7 @@ function L_hideFilterMenu() {
     "<button onClick='L_show" +
     L_filterArt +
     "FilterMenu()'>" +
-    "<img class='L_FilterButtonIcon' src='assets/PH.jpg'>" +
+    "<img class='L_FilterButtonIcon' src='assets/icons/round-keyboard_arrow_down-24px.svg'>" +
     "</button>";
 
   document.getElementById(L_FilterID).innerHTML = text;

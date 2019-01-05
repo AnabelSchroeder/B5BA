@@ -75,7 +75,7 @@ echo "<div id=\"L_headerRechts\">";
         echo "<form action=\"index.php\" method=\"get\">";
             echo "<button name=\"Seiten_ID\" type=\"submit\" class=\"L_headerButton\"";
                     echo "value=\"shop\">";
-                echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_img\" src=\"assets/icons/icons8-search-48 Kopie_weiss.png\">";
             echo "</button>";
         echo "</form>"; 
     echo "</div>";
@@ -88,7 +88,7 @@ echo "<div id=\"L_headerRechts\">";
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"Login\">";
-            echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"assets/icons/DefaultStaffMember_bearb_weiss.png\">";
         echo "</button>";
     echo "</form>";
 
@@ -100,7 +100,7 @@ echo "<div id=\"L_headerRechts\">";
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"warenkorb\">";
-            echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"assets/icons/img_334581 Kopie_weiss_Basket.png\">";
             echo "<div id=\"L_warenkorb_art_anz\">";  
                 /*if (warenkorbAnzahl()!=null) {
                     echo warenkorbAnzahl();

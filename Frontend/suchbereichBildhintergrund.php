@@ -20,7 +20,7 @@ echo "<div id=\"L_Content_SucheContainer\">";
         echo "<button id=\"L_ContSearchButton\" name=\"L_suchbutton\" type=\"submit\" "; 
         //echo "onClick=\"L_suchfeldplatzhalterAendern()\"";  //Klappt nicht
         echo ">";
-            echo "<img id=\"L_ContSearchButtIcon\" src=\"assets/PH.jpg\">";
+            echo "<img id=\"L_ContSearchButtIcon\" src=\"assets/icons/icons8-search-48 Kopie_weiss.png\">";
         echo "</button>";
     echo "</form>";
 echo "</div>";

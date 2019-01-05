@@ -25,7 +25,7 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "<div id=\"L_FilterPreis\" class=\"L_FilterKat\">";
                 echo "<span>Preis</span>";
                 echo "<button onClick=\"L_showPreisFilterMenu()\">";
-                    echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                    echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
                 echo "</button>";
                 //echo "<div id=\"L_Preisfiltermenuanzeige\" class=\"L_FilterMenu\"></div>";
             echo "</div>";
@@ -39,7 +39,7 @@ echo "<div id=\"L_FilterBarCon\">";
         echo "<div id=\"L_FilterFarbe\" class=\"L_FilterKat\">";
             echo "<span>Farbe</span>";
             echo "<button onclick=\"L_showFarbeFilterMenu()\">";
-                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
             echo "</button>";
         echo "</div>";
 
@@ -47,7 +47,7 @@ echo "<div id=\"L_FilterBarCon\">";
         echo "<div id=\"L_FilterKategorie\" class=\"L_FilterKat\">";
             echo "<span>Kategorie</span>";
             echo "<button onclick=\"L_showKategorieFilterMenu()\">";
-                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
             echo "</button>";
         echo "</div>";
 
@@ -56,7 +56,7 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "<div id=\"L_FilterHoehe\" class=\"L_FilterKat\">";
             echo "<span>Hoehe</span>";
             echo "<button onclick=\"L_showHoeheFilterMenu()\">";
-                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
             echo "</button>";
         echo "</div>";
 */
@@ -65,7 +65,7 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "<div id=\"L_FilterPflege\" class=\"L_FilterKat\">";
             echo "<span>Pflege</span>";
             echo "<button onclick=\"L_showPflegeFilterMenu()\">";
-                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
             echo "</button>";
         echo "</div>";
 
@@ -73,7 +73,7 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "<div id=\"L_FilterStandort\" class=\"L_FilterKat\">";
             echo "<span>Standort</span>";
             echo "<button onclick=\"L_showStandortFilterMenu()\">";
-                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
+                echo "<img class=\"L_FilterButtonIcon\" src=\"assets/icons/round-keyboard_arrow_down-24px.svg\">";
             echo "</button>";
         echo "</div>";
 
