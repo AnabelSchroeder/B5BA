@@ -50,7 +50,8 @@ function L_showFilterMenu() {
     "<div id='L_" +
     L_filterArt +
     "filtermenuanzeige' class='L_FilterMenu'>" +
-    "<form action='index.php' method='post' class='L_Filteroption'>";
+    //"<form action='index.php' method='post' class='L_Filteroption'>";
+    "<form action='index.php?Seiten_ID=shop' method='post' class='L_Filteroption'>";
 
   //j = i + 1;
 
@@ -68,7 +69,7 @@ function L_showFilterMenu() {
   text +=
     "<button class='L_FilterMenubutton' type='submit' name='" +
     L_filterArt +
-    '">Filter anwenden</button>' +
+    "'>Filter anwenden</button>" +
     "</form>" +
     "</div>";
 
