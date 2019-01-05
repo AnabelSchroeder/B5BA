@@ -484,10 +484,19 @@ label {
   padding: 15px;
 }
 
+#L_shopPagContSigns > a {
+  text-decoration: none;
+  color: var(--L_farbe-grau);
+  font-size: var(--L_fontsize_hint);
+}
+
 .L_shopPagAusgabe {
   color: var(--L_farbe-grau);
 
   font-size: var(--L_fontsize_hint);
+
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .L_pagPfeil {

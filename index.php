@@ -17,7 +17,7 @@ echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
 //Antonias CSS
 echo"<link rel=\"stylesheet\" href=\"Frontend/Antonia/pflanzenshop_Lbearb.css\" type=\"text/css\">";
 //Lisas CSS
-//echo"<link rel=\"stylesheet\" href=\"CSS/L_maincss.css\" type=\"text/css\">";
+echo"<link rel=\"stylesheet\" href=\"CSS/L_maincss.css\" type=\"text/css\">";
 
 echo"</head>";
 
