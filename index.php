@@ -1,46 +1,7 @@
 <?php
 session_start();
 
-//??$cookie_
-//Cookie_Antonia
-$servername = "localhost";
-$username = "root";
-$passwort = "root";
-$dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
 
-//$port = 8889;
-
-//$link = mysqli_init();
-//$success = mysqli_real_connect($link, $servername, $username, $passwort, $dbname, $port);
-
-$verbinde = mysqli_connect($servername, $username, $passwort);
-$connmysql = mysqli_select_db($verbinde, $dbname);
-
-if (isset($_COOKIE['sid'])) {
-    echo "cookie vorhanden";
-   // in der Datenbank nachschauen, ob Cookie vorhanden
-   $sql ="SELECT cookie_id FROM cookie WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
-   $result = mysqli_query($verbinde, $sql);
-// evtl. Cookie verlängern 
-}
-    
-else {
-    // cookie id zufällig generieren
-    $sid = md5(openssl_random_pseudo_bytes(32));
-    // cookie setzen
-setcookie("sid", $sid, time()+3600*48);
-    // In DB speichern
-    $sql = "INSERT INTO cookie
-    ( 
-        cookie_wert
-    )
-    VALUES
-    (
-        \"".$sid."\"
-    );";
-    $sql = mysqli_query($verbinde, $sql);
-    echo "neues cookie gesetzt";
-}
 
 
 echo"<!DOCTYPE html>";
@@ -53,6 +14,10 @@ echo"<title>Pflanzenshop</title>";
 echo"<link rel=\"stylesheet\" href=\"CSS/maincss.css\" type=\"text/css\">";
 //Adminbereich CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
+//Antonias CSS
+echo"<link rel=\"stylesheet\" href=\"Frontend/Antonia/pflanzenshop_Lbearb.css\" type=\"text/css\">";
+//Lisas CSS
+//echo"<link rel=\"stylesheet\" href=\"CSS/L_maincss.css\" type=\"text/css\">";
 
 echo"</head>";
 
@@ -80,9 +45,16 @@ if(isset($_GET['Seiten_ID'])) {
 echo $_GET['Seiten_ID']; echo $seitenid;
 
 include "Frontend/shop.php";
+//include "Frontend/L_DB_shop1.php";
 include "Frontend/artikelansicht.php";
+//include "Frontend/warenkorb.php";
 include "Frontend/warenkorb.php";
+//include "Frontend/L_DB_artikelWarenkorb1.php";
 //include "Frontend/L_DBanbindung.php";
+
+//Antonias
+//include "Antonia/Landing_controller_Lbearb.php";
+include "Antonia/landing_page_Lbearb.php";
 
 //Adminbereich einbinden
     include "Adminbereich/adminbereich.php";
