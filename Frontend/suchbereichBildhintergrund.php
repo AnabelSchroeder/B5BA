@@ -12,11 +12,13 @@ echo"<link rel=\"stylesheet\" href=\"../CSS/maincss.css\" type=\"text/css\">";
     //Bild-Container
 echo "<div id=\"L_Content_SucheContainer\">";
         //Formular für's Suchfeld mit Button
-    echo "<form action=\"index.php\" method=\"post\">";
+   // echo "<form action=\"Frontend/shop.php\" method=\"post\">"; Funktioniert nicht
+    echo "<form action=\"index.php?Seiten_ID=shop\" method=\"post\">";
         echo "<input id=\"L_ContSuchfeld\" type=\"text\" 
                     name=\"L_searchfield\" size=\"50\" "; /*onkeyup=\"L_startSearch()\" */
                 echo "placeholder=\"Suchen nach Produkten, Farben, ...\">";
-        echo "<button id=\"L_ContSearchButton\" name=\"L_suchbutton\" type=\"submit\" "; /*onClick=\"L_suchfeldplatzhalterAendern()\"*/ 
+        echo "<button id=\"L_ContSearchButton\" name=\"L_suchbutton\" type=\"submit\" "; 
+        //echo "onClick=\"L_suchfeldplatzhalterAendern()\"";  //Klappt nicht
         echo ">";
             echo "<img id=\"L_ContSearchButtIcon\" src=\"assets/PH.jpg\">";
         echo "</button>";
