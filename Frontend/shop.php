@@ -18,6 +18,8 @@ echo "<div id=\"L_FilterBarCon\">";
     echo "<div>";
 
     echo "<div id=\"L_FilterBar\">";
+    
+ /*   
             //Container für Preisfilterfeld und gewählte Filteranzeige
         //echo "<div>";
             echo "<div id=\"L_FilterPreis\" class=\"L_FilterKat\">";
@@ -31,6 +33,7 @@ echo "<div id=\"L_FilterBarCon\">";
                 //echo "Gewählte Filter: ";
             //echo "</div>";
         //echo "</div>";
+*/
 
             //Filter für Farbe
         echo "<div id=\"L_FilterFarbe\" class=\"L_FilterKat\">";
@@ -48,7 +51,7 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "</button>";
         echo "</div>";
 
-
+/*
             //Filter für Höhe
             echo "<div id=\"L_FilterHoehe\" class=\"L_FilterKat\">";
             echo "<span>Hoehe</span>";
@@ -56,6 +59,7 @@ echo "<div id=\"L_FilterBarCon\">";
                 echo "<img class=\"L_FilterButtonIcon\" src=\"assets/PH.jpg\">";
             echo "</button>";
         echo "</div>";
+*/
 
             //Filter für Pflege
             echo "<div id=\"L_FilterPflege\" class=\"L_FilterKat\">";
@@ -73,48 +77,69 @@ echo "<div id=\"L_FilterBarCon\">";
             echo "</button>";
         echo "</div>";
 
-    echo "<form action=\"index.php\" method=\"post\">";
+    //echo "<form action=\"index.php\" method=\"post\">";
+    echo "<form action=\"index.php?Seiten_ID=shop\" method=\"post\">";
             //Zurücksetzenbutton
-        echo "<button id=\"L_filterReset\" type=\"reset\">Filter zurücksetzen</button>";
+        echo "<button id=\"L_filterReset\" name=\"L_resetFilter\" type=\"submit\">Filter zurücksetzen</button>";
 
     echo "</form>";
-
+include "Frontend/L_DB_shop_reset1.php";
     echo "</div>";
     echo "<div id=\"L_gewFilterAnzeige\">";
                 echo "Gewählte Filter: ";
-                if((isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL) || 
-                (isset ($_POST["L_FilterFarbe"]) & ($_POST["L_FilterFarbe"]) != NULL) || 
-                (isset ($_POST["L_FilterKategorie"]) & ($_POST["L_FilterKategorie"]) != NULL )|| 
-                (isset ($_POST["L_FilterPflege"]) & ($_POST["L_FilterPflege"]) != NULL) || 
-                (isset ($_POST["L_FilterHoehe"]) & ($_POST["L_FilterHoehe"]) != NULL) || 
-                (isset ($_POST["L_FilterStandort"]) & ($_POST["L_FilterStandort"]) != NULL)){
-                    if (isset ($_POST["L_FilterPreis"]) & ($_POST["L_FilterPreis"]) != NULL){
-                        $L_filtertext = "Preis: ".$_POST["L_FilterPreis"];
+                if(
+                    //(isset ($_POST["Preis"]) && ($_POST["L_FilterPreisAuswahl"]) != NULL) || 
+                    (isset($_SESSION["L_filterPreis"]) && $_SESSION["L_filterPreis"] != null) || 
+                    //(isset ($_POST["Farbe"]) && ($_POST["L_FilterFarbeAuswahl"]) != NULL) || 
+                    (isset($_SESSION["L_filterFarbe"]) && $_SESSION["L_filterFarbe"]!= null) || 
+                    //(isset ($_POST["Kategorie"]) && ($_POST["L_FilterKategorieAuswahl"]) != NULL )|| 
+                    (isset($_SESSION["L_filterKategorie"]) && $_SESSION["L_filterKategorie"] != null) || 
+                    //(isset ($_POST["Pflege"]) && ($_POST["PfL_FilterPflegeAuswahllege"]) != NULL) || 
+                    (isset($_SESSION["L_filterPflege"]) && $_SESSION["L_filterPflege"] != null) || 
+                    //(isset ($_POST["Hoehe"]) && ($_POST["L_FilterHoeheAuswahl"]) != NULL) || 
+                    (isset($_SESSION['L_filterHoehe']) && $_SESSION['L_filterHoehe'] != null) ||
+                    //(isset ($_POST["Standort"]) && ($_POST["L_FilterStandortAuswahl"]) != NULL) || 
+                    (isset($_SESSION["L_filterStandort"]) && $_SESSION["L_filterStandort"] != null)
+                    ){
+                    //if (isset ($_POST["Preis"]) & ($_POST["L_FilterPreisAuswahl"]) != NULL){
+                    if (isset($_SESSION["L_filterPreis"]) && $_SESSION["L_filterPreis"] != null){
+                        //$L_filtertext = "Preis=".$_POST["L_FilterPreisAuswahl"];
+                        $L_filtertext = "Preis=".$_SESSION["L_filterPreis"];
                     }else{$L_filtertext = "";}
-                    if (isset ($_POST["L_FilterFarbe"]) & ($_POST["L_FilterFarbe"]) != NULL){
+                    //if (isset ($_POST["Farbe"]) & ($_POST["L_FilterFarbeAuswahl"]) != NULL){
+                    if (isset($_SESSION["L_filterFarbe"]) && $_SESSION["L_filterFarbe"]!= null){
                         if ($L_filtertext == ""){
-                            $L_filtertext = "Farbe: ".$_POST["L_FilterFarbe"];
-                        }else{$L_filtertext .= "; Farbe: ".$_POST["L_FilterFarbe"];}
+                            //$L_filtertext = "Farbe=".$_POST["L_FilterFarbeAuswahl"];
+                            $L_filtertext = "Farbe=".$_SESSION["L_filterFarbe"];
+                        }else{$L_filtertext .= "; Farbe=".$_SESSION["L_filterFarbe"];}
                     }else{$L_filtertext .= "";}
-                    if (isset ($_POST["L_FilterKategorie"]) & ($_POST["L_FilterKategorie"]) != NULL ){
+                    //if (isset ($_POST["Kategorie"]) & ($_POST["L_FilterKategorieAuswahl"]) != NULL ){
+                    if(isset($_SESSION["L_filterKategorie"]) && $_SESSION["L_filterKategorie"] != null){
                         if ($L_filtertext == ""){
-                            $L_filtertext = "Kategorie: ".$_POST["L_FilterKategorie"];
-                        }else{$L_filtertext .= "; Kategorie: ".$_POST["L_FilterKategorie"];} 
+                            //$L_filtertext = "Kategorie=".$_POST["L_FilterKategorieAuswahl"];
+                            $L_filtertext = "Kategorie=".$_SESSION["L_filterKategorie"];
+                        }else{$L_filtertext .= "; Kategorie=".$_SESSION["L_filterKategorie"];} 
                     }else{$L_filtertext .= "";}
-                    if (isset ($_POST["L_FilterPflege"]) & ($_POST["L_FilterPflege"]) != NULL){
+                    //if (isset ($_POST["Pflege"]) & ($_POST["PfL_FilterPflegeAuswahllege"]) != NULL){
+                    if(isset($_SESSION["L_filterPflege"]) && $_SESSION["L_filterPflege"] != null){
                         if ($L_filtertext == ""){
-                            $L_filtertext = "Pflege: ".$_POST["L_FilterPflege"];
-                        }else{$L_filtertext .= "; Pflege: ".$_POST["L_FilterPflege"];}    
+                            //$L_filtertext = "Pflege=".$_POST["PfL_FilterPflegeAuswahllege"];
+                            $L_filtertext = "Pflege=".$_SESSION["L_filterPflege"];
+                        }else{$L_filtertext .= "; Pflege=".$_SESSION["L_filterPflege"];}    
                     }else{$L_filtertext .= "";}
-                    if (isset ($_POST["L_FilterHoehe"]) & ($_POST["L_FilterHoehe"]) != NULL){
+                    //if (isset ($_POST["Hoehe"]) & ($_POST["L_FilterHoeheAuswahl"]) != NULL){
+                    if(isset($_SESSION['L_filterHoehe']) && $_SESSION['L_filterHoehe'] != null){
                         if ($L_filtertext == ""){
-                            $L_filtertext = "Ho&uuml;he: ".$_POST["L_FilterHoehe"];
-                        }else{$L_filtertext.="; Ho&uuml;he: ".$_POST["L_FilterHoehe"];}
+                            //$L_filtertext = "Ho&uuml;he= ".$_POST["L_FilterHoeheAuswahl"];
+                            $L_filtertext = "Ho&uuml;he= ".$_SESSION['L_filterHoehe'];
+                        }else{$L_filtertext.="; Ho&uuml;he=".$_SESSION['L_filterHoehe'];}
                     }else{$L_filtertext.="";}
-                    if (isset ($_POST["L_FilterStandort"]) & ($_POST["L_FilterStandort"]) != NULL){
+                    //if (isset ($_POST["Standort"]) & ($_POST["L_FilterStandortAuswahl"]) != NULL){
+                    if(isset($_SESSION["L_filterStandort"]) && $_SESSION["L_filterStandort"] != null){
                         if ($L_filtertext == ""){
-                            $L_filtertext = "Standort: ".$_POST["L_FilterStandort"];
-                        }else{$L_filtertext .= "; Standort: ".$_POST["L_FilterStandort"];}
+                            //$L_filtertext = "Standort=".$_POST["L_FilterStandortAuswahl"];
+                            $L_filtertext = "Standort=".$_SESSION["L_filterStandort"];
+                        }else{$L_filtertext .= "; Standort= ".$_SESSION["L_filterStandort"];}
                     }else{$L_filtertext.="";}
                 }
                 echo $L_filtertext;
@@ -139,7 +164,7 @@ if (isset($_GET['page']) & !empty($_GET['page'])) {
 
 //include "Frontend/L_DB_mysqli.php";
 include "Frontend/L_DB_shop1.php";
-
+include "Frontend/L_DB_shop_reset1.php";
 }
 
 ?>

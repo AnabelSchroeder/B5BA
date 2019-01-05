@@ -4,7 +4,7 @@
 // DBanbindung des Webshops (BA WS 18/19) //
 // Ersteller: Lisa Peters //
 ///////////////////////////////////////
-
+/*
 global $servername, $username, $passwort, $dbname;
 
 $servername = "localhost";
@@ -19,7 +19,7 @@ $dbname = "BA_webshop"; //in ba_webshop ändern bei zusammenführung
 
 $verbinde = mysqli_connect($servername, $username, $passwort);
 $connmysql = mysqli_select_db($verbinde, $dbname);
-
+*/
 if (isset ($_POST["L_resetFilter"])){
    /*
     $_POST["L_FilterPreis"] = NULL;
@@ -34,10 +34,17 @@ if (isset ($_POST["L_resetFilter"])){
     unset($_POST["L_FilterFarbe"]);
     unset($_POST["L_FilterKategorie"]);
     unset($_POST["L_FilterPflege"]);
-    unset($_POST["L_FilterHoehe"]);
-    unset($_POST["L_FilterStandort"]);
+   // unset($_POST["L_FilterHoehe"]);
+    //unset($_POST["L_FilterStandort"]);
 
-    
+    $_SESSION["L_filterFarbe"] = null;
+    $_SESSION["L_filterKategorie"] = null;
+    $_SESSION["L_filterPflege"] = null;
+    $_SESSION["L_filterStandort"] = null;
+   // $_SESSION["L_filterPreis"] = null;
+    //$_SESSION['L_filterHoehe'] = null;
+
+    unset($_POST["L_resetFilter"]);
 }
 //???????????????????????????????????????????????
 
