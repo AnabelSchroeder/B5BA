@@ -218,19 +218,7 @@ function L_shopPagination() {
             echo "Last</a>";
         }
 
-//Alternativ
-                echo "<img id=\"L_pfeil_l\" class=\"L_pagPfeil\" src=\"assets/PH.jpg\">";
-        
-            echo "<span id=\"L_shopPagAusgabe\">";
 
-                echo "1 2 3 4";
-
-            echo "</span>";
-
-            echo "<img id=\"L_pfeil_r\" class=\"L_pagPfeil\" src=\"assets/PH.jpg\">";
-            
-        echo "</div>";
-    echo "</div>";
         }
 
 
