@@ -15,11 +15,19 @@ echo"<title>Pflanzenshop</title>";
 echo"<link rel=\"stylesheet\" href=\"CSS/maincss.css\" type=\"text/css\">";
 //Adminbereich CSS einbinden
 echo"<link rel=\"stylesheet\" href=\"CSS/admincss.css\" type=\"text/css\">";
+// Landing/Login/Kasse CSS einbinden
+echo"<link rel=\"stylesheet\" href=\"CSS/pflanzenshop.css\" type=\"text/css\">";
 
+//Haupt CSS einbinden
+echo"<link rel=\"stylesheet\" href=\"Pflanzenshop/header-test/L_maincss.css\" type=\"text/css\">";
+
+//recaptcha /////////////////////////////////////////////////////////////////
+echo "<script src='https://www.google.com/recaptcha/api.js'></script>";
 echo"</head>";
 
 
 echo"<body>";
+
 
 
 // der Button muss später in den Header
@@ -33,11 +41,21 @@ if(isset($_GET['Seiten_ID'])) {
 } else {
     $seitenid = "index";
 }
-
+// header einbinden
+include "Pflanzenshop/header-test/header.php";
 
 //Adminbereich einbinden
     include "Adminbereich/adminbereich.php";
-    
+// Landing Page einbinden  
+    include "Pflanzenshop/landing_page.php";
+// User-Loginseite einbinden
+    include "Pflanzenshop/loginseite.php";
+//User-registrierung einbinden
+    include "Pflanzenshop/user_registrierung.php";
+//Kasse einbinden
+    include "Pflanzenshop/kasse.php";
+
+
 
 
 echo"</body>";
@@ -45,5 +63,9 @@ echo"</body>";
 
 
 echo"</html>";
+
+
+//javascript einbinden formulareingaben überprüfen
+echo "<script src=\"Pflanzenshop/pflanzenshop.js\"></script>";
 
 ?>
