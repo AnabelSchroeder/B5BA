@@ -26,7 +26,7 @@ if (isset ($_POST['user_registration_speichern']))
     else
     {
 
-    $passwort = $_POST['user_registrieren_passwort'];
+    $passwort = htmlspecialchars($_POST['user_registrieren_passwort'],ENT_QUOTES, 'utf-8');
     //Passwort hashen
     $hash = password_hash($passwort, PASSWORD_DEFAULT);
     //Daten in Tabelle nutzer einfügen
@@ -55,7 +55,7 @@ if (isset ($_POST['user_registration_speichern']))
                 \"".htmlspecialchars($_POST['user_registrieren_plz'],ENT_QUOTES, 'utf-8')."\",
                 \"".htmlspecialchars($_POST['user_registrieren_mail'],ENT_QUOTES, 'utf-8')."\",
                 \"".htmlspecialchars($_POST['user_registrieren_login_name'],ENT_QUOTES, 'utf-8')."\",
-                \"".htmlspecialchars($hash,ENT_QUOTES, 'utf-8')."\",
+                \"".$hash."\",
                 false,
                 \"".$_POST['user_registrieren_zahlart']."\"
             );";

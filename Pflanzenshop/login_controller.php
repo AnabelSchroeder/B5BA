@@ -68,6 +68,13 @@
                 WHERE cookie_id =\"".$zeile['cookie_id']."\";";
                  $result = mysqli_query($verbinde, $sql); */
              //////////////////////////////////////////////////////////////////////////////////////// 
+
+/******************************************************************************************** */
+// Login: session erneuern
+/********************************************************************************************* */
+  //automatisch neue Session id
+ //function session_regenerate_id()
+  //  session_regenerate_id();
                 
 /******************************************************************************************** */
 // Login: expire setzen
@@ -85,9 +92,9 @@
             $_SESSION['eingeloggt'] = true;
             // Token in Datenbank speichern
                 $sql = "UPDATE cookie
-                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\",  CRSF=\"".$_SESSION['csrf_token']."\", Versuche=\"3\"
+                        SET n_id =\"".$nutzer."\", logged_in =true, expire=\"".$expire."\", Versuche=\"3\"
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
-                $result = mysqli_query($verbinde, $sql);
+                $result = mysqli_query($verbinde, $sql) or die(mysqli_error);
 
 /******************************************************************************************** */
 // login: sperre prüfen
@@ -116,7 +123,7 @@
 /********************************************************************************************* */
                 //  Login Versuchanzahl auslesen
                 $sql ="SELECT Versuche FROM cookie WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
-                $result = mysqli_query($verbinde, $sql);
+                $result = mysqli_query($verbinde, $sql) or die(mysqli_error);
                 $zeile = mysqli_fetch_assoc($result);
 
                 // anzahl speichern
@@ -142,7 +149,7 @@
                         SET Versuche=\"".$versuch_anzahl_neu."\"
                         WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
                 
-                $result = mysqli_query($verbinde, $sql);
+                $result = mysqli_query($verbinde, $sql)or die(mysqli_error);
                 } 
                 // Versuche = 0
                 else
@@ -152,7 +159,7 @@
                     SET Versuche=\"0\"
                     WHERE cookie_wert= \"".$_COOKIE['sid']."\";";
             
-                    $result = mysqli_query($verbinde, $sql);
+                    $result = mysqli_query($verbinde, $sql)or die(mysqli_error);
                     
                     $captcha = "Loginversuche verbraucht!";
                     //login button disablen

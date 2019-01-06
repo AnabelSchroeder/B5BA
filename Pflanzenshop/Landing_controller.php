@@ -100,40 +100,5 @@ if (isset($_POST['angemeldetenUserLoeschen']))
 
 
 //////////////////////////////////////////////////////////////
-//bestellung speichern
-if (isset ($POST['bestellung']))
-{  
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-// aktuelles datum
-$best_date= date("Y-m-d H:i:s");  
-/******************************************************************************************** */
-// KASSE 3: Bestellung speichern
-/********************************************************************************************* */
 
-
-
-// bestellung in datenbank : tabelle bestellung
-$sql="INSERT INTO bestellung
-(best_datum,
-n_id,
-best_n_vname,
-best_n_name,
-lieferstrasse,
-lieferplz,
-lieferort,
-best_bezahlart)
-
-VALUES
-(
-\"".$best_date."\",
-\"". $kasse_n_id."\",
-\"".$_SESSION['kasse_vname']."\",
-\"".$_SESSION['kasse_nname']."\",
-\"".$_SESSION['kasse_strasse']."\",
-\"".$_SESSION['kasse_plz']."\",
-\"".$_SESSION['kasse_ort']."\",
-\"".$_SESSION['kasse_zahlart']."\"
-)";
-$result = mysqli_query($verbinde, $sql);
-}
 ?>

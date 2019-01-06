@@ -158,14 +158,14 @@ $result = mysqli_query($verbinde, $sql);
     //csrf gültig
     else
     {
-        $_SESSION['kasse_vname']= $_POST['liefer_vname'];
+        $_SESSION['kasse_vname']= htmlspecialchars($_POST['liefer_vname'],ENT_QUOTES, 'utf-8');
                
-        $_SESSION['kasse_nname']= $_POST['liefer_nname'];
+        $_SESSION['kasse_nname']= htmlspecialchars($_POST['liefer_nname'],ENT_QUOTES, 'utf-8');
        
-        $_SESSION['kasse_strasse']= $_POST['liefer_strasse'];
+        $_SESSION['kasse_strasse']= htmlspecialchars($_POST['liefer_strasse'],ENT_QUOTES, 'utf-8');
            
-        $_SESSION['kasse_plz']= $_POST['liefer_plz'];
-        $_SESSION['kasse_ort']= $_POST['liefer_ort'];
+        $_SESSION['kasse_plz']= htmlspecialchars($_POST['liefer_plz'],ENT_QUOTES, 'utf-8');
+        $_SESSION['kasse_ort']= htmlspecialchars($_POST['liefer_ort'],ENT_QUOTES, 'utf-8');
     }
 
  }
@@ -201,7 +201,7 @@ $result = mysqli_query($verbinde, $sql);
                 SET n_zahlart = \"".$_POST['kasse_zahlungsmethode_zahlungsart']."\" WHERE n_id =\"".$kasse_n_id ."\";";
         mysqli_query($verbinde, $sql);*/
         
-        $_SESSION['kasse_zahlart'] = $_POST['kasse_zahlungsmethode_zahlungsart'];
+        $_SESSION['kasse_zahlart'] =htmlspecialchars($_POST['kasse_zahlungsmethode_zahlungsart'],ENT_QUOTES, 'utf-8');
         
        }
     }
@@ -651,6 +651,16 @@ $kasse_bruttobetrag = $kasse_gesamt_preis + $versand;
 //bestellung speichern
 if (isset ($_POST['bestellung']))
 {  
+
+  //csrf prüfen/////////////////////////////////////////////////////////////////////////////////
+  if ($_POST['csrf'] !== $_SESSION['csrf_token'])
+  {
+      die ("ungültiger Token");
+  }
+
+  else{
+
+  
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 // aktuelles datum
 $best_date= date("Y-m-d H:i:s");  
@@ -814,5 +824,5 @@ $sql = "DELETE FROM warenkorb
 WHERE cookie_id=\"".$best_wk."\";";
 mysqli_query($verbinde, $sql) OR die(mysqli_error);        
 }
-
+}
 ?>

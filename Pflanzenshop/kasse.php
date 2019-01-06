@@ -229,11 +229,15 @@ else if ($seitenid== "kasse_3")
     //buttons zur Seitenweiterleitung///////////////////////////////////////////////////
 
     //zurück zu kasse2: "zahlart"
-    if(!isset($_SESSION['gesperrt']) && isset($_POST['kontrolle']))
+    if(!isset($_SESSION['gesperrt'])) 
  {
-    echo "<form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
+    if( isset($_POST['kontrolle']) || isset($_POST['kasse_3_anzahl_up']) || isset($_POST['kasse_3_anzahl_down']))
+{
+    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_2\">";
     echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
      echo "</form>";
+
+
      echo "<form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
     //weiter zu kasse4: bestellbestätigung
  echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"bestellung\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
@@ -241,7 +245,7 @@ else if ($seitenid== "kasse_3")
  //csrf///////////////////////////////////////////////////////////////////////
 echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
  echo "</form>";
-   }
+   }}
     echo "</div>";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

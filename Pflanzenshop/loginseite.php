@@ -7,12 +7,26 @@
     //sql controller inkludieren
     include ("login_controller.php");
 
+
+
 //linker container (login)///////////////////////////////////////////////////////////////////////
 echo "<div class=\"user_login_bg\">";
     echo "<div class=\"user_login_container\">";
 
 //Formular//////////////////////////////////////////////////////////////////////////////////////
+// seitenweiterleitung:
+//zum user-konto
+/*if(isset($POST['zu_user_seite']))
+{
+    echo "<form action=\"index.php?Seiten_ID=Adminbereich\" method=\"POST\">";
+}
+
+//zur kasse
+else
+{*/
     echo "<form  name=\"Login\"  method=\"POST\">";
+//}
+   
     echo "<div class=\"user_login_div\">";
         echo "<div class=\"user_login_div_headleiste_l\"> Login </div>";
     

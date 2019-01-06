@@ -91,7 +91,8 @@ if(isset($_SESSION['eingeloggt']) AND $_SESSION['eingeloggt']==false)
 {
     
 
-    echo "<form action=\"index.php?Seiten_ID=login method=\"POST\">";
+    echo "<form action=\"index.php?Seiten_ID=login\" method=\"POST\">";
+    echo "<input type=\"hidden\" name=\"zu_user_seite\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"login\">";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
@@ -106,7 +107,7 @@ if(isset($_SESSION['eingeloggt']) AND $_SESSION['eingeloggt']==false)
     {
         
     
-        echo "<form action=\"index.php?Seiten_ID=Adminbereich method=\"POST\">";
+        echo "<form action=\"index.php?Seiten_ID=Adminbereich\" method=\"POST\">";
             echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                     echo "value=\"login\">";
                 echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
@@ -116,9 +117,11 @@ if(isset($_SESSION['eingeloggt']) AND $_SESSION['eingeloggt']==false)
     }
     else
     {
-        echo "<form action=\"index.php?Seiten_ID=login method=\"POST\">";
+        echo "<form action=\"index.php?Seiten_ID=login\" method=\"POST\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
+      
                 echo "value=\"login\">";
+                echo "<input type=\"hidden\" name=\"zu_user_seite\">";
             echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
             echo"login";
         echo "</button>";
