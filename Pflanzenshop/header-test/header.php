@@ -20,7 +20,7 @@ echo "<div id=\"L_headerLinks\">";
     echo "<form action=\"index.php\" method=\"get\">";
         echo "<button class=\"L_headerButton\" name=\"Seiten_ID\" type=\"submit\" ";
                 echo "value=\"index\">";
-            echo "<img class=\"L_img\" src=\"assets/PH.jpg\">";
+            echo "<img class=\"L_img\" src=\"logo-weiß.png\">";
         echo "</button>";
     echo "</form>";
 

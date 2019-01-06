@@ -12,7 +12,8 @@
 /******************************************************************************************** */
 // Login: eingabe überprüfen
 /********************************************************************************************* */
-    if (isset( $_POST['login_name']))
+  //  if (isset( $_POST['login_name']))
+  if(array_key_exists('user_login',$_POST))
     {
         
 // prüfen: beide felder gesetzt/////////////////////////////////////////////////////////////
@@ -164,6 +165,16 @@
                     $captcha = "Loginversuche verbraucht!";
                     //login button disablen
                     echo "<script> login_sperren(); </script>";
+                    /*
+                    //captcha abfrage
+                    $response_key = $_POST['g_recaptcha-response'];
+                    $response= file_get_contents(" https://www.google.com/recaptcha/api/siteverify ?secret=6LdQDIYUAAAAAEUNX4KGn3VCHnkgKbL6Boauokvd & response=".$response_key);
+                    $response= json_decode($response);
+
+                    if ($response -> success == 1)
+                    {
+                        echo "success";
+                    }*/
                 }
             }
         }}

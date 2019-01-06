@@ -7,6 +7,8 @@
   
   $verbinde = mysqli_connect($host,$user,$pass);
   $con = mysqli_select_db($verbinde,$dbase);
+//mysqli_set_charset($con, "utf8");
+
 
 
 /**************************************************************************************** */

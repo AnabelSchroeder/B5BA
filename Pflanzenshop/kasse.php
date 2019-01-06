@@ -36,15 +36,17 @@ if(isset ($K_Fehler))
     // csrf////////////////////////////////////////////////////////////////////////////////
     echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
 
-    echo"Vorname:<input type=\"text\" name=\"liefer_vname\"value=\"".$_SESSION['kasse_vname']."\"><br>";
-    echo "Nachname: <input type=\"text\" name=\"liefer_nname\" value=\"".$_SESSION['kasse_nname']."\"><br><br>";
-    echo "Strasse: <input type=\"text\" name=\"liefer_strasse\" value=\"".$_SESSION['kasse_strasse']."\"> <br>";
-    echo "PLZ: <input type=\"text\" name=\"liefer_plz\" value=\"".$_SESSION['kasse_plz']."\"> <br>";
-    echo "Ort: <input type=\"text\" name=\"liefer_ort\" value=\"".$_SESSION['kasse_ort']."\"> <br>";
+    echo "<table> <tr>";
+    echo"<td>Vorname: </td> <td><input class=\"kasse_form\" type=\"text\" name=\"liefer_vname\"value=\"".$_SESSION['kasse_vname']."\"></td> </tr>";
+    echo "<tr> <td>Nachname: </td> <td><input class=\"kasse_form\" type=\"text\" name=\"liefer_nname\" value=\"".$_SESSION['kasse_nname']."\"></td></tr>";
+    echo "<tr> <td>Strasse:</td> <td> <input class=\"kasse_form\"type=\"text\" name=\"liefer_strasse\" value=\"".$_SESSION['kasse_strasse']."\"> </td></tr>";
+    echo "<tr> <td>PLZ:</td> <td><input class=\"kasse_form\"type=\"text\" name=\"liefer_plz\" value=\"".$_SESSION['kasse_plz']."\"> </td></tr>";
+    echo "<tr> <td>Ort:</td> <td> <input class=\"kasse_form\"type=\"text\" name=\"liefer_ort\" value=\"".$_SESSION['kasse_ort']."\"> </td></tr>";
+    echo"</table>";
     echo "<br> <br>";
      // änderungs link
-     echo "<input type=\"submit\"  name=\"kasse1_adresse_aendern\" value=\"speichern\">";
-    echo "</form> <br> <br> <br> <br> <br> <br> <br>";
+     echo "<input type=\"submit\" class =\"kasse_button_zurück\" name=\"kasse1_adresse_aendern\" value=\"speichern\">";
+    echo "</form> <br> <br> <br>";
    
     echo "<hr>";
    
@@ -162,7 +164,7 @@ if(isset ($K_Fehler))
 // speicher button
     echo "<button class =\"kasse_button_zurück\" name=\"kasse2_zahlart_speichern\" type=\"submit\"> speichern </button>";
     echo "</form>";
-    echo " <br> <br> <br> <br> <br> <br> <br> <br><br><br><hr>";
+    echo " <br> <br> <br> <br> <br> <br> <br> <br><br><br><br><br><hr>";
 
     //Seitenweiterleitung: Buttons///////////////////////////////////////////////////////////////////
      //prüfen ob gesperrt
@@ -181,15 +183,16 @@ if(isset ($K_Fehler))
 
    else{
     //zurück zu kasse1: "Adresse"
-    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
+    echo "<table> <tr>";
+    echo "<td><form method=\"GET\" action=\"index.php?Seiten_ID=kasse_3\">";
     echo "<button class=\"kasse_button_zurück\"  name=\"Seiten_ID\" value=\"kasse_1\"> zurück </button>";
-    echo "</form>";
+    echo "</form></td>";
 
     //weiter zu kasse3: "kauf abschließen"
-    echo "<form method=\"Post\" action=\"index.php?Seiten_ID=kasse_3\">";
+    echo "<td><form method=\"Post\" action=\"index.php?Seiten_ID=kasse_3\">";
     echo "<button class=\"kasse_button_weiter\" name=\"Seiten_ID\"  value=\"kasse_3\"> weiter </button>";
     echo "<input type=\"hidden\" name=\"kontrolle\">";
-    echo "</form>";
+    echo "</form></td></tr></table>";
    }
       echo "</div>";
 
@@ -233,18 +236,19 @@ else if ($seitenid== "kasse_3")
  {
     if( isset($_POST['kontrolle']) || isset($_POST['kasse_3_anzahl_up']) || isset($_POST['kasse_3_anzahl_down']))
 {
-    echo "<form method=\"GET\" action=\"index.php?Seiten_ID=kasse_2\">";
+    echo "<table><tr>";
+    echo "<td><form method=\"GET\" action=\"index.php?Seiten_ID=kasse_2\">";
     echo "<button class=\"kasse_button_zurück\" type=\"submit\" name=\"Seiten_ID\" value=\"kasse_2\"> zurück </button>";
-     echo "</form>";
+     echo "</form></td>";
 
 
-     echo "<form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
+     echo "<td><form method=\"POST\" action=\"index.php?Seiten_ID=kasse_4\">";
     //weiter zu kasse4: bestellbestätigung
  echo "<button id=\"kasse3_bestellen\" class=\"kasse_button_weiter_disabled\" type=\"submit\" name=\"bestellung\" value=\"kasse_4\" disabled> zahlungspflichtig bestellen </button>";
 
  //csrf///////////////////////////////////////////////////////////////////////
 echo "<input type=\"hidden\" name=\"csrf\" value=\"".$_SESSION['csrf_token']."\">";
- echo "</form>";
+ echo "</form></td></tr></table>";
    }}
     echo "</div>";
 

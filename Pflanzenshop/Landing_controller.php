@@ -101,4 +101,14 @@ if (isset($_POST['angemeldetenUserLoeschen']))
 
 //////////////////////////////////////////////////////////////
 
+//vorschlag zu expire verlängerung
+/*
+if (isset($_SESSION['eingeloggt']) AND $_SESSION['eingeloggt']== true)
+{
+$new_expire=time();
+$sql= "UPDATE cookie 
+        SET expire=\"".$new_expire."\"
+        WHERE cookie_wert =\"".$_COOKIE['sid']."\";";
+$result = mysqli_query($verbinde, $sql) OR die(mysqli_error); 
+}*/
 ?>
