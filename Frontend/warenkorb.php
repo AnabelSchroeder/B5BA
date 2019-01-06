@@ -36,12 +36,13 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 $connmysql = mysqli_select_db($verbinde, $dbname);
 
                 $L_cookie = $_COOKIE['sid']; //!!!!!!!!!
+                echo $L_cookie;
 
                 $L_sqlCookieId = "SELECT cookie_id FROM cookie WHERE cookie_wert='$L_cookie';"; 
                 $L_cookieId = mysqli_query($verbinde /*$link*/, $L_sqlCookieId);
                 $L_cookieIdarray = mysqli_fetch_assoc($L_cookieId);
                 $L_cookieIderg = $L_cookieIdarray["cookie_id"];
-            
+            echo "<br>".$L_cookieIderg."<br>";
                 $L_sqlbasketCount = "SELECT korb_id FROM warenkorb WHERE cookie_id='$L_cookieIderg'";
                 $L_basketCount = mysqli_query($verbinde /*$link*/, $L_sqlbasketCount);
                 //$L_result = $L_basketCount;
@@ -56,7 +57,8 @@ echo "<div id=\"L_artikelAnsicht\" class=\"L_contentbereich\">";
                 $L_basket = mysqli_query($verbinde /*$link*/, $L_sql);
 
                 $L_sqlartBasketJoin = "SELECT warenkorb.korb_id AS korb_id, warenkorb.anzahl_art AS anzahl_art, 
-                                        artikel.art_id AS art_id, artikel.art_name AS art_name, artikel.art_preis AS art_preis, 
+                                        artikel.art_id AS art_id, artikel.art_name AS art_name, 
+                                        artikel.art_preis AS art_preis, artikel.art_bild AS art_bild, 
                                         artikel.sale_status AS sale_status, artikel.sale_preis AS sale_preis, artikel.art_stueckzahl AS art_stueckzahl 
                                         FROM warenkorb INNER JOIN artikel 
                                         ON warenkorb.art_id=artikel.art_id";
